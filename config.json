@@ -1,0 +1,107 @@
+{
+  "mcpServers": {
+    "digikey": {
+      "command": "docker",
+      "args": [
+        "run",
+        "-i",
+        "--rm",
+        "-p",
+        "8139:8139",
+        "-v",
+        "/mnt/c/docker/digikey-mcp-env:/workspace/.env:ro",
+        "-v",
+        "/mnt/c/docker/digikey-localhost-key.pem:/workspace/localhost-key.pem:ro",
+        "-v",
+        "/mnt/c/docker/digikey-localhost-cert.pem:/workspace/localhost-cert.pem:ro",
+        "-v",
+        "/mnt/c/docker/digikey-tokens:/workspace/.digikey_tokens",
+        "digikey-mcp:latest",
+        "/bin/bash",
+        "-c",
+        "cd /workspace && uv run digikey_mcp_server.py"
+      ]
+    },
+    "partsbox": {
+      "command": "docker",
+      "args": [
+        "run",
+        "-i",
+        "--rm",
+        "-v",
+        "/mnt/c/docker/partsbox-mcp-env:/workspace/.env:ro",
+        "-v",
+        "/mnt/c/docker/blob-storage:/mnt/blob-storage",
+        "-e",
+        "PARTSBOX_BLOB_STORAGE_ROOT=/mnt/blob-storage",
+        "-e",
+        "PARTSBOX_BLOB_STORAGE_MAX_SIZE_MB=2048",
+        "-e",
+        "PARTSBOX_BLOB_STORAGE_TTL_HOURS=24",
+        "partsbox-mcp:latest",
+        "uv",
+        "run",
+        "partsbox-mcp"
+      ]
+    },
+    "google-docs": {
+      "command": "docker",
+      "args": [
+        "run",
+        "-i",
+        "--rm",
+        "-p",
+        "3000:3000",
+        "-v",
+        "/mnt/c/docker/google-docs-mcp:/workspace/credentials",
+        "-v",
+        "/mnt/c/docker/blob-storage:/mnt/blob-storage",
+        "-e",
+        "BLOB_STORAGE_ROOT=/mnt/blob-storage",
+        "-e",
+        "BLOB_STORAGE_MAX_SIZE_MB=2048",
+        "-e",
+        "BLOB_STORAGE_TTL_HOURS=24",
+        "google-docs-mcp:latest",
+        "uv",
+        "run",
+        "google-docs-mcp"
+      ]
+    },
+    "playwright-proxy-mcp-docker": {
+      "comment": "Docker deployment (recommended) - requires 'docker compose build' first",
+      "command": "docker",
+      "args": [
+        "run",
+        "-i",
+        "--rm",
+        "-v",
+        "/mnt/c/docker/blob-storage:/mnt/blob-storage",
+        "-e",
+        "BLOB_STORAGE_ROOT=/mnt/blob-storage",
+        "-e",
+        "BLOB_MAX_SIZE_MB=2048",
+        "-e",
+        "BLOB_TTL_HOURS=24",
+        "-e",
+        "BLOB_SIZE_THRESHOLD_KB=50",
+        "-e",
+        "BLOB_CLEANUP_INTERVAL_MINUTES=60",
+        "-e",
+        "PLAYWRIGHT_BROWSER=chromium",
+        "-e",
+        "PLAYWRIGHT_HEADLESS=true",
+        "-e",
+        "PLAYWRIGHT_CAPS=vision,pdf",
+        "-e",
+        "PLAYWRIGHT_TIMEOUT_ACTION=5000",
+        "-e",
+        "PLAYWRIGHT_TIMEOUT_NAVIGATION=60000",
+        "playwright-proxy-mcp:latest",
+        "uv",
+        "run",
+        "playwright-proxy-mcp"
+      ]
+    }
+  }
+}

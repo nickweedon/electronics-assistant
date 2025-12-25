@@ -1,0 +1,4 @@
+{
+  "enableAllProjectMcpServers": true,
+  "enabledMcpjsonServers": ["digikey", "google-docs", "partsbox", "playwright-proxy-mcp-docker"]
+}
