@@ -113,37 +113,100 @@ These through-hole parts can be used with your LMR51430 buck converter using ada
 
 \---
 
-\#\#\# \*\*5. SMD Signal Diodes — MEDIUM PRIORITY\*\*
+\#\#\# \*\*5. SMD Zener Diodes — MEDIUM PRIORITY\*\*
+
+\*\*You have through-hole Zeners:\*\* 3.3V, 3.6V, 5.1V, 5.6V, 6.2V, 9.1V, 12V, 15V (DO-35)
+\*\*Need SMD equivalents (SOD-323):\*\*
+
+| Part | Voltage | Package | Power | Cost @ 3k qty |
+| \----- | \----- | \----- | \----- | \----- |
+| MM3Z3V3T1G | 3.3V | SOD-323 | 300mW | $0.017 |
+| MM3Z5V1T1G | 5.1V | SOD-323 | 300mW | ~$0.017 |
+| MM3Z12T1G | 12V | SOD-323 | 300mW | ~$0.017 |
+
+\*\*Qty:\*\* 10-25 each of 3-4 common voltages (3.3V, 5.1V, 12V)
+
+\---
+
+\#\#\# \*\*6. SMD Signal Diodes — MEDIUM PRIORITY\*\*
+
+\*\*You have through-hole:\*\* 1N4148 (DO-35)
+\*\*Need SMD equivalent:\*\*
 
 | Part | Package | Use Case |
 | \----- | \----- | \----- |
-| 1N4148WS | SOD-323 | Fast switching |
+| 1N4148WS | SOD-323 | Fast switching (SMD version of 1N4148) |
 | BAT54S | SOT-23 | Dual Schottky |
 
 \*\*Qty:\*\* 20-50 of 1N4148WS
 
 \---
 
-\#\#\# \*\*6. SMD BJTs — LOWER PRIORITY\*\*
+\#\#\# \*\*7. SMD BJTs — LOWER PRIORITY\*\*
 
-| Part | Type | Package |
-| \----- | \----- | \----- |
-| MMBT3904 | NPN | SOT-23 |
-| MMBT3906 | PNP | SOT-23 |
+\*\*You have through-hole:\*\* 2N3904, 2N3906, BC548, BC558 (TO-92)
+\*\*Need SMD equivalents:\*\*
+
+| Part | Type | Package | Cost @ 3k qty |
+| \----- | \----- | \----- | \----- |
+| MMBT3904 | NPN | SOT-23 | $0.018 |
+| MMBT3906 | PNP | SOT-23 | $0.018 |
 
 \*\*Qty:\*\* 20-50 each
 
 \---
 
-\#\#\# \*\*7. P-Channel MOSFETs — LOWER PRIORITY\*\*
+\#\#\# \*\*8. P-Channel MOSFETs — LOWER PRIORITY\*\*
 
-For high-side switching and reverse polarity protection:
+\*\*You have through-hole:\*\* None
+\*\*Need for high-side switching and reverse polarity protection:\*\*
 
 | Part | Package | Vds | Id |
 | \----- | \----- | \----- | \----- |
 | AO3401A | SOT-23 | \-30V | \-4A |
 
 \*\*Qty:\*\* 10-20
+
+\---
+
+\#\#\# \*\*9. Schmitt Trigger Logic (SMD) — LOWER PRIORITY\*\*
+
+\*\*You have through-hole:\*\* SN74HC14N (hex Schmitt inverter, DIP-14)
+\*\*Need SMD equivalent:\*\*
+
+| Part | Package | Channels |
+| \----- | \----- | \----- |
+| 74LVC1G14 | SOT-23-5 or SC-70 | Single inverter |
+| 74LVC2G14 | TSSOP-8 | Dual inverter |
+
+\*\*Qty:\*\* 10-20
+
+\---
+
+\#\#\# \*\*10. Op-Amps (SMD) — LOWER PRIORITY\*\*
+
+\*\*You have through-hole:\*\* UA741CN (single, old), TLV2372IP (dual, modern, DIP-8)
+\*\*Need SMD equivalents:\*\*
+
+| Part | Type | Package |
+| \----- | \----- | \----- |
+| TLV2372I | Dual RRIO | SO-8 or TSSOP-8 |
+| MCP6001/MCP6002 | Single/Dual RRIO | SOT-23-5/SO-8 |
+
+\*\*Qty:\*\* 5-10 each
+
+\---
+
+\#\#\# \*\*11. 555 Timer (SMD) — VERY LOW PRIORITY\*\*
+
+\*\*You have through-hole:\*\* NE555N (DIP-8)
+\*\*Need SMD equivalent:\*\*
+
+| Part | Package | Notes |
+| \----- | \----- | \----- |
+| LMC555 or TLC555 | SO-8 | CMOS version, lower power |
+
+\*\*Qty:\*\* 5-10
 
 \---
 
@@ -157,8 +220,12 @@ For high-side switching and reverse polarity protection:
 | ✅ DONE | Capacitors 10pF–470µF | Planned (68 values) | — |
 | 🔴 HIGH | N-CH MOSFETs | Only 1 type | Add 2-3 varieties |
 | 🔴 HIGH | Schottky Diodes | \*\*NONE\*\* | SS14, SS34, B5819WS |
+| 🟡 MED | Zener Diodes (SMD) | \*\*Have THT only\*\* | MM3Z3V3T1G, MM3Z5V1T1G, MM3Z12T1G |
+| 🟡 MED | Fixed LDOs | Partial (adj only) | AMS1117-3.3/5.0 |
+| 🟡 MED | Signal Diodes | \*\*Have THT only\*\* | 1N4148WS |
 | 🟢 LOW | Power Inductors | \*\*Have THT\*\* | Optional SMD upgrade |
-| 🟡 MED | Fixed LDOs | Partial | AMS1117-3.3/5.0 |
-| 🟡 MED | Signal Diodes | \*\*NONE\*\* | 1N4148WS |
-| 🟢 LOW | SMD BJTs | \*\*NONE\*\* | MMBT3904/3906 |
+| 🟢 LOW | SMD BJTs | \*\*Have THT only\*\* | MMBT3904/3906 |
 | 🟢 LOW | P-CH MOSFETs | \*\*NONE\*\* | AO3401A |
+| 🟢 LOW | Schmitt Triggers | \*\*Have THT only\*\* | 74LVC1G14 |
+| 🟢 LOW | Op-Amps | \*\*Have THT only\*\* | TLV2372I, MCP6002 |
+| 🟢 VERY LOW | 555 Timer | \*\*Have THT only\*\* | LMC555/TLC555 |
