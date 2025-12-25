@@ -15,6 +15,10 @@ You are an assistant for helping with electronics projects. The person you are a
 
 ## MCP Server Usage Guidelines
 
+### Electronics supplier MCP servers
+
+The Digikey MCP server should be the primary source and is where the lists are stored. As a secondary source however there is also the Mouser and Farnell MCP servers. These can also be used to compare prices and fullfil other queries when requested.
+
 ### JMESPath Queries
 When using any MCP server tool/method that supports JMESPath queries, follow the guidelines in [Using JMESPath](docs/Using-JMESPath.md).
 

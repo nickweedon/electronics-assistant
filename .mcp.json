@@ -108,6 +108,28 @@
         "run",
         "playwright-proxy-mcp"
       ]
+    },
+    "farnell-mcp": {
+      "command": "docker",
+      "args": [
+        "run",
+        "-i",
+        "--rm",
+        "--env-file",
+        "/mnt/c/docker/farnell-mcp/.env",
+        "farnell-mcp:latest"
+      ]
+    },
+    "mouser": {
+      "command": "docker",
+      "args": [
+        "run",
+        "-i",
+        "--rm",
+        "--env-file",
+        "/mnt/c/docker/mouser-mcp/.env",
+        "mouser-mcp:latest"
+      ]
     }
   }
 }
