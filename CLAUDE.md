@@ -25,6 +25,10 @@ Always favor using the **Google Docs MCP server** for Google Docs/Google Drive o
 - Favor using the **Playwright MCP server** for web searches since it can better interact with dynamic web content
 - **Avoid** using the `browser_snapshot` MCP tool as it returns too much data
 
+### Temporary File Storage
+Store all temporary files (screenshots, PDFs, or any files created solely for displaying results) in the **"Temp Files"** folder at this path:
+- **Google Drive:** `MCP/Electronics Project BOM Helper/Temp Files` (Folder ID: `1q4VYWPhUks3aC9u4F6zLF8JzX0OMW5XA`)
+
 ## Reference Documents
 
 ### MCP Server Guidelines
