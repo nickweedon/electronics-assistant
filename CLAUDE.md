@@ -19,6 +19,134 @@ You are an assistant for helping with electronics projects. The person you are a
 
 The Digikey MCP server should be the primary source and is where the lists are stored. As a secondary source however there is also LCSC, Mouser and Farnell. Use the appropriate MCP servers for Mouser and Farnell and for LCSC there is no API so use the Playwright MCP server for this. These can also be used to compare prices and fullfil other queries when requested.
 
+#### LCSC
+
+LCSC has no API, so use the Playwright MCP server for all operations. Use the `browser_execute_bulk` tool to combine multiple steps into a single call for **5-10x better performance** and reduced token usage.
+
+**IMPORTANT**: Process **one product per bulk call**. Do not combine multiple products in a single bulk call as:
+- Commands execute sequentially (no performance benefit)
+- Combined results can exceed MCP tool response limits
+- Parsing large responses becomes problematic
+
+##### Searching for Products
+
+When searching by MPN (manufacturer part number) or keywords, use JavaScript evaluation to extract product data directly from the DOM. This is more reliable than ARIA snapshots with JMESPath.
+
+**Workflow for searching (returns up to 10 results):**
+```javascript
+browser_execute_bulk({
+  commands: [
+    {
+      "tool": "browser_navigate",
+      "args": {
+        "url": "https://www.lcsc.com/search?q=<MPN_or_keyword>",
+        "silent_mode": true
+      }
+    },
+    {
+      "tool": "browser_wait_for",
+      "args": {"time": 3}  // Allow JS to load search results
+    },
+    {
+      "tool": "browser_evaluate",
+      "args": {
+        "function": "() => { const tables = document.querySelectorAll('table'); let resultsTable = null; for (const table of tables) { if (table.querySelector('tr:has(a[href*=\"/product-detail/C\"])')) { resultsTable = table; break; } } if (!resultsTable) return { found: false, message: 'No results found' }; const resultRows = Array.from(resultsTable.querySelectorAll('tr:has(a[href*=\"/product-detail/C\"])')); const results = resultRows.slice(0, 10).map(row => { const allCells = Array.from(row.querySelectorAll('td')); const allLinks = Array.from(row.querySelectorAll('a')); const productLink = allLinks.find(a => a.href?.includes('/product-detail/C')); const mpn = productLink?.textContent?.trim() || allLinks.find(a => a.textContent?.match(/^[A-Z]{2}\\d/))?.textContent?.trim(); const productUrl = productLink?.href; const productCode = productUrl?.match(/C\\d+/)?.[0]; const lcscCode = allLinks.find(a => a.textContent?.trim().match(/^C\\d+$/))?.textContent?.trim(); const manufacturerLink = allLinks.find(a => a.href?.includes('/brand-detail/')); const manufacturer = manufacturerLink?.textContent?.trim(); const stockCell = allCells.find(td => td.textContent?.includes('In Stock') && /\\d{1,3}(,\\d{3})*/.test(td.textContent)); const stockMatch = stockCell?.textContent?.match(/([\\d,]+)/); const stock = stockMatch ? stockMatch[1].replace(/,/g, '') : 'Out of stock'; const innerTable = row.querySelector('table'); const priceRows = innerTable?.querySelectorAll('tr') || []; const pricing = Array.from(priceRows).filter(r => r.textContent.includes('$') && r.textContent.includes('+')).slice(0, 2).map(pr => { const cells = pr.querySelectorAll('td'); return { qty: cells[0]?.textContent?.trim(), price: cells[1]?.textContent?.trim() }; }); const description = allCells.find(td => { const text = td.textContent || ''; return text.includes('Resistor') || text.includes('Capacitor') || text.includes('Ohm') || text.includes('ohm') || text.includes('Ω') || text.includes('pF') || text.includes('µF'); })?.textContent?.trim(); const packageCell = allCells.find(td => /^0805$|^0603$|^1206$|^0402$|^1210$/.test(td.textContent?.trim())); const packageType = packageCell?.textContent?.trim(); return { mpn, lcscCode, manufacturer, stock, pricing, description, packageType, productUrl, productCode }; }); return { found: true, count: results.length, results }; }"
+      },
+      "return_result": true
+    }
+  ],
+  stop_on_error: true,
+  return_all_results: false
+})
+```
+
+**Example searches:**
+- Specific MPN: `q=CC0805JRNPO9BN120`
+- Generic keyword: `q=100+ohm+resistor+0805`
+
+**Returned data structure:**
+```json
+{
+  "found": true,
+  "count": 10,
+  "results": [
+    {
+      "mpn": "RC0805FR-07100RL",
+      "lcscCode": "C105577",
+      "manufacturer": "YAGEO",
+      "stock": "848600",
+      "pricing": [
+        {"qty": "100+", "price": "$0.0022"},
+        {"qty": "1,000+", "price": "$0.0017"}
+      ],
+      "description": "100Ω 125mW 150V ±1% ±100ppm/℃ Thick Film Resistor 0805",
+      "packageType": "0805",
+      "productUrl": "https://www.lcsc.com/product-detail/C105577.html",
+      "productCode": "C105577"
+    }
+    // ... up to 9 more results
+  ]
+}
+```
+
+**To extract fewer/more results:** Change `.slice(0, 10)` to desired number.
+
+##### Extracting Product Pricing
+
+When you already have the LCSC product code (e.g., C107107) and need detailed pricing:
+
+**Workflow for pricing extraction:**
+```javascript
+browser_execute_bulk({
+  commands: [
+    {
+      "tool": "browser_navigate",
+      "args": {
+        "url": "https://www.lcsc.com/product-detail/C107107.html",
+        "silent_mode": true
+      }
+    },
+    {
+      "tool": "browser_wait_for",
+      "args": {
+        "text": "Standard Packaging"
+      }
+    },
+    {
+      "tool": "browser_snapshot",
+      "args": {
+        "jmespath_query": "[[].children[].children[].children[].children[].children[?role == 'table'], [].children[].children[].children[].children[].children[].children[?role == 'table']] | [] | [].children[1].children[:6].{qty: children[0].children[0].name.value, unit_price: children[1].name.value, ext_price: children[2].name.value} | []",
+        "output_format": "json"
+      },
+      "return_result": true
+    }
+  ],
+  stop_on_error: true,
+  return_all_results: false
+})
+```
+
+**JMESPath query for pricing extraction:**
+```
+[[].children[].children[].children[].children[].children[?role == 'table'], [].children[].children[].children[].children[].children[].children[?role == 'table']] | [] | [].children[1].children[:6].{qty: children[0].children[0].name.value, unit_price: children[1].name.value, ext_price: children[2].name.value} | []
+```
+
+**Note:** This query searches for pricing tables at both depth 5 and depth 6 in the ARIA tree, as LCSC pages have inconsistent nesting levels. The array literal syntax `[expr1, expr2] | []` flattens results from both depths.
+
+**Why this workflow?**
+- **Navigate (silent mode)**: Loads the product page without returning large snapshot data
+- **Wait for "Standard Packaging"**: LCSC loads pricing dynamically via JavaScript (takes ~3-5 seconds). This text appears at the bottom of the pricing table, ensuring all pricing tiers are fully rendered
+- **Extract with JMESPath**: Pulls only the pricing data needed, formatted as JSON
+- **Bulk execution**: Combines all three steps into one API call for maximum efficiency
+
+**For multiple products**: Make separate bulk calls for each product, executing them in parallel using multiple tool invocations in a single message.
+
+#### Notes on comparing or retrieving prices
+
+* ALWAYS ensure that the right price is selected based on the order quantity.
+* ALWAYS check to make sure that the MOQ (minimum order quantity) for the item is less than the quantity being requested.
+* ALWAYS check that the item is actually in stock. Having to back order an item should be treated the same as it simply not being in stock.
+
 ### JMESPath Queries
 When using any MCP server tool/method that supports JMESPath queries, follow the guidelines in [Using JMESPath](docs/Using-JMESPath.md).
 
@@ -26,8 +154,7 @@ When using any MCP server tool/method that supports JMESPath queries, follow the
 Always favor using the **Google Docs MCP server** for Google Docs/Google Drive operations where possible, as this is a more feature-rich and efficient implementation.
 
 ### Web Search
-- Favor using the **Playwright MCP server** for web searches since it can better interact with dynamic web content
-- **Avoid** using the `browser_snapshot` MCP tool as it returns too much data
+- If you suspect, after doing a standard 'Web Search' or 'Web Fetch', you suspect that there may be additional important information that is only visible or navigable via a single page web application, then use the Playwright MCP server to check for this and navigate accordingly.
 
 ### Temporary File Storage
 Store all temporary files (screenshots, PDFs, or any files created solely for displaying results) in the **"Temp Files"** folder at this path:
