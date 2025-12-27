@@ -30,7 +30,7 @@ LCSC has no API, so use the Playwright MCP server for all operations. Use the `b
 
 ##### Searching for Products
 
-When searching by MPN (manufacturer part number) or keywords, use JavaScript evaluation to extract product data directly from the DOM. This is more reliable than ARIA snapshots with JMESPath.
+When searching by MPN (manufacturer part number) or keywords, use JavaScript evaluation to extract product data directly from the DOM. This is more reliable than ARIA snapshots with JMESPath. Note that this method will often not return all pricing for all quanitities and an additional price check may be needed depending on the quantity that needs to be ordered.
 
 **Workflow for searching (returns up to 10 results):**
 ```javascript
@@ -143,7 +143,7 @@ browser_execute_bulk({
 
 #### Notes on comparing or retrieving prices
 
-* ALWAYS ensure that the right price is selected based on the order quantity.
+* ALWAYS ensure that the right price is selected based on the order quantity. DO NOT LIST prices that do not match the quantity being ordered.
 * ALWAYS check to make sure that the MOQ (minimum order quantity) for the item is less than the quantity being requested.
 * ALWAYS check that the item is actually in stock. Having to back order an item should be treated the same as it simply not being in stock.
 
