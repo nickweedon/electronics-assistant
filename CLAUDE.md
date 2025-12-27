@@ -144,6 +144,7 @@ browser_execute_bulk({
 #### Notes on comparing or retrieving prices
 
 * ALWAYS ensure that the right price is selected based on the order quantity. DO NOT LIST prices that do not match the quantity being ordered.
+* If the quantity levels are all greater than the amount being ordered then this means that the item cannot be ordered since the quantity being sought is below the MOQ.
 * ALWAYS check to make sure that the MOQ (minimum order quantity) for the item is less than the quantity being requested.
 * ALWAYS check that the item is actually in stock. Having to back order an item should be treated the same as it simply not being in stock.
 

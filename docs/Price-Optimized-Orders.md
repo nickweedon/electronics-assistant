@@ -62,19 +62,19 @@ This document provides optimized purchasing recommendations for the E24 Capacito
 | 34 | [GRM2165C1H472JA01D](https://www.lcsc.com/product-detail/C77063.html) | 4.7nF ±5% 50V C0G | Murata | 25 | LCSC | $0.009 | $0.23 | ✅ 18,500 | Stock verified |
 | 35 | [GRM2195C1H562JA01D](https://www.lcsc.com/product-detail/C77067.html) | 5.6nF ±5% 50V C0G | Murata | 25 | LCSC | $0.009 | $0.23 | ✅ 10,680 | Stock verified |
 | 36 | [GRM2195C1H682JA01D](https://www.lcsc.com/product-detail/C77068.html) | 6.8nF ±5% 50V C0G | Murata | 25 | LCSC | $0.009 | $0.23 | ✅ 13,960 | Stock verified |
-| 37 | [GRM2195C1H822JA01D](https://www.lcsc.com/product-detail/C97908.html) | 8.2nF ±5% 50V C0G | Murata | 25 | LCSC | $0.009 | $0.23 | ❌ Out of stock | Stock verified - currently unavailable |
+| 37 | [FN21N822J500ECG](https://www.lcsc.com/product-detail/C2843396.html) | 8.2nF ±5% 50V C0G | PSA | 25 | LCSC | $0.0335 | $0.84 | ✅ 2,720 | **SUB**: PSA alternative, MOQ:20 |
 | 38 | [GRM2195C1H103JA01D](https://www.lcsc.com/product-detail/C97905.html) | 10nF ±5% 50V C0G | Murata | 25 | LCSC | $0.009 | $0.23 | ✅ 57,640 | Stock verified |
 | **X7R CERAMIC CAPACITORS (0805)** |
-| 39 | [C0805C123K5RACTU](https://www.lcsc.com/product-detail/C2180867.html) | 12nF ±10% 50V X7R | KEMET | 25 | LCSC | $0.009 | $0.23 | ❌ Out of stock | Stock verified - currently unavailable |
+| 39 | [CC0805KRX7R9BB123](https://www.lcsc.com/product-detail/C107141.html) | 12nF ±10% 50V X7R | YAGEO | 25 | LCSC | $0.0069 | $0.17 | ✅ 8,200 | **SUB**: YAGEO, same pricing tier, MOQ:100 |
 | 40 | [C0805C153K5RACTU](https://www.lcsc.com/product-detail/C2169941.html) | 15nF ±10% 50V X7R | KEMET | 25 | LCSC | $0.009 | $0.23 | ✅ 80 | Stock verified |
 | 41 | [AC0805KRX7R9BB183](https://www.lcsc.com/product-detail/C3884152.html) | 18nF ±10% 50V X7R | YAGEO | 25 | LCSC | $0.0061 | $0.15 | ✅ Stock | Same pricing tier |
 | 42 | [C0805C223K5RACTU](https://www.lcsc.com/product-detail/C452753.html) | 22nF ±10% 50V X7R | KEMET | 25 | LCSC | $0.009 | $0.23 | ✅ 900 | Stock verified |
 | 43 | [C0805C273K5RACTU](https://www.mouser.com/ProductDetail/KEMET/C0805C273K5RACTU?qs=IAf6OXM7NA%252BhSJ%252BFZzT%252B2A%3D%3D) | 27nF ±10% 50V X7R | KEMET | 25 | Mouser | $0.027 | $0.68 | ✅ 19,280 | KEMET out at LCSC |
 | 44 | [C0805C333K5RACTU](https://www.lcsc.com/product-detail/C2168998.html) | 33nF ±10% 50V X7R | KEMET | 25 | LCSC | $0.009 | $0.23 | ✅ 430 | Stock verified |
 | 45 | [AC0805KRX7R9BB393](https://www.lcsc.com/product-detail/C6117859.html) | 39nF ±10% 50V X7R | YAGEO | 25 | LCSC | $0.0061 | $0.15 | ✅ Stock | Same pricing tier |
-| 46 | [C0805C473K5RACTU](https://www.lcsc.com/product-detail/C2167681.html) | 47nF ±10% 50V X7R | KEMET | 25 | LCSC | $0.009 | $0.23 | ❌ Out of stock | Stock verified - currently unavailable |
-| 47 | [C0805C563K5RACTU](https://www.lcsc.com/product-detail/C2169102.html) | 56nF ±10% 50V X7R | KEMET | 25 | LCSC | $0.009 | $0.23 | ❌ Out of stock | Stock verified - currently unavailable |
-| 48 | [C0805C683K5RACTU](https://www.lcsc.com/product-detail/C1845479.html) | 68nF ±10% 50V X7R | KEMET | 25 | LCSC | $0.009 | $0.23 | ❌ Out of stock | Stock verified - currently unavailable |
+| 46 | [CC0805KRX7R9BB473](https://www.lcsc.com/product-detail/C107154.html) | 47nF ±10% 50V X7R | YAGEO | 25 | LCSC | $0.0063 | $0.16 | ✅ 117,000 | **SUB**: YAGEO, 30% cheaper, MOQ:100 |
+| 47 | [CC0805KRX7R9BB563](https://www.lcsc.com/product-detail/C107156.html) | 56nF ±10% 50V X7R | YAGEO | 25 | LCSC | $0.0073 | $0.18 | ✅ 6,300 | **SUB**: YAGEO, same pricing tier, MOQ:100 |
+| 48 | [CC0805KRX7R9BB683](https://www.lcsc.com/product-detail/C107159.html) | 68nF ±10% 50V X7R | YAGEO | 25 | LCSC | $0.0069 | $0.17 | ✅ 56,800 | **SUB**: YAGEO, same pricing tier, MOQ:100 |
 | 49 | [CC0805KRX7R9BB823](https://www.lcsc.com/product-detail/C327222.html) | 82nF ±10% 50V X7R | YAGEO | 25 | LCSC | $0.0061 | $0.15 | ✅ Stock | Same pricing tier |
 | 50 | [CL21B104KBCNFNC](https://www.mouser.com/ProductDetail/Samsung-Electro-Mechanics/CL21B104KBCNFNC?qs=h6Piwd%2FnvzleGyyZyzPHvg%3D%3D) | 100nF ±10% 50V X7R | Samsung | 25 | Mouser | $0.022 | $0.55 | ✅ 344,002 | Discontinued at LCSC |
 | 51 | [CC0805KRX7R9BB154](https://www.lcsc.com/product-detail/C107144.html) | 150nF ±10% 50V X7R | YAGEO | 25 | LCSC | $0.0061 | $0.15 | ✅ Stock | Same pricing tier |
@@ -83,13 +83,13 @@ This document provides optimized purchasing recommendations for the E24 Capacito
 | 54 | [CL21B474KBFNNNG](https://www.lcsc.com/product-detail/C3842613.html) | 470nF ±10% 50V X7R | Samsung | 25 | LCSC | $0.0092 | $0.23 | ✅ Est. similar | Same pricing tier |
 | 55 | [CL21B105KBFNNNE](https://www.lcsc.com/product-detail/C28323.html) | 1µF ±10% 50V X7R | Samsung | 25 | LCSC | $0.0092 | $0.23 | ✅ 3.7M | 29% cheaper than DK |
 | 56 | [CL21B225KBYNNWE](https://www.lcsc.com/product-detail/C6534398.html) | 2.2µF ±10% 50V X7R | Samsung | 25 | LCSC | $0.0092 | $0.23 | ✅ Est. similar | Same pricing tier |
-| 57 | [GRM21BZ71H475ME15K](https://www.lcsc.com/product-detail/C3862703.html) | 4.7µF ±20% 50V X7R | Murata | 25 | LCSC | $0.009 | $0.23 | ❌ Out of stock | Stock verified - currently unavailable |
+| 57 | [C20416422](https://www.lcsc.com/product-detail/C20416422.html) | 4.7µF ±10% 50V X7R | CCTC | 25 | LCSC | $0.0252 | $0.63 | ✅ 37,060 | **SUB**: CCTC, better tolerance (±10%), MOQ:20 |
 | **X7R CERAMIC CAPACITORS (1206 & LARGER)** |
-| 58 | [C0805C184K5RACTU](https://www.lcsc.com/product-detail/C2170796.html) | 180nF ±10% 50V X7R | KEMET | 25 | LCSC | $0.009 | $0.23 | ❌ Out of stock | Stock verified - currently unavailable (0805 package) |
+| 58 | [C376938](https://www.lcsc.com/product-detail/C376938.html) | 180nF ±10% 50V X7R | CCTC | 25 | LCSC | $0.0102 | $0.26 | ✅ 3,850 | **SUB**: CCTC alternative, MOQ:50 |
 | 59 | [CC0805KKX7R9BB274](https://www.lcsc.com/product-detail/C113845.html) | 270nF ±10% 50V X7R | YAGEO | 25 | LCSC | $0.0061 | $0.15 | ✅ Stock | Same pricing tier |
 | 60 | [CL21B684KBFVPNE](https://www.lcsc.com/product-detail/C472832.html) | 680nF ±10% 50V X7R | Samsung | 25 | LCSC | $0.0092 | $0.23 | ✅ Est. similar | Same pricing tier |
 | 61 | [CL32B106KBJNNNE](https://www.lcsc.com/product-detail/C138687.html) | 10µF ±10% 50V X7R | Samsung | 25 | LCSC | $0.0092 | $0.23 | ✅ Est. similar | 1206 package |
-| 62 | [C0805C394K5RACTU](https://www.lcsc.com/product-detail/C5584893.html) | 390nF ±10% 50V X7R | KEMET | 25 | LCSC | $0.009 | $0.23 | ❌ Out of stock | Stock verified - currently unavailable |
+| 62 | [C7393951](https://www.lcsc.com/product-detail/C7393951.html) | 390nF ±10% 50V X7R | CCTC | 25 | LCSC | $0.01 | $0.25 | ✅ 700 | **SUB**: CCTC alternative, MOQ:50 |
 | 63 | [C0805C824K3RACTU](https://www.lcsc.com/product-detail/C2169211.html) | 820nF ±10% 50V X7R | KEMET | 25 | LCSC | $0.009 | $0.23 | ✅ 45 | Stock verified |
 | **ALUMINUM POLYMER CAPACITORS** |
 | 64 | [A768EB226M1HLAE048](https://www.lcsc.com/product-detail/C3274488.html) | 22µF ±20% 50V Polymer | KEMET | 25 | LCSC | $0.3590 | $8.98 | ✅ 33 | 10% cheaper than Mouser |
