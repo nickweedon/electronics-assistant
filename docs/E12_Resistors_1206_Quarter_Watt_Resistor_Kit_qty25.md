@@ -4,69 +4,69 @@
 
 ## Complete Pricing Comparison with LCSC (All 63 Parts)
 
-| # | Value | MPN | Mfr | LCSC Code | Stock | MOQ | LCSC Unit Price | LCSC Qty | LCSC Ext Price | DK Unit Price | DK Qty | DK Ext Price | DK Description |
-|---|-------|-----|-----|-----------|-------|-----|-----------------|----------|----------------|---------------|--------|--------------|----------------|
-| 1 | 0Ω | RC1206FR-070RL | YAGEO | C137394 | In Stock | 100 | $ 0.0041 | 100 | $ 0.41 | $0.0228 | 25 | $0.57 | RES 0 OHM JUMPER 1/4W 1206 |
-| 2 | 1Ω | RC1206JR-071RL | YAGEO | C137181 | In Stock | 100 | $ 0.008 | 100 | $ 0.80 | $0.0208 | 25 | $0.52 | RES 1 OHM 5% 1/4W 1206 |
-| 3 | 10Ω | RC1206FR-0710RL | YAGEO | C108080 | In Stock | 50 | $ 0.0125 | 100 | $ 0.63 | $0.022 | 25 | $0.55 | RES 10 OHM 1% 1/4W 1206 |
-| 4 | 12Ω | RC1206JR-0712RL | YAGEO | C137202 | In Stock | 100 | $ 0.0037 | 100 | $ 0.37 | $0.016 | 25 | $0.40 | RES 12 OHM 5% 1/4W 1206 |
-| 5 | 15Ω | RC1206FR-0715RL | YAGEO | C137386 | In Stock | 100 | $ 0.0041 | 100 | $ 0.41 | $0.0116 | 25 | $0.29 | RES 15 OHM 1% 1/4W 1206 |
-| 6 | 18Ω | RC1206FR-0718RL | YAGEO | C137378 | In Stock | 100 | $ 0.0038 | 100 | $ 0.38 | $0.0104 | 25 | $0.26 | RES 18 OHM 1% 1/4W 1206 |
-| 7 | 22Ω | RC1206FR-0722RL | YAGEO | C114943 | In Stock | 100 | $ 0.0041 | 100 | $ 0.41 | $0.0112 | 25 | $0.28 | RES 22 OHM 1% 1/4W 1206 |
-| 8 | 27Ω | RC1206FR-0727RL | YAGEO | C137339 | In Stock | 100 | $ 0.0041 | 100 | $ 0.41 | $0.0108 | 25 | $0.27 | RES 27 OHM 1% 1/4W 1206 |
-| 9 | 33Ω | RC1206FR-0733RL | YAGEO | C137308 | In Stock | 100 | $ 0.004 | 100 | $ 0.40 | $0.0312 | 25 | $0.78 | RES 33 OHM 1% 1/4W 1206 |
-| 10 | 39Ω | RC1206FR-0739RL | YAGEO | C137295 | In Stock | 100 | $ 0.004 | 100 | $ 0.40 | $0.0116 | 25 | $0.29 | RES 39 OHM 1% 1/4W 1206 |
-| 11 | 47Ω | RC1206FR-0747RL | YAGEO | C137268 | In Stock | 100 | $ 0.004 | 100 | $ 0.40 | $0.0108 | 25 | $0.27 | RES 47 OHM 1% 1/4W 1206 |
-| 12 | 56Ω | RC1206FR-0756RL | YAGEO | C246051 | In Stock | 100 | $ 0.0044 | 100 | $ 0.44 | $0.0128 | 25 | $0.32 | RES 56 OHM 1% 1/4W 1206 |
-| 13 | 68Ω | RC1206FR-0768RL | YAGEO | C137238 | In Stock | 100 | $ 0.004 | 100 | $ 0.40 | $0.0112 | 25 | $0.28 | RES 68 OHM 1% 1/4W 1206 |
-| 14 | 82Ω | 0805W8F0820T5E | FOJAN | C17503 | In Stock | 100 | $ 0.0019 | 100 | $ 0.19 | $0.0376 | 25 | $0.94 | RES SMD 82 OHM 1% 1/4W 1206 |
-| 15 | 100Ω | RC1206FR-07100RL | YAGEO | C137392 | In Stock | 100 | $ 0.0041 | 100 | $ 0.41 | $0.0108 | 25 | $0.27 | RES 100 OHM 1% 1/4W 1206 |
-| 16 | 120Ω | RC1206JR-07120RL | YAGEO | C137204 | In Stock | 100 | $ 0.0036 | 100 | $ 0.36 | $0.0116 | 25 | $0.29 | RES 120 OHM 5% 1/4W 1206 |
-| 17 | 150Ω | RC1206FR-07150RL | YAGEO | C137387 | In Stock | 100 | $ 0.0042 | 100 | $ 0.42 | $0.0104 | 25 | $0.26 | RES 150 OHM 1% 1/4W 1206 |
-| 18 | 180Ω | RC1206FR-07180RL | YAGEO | C137380 | In Stock | 100 | $ 0.0038 | 100 | $ 0.38 | $0.0108 | 25 | $0.27 | RES 180 OHM 1% 1/4W 1206 |
-| 19 | 220Ω | RC1206JR-07220RL | YAGEO | C137176 | In Stock | 100 | $ 0.0035 | 100 | $ 0.35 | $0.0136 | 25 | $0.34 | RES 220 OHM 5% 1/4W 1206 |
-| 20 | 270Ω | RC1206JR-07270RL | YAGEO | C137170 | In Stock | 100 | $ 0.0035 | 100 | $ 0.35 | $0.011 | 25 | $0.28 | RES 270 OHM 5% 1/4W 1206 |
-| 21 | 330Ω | RC1206JR-07330RL | YAGEO | C137152 | In Stock | 100 | $ 0.0035 | 100 | $ 0.35 | $0.0096 | 25 | $0.24 | RES 330 OHM 5% 1/4W 1206 |
-| 22 | 390Ω | RC1206FR-07390RL | YAGEO | C163377 | In Stock | 100 | $ 0.0036 | 100 | $ 0.36 | $0.0116 | 25 | $0.29 | RES 390 OHM 1% 1/4W 1206 |
-| 23 | 470Ω | RC1206FR-07470RL | YAGEO | C114945 | In Stock | 100 | $ 0.0042 | 100 | $ 0.42 | $0.0092 | 25 | $0.23 | RES 470 OHM 1% 1/4W 1206 |
-| 24 | 560Ω | RC1206FR-07560RL | YAGEO | C185262 | In Stock | 100 | $ 0.004 | 100 | $ 0.40 | $0.01 | 25 | $0.25 | RES 560 OHM 1% 1/4W 1206 |
-| 25 | 680Ω | RC1206FR-07680RL | YAGEO | C137240 | In Stock | 100 | $ 0.004 | 100 | $ 0.40 | $0.017 | 25 | $0.43 | RES 680 OHM 1% 1/4W 1206 |
-| 26 | 820Ω | RC1206JR-07820RL | YAGEO | C137112 | In Stock | 100 | $ 0.0037 | 100 | $ 0.37 | $0.0112 | 25 | $0.28 | RES 820 OHM 5% 1/4W 1206 |
-| 27 | 1KΩ | RC1206JR-071KL | YAGEO | C112223 | In Stock | 100 | $ 0.003 | 100 | $ 0.30 | $0.0128 | 25 | $0.32 | RES 1K OHM 5% 1/4W 1206 |
-| 28 | 1.2KΩ | RC1206FR-071K2L | YAGEO | C185265 | In Stock | 100 | $ 0.0036 | 100 | $ 0.36 | $0.0228 | 25 | $0.57 | RES 1.2K OHM 1% 1/4W 1206 |
-| 29 | 1.5KΩ | RC1206FR-071K5L | YAGEO | C114929 | In Stock | 100 | $ 0.0041 | 100 | $ 0.41 | $0.0116 | 25 | $0.29 | RES 1.5K OHM 1% 1/4W 1206 |
-| 30 | 1.8KΩ | RC1206JR-071K8L | YAGEO | C137188 | In Stock | 100 | $ 0.0035 | 100 | $ 0.35 | $0.0128 | 25 | $0.32 | RES 1.8K OHM 5% 1/4W 1206 |
-| 31 | 2.2KΩ | RC1206JR-072K2L | YAGEO | C137167 | In Stock | 100 | $ 0.0035 | 100 | $ 0.35 | $0.0148 | 25 | $0.37 | RES 2.2K OHM 5% 1/4W 1206 |
-| 32 | 2.7KΩ | RC1206FR-072K7L | YAGEO | C137330 | In Stock | 100 | $ 0.004 | 100 | $ 0.40 | $0.0128 | 25 | $0.32 | RES 2.7K OHM 1% 1/4W 1206 |
-| 33 | 3.3KΩ | RC1206FR-073K3L | YAGEO | C137292 | In Stock | 100 | $ 0.004 | 100 | $ 0.40 | $0.0104 | 25 | $0.26 | RES 3.3K OHM 1% 1/4W 1206 |
-| 34 | 3.9KΩ | RC1206JR-073K9L | YAGEO | C137145 | In Stock | 100 | $ 0.0035 | 100 | $ 0.35 | $0.0132 | 25 | $0.33 | RES 3.9K OHM 5% 1/4W 1206 |
-| 35 | 4.7KΩ | RC1206FR-074K7L | YAGEO | C137262 | In Stock | 100 | $ 0.0041 | 100 | $ 0.41 | $0.0108 | 25 | $0.27 | RES 4.7K OHM 1% 1/4W 1206 |
-| 36 | 5.6KΩ | RC1206JR-075K6L | YAGEO | C141708 | In Stock | 100 | $ 0.0037 | 100 | $ 0.37 | $0.0116 | 25 | $0.29 | RES 5.6K OHM 5% 1/4W 1206 |
-| 37 | 6.8KΩ | RC1206FR-076K8L | YAGEO | C246053 | In Stock | 100 | $ 0.0037 | 100 | $ 0.37 | $0.0136 | 25 | $0.34 | RES 6.8K OHM 1% 1/4W 1206 |
-| 38 | 8.2KΩ | RC1206FR-078K2L | YAGEO | C137226 | In Stock | 100 | $ 0.0041 | 100 | $ 0.41 | $0.0108 | 25 | $0.27 | RES 8.2K OHM 1% 1/4W 1206 |
-| 39 | 10KΩ | RC1206FR-0710KL | YAGEO | C132649 | In Stock | 100 | $ 0.0041 | 100 | $ 0.41 | $0.0112 | 25 | $0.28 | RES 10K OHM 1% 1/4W 1206 |
-| 40 | 12KΩ | RC1206JR-0712KL | YAGEO | C137203 | In Stock | 100 | $ 0.0035 | 100 | $ 0.35 | $0.01 | 25 | $0.25 | RES 12K OHM 5% 1/4W 1206 |
-| 41 | 15KΩ | 0805W8F1502T5E | FOJAN | C17475 | In Stock | 100 | $ 0.002 | 100 | $ 0.20 | $0.0376 | 25 | $0.94 | RES SMD 15K OHM 1% 1/4W 1206 |
-| 42 | 18KΩ | RC1206JR-0718KL | YAGEO | C246063 | In Stock | 100 | $ 0.0032 | 100 | $ 0.32 | $0.0128 | 25 | $0.32 | RES 18K OHM 5% 1/4W 1206 |
-| 43 | 22KΩ | RC1206FR-0722KL | YAGEO | C114942 | In Stock | 100 | $ 0.004 | 100 | $ 0.40 | $0.0128 | 25 | $0.32 | RES 22K OHM 1% 1/4W 1206 |
-| 44 | 27KΩ | RC1206FR-0727KL | YAGEO | C137340 | In Stock | 100 | $ 0.0038 | 100 | $ 0.38 | $0.0108 | 25 | $0.27 | RES 27K OHM 1% 1/4W 1206 |
-| 45 | 33KΩ | RC1206FR-0733KL | YAGEO | C137309 | In Stock | 100 | $ 0.004 | 100 | $ 0.40 | $0.0128 | 25 | $0.32 | RES 33K OHM 1% 1/4W 1206 |
-| 46 | 39KΩ | RC1206FR-0739KL | YAGEO | C137296 | In Stock | 100 | $ 0.0038 | 100 | $ 0.38 | $0.008 | 25 | $0.20 | RES 39K OHM 1% 1/4W 1206 |
-| 47 | 47KΩ | RC1206FR-0747KL | YAGEO | C137270 | In Stock | 100 | $ 0.0041 | 100 | $ 0.41 | $0.0108 | 25 | $0.27 | RES 47K OHM 1% 1/4W 1206 |
-| 48 | 56KΩ | RC1206FR-0756KL | YAGEO | C137251 | In Stock | 100 | $ 0.0037 | 100 | $ 0.37 | $0.0108 | 25 | $0.27 | RES 56K OHM 1% 1/4W 1206 |
-| 49 | 68KΩ | RC1206FR-0768KL | YAGEO | C137239 | In Stock | 100 | $ 0.004 | 100 | $ 0.40 | $0.0108 | 25 | $0.27 | RES 68K OHM 1% 1/4W 1206 |
-| 50 | 82KΩ | RC1206FR-0782KL | YAGEO | C137229 | In Stock | 100 | $ 0.0041 | 100 | $ 0.41 | $0.011 | 25 | $0.28 | RES 82K OHM 1% 1/4W 1206 |
-| 51 | 100KΩ | RC1206FR-07100KL | YAGEO | C137393 | In Stock | 100 | $ 0.0042 | 100 | $ 0.42 | $0.0112 | 25 | $0.28 | RES 100K OHM 1% 1/4W 1206 |
-| 52 | 120KΩ | RC1206FR-07120KL | YAGEO | C163387 | In Stock | 100 | $ 0.004 | 100 | $ 0.40 | $0.016 | 25 | $0.40 | RES 120K OHM 1% 1/4W 1206 |
-| 53 | 150KΩ | RC1206FR-07150KL | YAGEO | C114931 | In Stock | 100 | $ 0.0040 | 100 | $ 0.40 | $0.01 | 25 | $0.25 | RES 150K OHM 1% 1/4W 1206 |
-| 54 | 180KΩ | RC1206JR-07180KL | YAGEO | C137194 | In Stock | 100 | $ 0.0035 | 100 | $ 0.35 | $0.0128 | 25 | $0.32 | RES 180K OHM 5% 1/4W 1206 |
-| 55 | 220KΩ | RC1206FR-07220KL | YAGEO | C130275 | In Stock | 100 | $ 0.004 | 100 | $ 0.40 | $0.0108 | 25 | $0.27 | RES 220K OHM 1% 1/4W 1206 |
-| 56 | 270KΩ | RC1206FR-07270KL | YAGEO | C137342 | In Stock | 100 | $ 0.0041 | 100 | $ 0.41 | $0.0172 | 25 | $0.43 | RES 270K OHM 1% 1/4W 1206 |
-| 57 | 330KΩ | RC1206FR-07330KL | YAGEO | C137312 | In Stock | 100 | $ 0.004 | 100 | $ 0.40 | $0.0104 | 25 | $0.26 | RES 330K OHM 1% 1/4W 1206 |
-| 58 | 390KΩ | RC1206FR-07390KL | YAGEO | C137298 | In Stock | 100 | $ 0.004 | 100 | $ 0.40 | $0.0108 | 25 | $0.27 | RES 390K OHM 1% 1/4W 1206 |
-| 59 | 470KΩ | RC1206FR-07470KL | YAGEO | C137273 | In Stock | 100 | $ 0.004 | 100 | $ 0.40 | $0.0228 | 25 | $0.57 | RES 470K OHM 1% 1/4W 1206 |
-| 60 | 560KΩ | RC1206JR-07560KL | YAGEO | C141711 | In Stock | 100 | $ 0.0031 | 100 | $ 0.31 | $0.0096 | 25 | $0.24 | RES 560K OHM 5% 1/4W 1206 |
-| 61 | 680KΩ | 1206W4F6803T5E | UNI-ROYAL | C17974 | In Stock | 100 | $ 0.0034 | 100 | $ 0.34 | $0.0376 | 25 | $0.94 | RES SMD 680K OHM 1% 1/4W 1206 |
-| 62 | 820KΩ | RC1206FR-07820KL | YAGEO | C246057 | In Stock | 100 | $ 0.0042 | 100 | $ 0.42 | $0.0124 | 25 | $0.31 | RES 820K OHM 1% 1/4W 1206 |
-| 63 | 1MΩ | RC1206FR-071ML | YAGEO | C108083 | In Stock | 100 | $ 0.004 | 100 | $ 0.40 | $0.0112 | 25 | $0.28 | RES 1M OHM 1% 1/4W 1206 |
+| # | Value | MPN | Mfr | LCSC Code | Stock | MOQ | LCSC Unit Price | LCSC Qty | LCSC Ext Price | DK Unit Price | DK Qty | DK Ext Price | DK Description | LCSC Desc |
+|---|-------|-----|-----|-----------|-------|-----|-----------------|----------|----------------|---------------|--------|--------------|----------------|-----------|
+| 1 | 0Ω | RC1206FR-070RL | YAGEO | C137394 | In Stock | 100 | $ 0.0041 | 100 | $ 0.41 | $0.0228 | 25 | $0.57 | RES 0 OHM JUMPER 1/4W 1206 | 0Ω 250mW 200V Thick Film Resistor ±1% 1206 Chip Resistor - Surface Mount RoHS |
+| 2 | 1Ω | RC1206JR-071RL | YAGEO | C137181 | In Stock | 100 | $ 0.008 | 100 | $ 0.80 | $0.0208 | 25 | $0.52 | RES 1 OHM 5% 1/4W 1206 | 1Ω 250mW 200V ±200ppm/℃ Thick Film Resistor ±5% 1206 Chip Resistor - Surface Mount RoHS |
+| 3 | 10Ω | RC1206FR-0710RL | YAGEO | C108080 | In Stock | 50 | $ 0.0125 | 100 | $ 0.63 | $0.022 | 25 | $0.55 | RES 10 OHM 1% 1/4W 1206 | 10Ω 250mW 200V ±200ppm/℃ Thick Film Resistor ±1% 1206 Chip Resistor - Surface Mount RoHS |
+| 4 | 12Ω | RC1206JR-0712RL | YAGEO | C137202 | In Stock | 100 | $ 0.0037 | 100 | $ 0.37 | $0.016 | 25 | $0.40 | RES 12 OHM 5% 1/4W 1206 | 12Ω 250mW 200V ±100ppm/℃ Thick Film Resistor ±5% 1206 Chip Resistor - Surface Mount RoHS |
+| 5 | 15Ω | RC1206FR-0715RL | YAGEO | C137386 | In Stock | 100 | $ 0.0041 | 100 | $ 0.41 | $0.0116 | 25 | $0.29 | RES 15 OHM 1% 1/4W 1206 | 250mW 15Ω 200V ±100ppm/℃ Thick Film Resistor ±1% 1206 Chip Resistor - Surface Mount RoHS |
+| 6 | 18Ω | RC1206FR-0718RL | YAGEO | C137378 | In Stock | 100 | $ 0.0038 | 100 | $ 0.38 | $0.0104 | 25 | $0.26 | RES 18 OHM 1% 1/4W 1206 | 250mW 18Ω 200V ±100ppm/℃ Thick Film Resistor ±1% 1206 Chip Resistor - Surface Mount RoHS |
+| 7 | 22Ω | RC1206FR-0722RL | YAGEO | C114943 | In Stock | 100 | $ 0.0041 | 100 | $ 0.41 | $0.0112 | 25 | $0.28 | RES 22 OHM 1% 1/4W 1206 | 22Ω 250mW 200V ±100ppm/℃ Thick Film Resistor ±1% 1206 Chip Resistor - Surface Mount RoHS |
+| 8 | 27Ω | RC1206FR-0727RL | YAGEO | C137339 | In Stock | 100 | $ 0.0041 | 100 | $ 0.41 | $0.0108 | 25 | $0.27 | RES 27 OHM 1% 1/4W 1206 | 27Ω 250mW 200V ±100ppm/℃ Thick Film Resistor ±1% 1206 Chip Resistor - Surface Mount RoHS |
+| 9 | 33Ω | RC1206FR-0733RL | YAGEO | C137308 | In Stock | 100 | $ 0.004 | 100 | $ 0.40 | $0.0312 | 25 | $0.78 | RES 33 OHM 1% 1/4W 1206 | 250mW 33Ω 200V ±100ppm/℃ Thick Film Resistor ±1% 1206 Chip Resistor - Surface Mount RoHS |
+| 10 | 39Ω | RC1206FR-0739RL | YAGEO | C137295 | In Stock | 100 | $ 0.004 | 100 | $ 0.40 | $0.0116 | 25 | $0.29 | RES 39 OHM 1% 1/4W 1206 | 39Ω 250mW 200V ±100ppm/℃ Thick Film Resistor ±1% 1206 Chip Resistor - Surface Mount RoHS |
+| 11 | 47Ω | RC1206FR-0747RL | YAGEO | C137268 | In Stock | 100 | $ 0.004 | 100 | $ 0.40 | $0.0108 | 25 | $0.27 | RES 47 OHM 1% 1/4W 1206 | 47Ω 250mW 200V ±100ppm/℃ Thick Film Resistor ±1% 1206 Chip Resistor - Surface Mount RoHS |
+| 12 | 56Ω | RC1206FR-0756RL | YAGEO | C246051 | In Stock | 100 | $ 0.0044 | 100 | $ 0.44 | $0.0128 | 25 | $0.32 | RES 56 OHM 1% 1/4W 1206 | 250mW 56Ω 200V ±100ppm/℃ Thick Film Resistor ±1% 1206 Chip Resistor - Surface Mount RoHS |
+| 13 | 68Ω | RC1206FR-0768RL | YAGEO | C137238 | In Stock | 100 | $ 0.004 | 100 | $ 0.40 | $0.0112 | 25 | $0.28 | RES 68 OHM 1% 1/4W 1206 | 250mW 68Ω 200V ±100ppm/℃ Thick Film Resistor ±1% 1206 Chip Resistor - Surface Mount RoHS |
+| 14 | 82Ω | 0805W8F0820T5E | FOJAN | C17503 | In Stock | 100 | $ 0.0019 | 100 | $ 0.19 | $0.0376 | 25 | $0.94 | RES SMD 82 OHM 1% 1/4W 1206 | 182Ω ±1% 125mW 0805 Thick Film Resistor |
+| 15 | 100Ω | RC1206FR-07100RL | YAGEO | C137392 | In Stock | 100 | $ 0.0041 | 100 | $ 0.41 | $0.0108 | 25 | $0.27 | RES 100 OHM 1% 1/4W 1206 | 100Ω 250mW 200V ±100ppm/℃ Thick Film Resistor ±1% 1206 Chip Resistor - Surface Mount RoHS |
+| 16 | 120Ω | RC1206JR-07120RL | YAGEO | C137204 | In Stock | 100 | $ 0.0036 | 100 | $ 0.36 | $0.0116 | 25 | $0.29 | RES 120 OHM 5% 1/4W 1206 | 120Ω 250mW 200V ±100ppm/℃ Thick Film Resistor ±5% 1206 Chip Resistor - Surface Mount RoHS |
+| 17 | 150Ω | RC1206FR-07150RL | YAGEO | C137387 | In Stock | 100 | $ 0.0042 | 100 | $ 0.42 | $0.0104 | 25 | $0.26 | RES 150 OHM 1% 1/4W 1206 | 150Ω 250mW 200V ±100ppm/℃ Thick Film Resistor ±1% 1206 Chip Resistor - Surface Mount RoHS |
+| 18 | 180Ω | RC1206FR-07180RL | YAGEO | C137380 | In Stock | 100 | $ 0.0038 | 100 | $ 0.38 | $0.0108 | 25 | $0.27 | RES 180 OHM 1% 1/4W 1206 | 180Ω 250mW 200V ±100ppm/℃ Thick Film Resistor ±1% 1206 Chip Resistor - Surface Mount RoHS |
+| 19 | 220Ω | RC1206JR-07220RL | YAGEO | C137176 | In Stock | 100 | $ 0.0035 | 100 | $ 0.35 | $0.0136 | 25 | $0.34 | RES 220 OHM 5% 1/4W 1206 | 220Ω 250mW 200V ±100ppm/℃ Thick Film Resistor ±5% 1206 Chip Resistor - Surface Mount RoHS |
+| 20 | 270Ω | RC1206JR-07270RL | YAGEO | C137170 | In Stock | 100 | $ 0.0035 | 100 | $ 0.35 | $0.011 | 25 | $0.28 | RES 270 OHM 5% 1/4W 1206 | 270Ω 250mW 200V ±100ppm/℃ Thick Film Resistor ±5% 1206 Chip Resistor - Surface Mount RoHS |
+| 21 | 330Ω | RC1206JR-07330RL | YAGEO | C137152 | In Stock | 100 | $ 0.0035 | 100 | $ 0.35 | $0.0096 | 25 | $0.24 | RES 330 OHM 5% 1/4W 1206 | 330Ω 250mW 200V ±100ppm/℃ Thick Film Resistor ±5% 1206 Chip Resistor - Surface Mount RoHS |
+| 22 | 390Ω | RC1206FR-07390RL | YAGEO | C163377 | In Stock | 100 | $ 0.0036 | 100 | $ 0.36 | $0.0116 | 25 | $0.29 | RES 390 OHM 1% 1/4W 1206 | 390Ω 250mW 200V ±100ppm/℃ Thick Film Resistor ±1% 1206 Chip Resistor - Surface Mount RoHS |
+| 23 | 470Ω | RC1206FR-07470RL | YAGEO | C114945 | In Stock | 100 | $ 0.0042 | 100 | $ 0.42 | $0.0092 | 25 | $0.23 | RES 470 OHM 1% 1/4W 1206 | 250mW 470Ω 200V ±100ppm/℃ Thick Film Resistor ±1% 1206 Chip Resistor - Surface Mount RoHS |
+| 24 | 560Ω | RC1206FR-07560RL | YAGEO | C185262 | In Stock | 100 | $ 0.004 | 100 | $ 0.40 | $0.01 | 25 | $0.25 | RES 560 OHM 1% 1/4W 1206 | 560Ω 250mW 200V ±100ppm/℃ Thick Film Resistor ±1% 1206 Chip Resistor - Surface Mount RoHS |
+| 25 | 680Ω | RC1206FR-07680RL | YAGEO | C137240 | In Stock | 100 | $ 0.004 | 100 | $ 0.40 | $0.017 | 25 | $0.43 | RES 680 OHM 1% 1/4W 1206 | 250mW 680Ω 200V ±100ppm/℃ Thick Film Resistor ±1% 1206 Chip Resistor - Surface Mount RoHS |
+| 26 | 820Ω | RC1206JR-07820RL | YAGEO | C137112 | In Stock | 100 | $ 0.0037 | 100 | $ 0.37 | $0.0112 | 25 | $0.28 | RES 820 OHM 5% 1/4W 1206 | 250mW 820Ω 200V ±100ppm/℃ Thick Film Resistor ±5% 1206 Chip Resistor - Surface Mount RoHS |
+| 27 | 1KΩ | RC1206JR-071KL | YAGEO | C112223 | In Stock | 100 | $ 0.003 | 100 | $ 0.30 | $0.0128 | 25 | $0.32 | RES 1K OHM 5% 1/4W 1206 | 1kΩ 250mW 200V ±100ppm/℃ Thick Film Resistor ±5% 1206 Chip Resistor - Surface Mount RoHS |
+| 28 | 1.2KΩ | RC1206FR-071K2L | YAGEO | C185265 | In Stock | 100 | $ 0.0036 | 100 | $ 0.36 | $0.0228 | 25 | $0.57 | RES 1.2K OHM 1% 1/4W 1206 | 250mW 1.2kΩ 200V ±100ppm/℃ Thick Film Resistor ±1% 1206 Chip Resistor - Surface Mount RoHS |
+| 29 | 1.5KΩ | RC1206FR-071K5L | YAGEO | C114929 | In Stock | 100 | $ 0.0041 | 100 | $ 0.41 | $0.0116 | 25 | $0.29 | RES 1.5K OHM 1% 1/4W 1206 | 1.5kΩ 250mW 200V ±100ppm/℃ Thick Film Resistor ±1% 1206 Chip Resistor - Surface Mount RoHS |
+| 30 | 1.8KΩ | RC1206JR-071K8L | YAGEO | C137188 | In Stock | 100 | $ 0.0035 | 100 | $ 0.35 | $0.0128 | 25 | $0.32 | RES 1.8K OHM 5% 1/4W 1206 | 250mW 1.8kΩ 200V ±100ppm/℃ Thick Film Resistor ±5% 1206 Chip Resistor - Surface Mount RoHS |
+| 31 | 2.2KΩ | RC1206JR-072K2L | YAGEO | C137167 | In Stock | 100 | $ 0.0035 | 100 | $ 0.35 | $0.0148 | 25 | $0.37 | RES 2.2K OHM 5% 1/4W 1206 | 2.2kΩ 250mW 200V ±100ppm/℃ Thick Film Resistor ±5% 1206 Chip Resistor - Surface Mount RoHS |
+| 32 | 2.7KΩ | RC1206FR-072K7L | YAGEO | C137330 | In Stock | 100 | $ 0.004 | 100 | $ 0.40 | $0.0128 | 25 | $0.32 | RES 2.7K OHM 1% 1/4W 1206 | 2.7kΩ 250mW 200V ±100ppm/℃ Thick Film Resistor ±1% 1206 Chip Resistor - Surface Mount RoHS |
+| 33 | 3.3KΩ | RC1206FR-073K3L | YAGEO | C137292 | In Stock | 100 | $ 0.004 | 100 | $ 0.40 | $0.0104 | 25 | $0.26 | RES 3.3K OHM 1% 1/4W 1206 | 3.3kΩ 250mW 200V ±100ppm/℃ Thick Film Resistor ±1% 1206 Chip Resistor - Surface Mount RoHS |
+| 34 | 3.9KΩ | RC1206JR-073K9L | YAGEO | C137145 | In Stock | 100 | $ 0.0035 | 100 | $ 0.35 | $0.0132 | 25 | $0.33 | RES 3.9K OHM 5% 1/4W 1206 | 250mW 3.9kΩ 200V ±100ppm/℃ Thick Film Resistor ±5% 1206 Chip Resistor - Surface Mount RoHS |
+| 35 | 4.7KΩ | RC1206FR-074K7L | YAGEO | C137262 | In Stock | 100 | $ 0.0041 | 100 | $ 0.41 | $0.0108 | 25 | $0.27 | RES 4.7K OHM 1% 1/4W 1206 | 4.7kΩ 250mW 200V ±100ppm/℃ Thick Film Resistor ±1% 1206 Chip Resistor - Surface Mount RoHS |
+| 36 | 5.6KΩ | RC1206JR-075K6L | YAGEO | C141708 | In Stock | 100 | $ 0.0037 | 100 | $ 0.37 | $0.0116 | 25 | $0.29 | RES 5.6K OHM 5% 1/4W 1206 | 5.6kΩ 250mW 200V ±100ppm/℃ Thick Film Resistor ±5% 1206 Chip Resistor - Surface Mount RoHS |
+| 37 | 6.8KΩ | RC1206FR-076K8L | YAGEO | C246053 | In Stock | 100 | $ 0.0037 | 100 | $ 0.37 | $0.0136 | 25 | $0.34 | RES 6.8K OHM 1% 1/4W 1206 | 250mW 6.8kΩ 200V ±100ppm/℃ Thick Film Resistor ±1% 1206 Chip Resistor - Surface Mount RoHS |
+| 38 | 8.2KΩ | RC1206FR-078K2L | YAGEO | C137226 | In Stock | 100 | $ 0.0041 | 100 | $ 0.41 | $0.0108 | 25 | $0.27 | RES 8.2K OHM 1% 1/4W 1206 | 8.2kΩ 250mW 200V ±100ppm/℃ Thick Film Resistor ±1% 1206 Chip Resistor - Surface Mount RoHS |
+| 39 | 10KΩ | RC1206FR-0710KL | YAGEO | C132649 | In Stock | 100 | $ 0.0041 | 100 | $ 0.41 | $0.0112 | 25 | $0.28 | RES 10K OHM 1% 1/4W 1206 | 250mW 10kΩ 200V ±100ppm/℃ Thick Film Resistor ±1% 1206 Chip Resistor - Surface Mount RoHS |
+| 40 | 12KΩ | RC1206JR-0712KL | YAGEO | C137203 | In Stock | 100 | $ 0.0035 | 100 | $ 0.35 | $0.01 | 25 | $0.25 | RES 12K OHM 5% 1/4W 1206 | 12kΩ 250mW 200V ±100ppm/℃ Thick Film Resistor ±5% 1206 Chip Resistor - Surface Mount RoHS |
+| 41 | 15KΩ | 0805W8F1502T5E | FOJAN | C17475 | In Stock | 100 | $ 0.002 | 100 | $ 0.20 | $0.0376 | 25 | $0.94 | RES SMD 15K OHM 1% 1/4W 1206 | 15kΩ ±1% 125mW 0805 Thick Film Resistor |
+| 42 | 18KΩ | RC1206JR-0718KL | YAGEO | C246063 | In Stock | 100 | $ 0.0032 | 100 | $ 0.32 | $0.0128 | 25 | $0.32 | RES 18K OHM 5% 1/4W 1206 | 250mW 18kΩ 200V ±100ppm/℃ Thick Film Resistor ±5% 1206 Chip Resistor - Surface Mount RoHS |
+| 43 | 22KΩ | RC1206FR-0722KL | YAGEO | C114942 | In Stock | 100 | $ 0.004 | 100 | $ 0.40 | $0.0128 | 25 | $0.32 | RES 22K OHM 1% 1/4W 1206 | 250mW 22kΩ 200V ±100ppm/℃ Thick Film Resistor ±1% 1206 Chip Resistor - Surface Mount RoHS |
+| 44 | 27KΩ | RC1206FR-0727KL | YAGEO | C137340 | In Stock | 100 | $ 0.0038 | 100 | $ 0.38 | $0.0108 | 25 | $0.27 | RES 27K OHM 1% 1/4W 1206 | 27kΩ 250mW 200V ±100ppm/℃ Thick Film Resistor ±1% 1206 Chip Resistor - Surface Mount RoHS |
+| 45 | 33KΩ | RC1206FR-0733KL | YAGEO | C137309 | In Stock | 100 | $ 0.004 | 100 | $ 0.40 | $0.0128 | 25 | $0.32 | RES 33K OHM 1% 1/4W 1206 | 250mW 33kΩ 200V ±100ppm/℃ Thick Film Resistor ±1% 1206 Chip Resistor - Surface Mount RoHS |
+| 46 | 39KΩ | RC1206FR-0739KL | YAGEO | C137296 | In Stock | 100 | $ 0.0038 | 100 | $ 0.38 | $0.008 | 25 | $0.20 | RES 39K OHM 1% 1/4W 1206 | 39kΩ 250mW 200V ±100ppm/℃ Thick Film Resistor ±1% 1206 Chip Resistor - Surface Mount RoHS |
+| 47 | 47KΩ | RC1206FR-0747KL | YAGEO | C137270 | In Stock | 100 | $ 0.0041 | 100 | $ 0.41 | $0.0108 | 25 | $0.27 | RES 47K OHM 1% 1/4W 1206 | 47kΩ 250mW 200V ±100ppm/℃ Thick Film Resistor ±1% 1206 Chip Resistor - Surface Mount RoHS |
+| 48 | 56KΩ | RC1206FR-0756KL | YAGEO | C137251 | In Stock | 100 | $ 0.0037 | 100 | $ 0.37 | $0.0108 | 25 | $0.27 | RES 56K OHM 1% 1/4W 1206 | 56kΩ 250mW 200V ±100ppm/℃ Thick Film Resistor ±1% 1206 Chip Resistor - Surface Mount RoHS |
+| 49 | 68KΩ | RC1206FR-0768KL | YAGEO | C137239 | In Stock | 100 | $ 0.004 | 100 | $ 0.40 | $0.0108 | 25 | $0.27 | RES 68K OHM 1% 1/4W 1206 | 68kΩ 250mW 200V ±100ppm/℃ Thick Film Resistor ±1% 1206 Chip Resistor - Surface Mount RoHS |
+| 50 | 82KΩ | RC1206FR-0782KL | YAGEO | C137229 | In Stock | 100 | $ 0.0041 | 100 | $ 0.41 | $0.011 | 25 | $0.28 | RES 82K OHM 1% 1/4W 1206 | 82kΩ 250mW 200V ±100ppm/℃ Thick Film Resistor ±1% 1206 Chip Resistor - Surface Mount RoHS |
+| 51 | 100KΩ | RC1206FR-07100KL | YAGEO | C137393 | In Stock | 100 | $ 0.0042 | 100 | $ 0.42 | $0.0112 | 25 | $0.28 | RES 100K OHM 1% 1/4W 1206 | 100kΩ 250mW 200V ±100ppm/℃ Thick Film Resistor ±1% 1206 Chip Resistor - Surface Mount RoHS |
+| 52 | 120KΩ | RC1206FR-07120KL | YAGEO | C163387 | In Stock | 100 | $ 0.004 | 100 | $ 0.40 | $0.016 | 25 | $0.40 | RES 120K OHM 1% 1/4W 1206 | 250mW 120kΩ 200V ±100ppm/℃ Thick Film Resistor ±1% 1206 Chip Resistor - Surface Mount RoHS |
+| 53 | 150KΩ | RC1206FR-07150KL | YAGEO | C114931 | In Stock | 100 | $ 0.0040 | 100 | $ 0.40 | $0.01 | 25 | $0.25 | RES 150K OHM 1% 1/4W 1206 | 250mW 150kΩ 200V ±100ppm/℃ Thick Film Resistor ±1% 1206 Chip Resistor - Surface Mount RoHS |
+| 54 | 180KΩ | RC1206JR-07180KL | YAGEO | C137194 | In Stock | 100 | $ 0.0035 | 100 | $ 0.35 | $0.0128 | 25 | $0.32 | RES 180K OHM 5% 1/4W 1206 | 180kΩ 250mW 200V ±100ppm/℃ Thick Film Resistor ±5% 1206 Chip Resistor - Surface Mount RoHS |
+| 55 | 220KΩ | RC1206FR-07220KL | YAGEO | C130275 | In Stock | 100 | $ 0.004 | 100 | $ 0.40 | $0.0108 | 25 | $0.27 | RES 220K OHM 1% 1/4W 1206 | 220kΩ 250mW 200V ±100ppm/℃ Thick Film Resistor ±1% 1206 Chip Resistor - Surface Mount RoHS |
+| 56 | 270KΩ | RC1206FR-07270KL | YAGEO | C137342 | In Stock | 100 | $ 0.0041 | 100 | $ 0.41 | $0.0172 | 25 | $0.43 | RES 270K OHM 1% 1/4W 1206 | 270kΩ 250mW 200V ±100ppm/℃ Thick Film Resistor ±1% 1206 Chip Resistor - Surface Mount RoHS |
+| 57 | 330KΩ | RC1206FR-07330KL | YAGEO | C137312 | In Stock | 100 | $ 0.004 | 100 | $ 0.40 | $0.0104 | 25 | $0.26 | RES 330K OHM 1% 1/4W 1206 | 250mW 330kΩ 200V ±100ppm/℃ Thick Film Resistor ±1% 1206 Chip Resistor - Surface Mount RoHS |
+| 58 | 390KΩ | RC1206FR-07390KL | YAGEO | C137298 | In Stock | 100 | $ 0.004 | 100 | $ 0.40 | $0.0108 | 25 | $0.27 | RES 390K OHM 1% 1/4W 1206 | 250mW 390kΩ 200V ±100ppm/℃ Thick Film Resistor ±1% 1206 Chip Resistor - Surface Mount RoHS |
+| 59 | 470KΩ | RC1206FR-07470KL | YAGEO | C137273 | In Stock | 100 | $ 0.004 | 100 | $ 0.40 | $0.0228 | 25 | $0.57 | RES 470K OHM 1% 1/4W 1206 | 250mW 470kΩ 200V ±100ppm/℃ Thick Film Resistor ±1% 1206 Chip Resistor - Surface Mount RoHS |
+| 60 | 560KΩ | RC1206JR-07560KL | YAGEO | C141711 | In Stock | 100 | $ 0.0031 | 100 | $ 0.31 | $0.0096 | 25 | $0.24 | RES 560K OHM 5% 1/4W 1206 | 560kΩ 250mW 200V ±100ppm/℃ Thick Film Resistor ±5% 1206 Chip Resistor - Surface Mount RoHS |
+| 61 | 680KΩ | 1206W4F6803T5E | UNI-ROYAL | C17974 | In Stock | 100 | $ 0.0034 | 100 | $ 0.34 | $0.0376 | 25 | $0.94 | RES SMD 680K OHM 1% 1/4W 1206 | 680kΩ ±1% 250mW 1206 Thick Film Resistor |
+| 62 | 820KΩ | RC1206FR-07820KL | YAGEO | C246057 | In Stock | 100 | $ 0.0042 | 100 | $ 0.42 | $0.0124 | 25 | $0.31 | RES 820K OHM 1% 1/4W 1206 | 820kΩ 250mW 200V ±100ppm/℃ Thick Film Resistor ±1% 1206 Chip Resistor - Surface Mount RoHS |
+| 63 | 1MΩ | RC1206FR-071ML | YAGEO | C108083 | In Stock | 100 | $ 0.004 | 100 | $ 0.40 | $0.0112 | 25 | $0.28 | RES 1M OHM 1% 1/4W 1206 | 250mW 1MΩ 200V ±100ppm/℃ Thick Film Resistor ±1% 1206 Chip Resistor - Surface Mount RoHS |
 | **TOTAL** |  |  |  |  |  |  |  | **6,300** | **$24.58** |  | **1,575** | **$22.21** |  |
