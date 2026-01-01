@@ -37,4 +37,9 @@ Pull back the prices and MOQ from LCSC for all of the items in @docs/E12_Resisto
 
 
 Carry on with running @scripts/lcsc_add_to_cart.py to add all the items from @docs/E12_Resistors_1206_Quarter_Watt_Resistor_Kit_qty25.md to the cart. Start with just 2 or 3 items to test that it works first.
-The was previously an issue where blank tabs were appearing but i have made some configuration changes that hopefully now address this.
+Ensure that you always pass both an output file and a log file to the script so that i can observe the progress.
+
+
+Prepare to run @scripts/lcsc_add_to_cart.py to add all the items from @docs/E12_Resistors_1206_Quarter_Watt_Resistor_Kit_qty25.md to the cart.
+Ensure that you pass both an output file and a log file to the script so that i can observe the progress.
+Prepare necessary files but DO NOT RUN THE SCRIPT. Instead just show me the command line to run so that i can run it myself.
