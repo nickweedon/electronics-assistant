@@ -62,7 +62,7 @@
         "PLAYWRIGHT_SAVE_SESSION": "true",
         "PLAYWRIGHT_SAVE_TRACE": "true",
         "PLAYWRIGHT_BROWSER": "chrome",
-        "PLAYWRIGHT_WSL_HOST_CONNECT": "172.22.96.1"
+        "PLAYWRIGHT_WSL_WINDOWS": "true"
       }
     },
     "digikey": {
