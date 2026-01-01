@@ -56,9 +56,96 @@ Follow these steps for efficient searching:
 - Step 3 is EXTRACTION - you must base your query on what you actually observed, not assumptions
 - If you attempt a JMESPath query without having observed the target content structure first, you are doing it wrong
 
-### Tasks requiring many repetitve MCP calls
-When being asked to peform tasks that many MCP calls such as pulling back pricing information for more than 10 items or having to launch many different item searches then create a script to do this if this is more efficient.
-If you are neeing to write such a script then consult the playwright_example.py file to see how to do this. **DO NOT** modify this file, just use it as an example to write a new script.
+### Tasks requiring many repetitive MCP calls
+
+**CRITICAL: When to write scripts vs. making direct MCP calls**
+
+For tasks requiring **more than 10 repetitive MCP calls** (e.g., pricing lookups, bulk searches):
+1. **ALWAYS create a Python script** - this is 5-10x faster than sequential tool calls
+2. **NEVER fall back to manual tool calls** if the script has a fixable error (missing dependency, syntax error, etc.)
+
+#### Writing MCP automation scripts
+
+**Step 1: Check if there is any existing or similar scripts already under scripts/**
+If there is a script serving the same or similar purpose then extend this script.
+**ALWAYS** Parameterize scripts so that they can be easily re-used in the future.
+Also, have the script have a parameter to specify and output file such as a JSON file and write the 
+script in such a way that the output file can be monitored for progress.
+
+**Step 2: Read the example file FIRST**
+```bash
+# MANDATORY: Always read this file before writing any MCP automation script
+cat playwright_example.py
+```
+
+The `playwright_example.py` file contains:
+- Complete setup instructions (virtual environment, package installation)
+- Working code patterns for MCP tool calls
+- Tool naming conventions (server prefix required)
+- Result access patterns (`.data` attribute)
+- Documentation links for FastMCP
+
+**Step 2: Follow the established pattern**
+
+Key requirements from the example:
+- **Package**: Use `fastmcp` library (install with `uv pip install fastmcp`)
+- **Tool names**: Must include server prefix: `"<server-name>_<tool-name>"`
+  - Example: `"playwright-mcp-server_browser_navigate"` (NOT just `"browser_navigate"`)
+- **Configuration**: Load from `.mcp.json` using `Client(config)`
+- **Results**: Access structured data via `.data` attribute on CallToolResult
+- **Async**: All MCP calls must use `async`/`await` pattern
+
+**Step 3: Experiment first**
+
+If writing a new script or adding script features then:
+1) Make a manual call to the related MCP server servers to ensure that the approach works
+2) Use a reduced data set of just 2 or 3 items first to make sure the script works before running it against all the data items.
+
+**Step 4: Handle errors properly**
+
+If your script fails:
+- ❌ **WRONG**: Abandon the script and revert to manual tool calls
+- ✅ **CORRECT**: Fix the script error (install dependencies, fix syntax, adjust tool names)
+
+Common fixable errors:
+- `ModuleNotFoundError: No module named 'fastmcp'` → Run `uv pip install fastmcp`
+- Tool not found errors → Add server prefix to tool name
+- Attribute errors on results → Use `.data` instead of direct access
+
+**Step 5: Script organization**
+
+- Store all scripts in `scripts/` directory
+- Parameterize inputs (accept command-line args or file inputs)
+- Output results as JSON for easy parsing
+- Check for existing scripts in `scripts/` before writing new ones
+- Consider future reuse when designing the interface
+
+**Example: LCSC pricing script structure**
+```python
+#!/usr/bin/env python3
+import asyncio
+import json
+from pathlib import Path
+from fastmcp import Client
+
+async def get_pricing(lcsc_codes: list) -> list:
+    config_path = Path(__file__).parent.parent / ".mcp.json"
+    with open(config_path) as f:
+        config = json.load(f)
+
+    client = Client(config)
+    results = []
+
+    async with client:
+        for code in lcsc_codes:
+            result = await client.call_tool(
+                "playwright-mcp-server_browser_execute_bulk",
+                {"commands": [...]}
+            )
+            results.append(result.data)
+
+    return results
+```
 
 ### Images
 The the user asks to see images, use xdg-open as the preferred tool to display them.
