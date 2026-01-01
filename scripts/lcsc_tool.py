@@ -7,6 +7,7 @@ Subcommands:
     list-cart       List all items currently in the cart
     open-cart       Open the cart in browser for manual review
     check-pricing   Check pricing and MOQ for LCSC parts (parallel execution)
+    search          Search LCSC catalog by keyword/specs (parallel execution)
 
 Examples:
     # Add parts to cart
@@ -25,6 +26,12 @@ Examples:
     python lcsc_tool.py check-pricing input.json output.json
     python lcsc_tool.py check-pricing input.json output.json --max-concurrent 20
     python lcsc_tool.py check-pricing mpn_input.json output.json --max-concurrent 1  # For MPN searches
+
+    # Search catalog
+    python lcsc_tool.py search input.json output.json
+    python lcsc_tool.py search input.json output.json --max-concurrent 10
+    python lcsc_tool.py search -s "1206 resistor 10k"  # Output to stdout
+    python lcsc_tool.py search -s "capacitor 10uF" output.json  # Save to file
 """
 import asyncio
 import json
@@ -585,68 +592,76 @@ async def fetch_single_part_pricing(client, part: dict, idx: int, total: int, se
             print(f"Processing {idx}/{total}: Searching for MPN {mpn}", file=sys.stderr)
 
             try:
-                # Search for the product by MPN
+                # Search using direct API call (much faster than UI navigation)
+                search_body = {
+                    "keyword": mpn,
+                    "catalogIdList": [],
+                    "brandIdList": [],
+                    "encapValueList": [],
+                    "isStock": False,  # Search all products, not just in-stock
+                    "isOtherSuppliers": False,
+                    "isAsianBrand": False,
+                    "isDeals": False,
+                    "isEnvironment": False,
+                    "paramNameValueMap": {},
+                    "currentPage": 1,
+                    "pageSize": 5  # Only need first few results
+                }
+
                 search_result = await client.call_tool(
-                    "browser_execute_bulk",
+                    "browser_run_code",
                     {
-                        "commands": [
-                            {
-                                "tool": "browser_navigate",
-                                "args": {
-                                    "url": f"https://www.lcsc.com/search?q={mpn}",
-                                    "silent_mode": True
-                                }
-                            },
-                            {
-                                "tool": "browser_wait_for",
-                                "args": {"time": 5}
-                            },
-                            {
-                                "tool": "browser_evaluate",
-                                "args": {
-                                    "function": "() => { const productLinks = document.querySelectorAll('a[href*=\"/product-detail/C\"]'); if (productLinks.length === 0) return { found: false, message: 'No product links found' }; const firstLink = productLinks[0]; const productUrl = firstLink.href; const productCode = productUrl.match(/C\\d+/)?.[0]; if (!productCode) return { found: false, message: 'Could not extract product code' }; let mpnFound = firstLink.textContent?.trim(); const row = firstLink.closest('tr'); let manufacturer = ''; if (row) { const mfgLink = row.querySelector('a[href*=\"/brand-detail/\"]'); if (mfgLink) manufacturer = mfgLink.textContent?.trim(); } return { found: true, count: 1, results: [{ mpn: mpnFound, lcscCode: productCode, manufacturer, productUrl, productCode }] }; }"
-                                },
-                                "return_result": True
-                            }
-                        ],
-                        "stop_on_error": True,
-                        "return_all_results": False
+                        "code": f"""
+                        async (page) => {{
+                            const response = await page.evaluate(async () => {{
+                                const res = await fetch('https://wmsc.lcsc.com/ftps/wm/product/query/list', {{
+                                    method: 'POST',
+                                    headers: {{
+                                        'Content-Type': 'application/json;charset=UTF-8',
+                                        'Accept': 'application/json, text/plain, */*'
+                                    }},
+                                    body: JSON.stringify({json.dumps(search_body)})
+                                }});
+                                return await res.json();
+                            }});
+                            return response;
+                        }}
+                        """
                     }
                 )
 
-                # Extract search results from browser_execute_bulk response
-                bulk_results = search_result.data.get("results", [])
-                last_result = bulk_results[-1] if bulk_results else None
-
-                # Parse the evaluation result from the text content
+                # Extract search results - browser_run_code returns content array format
                 search_data = None
-                if last_result and "content" in last_result:
-                    content = last_result["content"]
-                    if content and len(content) > 0:
-                        text_content = content[0].get("text", "")
-                        # Extract JSON from the "### Result\n{...}" format
-                        if "### Result" in text_content:
-                            json_start = text_content.find("{")
-                            json_end = text_content.find("\n\n###", json_start)
-                            if json_start >= 0:
-                                json_str = text_content[json_start:json_end if json_end > 0 else None]
-                                try:
-                                    search_data = json.loads(json_str)
-                                except json.JSONDecodeError:
-                                    pass
+                if hasattr(search_result, 'data') and search_result.data:
+                    if isinstance(search_result.data, list) and len(search_result.data) > 0:
+                        content_item = search_result.data[0]
+                        if isinstance(content_item, dict) and 'text' in content_item:
+                            text = content_item['text']
+                            # Extract JSON from "### Result\n{...}" format
+                            if "### Result" in text:
+                                json_start = text.find("{", text.find("### Result"))
+                                json_end = text.find("\n\n###", json_start)
+                                if json_start >= 0:
+                                    json_str = text[json_start:json_end if json_end > 0 else None]
+                                    try:
+                                        search_data = json.loads(json_str)
+                                    except json.JSONDecodeError as e:
+                                        print(f"  JSON parse error: {e}", file=sys.stderr)
 
-                if not search_data or not search_data.get("found"):
+                if not search_data or search_data.get("code") != 200:
                     return {
                         "lcsc_code": None,
                         "value": value,
                         "mpn": mpn,
-                        "error": "MPN not found in LCSC catalog",
+                        "error": "MPN search API request failed",
                         "success": False,
                         "index": idx
                     }
 
-                search_results = search_data.get("results", [])
-                if not search_results:
+                result_data = search_data.get("result", {})
+                products = result_data.get("dataList", [])
+
+                if not products or result_data.get("totalRow", 0) == 0:
                     return {
                         "lcsc_code": None,
                         "value": value,
@@ -657,10 +672,10 @@ async def fetch_single_part_pricing(client, part: dict, idx: int, total: int, se
                     }
 
                 # Use the first result
-                first_result = search_results[0]
-                lcsc_code = first_result.get("lcscCode") or first_result.get("productCode")
-                found_mpn = first_result.get("mpn", mpn)
-                manufacturer = first_result.get("manufacturer", "")
+                first_product = products[0]
+                lcsc_code = first_product.get("productCode")
+                found_mpn = first_product.get("productModel", mpn)
+                manufacturer = first_product.get("brandNameEn", "")
 
                 if not lcsc_code:
                     return {
@@ -929,6 +944,273 @@ async def check_lcsc_pricing(parts_list: list, output_file: Path, max_concurrent
 
 
 # ============================================================================
+# SEARCH FUNCTIONALITY
+# ============================================================================
+
+async def search_single_product(client: Client, search_spec: dict, idx: int, total: int, semaphore: asyncio.Semaphore) -> dict:
+    """Search LCSC catalog for a product matching the specification.
+
+    Args:
+        client: FastMCP client instance
+        search_spec: Dict with search parameters (e.g., {"keywords": "1206 1% 1Ω resistor", "value": "1Ω"})
+        idx: Current item index (1-based)
+        total: Total number of searches
+        semaphore: Asyncio semaphore for concurrency control
+
+    Returns:
+        dict: Search results with matching products or error information
+    """
+    keywords = search_spec.get("keywords", "")
+    value = search_spec.get("value", "")
+
+    if not keywords:
+        return {
+            "keywords": keywords,
+            "value": value,
+            "error": "No keywords provided",
+            "success": False,
+            "products": [],
+            "index": idx
+        }
+
+    async with semaphore:
+        print(f"Processing {idx}/{total}: Searching for '{keywords}'", file=sys.stderr)
+
+        try:
+            result = await client.call_tool(
+                "browser_execute_bulk",
+                {
+                    "commands": [
+                        {
+                            "tool": "browser_navigate",
+                            "args": {
+                                "url": f"https://www.lcsc.com/search?q={keywords}",
+                                "silent_mode": True
+                            }
+                        },
+                        {
+                            "tool": "browser_wait_for",
+                            "args": {"time": 5}
+                        },
+                        {
+                            "tool": "browser_evaluate",
+                            "args": {
+                                "function": r"""() => {
+                                    const productLinks = document.querySelectorAll('a[href*="/product-detail/C"]');
+                                    if (productLinks.length === 0) return { found: false, message: 'No product links found' };
+
+                                    const results = [];
+                                    const seen = new Set();
+
+                                    productLinks.forEach((link, i) => {
+                                        if (i >= 10) return; // Limit to first 10 results
+
+                                        const productUrl = link.href;
+                                        const productCode = productUrl.match(/C\d+/)?.[0];
+                                        if (!productCode || seen.has(productCode)) return;
+                                        seen.add(productCode);
+
+                                        let mpn = link.textContent?.trim();
+                                        const row = link.closest('tr');
+                                        let manufacturer = '';
+                                        let description = '';
+                                        let stock = '';
+                                        let price = '';
+
+                                        if (row) {
+                                            // Get manufacturer
+                                            const mfgLink = row.querySelector('a[href*="/brand-detail/"]');
+                                            if (mfgLink) manufacturer = mfgLink.textContent?.trim();
+
+                                            // Get stock - look for button with number
+                                            const stockButtons = row.querySelectorAll('button');
+                                            for (const btn of stockButtons) {
+                                                const text = btn.textContent?.trim();
+                                                if (text && text.match(/^[\d,]+$/)) {
+                                                    stock = text.replace(/,/g, '');
+                                                    break;
+                                                }
+                                            }
+
+                                            // Get description - look for cell with long text containing Ω, Resistor, etc.
+                                            const cells = row.querySelectorAll('td');
+                                            for (const cell of cells) {
+                                                const text = cell.textContent?.trim();
+                                                if (text && text.length > 30 && (text.includes('Ω') || text.includes('Resistor') || text.includes('Capacitor'))) {
+                                                    description = text;
+                                                    break;
+                                                }
+                                            }
+
+                                            // Get price - look for first price in pricing table
+                                            const priceRows = row.querySelectorAll('table tr');
+                                            for (const priceRow of priceRows) {
+                                                const priceCells = priceRow.querySelectorAll('td');
+                                                if (priceCells.length >= 2) {
+                                                    const priceText = priceCells[1].textContent?.trim();
+                                                    if (priceText && priceText.startsWith('$')) {
+                                                        price = priceText;
+                                                        break;
+                                                    }
+                                                }
+                                            }
+                                        }
+
+                                        results.push({
+                                            mpn,
+                                            lcscCode: productCode,
+                                            manufacturer,
+                                            description,
+                                            stock,
+                                            price,
+                                            productUrl
+                                        });
+                                    });
+
+                                    return { found: true, count: results.length, results };
+                                }"""
+                            },
+                            "return_result": True
+                        }
+                    ],
+                    "stop_on_error": True,
+                    "return_all_results": False
+                }
+            )
+
+            # Extract search results from browser_execute_bulk response
+            bulk_results = result.data.get("results", [])
+            last_result = bulk_results[-1] if bulk_results else None
+
+            # Parse the evaluation result from the text content
+            search_data = None
+            if last_result and "content" in last_result:
+                content = last_result["content"]
+                if content and len(content) > 0:
+                    text_content = content[0].get("text", "")
+                    # Extract JSON from the "### Result\n{...}" format
+                    if "### Result" in text_content:
+                        json_start = text_content.find("{")
+                        json_end = text_content.find("\n\n###", json_start)
+                        if json_start >= 0:
+                            json_str = text_content[json_start:json_end if json_end > 0 else None]
+                            try:
+                                search_data = json.loads(json_str)
+                            except json.JSONDecodeError:
+                                pass
+
+            if not search_data or not search_data.get("found"):
+                return {
+                    "keywords": keywords,
+                    "value": value,
+                    "error": search_data.get("message", "Search failed") if search_data else "No search data returned",
+                    "success": False,
+                    "products": [],
+                    "index": idx
+                }
+
+            products = search_data.get("results", [])
+            logger.info(f"✓ [{idx}/{total}] Found {len(products)} products for '{keywords}'")
+
+            return {
+                "keywords": keywords,
+                "value": value,
+                "products": products,
+                "total_found": len(products),
+                "success": True,
+                "index": idx
+            }
+
+        except Exception as e:
+            logger.error(f"✗ [{idx}/{total}] Error searching for '{keywords}': {e}")
+            return {
+                "keywords": keywords,
+                "value": value,
+                "error": str(e),
+                "success": False,
+                "products": [],
+                "index": idx
+            }
+
+
+async def search_lcsc_catalog(search_specs: list, output_file: Path = None, max_concurrent: int = 10) -> list:
+    """Search LCSC catalog for multiple products in parallel with controlled concurrency.
+
+    Optionally writes results to JSON file incrementally as each search completes.
+    Results are sorted by original index to maintain input order.
+
+    Args:
+        search_specs: List of search specification dicts with keywords and optional value
+        output_file: Optional path to write results JSON (if None, results only returned)
+        max_concurrent: Maximum concurrent requests (default: 10)
+
+    Returns:
+        list: Search results sorted by original index
+    """
+    config = load_mcp_config("playwright-mcp-server")
+    client = Client(config)
+
+    # Create semaphore to limit concurrent requests
+    semaphore = asyncio.Semaphore(max_concurrent)
+
+    # Track all results by index
+    results_dict = {}
+    completed_count = 0
+
+    # Initialize the output file with empty array if specified
+    if output_file:
+        output_file.parent.mkdir(parents=True, exist_ok=True)
+        with open(output_file, 'w') as f:
+            json.dump([], f)
+
+    logger.info(f"Starting to search for {len(search_specs)} products with max {max_concurrent} concurrent requests")
+    if output_file:
+        logger.info(f"Results will be written incrementally to: {output_file}")
+
+    def write_current_results():
+        """Write all completed results in index order to file."""
+        # Sort results by index and remove index field
+        sorted_results = []
+        for idx in sorted(results_dict.keys()):
+            entry = results_dict[idx]
+            entry_clean = {k: v for k, v in entry.items() if k != "index"}
+            sorted_results.append(entry_clean)
+
+        # Write to file if output_file specified
+        if output_file:
+            with open(output_file, 'w') as f:
+                json.dump(sorted_results, f, indent=2)
+
+        return sorted_results
+
+    async with client:
+        # Create all tasks
+        tasks = [
+            search_single_product(client, spec, idx + 1, len(search_specs), semaphore)
+            for idx, spec in enumerate(search_specs)
+        ]
+
+        # Process results as they complete
+        for coro in asyncio.as_completed(tasks):
+            result = await coro
+            idx = result.get("index", 0) - 1  # Convert 1-based to 0-based
+            results_dict[idx] = result
+            completed_count += 1
+
+            # Write all completed results to file after each completion
+            write_current_results()
+
+    final_results = write_current_results()
+
+    if output_file:
+        logger.info(f"✓ All searches processed. Results saved to {output_file}")
+    else:
+        logger.info(f"✓ All searches processed.")
+
+    return final_results
+
+
+# ============================================================================
 # MAIN ENTRY POINT
 # ============================================================================
 
@@ -952,6 +1234,12 @@ Examples:
   # Check pricing
   python lcsc_tool.py check-pricing input.json output.json
   python lcsc_tool.py check-pricing input.json output.json --max-concurrent 20
+
+  # Search catalog
+  python lcsc_tool.py search search_input.json search_results.json
+  python lcsc_tool.py search search_input.json search_results.json --max-concurrent 10
+  python lcsc_tool.py search -s "1206 resistor 10k"  # Output to stdout
+  python lcsc_tool.py search -s "capacitor 10uF" results.json  # Save to file
         """
     )
 
@@ -1040,6 +1328,40 @@ Examples:
         help="Maximum concurrent requests (default: 15, use 1 for MPN searches for better reliability)"
     )
     pricing_parser.add_argument(
+        "-l", "--log",
+        type=str,
+        help="Log file path (optional, defaults to console only)"
+    )
+
+    # search command
+    search_parser = subparsers.add_parser(
+        "search",
+        help="Search LCSC catalog by keywords/specifications"
+    )
+    search_parser.add_argument(
+        "input_file",
+        type=str,
+        nargs="?",
+        help="Input JSON file with search specs (format: [{\"keywords\": \"1206 1%% 1Ω resistor\", \"value\": \"1Ω\"}])"
+    )
+    search_parser.add_argument(
+        "output_file",
+        type=str,
+        nargs="?",
+        help="Output JSON file for search results (optional, outputs to stdout if not specified)"
+    )
+    search_parser.add_argument(
+        "-s", "--search",
+        type=str,
+        help="Direct keyword search string (alternative to input file)"
+    )
+    search_parser.add_argument(
+        "--max-concurrent",
+        type=int,
+        default=10,
+        help="Maximum concurrent requests (default: 10)"
+    )
+    search_parser.add_argument(
         "-l", "--log",
         type=str,
         help="Log file path (optional, defaults to console only)"
@@ -1137,6 +1459,49 @@ Examples:
         logger.info(f"  Failed: {sum(1 for r in results if not r.get('success'))}")
         logger.info(f"  Results file: {output_file}")
         logger.info("=" * 80)
+
+    elif args.command == "search":
+        # Determine input source: direct search string or input file
+        if args.search:
+            # Direct keyword search
+            search_specs = [{"keywords": args.search, "value": ""}]
+            logger.info(f"Searching for: '{args.search}'")
+        elif args.input_file:
+            # Load from input file
+            input_file = Path(args.input_file)
+            with open(input_file) as f:
+                search_specs = json.load(f)
+            logger.info(f"Loaded {len(search_specs)} search specifications from {input_file}")
+        else:
+            logger.error("Error: Either provide an input file or use -s/--search for direct keyword search")
+            search_parser.print_help()
+            return
+
+        # Determine output destination
+        output_file = Path(args.output_file) if args.output_file else None
+
+        max_concurrent = args.max_concurrent
+        logger.info(f"Max concurrent requests: {max_concurrent}")
+        logger.info("")
+
+        # Search catalog in parallel
+        results = asyncio.run(search_lcsc_catalog(search_specs, output_file, max_concurrent))
+
+        # Generate summary
+        logger.info("")
+        logger.info("=" * 80)
+        logger.info(f"Summary:")
+        logger.info(f"  Total searches: {len(results)}")
+        logger.info(f"  Successful: {sum(1 for r in results if r.get('success'))}")
+        logger.info(f"  Failed: {sum(1 for r in results if not r.get('success'))}")
+        logger.info(f"  Total products found: {sum(r.get('total_found', 0) for r in results if r.get('success'))}")
+        if output_file:
+            logger.info(f"  Results file: {output_file}")
+        logger.info("=" * 80)
+
+        # Output to stdout if no output file specified
+        if not output_file:
+            print(json.dumps(results, indent=2))
 
 
 if __name__ == "__main__":
