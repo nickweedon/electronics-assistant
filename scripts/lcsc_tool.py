@@ -863,8 +863,8 @@ async def fetch_single_part_pricing(client, part: dict, idx: int, total: int, se
 async def check_lcsc_pricing(parts_list: list, output_file: Path, max_concurrent: int = 15) -> None:
     """Fetch LCSC pricing for all parts in parallel with controlled concurrency.
 
-    Writes results to JSON file incrementally as each part completes, maintaining
-    valid JSON format throughout. Results are written in original order.
+    Writes results to JSON file incrementally as each part completes.
+    Results are sorted by original index to maintain input order in output file.
 
     Args:
         parts_list: List of part dicts with lcsc_code, value, mpn
@@ -877,33 +877,30 @@ async def check_lcsc_pricing(parts_list: list, output_file: Path, max_concurrent
     # Create semaphore to limit concurrent requests
     semaphore = asyncio.Semaphore(max_concurrent)
 
-    # Track results by index to maintain order
+    # Track all results by index
     results_dict = {}
-    next_index_to_write = 0
+    completed_count = 0
 
     # Initialize the output file with empty array
+    output_file.parent.mkdir(parents=True, exist_ok=True)
     with open(output_file, 'w') as f:
         json.dump([], f)
 
-    def write_results_in_order():
-        """Write any sequential results that are ready, maintaining order."""
-        nonlocal next_index_to_write
+    logger.info(f"Starting to process {len(parts_list)} parts with max {max_concurrent} concurrent requests")
+    logger.info(f"Results will be written incrementally to: {output_file}")
 
-        # Read current file content
-        with open(output_file, 'r') as f:
-            current_data = json.load(f)
-
-        # Add any sequential results that are ready
-        while next_index_to_write in results_dict:
-            entry = results_dict.pop(next_index_to_write)
-            # Remove the index field before writing
+    def write_current_results():
+        """Write all completed results in index order to file."""
+        # Sort results by index and remove index field
+        sorted_results = []
+        for idx in sorted(results_dict.keys()):
+            entry = results_dict[idx]
             entry_clean = {k: v for k, v in entry.items() if k != "index"}
-            current_data.append(entry_clean)
-            next_index_to_write += 1
+            sorted_results.append(entry_clean)
 
-        # Write updated data back to file
+        # Write to file
         with open(output_file, 'w') as f:
-            json.dump(current_data, f, indent=2)
+            json.dump(sorted_results, f, indent=2)
 
     async with client:
         # Create all tasks
@@ -915,13 +912,20 @@ async def check_lcsc_pricing(parts_list: list, output_file: Path, max_concurrent
         # Process results as they complete
         for coro in asyncio.as_completed(tasks):
             result = await coro
-            # Store result by its original index (1-based from function, convert to 0-based)
-            results_dict[result.get("index", 0) - 1] = result
-            # Write any sequential results that are now ready
-            write_results_in_order()
+            idx = result.get("index", 0) - 1  # Convert 1-based to 0-based
+            results_dict[idx] = result
+            completed_count += 1
 
-    # Final write to ensure all results are saved
-    write_results_in_order()
+            # Log completion
+            status = "✓" if result.get("success") else "✗"
+            lcsc_code = result.get("lcsc_code", "N/A")
+            value = result.get("value", "")
+            logger.info(f"{status} [{completed_count}/{len(parts_list)}] {lcsc_code} ({value})")
+
+            # Write all completed results to file after each completion
+            write_current_results()
+
+    logger.info(f"✓ All parts processed. Results saved to {output_file}")
 
 
 # ============================================================================
@@ -1035,6 +1039,11 @@ Examples:
         default=15,
         help="Maximum concurrent requests (default: 15, use 1 for MPN searches for better reliability)"
     )
+    pricing_parser.add_argument(
+        "-l", "--log",
+        type=str,
+        help="Log file path (optional, defaults to console only)"
+    )
 
     args = parser.parse_args()
 
@@ -1109,22 +1118,25 @@ Examples:
             parts_list = json.load(f)
 
         max_concurrent = args.max_concurrent
-        print(f"Starting to process {len(parts_list)} parts...", file=sys.stderr)
-        print(f"Max concurrent requests: {max_concurrent}", file=sys.stderr)
-        print(f"Results will be written to {output_file}", file=sys.stderr)
-        print("", file=sys.stderr)
+        logger.info(f"Loaded {len(parts_list)} parts from {input_file}")
+        logger.info(f"Max concurrent requests: {max_concurrent}")
+        logger.info("")
 
-        # Fetch pricing in parallel (writes to output_file when complete)
+        # Fetch pricing in parallel (writes to output_file incrementally)
         asyncio.run(check_lcsc_pricing(parts_list, output_file, max_concurrent))
 
         # Load results to generate summary
         with open(output_file) as f:
             results = json.load(f)
 
-        print(f"\n✓ Results saved to {output_file}", file=sys.stderr)
-        print(f"Processed {len(results)} parts", file=sys.stderr)
-        print(f"Successful: {sum(1 for r in results if r.get('success'))}", file=sys.stderr)
-        print(f"Failed: {sum(1 for r in results if not r.get('success'))}", file=sys.stderr)
+        logger.info("")
+        logger.info("=" * 80)
+        logger.info(f"Summary:")
+        logger.info(f"  Total processed: {len(results)}")
+        logger.info(f"  Successful: {sum(1 for r in results if r.get('success'))}")
+        logger.info(f"  Failed: {sum(1 for r in results if not r.get('success'))}")
+        logger.info(f"  Results file: {output_file}")
+        logger.info("=" * 80)
 
 
 if __name__ == "__main__":
