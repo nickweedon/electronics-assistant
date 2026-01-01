@@ -1,33 +1,41 @@
 #!/usr/bin/env python3
 """
-LCSC cart management tool - supports multiple operations via subcommands.
+LCSC management tool - supports multiple operations via subcommands.
 
 Subcommands:
-    add-to-cart     Add parts to LCSC cart (parallel execution)
+    add-to-cart     Add parts to LCSC cart (sequential execution)
     list-cart       List all items currently in the cart
+    open-cart       Open the cart in browser for manual review
+    check-pricing   Check pricing and MOQ for LCSC parts (parallel execution)
 
 Examples:
     # Add parts to cart
-    python lcsc_cart.py add-to-cart C137394:100 C137181:50
-    python lcsc_cart.py add-to-cart --file codes.txt -o results.json -l progress.log
+    python lcsc_tool.py add-to-cart C137394:100 C137181:50
+    python lcsc_tool.py add-to-cart --file codes.txt -o results.json -l progress.log
 
     # List cart contents
-    python lcsc_cart.py list-cart
-    python lcsc_cart.py list-cart -o cart_summary.json
-    python lcsc_cart.py list-cart --format table
+    python lcsc_tool.py list-cart
+    python lcsc_tool.py list-cart -o cart_summary.json
+    python lcsc_tool.py list-cart --format table
+
+    # Open cart in browser
+    python lcsc_tool.py open-cart
+
+    # Check pricing
+    python lcsc_tool.py check-pricing input.json output.json
+    python lcsc_tool.py check-pricing input.json output.json --max-concurrent 20
 """
 import asyncio
 import json
 import argparse
 import logging
+import sys
 from pathlib import Path
 from fastmcp import Client
 
 
 # Global logger
 logger = None
-# Global results list
-results = []
 
 
 def parse_item_spec(spec: str, default_qty: int = 100):
@@ -54,6 +62,9 @@ def setup_logging(log_file: Path = None):
     logger = logging.getLogger(__name__)
     logger.setLevel(logging.INFO)
 
+    # Clear existing handlers
+    logger.handlers.clear()
+
     # Create formatters
     console_formatter = logging.Formatter('%(message)s')
     file_formatter = logging.Formatter('%(asctime)s - %(levelname)s - %(message)s')
@@ -74,26 +85,117 @@ def setup_logging(log_file: Path = None):
         logger.info(f"Logging to file: {log_file}")
 
 
-def load_playwright_config():
-    """Load and filter MCP configuration for playwright-real-session-mcp-server.
+def load_mcp_config(server_name: str):
+    """Load and filter MCP configuration for a specific server.
+
+    Args:
+        server_name: Name of the MCP server to filter for
 
     Returns:
-        Filtered config dict containing only the playwright real session server
+        Filtered config dict containing only the specified server
     """
     config_path = Path(__file__).parent.parent / ".mcp.json"
     with open(config_path) as f:
         full_config = json.load(f)
 
-    # Filter to only use playwright-real-session-mcp-server
+    # Filter to only use the specified server
+    if server_name not in full_config["mcpServers"]:
+        raise ValueError(f"Server '{server_name}' not found in .mcp.json")
+
     return {
         "mcpServers": {
-            "playwright-real-session-mcp-server": full_config["mcpServers"]["playwright-real-session-mcp-server"]
+            server_name: full_config["mcpServers"][server_name]
         }
     }
 
 
+def _check_success(result):
+    """Check if a browser evaluation result indicates success.
+
+    Args:
+        result: CallToolResult from browser_evaluate
+
+    Returns:
+        bool: True if successful, False otherwise
+    """
+    eval_data = str(result.content[0].text) if result.content else ""
+    return not ('"success": false' in eval_data or "'success': False" in eval_data)
+
+
+def _extract_cart_data_from_result(result):
+    """Extract cart data from browser evaluation result.
+
+    Handles various result formats including double-encoded JSON and markdown blocks.
+
+    Args:
+        result: CallToolResult from browser_evaluate
+
+    Returns:
+        dict: Parsed cart data or empty structure if parsing fails
+    """
+    if not result.content:
+        return {"items": [], "cartTotal": "N/A", "totalItems": 0}
+
+    result_text = result.content[0].text
+
+    # Check if result_text is a JSON-serialized CallToolResult (double-encoding issue)
+    if result_text.startswith('{"content":['):
+        logger.info("Detected double-encoded result, extracting nested text")
+        outer_data = json.loads(result_text)
+        result_text = outer_data['content'][0]['text']
+
+    # Extract JSON from markdown result block
+    if "### Result\n{" in result_text:
+        json_start = result_text.index("### Result\n{") + len("### Result\n")
+        json_end = result_text.index("\n\n###", json_start) if "\n\n###" in result_text[json_start:] else len(result_text)
+        json_text = result_text[json_start:json_end]
+        return json.loads(json_text)
+    else:
+        return json.loads(result_text)
+
+
+def _print_cart_table(cart_data):
+    """Print cart data in formatted table.
+
+    Args:
+        cart_data: Dictionary containing items, cartTotal, and totalItems
+    """
+    print("\n" + "=" * 120)
+    print(f"LCSC Cart Summary - {cart_data['totalItems']} items")
+    print("=" * 120)
+    print(f"{'LCSC Code':<12} {'MPN':<20} {'Manufacturer':<15} {'Qty':<8} {'Unit Price':<12} {'Ext Price':<12} Description")
+    print("-" * 120)
+
+    for item in cart_data['items']:
+        desc = item['description']
+        if len(desc) > 30:
+            desc = desc[:27] + "..."
+
+        print(f"{item['lcscCode']:<12} {item['mpn']:<20} {item['manufacturer']:<15} "
+              f"{item['quantity']:<8} {item['unitPrice']:<12} {item['extPrice']:<12} {desc}")
+
+    print("-" * 120)
+    print(f"{'':>85}Cart Total: {cart_data['cartTotal']}")
+    print("=" * 120 + "\n")
+
+
+# ============================================================================
+# ADD TO CART FUNCTIONALITY
+# ============================================================================
+
 async def add_single_part(client: Client, lcsc_code: str, quantity: int, index: int, total: int):
-    """Add a single part to LCSC cart."""
+    """Add a single part to LCSC cart.
+
+    Args:
+        client: FastMCP client instance
+        lcsc_code: LCSC part code (e.g., "C137394")
+        quantity: Quantity to add
+        index: Current item index (for progress reporting)
+        total: Total number of items
+
+    Returns:
+        dict: Result with status and error information if applicable
+    """
     logger.info(f"[{index}/{total}] Starting {lcsc_code} (qty: {quantity})")
 
     try:
@@ -169,30 +271,19 @@ async def add_single_part(client: Client, lcsc_code: str, quantity: int, index: 
         return {"code": lcsc_code, "status": "error", "error": str(e)}
 
 
-def _check_success(result):
-    """Check if a browser evaluation result indicates success.
-
-    Args:
-        result: CallToolResult from browser_evaluate
-
-    Returns:
-        bool: True if successful, False otherwise
-    """
-    eval_data = str(result.content[0].text) if result.content else ""
-    return not ('"success": false' in eval_data or "'success': False" in eval_data)
-
-
 async def add_parts_to_cart(items: list, output_file: Path = None):
     """Add parts to LCSC cart sequentially.
 
     Args:
         items: List of (code, quantity) tuples
         output_file: Path to output JSON file
+
+    Returns:
+        list: Results for each part
     """
-    global results
     results = []
 
-    config = load_playwright_config()
+    config = load_mcp_config("playwright-real-session-mcp-server")
     client = Client(config)
 
     # Initialize output file with empty array if specified
@@ -232,37 +323,9 @@ async def add_parts_to_cart(items: list, output_file: Path = None):
     return results
 
 
-def _extract_cart_data_from_result(result):
-    """Extract cart data from browser evaluation result.
-
-    Handles various result formats including double-encoded JSON and markdown blocks.
-
-    Args:
-        result: CallToolResult from browser_evaluate
-
-    Returns:
-        dict: Parsed cart data or empty structure if parsing fails
-    """
-    if not result.content:
-        return {"items": [], "cartTotal": "N/A", "totalItems": 0}
-
-    result_text = result.content[0].text
-
-    # Check if result_text is a JSON-serialized CallToolResult (double-encoding issue)
-    if result_text.startswith('{"content":['):
-        logger.info("Detected double-encoded result, extracting nested text")
-        outer_data = json.loads(result_text)
-        result_text = outer_data['content'][0]['text']
-
-    # Extract JSON from markdown result block
-    if "### Result\n{" in result_text:
-        json_start = result_text.index("### Result\n{") + len("### Result\n")
-        json_end = result_text.index("\n\n###", json_start) if "\n\n###" in result_text[json_start:] else len(result_text)
-        json_text = result_text[json_start:json_end]
-        return json.loads(json_text)
-    else:
-        return json.loads(result_text)
-
+# ============================================================================
+# LIST CART FUNCTIONALITY
+# ============================================================================
 
 async def list_cart_contents(output_file: Path = None, output_format: str = "table"):
     """List all items currently in LCSC cart.
@@ -270,8 +333,11 @@ async def list_cart_contents(output_file: Path = None, output_format: str = "tab
     Args:
         output_file: Optional path to save results as JSON
         output_format: Output format - 'table' or 'json'
+
+    Returns:
+        dict: Cart data
     """
-    config = load_playwright_config()
+    config = load_mcp_config("playwright-real-session-mcp-server")
     client = Client(config)
 
     logger.info("Fetching cart contents from LCSC...")
@@ -453,44 +519,202 @@ async def list_cart_contents(output_file: Path = None, output_format: str = "tab
     return cart_data
 
 
-def _print_cart_table(cart_data):
-    """Print cart data in formatted table.
+# ============================================================================
+# OPEN CART FUNCTIONALITY
+# ============================================================================
+
+async def open_cart_in_browser():
+    """Open LCSC cart in browser and keep it open for manual review.
+
+    This function navigates to the cart page and keeps the browser session
+    active so the user can manually review and interact with the cart.
+    """
+    config = load_mcp_config("playwright-real-session-mcp-server")
+    client = Client(config)
+
+    logger.info("Opening LCSC cart in browser...")
+    logger.info("The browser will remain open for you to review the cart.")
+    logger.info("Press Ctrl+C when you're done to close this script.")
+
+    async with client:
+        # Navigate to cart
+        await client.call_tool(
+            "browser_navigate",
+            {
+                "url": "https://www.lcsc.com/cart",
+                "silent_mode": True
+            }
+        )
+
+        logger.info("✓ Cart page loaded successfully")
+        logger.info("Browser is ready for your review. Press Ctrl+C to exit.")
+
+        # Keep the script running to maintain the browser session
+        try:
+            while True:
+                await asyncio.sleep(1)
+        except KeyboardInterrupt:
+            logger.info("\nClosing browser session...")
+
+
+# ============================================================================
+# CHECK PRICING FUNCTIONALITY
+# ============================================================================
+
+async def fetch_single_part_pricing(client, part: dict, idx: int, total: int, semaphore: asyncio.Semaphore) -> dict:
+    """Fetch pricing for a single part with semaphore-controlled concurrency.
 
     Args:
-        cart_data: Dictionary containing items, cartTotal, and totalItems
+        client: FastMCP client instance
+        part: Part dict with lcsc_code, value, mpn
+        idx: Current item index (1-based)
+        total: Total number of parts
+        semaphore: Asyncio semaphore for concurrency control
+
+    Returns:
+        dict: Pricing data or error information
     """
-    print("\n" + "=" * 120)
-    print(f"LCSC Cart Summary - {cart_data['totalItems']} items")
-    print("=" * 120)
-    print(f"{'LCSC Code':<12} {'MPN':<20} {'Manufacturer':<15} {'Qty':<8} {'Unit Price':<12} {'Ext Price':<12} Description")
-    print("-" * 120)
+    lcsc_code = part.get("lcsc_code")
+    value = part.get("value", "")
+    mpn = part.get("mpn", "")
 
-    for item in cart_data['items']:
-        desc = item['description']
-        if len(desc) > 30:
-            desc = desc[:27] + "..."
+    async with semaphore:
+        print(f"Processing {idx}/{total}: {lcsc_code} ({value})", file=sys.stderr)
 
-        print(f"{item['lcscCode']:<12} {item['mpn']:<20} {item['manufacturer']:<15} "
-              f"{item['quantity']:<8} {item['unitPrice']:<12} {item['extPrice']:<12} {desc}")
+        try:
+            result = await client.call_tool(
+                "playwright-mcp-server_browser_execute_bulk",
+                {
+                    "commands": [
+                        {
+                            "tool": "browser_navigate",
+                            "args": {
+                                "url": f"https://www.lcsc.com/product-detail/{lcsc_code}.html",
+                                "silent_mode": True
+                            }
+                        },
+                        {
+                            "tool": "browser_wait_for",
+                            "args": {
+                                "text": "Standard Packaging"
+                            }
+                        },
+                        {
+                            "tool": "browser_snapshot",
+                            "args": {
+                                "jmespath_query": "[[].children[].children[].children[].children[].children[?role == 'table'], [].children[].children[].children[].children[].children[].children[?role == 'table']] | [] | [].children[1].children[:6].{qty: children[0].children[0].name.value, unit_price: children[1].name.value, ext_price: children[2].name.value} | []",
+                                "output_format": "json"
+                            },
+                            "return_result": True
+                        }
+                    ],
+                    "stop_on_error": True,
+                    "return_all_results": False
+                }
+            )
 
-    print("-" * 120)
-    print(f"{'':>85}Cart Total: {cart_data['cartTotal']}")
-    print("=" * 120 + "\n")
+            # Extract pricing data from the result
+            bulk_results = result.data.get("results", [])
+            pricing_snapshot = bulk_results[-1] if bulk_results else None
 
+            # Parse pricing data
+            pricing = []
+            if pricing_snapshot and "snapshot" in pricing_snapshot:
+                pricing = pricing_snapshot["snapshot"]
+
+            return {
+                "lcsc_code": lcsc_code,
+                "value": value,
+                "mpn": mpn,
+                "pricing": pricing,
+                "success": True,
+                "index": idx
+            }
+
+        except Exception as e:
+            print(f"Error processing {lcsc_code}: {e}", file=sys.stderr)
+            return {
+                "lcsc_code": lcsc_code,
+                "value": value,
+                "mpn": mpn,
+                "error": str(e),
+                "success": False,
+                "index": idx
+            }
+
+
+async def check_lcsc_pricing(parts_list: list, output_file: Path, max_concurrent: int = 15) -> None:
+    """Fetch LCSC pricing for all parts in parallel with controlled concurrency.
+
+    Args:
+        parts_list: List of part dicts with lcsc_code, value, mpn
+        output_file: Path to write results JSON
+        max_concurrent: Maximum concurrent requests (default: 15)
+    """
+    config = load_mcp_config("playwright-mcp-server")
+    client = Client(config)
+
+    # Initialize the output file with an empty array
+    with open(output_file, 'w') as f:
+        f.write('[\n')
+
+    # Create semaphore to limit concurrent requests
+    semaphore = asyncio.Semaphore(max_concurrent)
+
+    async with client:
+        # Create all tasks
+        tasks = [
+            fetch_single_part_pricing(client, part, idx + 1, len(parts_list), semaphore)
+            for idx, part in enumerate(parts_list)
+        ]
+
+        # Wait for all tasks to complete
+        results = await asyncio.gather(*tasks)
+
+        # Sort by original index to maintain order
+        results.sort(key=lambda x: x.get("index", 0))
+
+        # Write all results to file
+        for idx, entry in enumerate(results):
+            # Remove the index field before writing
+            entry_copy = {k: v for k, v in entry.items() if k != "index"}
+
+            if idx > 0:
+                with open(output_file, 'a') as f:
+                    f.write(',\n')
+
+            with open(output_file, 'a') as f:
+                json.dump(entry_copy, f, indent=2)
+
+    # Close the JSON array
+    with open(output_file, 'a') as f:
+        f.write('\n]\n')
+
+
+# ============================================================================
+# MAIN ENTRY POINT
+# ============================================================================
 
 def main():
     parser = argparse.ArgumentParser(
-        description="LCSC cart management tool",
+        description="LCSC management tool",
         formatter_class=argparse.RawDescriptionHelpFormatter,
         epilog="""
 Examples:
   # Add parts to cart
-  python lcsc_cart.py add-to-cart C137394:100 C137181:50
-  python lcsc_cart.py add-to-cart --file codes.txt -o results.json
+  python lcsc_tool.py add-to-cart C137394:100 C137181:50
+  python lcsc_tool.py add-to-cart --file codes.txt -o results.json
 
   # List cart contents
-  python lcsc_cart.py list-cart
-  python lcsc_cart.py list-cart -o cart.json --format json
+  python lcsc_tool.py list-cart
+  python lcsc_tool.py list-cart -o cart.json --format json
+
+  # Open cart in browser
+  python lcsc_tool.py open-cart
+
+  # Check pricing
+  python lcsc_tool.py check-pricing input.json output.json
+  python lcsc_tool.py check-pricing input.json output.json --max-concurrent 20
         """
     )
 
@@ -546,15 +770,51 @@ Examples:
         help="Log file path (optional, defaults to console only)"
     )
 
+    # open-cart command
+    open_parser = subparsers.add_parser(
+        "open-cart",
+        help="Open LCSC cart in browser for manual review"
+    )
+    open_parser.add_argument(
+        "-l", "--log",
+        type=str,
+        help="Log file path (optional, defaults to console only)"
+    )
+
+    # check-pricing command
+    pricing_parser = subparsers.add_parser(
+        "check-pricing",
+        help="Check pricing and MOQ for LCSC parts"
+    )
+    pricing_parser.add_argument(
+        "input_file",
+        type=str,
+        help="Input JSON file with parts (format: [{\"lcsc_code\": \"C137394\", \"value\": \"0Ω\", \"mpn\": \"...\"}])"
+    )
+    pricing_parser.add_argument(
+        "output_file",
+        type=str,
+        help="Output JSON file for pricing results"
+    )
+    pricing_parser.add_argument(
+        "--max-concurrent",
+        type=int,
+        default=15,
+        help="Maximum concurrent requests (default: 15)"
+    )
+
     args = parser.parse_args()
 
     if not args.command:
         parser.print_help()
         return
 
-    # Setup logging
-    log_file = Path(args.log) if hasattr(args, 'log') and args.log else None
-    setup_logging(log_file)
+    # Setup logging for commands that support it
+    if hasattr(args, 'log'):
+        log_file = Path(args.log) if args.log else None
+        setup_logging(log_file)
+    else:
+        setup_logging()
 
     # Execute command
     if args.command == "add-to-cart":
@@ -603,6 +863,35 @@ Examples:
     elif args.command == "list-cart":
         output_file = Path(args.output) if args.output else None
         asyncio.run(list_cart_contents(output_file, args.format))
+
+    elif args.command == "open-cart":
+        asyncio.run(open_cart_in_browser())
+
+    elif args.command == "check-pricing":
+        input_file = Path(args.input_file)
+        output_file = Path(args.output_file)
+
+        # Load input data
+        with open(input_file) as f:
+            parts_list = json.load(f)
+
+        max_concurrent = args.max_concurrent
+        print(f"Starting to process {len(parts_list)} parts...", file=sys.stderr)
+        print(f"Max concurrent requests: {max_concurrent}", file=sys.stderr)
+        print(f"Results will be written to {output_file}", file=sys.stderr)
+        print("", file=sys.stderr)
+
+        # Fetch pricing in parallel (writes to output_file when complete)
+        asyncio.run(check_lcsc_pricing(parts_list, output_file, max_concurrent))
+
+        # Load results to generate summary
+        with open(output_file) as f:
+            results = json.load(f)
+
+        print(f"\n✓ Results saved to {output_file}", file=sys.stderr)
+        print(f"Processed {len(results)} parts", file=sys.stderr)
+        print(f"Successful: {sum(1 for r in results if r.get('success'))}", file=sys.stderr)
+        print(f"Failed: {sum(1 for r in results if not r.get('success'))}", file=sys.stderr)
 
 
 if __name__ == "__main__":
