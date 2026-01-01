@@ -26,6 +26,8 @@
         "-e",
         "PLAYWRIGHT_NO_SANDBOX=true",
         "-e",
+        "PLAYWRIGHT_ISOLATED=true",
+        "-e",
         "PLAYWRIGHT_TIMEOUT_ACTION=15000",
         "-e",
         "PLAYWRIGHT_TIMEOUT_NAVIGATION=5000",

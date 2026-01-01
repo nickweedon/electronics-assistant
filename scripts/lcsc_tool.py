@@ -24,6 +24,7 @@ Examples:
     # Check pricing
     python lcsc_tool.py check-pricing input.json output.json
     python lcsc_tool.py check-pricing input.json output.json --max-concurrent 20
+    python lcsc_tool.py check-pricing mpn_input.json output.json --max-concurrent 1  # For MPN searches
 """
 import asyncio
 import json
@@ -566,7 +567,7 @@ async def fetch_single_part_pricing(client, part: dict, idx: int, total: int, se
 
     Args:
         client: FastMCP client instance
-        part: Part dict with lcsc_code, value, mpn
+        part: Part dict with lcsc_code OR mpn (plus optional value)
         idx: Current item index (1-based)
         total: Total number of parts
         semaphore: Asyncio semaphore for concurrency control
@@ -579,11 +580,127 @@ async def fetch_single_part_pricing(client, part: dict, idx: int, total: int, se
     mpn = part.get("mpn", "")
 
     async with semaphore:
+        # Determine if we need to search for the LCSC code first
+        if not lcsc_code and mpn:
+            print(f"Processing {idx}/{total}: Searching for MPN {mpn}", file=sys.stderr)
+
+            try:
+                # Search for the product by MPN
+                search_result = await client.call_tool(
+                    "browser_execute_bulk",
+                    {
+                        "commands": [
+                            {
+                                "tool": "browser_navigate",
+                                "args": {
+                                    "url": f"https://www.lcsc.com/search?q={mpn}",
+                                    "silent_mode": True
+                                }
+                            },
+                            {
+                                "tool": "browser_wait_for",
+                                "args": {"time": 5}
+                            },
+                            {
+                                "tool": "browser_evaluate",
+                                "args": {
+                                    "function": "() => { const productLinks = document.querySelectorAll('a[href*=\"/product-detail/C\"]'); if (productLinks.length === 0) return { found: false, message: 'No product links found' }; const firstLink = productLinks[0]; const productUrl = firstLink.href; const productCode = productUrl.match(/C\\d+/)?.[0]; if (!productCode) return { found: false, message: 'Could not extract product code' }; let mpnFound = firstLink.textContent?.trim(); const row = firstLink.closest('tr'); let manufacturer = ''; if (row) { const mfgLink = row.querySelector('a[href*=\"/brand-detail/\"]'); if (mfgLink) manufacturer = mfgLink.textContent?.trim(); } return { found: true, count: 1, results: [{ mpn: mpnFound, lcscCode: productCode, manufacturer, productUrl, productCode }] }; }"
+                                },
+                                "return_result": True
+                            }
+                        ],
+                        "stop_on_error": True,
+                        "return_all_results": False
+                    }
+                )
+
+                # Extract search results from browser_execute_bulk response
+                bulk_results = search_result.data.get("results", [])
+                last_result = bulk_results[-1] if bulk_results else None
+
+                # Parse the evaluation result from the text content
+                search_data = None
+                if last_result and "content" in last_result:
+                    content = last_result["content"]
+                    if content and len(content) > 0:
+                        text_content = content[0].get("text", "")
+                        # Extract JSON from the "### Result\n{...}" format
+                        if "### Result" in text_content:
+                            json_start = text_content.find("{")
+                            json_end = text_content.find("\n\n###", json_start)
+                            if json_start >= 0:
+                                json_str = text_content[json_start:json_end if json_end > 0 else None]
+                                try:
+                                    search_data = json.loads(json_str)
+                                except json.JSONDecodeError:
+                                    pass
+
+                if not search_data or not search_data.get("found"):
+                    return {
+                        "lcsc_code": None,
+                        "value": value,
+                        "mpn": mpn,
+                        "error": "MPN not found in LCSC catalog",
+                        "success": False,
+                        "index": idx
+                    }
+
+                search_results = search_data.get("results", [])
+                if not search_results:
+                    return {
+                        "lcsc_code": None,
+                        "value": value,
+                        "mpn": mpn,
+                        "error": "No matching products found",
+                        "success": False,
+                        "index": idx
+                    }
+
+                # Use the first result
+                first_result = search_results[0]
+                lcsc_code = first_result.get("lcscCode") or first_result.get("productCode")
+                found_mpn = first_result.get("mpn", mpn)
+                manufacturer = first_result.get("manufacturer", "")
+
+                if not lcsc_code:
+                    return {
+                        "lcsc_code": None,
+                        "value": value,
+                        "mpn": mpn,
+                        "error": "Could not extract LCSC code from search results",
+                        "success": False,
+                        "index": idx
+                    }
+
+                print(f"  Found: {lcsc_code} ({found_mpn} by {manufacturer})", file=sys.stderr)
+
+            except Exception as e:
+                print(f"Error searching for MPN {mpn}: {e}", file=sys.stderr)
+                return {
+                    "lcsc_code": None,
+                    "value": value,
+                    "mpn": mpn,
+                    "error": f"Search failed: {str(e)}",
+                    "success": False,
+                    "index": idx
+                }
+
+        # Now fetch pricing with the LCSC code
+        if not lcsc_code:
+            return {
+                "lcsc_code": None,
+                "value": value,
+                "mpn": mpn,
+                "error": "No LCSC code available",
+                "success": False,
+                "index": idx
+            }
+
         print(f"Processing {idx}/{total}: {lcsc_code} ({value})", file=sys.stderr)
 
         try:
             result = await client.call_tool(
-                "playwright-mcp-server_browser_execute_bulk",
+                "browser_execute_bulk",
                 {
                     "commands": [
                         {
@@ -606,6 +723,76 @@ async def fetch_single_part_pricing(client, part: dict, idx: int, total: int, se
                                 "output_format": "json"
                             },
                             "return_result": True
+                        },
+                        {
+                            "tool": "browser_evaluate",
+                            "args": {
+                                "function": r"""() => {
+                                    // Extract manufacturer
+                                    const mfgLink = document.querySelector('a[href*="/brand-detail/"]');
+                                    const manufacturer = mfgLink ? mfgLink.textContent.trim() : 'N/A';
+
+                                    // Extract description from meta tag (most reliable)
+                                    let description = 'N/A';
+                                    const metaDesc = document.querySelector('meta[name="description"]');
+                                    if (metaDesc) {
+                                        description = metaDesc.getAttribute('content') || 'N/A';
+                                    }
+
+                                    // If no meta description, try h1 title
+                                    if (description === 'N/A') {
+                                        const h1 = document.querySelector('h1');
+                                        if (h1) {
+                                            description = h1.textContent.trim();
+                                        }
+                                    }
+
+                                    // Extract stock quantity
+                                    let stock = 'N/A';
+                                    const bodyText = document.body.textContent || '';
+
+                                    // LCSC shows "In-Stock:" on one line and the number on the next line
+                                    const lines = bodyText.split('\n');
+                                    for (let i = 0; i < lines.length; i++) {
+                                        if (lines[i].includes('In-Stock:')) {
+                                            // Check next 3 lines for a number
+                                            for (let j = 1; j <= 3 && i + j < lines.length; j++) {
+                                                const nextLine = lines[i + j].trim();
+                                                const numberMatch = nextLine.match(/^([0-9,]+)$/);
+                                                if (numberMatch) {
+                                                    stock = numberMatch[1].replace(/,/g, '');
+                                                    break;
+                                                }
+                                            }
+                                            break;
+                                        }
+                                    }
+
+                                    // Fallback: try inline patterns
+                                    if (stock === 'N/A') {
+                                        const stockPatterns = [
+                                            /In Stock[:\\s]+([0-9,]+)/i,
+                                            /Stock[:\\s]+([0-9,]+)/i,
+                                            /([0-9,]+)\\s*pcs in stock/i
+                                        ];
+
+                                        for (const pattern of stockPatterns) {
+                                            const match = bodyText.match(pattern);
+                                            if (match) {
+                                                stock = match[1].replace(/,/g, '');
+                                                break;
+                                            }
+                                        }
+                                    }
+
+                                    return {
+                                        manufacturer: manufacturer,
+                                        description: description,
+                                        stock: stock
+                                    };
+                                }"""
+                            },
+                            "return_result": True
                         }
                     ],
                     "stop_on_error": True,
@@ -615,17 +802,44 @@ async def fetch_single_part_pricing(client, part: dict, idx: int, total: int, se
 
             # Extract pricing data from the result
             bulk_results = result.data.get("results", [])
-            pricing_snapshot = bulk_results[-1] if bulk_results else None
+            pricing_snapshot = bulk_results[-2] if len(bulk_results) >= 2 else None
+            details_result = bulk_results[-1] if bulk_results else None
 
             # Parse pricing data
             pricing = []
             if pricing_snapshot and "snapshot" in pricing_snapshot:
                 pricing = pricing_snapshot["snapshot"]
 
+            # Parse manufacturer, description, and stock
+            manufacturer = "N/A"
+            description = "N/A"
+            stock = "N/A"
+
+            if details_result and "content" in details_result:
+                content = details_result["content"]
+                if content and len(content) > 0:
+                    text_content = content[0].get("text", "")
+                    # Extract JSON from the "### Result\n{...}" format
+                    if "### Result" in text_content:
+                        json_start = text_content.find("{")
+                        json_end = text_content.find("\n\n###", json_start)
+                        if json_start >= 0:
+                            json_str = text_content[json_start:json_end if json_end > 0 else None]
+                            try:
+                                details_data = json.loads(json_str)
+                                manufacturer = details_data.get("manufacturer", "N/A")
+                                description = details_data.get("description", "N/A")
+                                stock = details_data.get("stock", "N/A")
+                            except json.JSONDecodeError:
+                                pass
+
             return {
                 "lcsc_code": lcsc_code,
                 "value": value,
                 "mpn": mpn,
+                "manufacturer": manufacturer,
+                "description": description,
+                "stock": stock,
                 "pricing": pricing,
                 "success": True,
                 "index": idx
@@ -637,6 +851,9 @@ async def fetch_single_part_pricing(client, part: dict, idx: int, total: int, se
                 "lcsc_code": lcsc_code,
                 "value": value,
                 "mpn": mpn,
+                "manufacturer": "N/A",
+                "description": "N/A",
+                "stock": "N/A",
                 "error": str(e),
                 "success": False,
                 "index": idx
@@ -646,6 +863,9 @@ async def fetch_single_part_pricing(client, part: dict, idx: int, total: int, se
 async def check_lcsc_pricing(parts_list: list, output_file: Path, max_concurrent: int = 15) -> None:
     """Fetch LCSC pricing for all parts in parallel with controlled concurrency.
 
+    Writes results to JSON file incrementally as each part completes, maintaining
+    valid JSON format throughout. Results are written in original order.
+
     Args:
         parts_list: List of part dicts with lcsc_code, value, mpn
         output_file: Path to write results JSON
@@ -654,12 +874,36 @@ async def check_lcsc_pricing(parts_list: list, output_file: Path, max_concurrent
     config = load_mcp_config("playwright-mcp-server")
     client = Client(config)
 
-    # Initialize the output file with an empty array
-    with open(output_file, 'w') as f:
-        f.write('[\n')
-
     # Create semaphore to limit concurrent requests
     semaphore = asyncio.Semaphore(max_concurrent)
+
+    # Track results by index to maintain order
+    results_dict = {}
+    next_index_to_write = 0
+
+    # Initialize the output file with empty array
+    with open(output_file, 'w') as f:
+        json.dump([], f)
+
+    def write_results_in_order():
+        """Write any sequential results that are ready, maintaining order."""
+        nonlocal next_index_to_write
+
+        # Read current file content
+        with open(output_file, 'r') as f:
+            current_data = json.load(f)
+
+        # Add any sequential results that are ready
+        while next_index_to_write in results_dict:
+            entry = results_dict.pop(next_index_to_write)
+            # Remove the index field before writing
+            entry_clean = {k: v for k, v in entry.items() if k != "index"}
+            current_data.append(entry_clean)
+            next_index_to_write += 1
+
+        # Write updated data back to file
+        with open(output_file, 'w') as f:
+            json.dump(current_data, f, indent=2)
 
     async with client:
         # Create all tasks
@@ -668,27 +912,16 @@ async def check_lcsc_pricing(parts_list: list, output_file: Path, max_concurrent
             for idx, part in enumerate(parts_list)
         ]
 
-        # Wait for all tasks to complete
-        results = await asyncio.gather(*tasks)
+        # Process results as they complete
+        for coro in asyncio.as_completed(tasks):
+            result = await coro
+            # Store result by its original index (1-based from function, convert to 0-based)
+            results_dict[result.get("index", 0) - 1] = result
+            # Write any sequential results that are now ready
+            write_results_in_order()
 
-        # Sort by original index to maintain order
-        results.sort(key=lambda x: x.get("index", 0))
-
-        # Write all results to file
-        for idx, entry in enumerate(results):
-            # Remove the index field before writing
-            entry_copy = {k: v for k, v in entry.items() if k != "index"}
-
-            if idx > 0:
-                with open(output_file, 'a') as f:
-                    f.write(',\n')
-
-            with open(output_file, 'a') as f:
-                json.dump(entry_copy, f, indent=2)
-
-    # Close the JSON array
-    with open(output_file, 'a') as f:
-        f.write('\n]\n')
+    # Final write to ensure all results are saved
+    write_results_in_order()
 
 
 # ============================================================================
@@ -789,7 +1022,7 @@ Examples:
     pricing_parser.add_argument(
         "input_file",
         type=str,
-        help="Input JSON file with parts (format: [{\"lcsc_code\": \"C137394\", \"value\": \"0Ω\", \"mpn\": \"...\"}])"
+        help="Input JSON file with parts (format: [{\"lcsc_code\": \"C137394\"} or {\"mpn\": \"RC1206FR-070RL\"}, optional \"value\": \"0Ω\"])"
     )
     pricing_parser.add_argument(
         "output_file",
@@ -800,7 +1033,7 @@ Examples:
         "--max-concurrent",
         type=int,
         default=15,
-        help="Maximum concurrent requests (default: 15)"
+        help="Maximum concurrent requests (default: 15, use 1 for MPN searches for better reliability)"
     )
 
     args = parser.parse_args()
