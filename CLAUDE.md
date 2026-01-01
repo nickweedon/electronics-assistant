@@ -56,6 +56,10 @@ Follow these steps for efficient searching:
 - Step 3 is EXTRACTION - you must base your query on what you actually observed, not assumptions
 - If you attempt a JMESPath query without having observed the target content structure first, you are doing it wrong
 
+### Tasks requiring many repetitve MCP calls
+When being asked to peform tasks that many MCP calls such as pulling back pricing information for more than 10 items or having to launch many different item searches then create a script to do this if this is more efficient.
+If you are neeing to write such a script then consult the playwright_example.py file to see how to do this. **DO NOT** modify this file, just use it as an example to write a new script.
+
 ### Images
 The the user asks to see images, use xdg-open as the preferred tool to display them.
 
