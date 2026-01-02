@@ -949,7 +949,7 @@ async def check_lcsc_pricing(parts_list: list, output_file: Path, max_concurrent
 # ============================================================================
 
 async def search_single_product(client: Client, search_spec: dict, idx: int, total: int, semaphore: asyncio.Semaphore, limit: int = None) -> dict:
-    """Search LCSC catalog for a product matching the specification.
+    """Search LCSC catalog for a product matching the specification with pagination support.
 
     Args:
         client: FastMCP client instance
@@ -957,7 +957,7 @@ async def search_single_product(client: Client, search_spec: dict, idx: int, tot
         idx: Current item index (1-based)
         total: Total number of searches
         semaphore: Asyncio semaphore for concurrency control
-        limit: Maximum number of results to return (None = all results)
+        limit: Maximum number of results to return (None = all results up to 5000)
 
     Returns:
         dict: Search results with matching products or error information
@@ -979,7 +979,7 @@ async def search_single_product(client: Client, search_spec: dict, idx: int, tot
         print(f"Processing {idx}/{total}: Searching for '{keywords}'", file=sys.stderr)
 
         try:
-            # Navigate, wait, and evaluate in one batch call
+            # Navigate and wait for page to load
             result = await client.call_tool(
                 "browser_execute_bulk",
                 {
@@ -994,84 +994,6 @@ async def search_single_product(client: Client, search_spec: dict, idx: int, tot
                         {
                             "tool": "browser_wait_for",
                             "args": {"time": 5}
-                        },
-                        {
-                            "tool": "browser_evaluate",
-                            "args": {
-                                "function": r"""() => {
-                                    const productLinks = document.querySelectorAll('a[href*="/product-detail/C"]');
-                                    if (productLinks.length === 0) return [];
-
-                                    const results = [];
-                                    const seen = new Set();
-
-                                    productLinks.forEach((link) => {
-                                        const productUrl = link.href;
-                                        const productCode = productUrl.match(/C\d+/)?.[0];
-                                        if (!productCode || seen.has(productCode)) return;
-                                        seen.add(productCode);
-
-                                        let mpn = link.textContent?.trim();
-                                        const row = link.closest('tr');
-                                        let manufacturer = '';
-                                        let description = '';
-                                        let stock = '';
-                                        let price = '';
-
-                                        if (row) {
-                                            // Get manufacturer
-                                            const mfgLink = row.querySelector('a[href*="/brand-detail/"]');
-                                            if (mfgLink) manufacturer = mfgLink.textContent?.trim();
-
-                                            // Get stock - look for button with number
-                                            const stockButtons = row.querySelectorAll('button');
-                                            for (const btn of stockButtons) {
-                                                const text = btn.textContent?.trim();
-                                                if (text && text.match(/^[\d,]+$/)) {
-                                                    stock = text.replace(/,/g, '');
-                                                    break;
-                                                }
-                                            }
-
-                                            // Get description - look for cell with long text containing Ω, Resistor, etc.
-                                            const cells = row.querySelectorAll('td');
-                                            for (const cell of cells) {
-                                                const text = cell.textContent?.trim();
-                                                if (text && text.length > 30 && (text.includes('Ω') || text.includes('Resistor') || text.includes('Capacitor'))) {
-                                                    description = text;
-                                                    break;
-                                                }
-                                            }
-
-                                            // Get price - look for first price in pricing table
-                                            const priceRows = row.querySelectorAll('table tr');
-                                            for (const priceRow of priceRows) {
-                                                const priceCells = priceRow.querySelectorAll('td');
-                                                if (priceCells.length >= 2) {
-                                                    const priceText = priceCells[1].textContent?.trim();
-                                                    if (priceText && priceText.startsWith('$')) {
-                                                        price = priceText;
-                                                        break;
-                                                    }
-                                                }
-                                            }
-                                        }
-
-                                        results.push({
-                                            mpn,
-                                            lcscCode: productCode,
-                                            manufacturer,
-                                            description,
-                                            stock,
-                                            price,
-                                            productUrl
-                                        });
-                                    });
-
-                                    return results;
-                                }"""
-                            },
-                            "return_result": True
                         }
                     ],
                     "stop_on_error": True,
@@ -1079,34 +1001,171 @@ async def search_single_product(client: Client, search_spec: dict, idx: int, tot
                 }
             )
 
-            # Extract search results from browser_execute_bulk response
-            bulk_results = result.data.get("results", [])
-            last_result = bulk_results[-1] if bulk_results else None
+            # Use browser_run_code to paginate with proper context separation
+            # State (seen Set, allProducts) stays in Node.js context
+            # Product extraction happens in browser context via page.evaluate
+            max_products = limit if limit else 5000
+            code_result = await client.call_tool(
+                "browser_run_code",
+                {
+                    "code": f"""async (page) => {{
+                        const maxProducts = {max_products};
+                        const allProducts = [];
+                        const seen = new Set();
 
-            # Parse the evaluation result from the text content
+                        // Extract products from current page (runs in browser context)
+                        async function extractCurrentPage() {{
+                            return await page.evaluate(() => {{
+                                const productLinks = document.querySelectorAll('a[href*="/product-detail/C"]');
+                                let pageProducts = [];
+
+                                productLinks.forEach((link) => {{
+                                    const productUrl = link.href;
+                                    const productCode = productUrl.match(/C\\d+/)?.[0];
+                                    if (!productCode) return;
+
+                                    let mpn = link.textContent?.trim();
+                                    const row = link.closest('tr');
+                                    let manufacturer = '';
+                                    let description = '';
+                                    let stock = '';
+                                    let price = '';
+
+                                    if (row) {{
+                                        const mfgLink = row.querySelector('a[href*="/brand-detail/"]');
+                                        if (mfgLink) manufacturer = mfgLink.textContent?.trim();
+
+                                        const stockButtons = row.querySelectorAll('button');
+                                        for (const btn of stockButtons) {{
+                                            const text = btn.textContent?.trim();
+                                            if (text && text.match(/^[\\d,]+$/)) {{
+                                                stock = text.replace(/,/g, '');
+                                                break;
+                                            }}
+                                        }}
+
+                                        const cells = row.querySelectorAll('td');
+                                        for (const cell of cells) {{
+                                            const text = cell.textContent?.trim();
+                                            if (text && text.length > 30 && (text.includes('Ω') || text.includes('Resistor') || text.includes('Capacitor'))) {{
+                                                description = text;
+                                                break;
+                                            }}
+                                        }}
+
+                                        const priceRows = row.querySelectorAll('table tr');
+                                        for (const priceRow of priceRows) {{
+                                            const priceCells = priceRow.querySelectorAll('td');
+                                            if (priceCells.length >= 2) {{
+                                                const priceText = priceCells[1].textContent?.trim();
+                                                if (priceText && priceText.startsWith('$')) {{
+                                                    price = priceText;
+                                                    break;
+                                                }}
+                                            }}
+                                        }}
+                                    }}
+
+                                    pageProducts.push({{
+                                        mpn,
+                                        lcscCode: productCode,
+                                        manufacturer,
+                                        description,
+                                        stock,
+                                        price,
+                                        productUrl
+                                    }});
+                                }});
+
+                                return pageProducts;
+                            }});
+                        }}
+
+                        // Click next page button and wait (runs in Node.js context)
+                        async function goToNextPage() {{
+                            try {{
+                                const hasNext = await page.evaluate(() => {{
+                                    const currentActive = document.querySelector('button.v-pagination__item--active');
+                                    if (!currentActive) return false;
+                                    const currentPage = parseInt(currentActive.textContent.trim());
+
+                                    const nextButtons = Array.from(document.querySelectorAll('button.v-pagination__item')).filter(btn => {{
+                                        const btnPage = parseInt(btn.textContent.trim());
+                                        return btnPage === currentPage + 1;
+                                    }});
+
+                                    if (nextButtons.length > 0) {{
+                                        nextButtons[0].click();
+                                        return true;
+                                    }}
+                                    return false;
+                                }});
+
+                                if (hasNext) {{
+                                    await page.waitForTimeout(3000);  // Wait for page to update
+                                    return true;
+                                }}
+                                return false;
+                            }} catch (e) {{
+                                return false;
+                            }}
+                        }}
+
+                        // Extract first page
+                        let pageProducts = await extractCurrentPage();
+
+                        // Deduplicate in Node.js context
+                        for (const product of pageProducts) {{
+                            if (!seen.has(product.lcscCode)) {{
+                                seen.add(product.lcscCode);
+                                allProducts.push(product);
+                            }}
+                        }}
+
+                        // Keep paginating while we have products and haven't hit limit
+                        let pageCount = 1;
+                        while (allProducts.length < maxProducts && pageCount < 200) {{
+                            const hasNext = await goToNextPage();
+                            if (!hasNext) break;
+
+                            pageProducts = await extractCurrentPage();
+                            if (pageProducts.length === 0) break;
+
+                            // Deduplicate in Node.js context
+                            for (const product of pageProducts) {{
+                                if (!seen.has(product.lcscCode)) {{
+                                    seen.add(product.lcscCode);
+                                    allProducts.push(product);
+                                    if (allProducts.length >= maxProducts) break;
+                                }}
+                            }}
+
+                            pageCount++;
+                        }}
+
+                        // Trim to limit and return
+                        return allProducts.slice(0, maxProducts);
+                    }}"""
+                }
+            )
+
+            # Parse the result from browser_run_code
+            # The result is in .data.content[0].text as a markdown-formatted string
+            # containing: "### Result\n[...json array...]\n\n### Ran Playwright code\n..."
             all_products = []
-            if last_result and "content" in last_result:
-                content = last_result["content"]
-                if content and len(content) > 0:
-                    text_content = content[0].get("text", "")
-                    # Extract JSON from the "### Result\n[...]" format
-                    if "### Result" in text_content:
-                        json_start = text_content.find("[")
-                        if json_start < 0:
-                            json_start = text_content.find("{")
-                        json_end = text_content.find("\n\n###", json_start)
-                        if json_start >= 0:
-                            json_str = text_content[json_start:json_end if json_end > 0 else None]
-                            try:
-                                all_products = json.loads(json_str)
-                                if not isinstance(all_products, list):
-                                    all_products = [all_products]
-                            except json.JSONDecodeError:
-                                pass
-
-            # Apply user-specified limit if provided
-            if limit and len(all_products) > limit:
-                all_products = all_products[:limit]
+            if code_result.data and "content" in code_result.data:
+                content = code_result.data["content"]
+                if content and len(content) > 0 and "text" in content[0]:
+                    text = content[0]["text"]
+                    # Extract JSON array from markdown text
+                    # Format: "### Result\n[...]\n\n### Ran Playwright code\n..."
+                    import re
+                    match = re.search(r'### Result\n(\[.*?\])\n\n### Ran Playwright code', text, re.DOTALL)
+                    if match:
+                        import json
+                        all_products = json.loads(match.group(1))
+                        if not isinstance(all_products, list):
+                            all_products = [all_products] if all_products else []
 
             if not all_products:
                 return {
