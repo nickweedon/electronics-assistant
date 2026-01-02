@@ -594,6 +594,7 @@ async def fetch_single_part_pricing(client, part: dict, idx: int, total: int, se
 
             try:
                 # Search using direct API call (much faster than UI navigation)
+                # Need to navigate to LCSC first to establish session
                 search_body = {
                     "keyword": mpn,
                     "catalogIdList": [],
@@ -609,45 +610,73 @@ async def fetch_single_part_pricing(client, part: dict, idx: int, total: int, se
                     "pageSize": 5  # Only need first few results
                 }
 
+                # First navigate to LCSC to establish session, then make API call
                 search_result = await client.call_tool(
-                    "browser_run_code",
+                    "browser_execute_bulk",
                     {
-                        "code": f"""
-                        async (page) => {{
-                            const response = await page.evaluate(async () => {{
-                                const res = await fetch('https://wmsc.lcsc.com/ftps/wm/product/query/list', {{
-                                    method: 'POST',
-                                    headers: {{
-                                        'Content-Type': 'application/json;charset=UTF-8',
-                                        'Accept': 'application/json, text/plain, */*'
-                                    }},
-                                    body: JSON.stringify({json.dumps(search_body)})
-                                }});
-                                return await res.json();
-                            }});
-                            return response;
-                        }}
-                        """
+                        "commands": [
+                            {
+                                "tool": "browser_navigate",
+                                "args": {
+                                    "url": "https://www.lcsc.com",
+                                    "silent_mode": True
+                                }
+                            },
+                            {
+                                "tool": "browser_wait_for",
+                                "args": {"time": 2}
+                            },
+                            {
+                                "tool": "browser_run_code",
+                                "args": {
+                                    "code": f"""
+                                    async (page) => {{
+                                        const response = await page.evaluate(async () => {{
+                                            const res = await fetch('https://wmsc.lcsc.com/ftps/wm/product/query/list', {{
+                                                method: 'POST',
+                                                headers: {{
+                                                    'Content-Type': 'application/json;charset=UTF-8',
+                                                    'Accept': 'application/json, text/plain, */*'
+                                                }},
+                                                body: JSON.stringify({json.dumps(search_body)})
+                                            }});
+                                            return await res.json();
+                                        }});
+                                        return response;
+                                    }}
+                                    """
+                                },
+                                "return_result": True
+                            }
+                        ],
+                        "stop_on_error": True,
+                        "return_all_results": False
                     }
                 )
 
-                # Extract search results - browser_run_code returns content array format
+                # Extract search results from browser_execute_bulk response
                 search_data = None
                 if hasattr(search_result, 'data') and search_result.data:
-                    if isinstance(search_result.data, list) and len(search_result.data) > 0:
-                        content_item = search_result.data[0]
-                        if isinstance(content_item, dict) and 'text' in content_item:
-                            text = content_item['text']
-                            # Extract JSON from "### Result\n{...}" format
-                            if "### Result" in text:
-                                json_start = text.find("{", text.find("### Result"))
-                                json_end = text.find("\n\n###", json_start)
-                                if json_start >= 0:
-                                    json_str = text[json_start:json_end if json_end > 0 else None]
-                                    try:
-                                        search_data = json.loads(json_str)
-                                    except json.JSONDecodeError as e:
-                                        print(f"  JSON parse error: {e}", file=sys.stderr)
+                    results = search_result.data.get("results", [])
+                    if results and len(results) > 0:
+                        # The browser_run_code result is the last item
+                        code_result = results[-1]
+                        if code_result and "content" in code_result:
+                            content = code_result["content"]
+                            if content and len(content) > 0:
+                                content_item = content[0]
+                                if isinstance(content_item, dict) and 'text' in content_item:
+                                    text = content_item['text']
+                                    # Extract JSON from "### Result\n{...}" format
+                                    if "### Result" in text:
+                                        json_start = text.find("{", text.find("### Result"))
+                                        json_end = text.find("\n\n###", json_start)
+                                        if json_start >= 0:
+                                            json_str = text[json_start:json_end if json_end > 0 else None]
+                                            try:
+                                                search_data = json.loads(json_str)
+                                            except json.JSONDecodeError as e:
+                                                print(f"  JSON parse error: {e}", file=sys.stderr)
 
                 if not search_data or search_data.get("code") != 200:
                     return {
