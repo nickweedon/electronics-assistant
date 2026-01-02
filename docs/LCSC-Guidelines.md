@@ -190,6 +190,48 @@ uv run python scripts/lcsc_tool.py open-cart
 
 This opens the cart page and keeps the browser session active. Press Ctrl+C when done to close.
 
+#### 6. Create BOM File
+
+Create LCSC BOM CSV file from Manufacturer Part Numbers (MPNs) and quantities:
+
+```bash
+# Create BOM from command line
+uv run python scripts/lcsc_tool.py create-bom-file RC1206FR-071RL:100 RC1206FR-070RL:50 -o bom.csv
+
+# Create BOM from file
+uv run python scripts/lcsc_tool.py create-bom-file --file mpns.txt -o bom.csv
+
+# With logging
+uv run python scripts/lcsc_tool.py create-bom-file --file mpns.txt -o bom.csv -l bom.log
+```
+
+**File format** (one item per line):
+```
+RC1206FR-071RL:100
+RC1206FR-070RL:50
+0805W8F1002T5E:100
+```
+
+**Output format**: CSV file matching LCSC BOM template with headers:
+```csv
+Quantity,Manufacture Part Number,Manufacturer(optional),Description(optional),LCSC Part Number(optional),Package(optional),Customer Part Number(optional),,
+100,RC1206FR-071RL,,,,,,,
+50,RC1206FR-070RL,,,,,,,
+100,0805W8F1002T5E,,,,,,,
+```
+
+**Features**:
+- Simple and fast - no web scraping required
+- Only populates required columns (Quantity and Manufacture Part Number)
+- Leaves optional columns empty
+- CSV format ready for direct upload to LCSC BOM tool
+- Accepts MPNs directly from your source data
+
+**Parameters**:
+- `--file`: Input file with MPNs (MPN:QTY format)
+- `-o, --output`: Output CSV file (required)
+- `-l, --log`: Log file path
+
 ## When to Use Manual MCP Calls vs lcsc_tool.py
 
 ### Use lcsc_tool.py for:
@@ -197,6 +239,7 @@ This opens the cart page and keeps the browser session active. Press Ctrl+C when
 - ✅ Checking pricing and stock (including MPN lookups)
 - ✅ Adding items to cart (single or batch)
 - ✅ Listing cart contents
+- ✅ Creating BOM CSV files
 - ✅ Any repetitive LCSC operations
 
 ### Use manual MCP calls only for:

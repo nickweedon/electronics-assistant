@@ -8,6 +8,7 @@ Subcommands:
     open-cart       Open the cart in browser for manual review
     check-pricing   Check pricing and MOQ for LCSC parts (parallel execution)
     search          Search LCSC catalog by keyword/specs (parallel execution)
+    create-bom-file Create LCSC BOM CSV file from part codes and quantities
 
 Examples:
     # Add parts to cart
@@ -32,12 +33,17 @@ Examples:
     python lcsc_tool.py search input.json output.json --max-concurrent 10
     python lcsc_tool.py search -s "1206 resistor 10k"  # Output to stdout
     python lcsc_tool.py search -s "capacitor 10uF" output.json  # Save to file
+
+    # Create BOM file
+    python lcsc_tool.py create-bom-file RC1206FR-071RL:100 RC1206FR-070RL:50 -o bom.csv
+    python lcsc_tool.py create-bom-file --file mpns.txt -o bom.csv
 """
 import asyncio
 import json
 import argparse
 import logging
 import sys
+import csv
 from pathlib import Path
 from urllib.parse import quote_plus
 from fastmcp import Client
@@ -1308,6 +1314,64 @@ async def search_lcsc_catalog(search_specs: list, output_file: Path = None, max_
 
 
 # ============================================================================
+# CREATE BOM FILE FUNCTIONALITY
+# ============================================================================
+
+async def create_bom_file(items: list, output_file: Path):
+    """Create LCSC BOM CSV file from MPNs and quantities.
+
+    Args:
+        items: List of (mpn, quantity) tuples
+        output_file: Path to output CSV file
+
+    Returns:
+        None
+    """
+    logger.info(f"Processing {len(items)} parts to create BOM file")
+    logger.info("=" * 80)
+
+    # Store BOM rows
+    bom_rows = []
+
+    # Process each item - no need for async operations
+    for i, (mpn, qty) in enumerate(items, start=1):
+        logger.info(f"[{i}/{len(items)}] Adding MPN: {mpn} (qty: {qty})")
+
+        # Add to BOM rows
+        bom_rows.append({
+            "Quantity": qty,
+            "Manufacture Part Number": mpn
+        })
+
+    # Write CSV file
+    output_file.parent.mkdir(parents=True, exist_ok=True)
+    with open(output_file, 'w', newline='', encoding='utf-8') as csvfile:
+        # Header matching the template
+        fieldnames = [
+            "Quantity",
+            "Manufacture Part Number",
+            "Manufacturer(optional)",
+            "Description(optional)",
+            "LCSC Part Number(optional)",
+            "Package(optional)",
+            "Customer Part Number(optional)",
+            "",
+            ""
+        ]
+
+        writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
+        writer.writeheader()
+
+        # Write each row
+        for row in bom_rows:
+            writer.writerow(row)
+
+    logger.info("=" * 80)
+    logger.info(f"BOM file created: {output_file}")
+    logger.info(f"Total parts: {len(bom_rows)}")
+
+
+# ============================================================================
 # MAIN ENTRY POINT
 # ============================================================================
 
@@ -1337,6 +1401,10 @@ Examples:
   python lcsc_tool.py search search_input.json search_results.json --max-concurrent 10
   python lcsc_tool.py search -s "1206 resistor 10k"  # Output to stdout
   python lcsc_tool.py search -s "capacitor 10uF" results.json  # Save to file
+
+  # Create BOM file
+  python lcsc_tool.py create-bom-file RC1206FR-071RL:100 RC1206FR-070RL:50 -o bom.csv
+  python lcsc_tool.py create-bom-file --file mpns.txt -o bom.csv
         """
     )
 
@@ -1465,6 +1533,33 @@ Examples:
         help="Maximum number of results per search (default: no limit)"
     )
     search_parser.add_argument(
+        "-l", "--log",
+        type=str,
+        help="Log file path (optional, defaults to console only)"
+    )
+
+    # create-bom-file command
+    bom_parser = subparsers.add_parser(
+        "create-bom-file",
+        help="Create LCSC BOM CSV file from MPNs and quantities"
+    )
+    bom_parser.add_argument(
+        "items",
+        nargs="*",
+        help="Manufacturer Part Numbers (MPN or MPN:QTY format, e.g., RC1206FR-071RL:100 RC1206FR-070RL:50)"
+    )
+    bom_parser.add_argument(
+        "--file",
+        type=str,
+        help="File containing MPNs (MPN or MPN:QTY per line)"
+    )
+    bom_parser.add_argument(
+        "-o", "--output",
+        type=str,
+        required=True,
+        help="Output CSV file for BOM (required)"
+    )
+    bom_parser.add_argument(
         "-l", "--log",
         type=str,
         help="Log file path (optional, defaults to console only)"
@@ -1608,6 +1703,48 @@ Examples:
         # Output to stdout if no output file specified
         if not output_file:
             print(json.dumps(results, indent=2))
+
+    elif args.command == "create-bom-file":
+        # Get MPN specifications from arguments or file
+        item_specs = []
+        if args.file:
+            file_path = Path(args.file)
+            if file_path.exists():
+                with open(file_path) as f:
+                    item_specs = [line.strip() for line in f if line.strip() and not line.strip().startswith('#')]
+                logger.info(f"Loaded {len(item_specs)} items from {args.file}")
+            else:
+                logger.error(f"File not found: {args.file}")
+                return
+        elif args.items:
+            item_specs = args.items
+            logger.info(f"Processing {len(item_specs)} items from command line")
+        else:
+            bom_parser.print_help()
+            return
+
+        if not item_specs:
+            logger.error("No MPNs provided")
+            return
+
+        # Parse item specifications into (mpn, quantity) tuples
+        items = []
+        for spec in item_specs:
+            try:
+                mpn, qty = parse_item_spec(spec)
+                items.append((mpn, qty))
+            except ValueError as e:
+                logger.error(f"Invalid item specification '{spec}': {e}")
+                return
+
+        # Prepare output file path
+        output_file = Path(args.output)
+
+        logger.info(f"Creating BOM file for {len(items)} parts")
+        logger.info(f"Output file: {output_file}")
+
+        # Run the async function (keeping async for consistency, even though not strictly needed)
+        asyncio.run(create_bom_file(items, output_file))
 
 
 if __name__ == "__main__":
