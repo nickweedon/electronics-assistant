@@ -43,3 +43,8 @@ Ensure that you always pass both an output file and a log file to the script so 
 Prepare to run @scripts/lcsc_add_to_cart.py to add all the items from @docs/E12_Resistors_1206_Quarter_Watt_Resistor_Kit_qty25.md to the cart.
 Ensure that you pass both an output file and a log file to the script so that i can observe the progress.
 Prepare necessary files but DO NOT RUN THE SCRIPT. Instead just show me the command line to run so that i can run it myself.
+
+
+
+https://wmsc.lcsc.com/ftps/wm/product/query/list
+https://wmsc.lcsc.com/ftps/wm/product/query/param/group
