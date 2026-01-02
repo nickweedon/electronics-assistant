@@ -51,3 +51,6 @@ https://wmsc.lcsc.com/ftps/wm/product/query/param/group
 
 
 Read the LCSC guidlines and then find 1% alternatives to the parts in @data/E12_Resistors_1206_Quarter_Watt_Resistor_Kit_qty25.md. Create a new markdown file in the same format and the same directory that contains the full list plus the alternatives. Keep the same column structure
+
+
+Read the @docs/LCSC-Guidelines.md document and create a BOM for @data/E12_Resistors_1206_Quarter_Watt_1Percent_Kit_qty100.md

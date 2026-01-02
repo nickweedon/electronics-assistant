@@ -66,6 +66,17 @@
         "PLAYWRIGHT_BROWSER": "chrome",
         "PLAYWRIGHT_WSL_WINDOWS": "true"
       }
+    },
+    "mouser": {
+      "command": "docker",
+      "args": [
+        "run",
+        "-i",
+        "--rm",
+        "--env-file",
+        "/mnt/c/docker/mouser-mcp/.env",
+        "mouser-mcp:latest"
+      ]
     }
  }
 }
