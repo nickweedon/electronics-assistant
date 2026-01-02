@@ -71,14 +71,8 @@ uv run python scripts/lcsc_tool.py search input.json output.json --limit 100
 Fetch detailed pricing and stock information:
 
 ```bash
-# Check pricing by LCSC codes
+# Check pricing by LCSC codes or MPNs
 uv run python scripts/lcsc_tool.py check-pricing input.json output.json
-
-# Check pricing by MPN (use lower concurrency for better reliability)
-uv run python scripts/lcsc_tool.py check-pricing mpn_input.json output.json --max-concurrent 1
-
-# With custom concurrency
-uv run python scripts/lcsc_tool.py check-pricing input.json output.json --max-concurrent 20
 ```
 
 **Input format**:
@@ -109,10 +103,7 @@ uv run python scripts/lcsc_tool.py check-pricing input.json output.json --max-co
 ]
 ```
 
-**Parameters**:
-- `--max-concurrent`: Number of parallel requests (default: 15, use 1 for MPN searches)
-
-**Important**: When searching by MPN, use `--max-concurrent 1` for better reliability as MPN searches require additional API calls.
+**Note**: Processing runs sequentially (not in parallel) because playwright-mcp-server uses a single shared browser page. Concurrent requests would cause race conditions where navigations overwrite each other.
 
 #### 3. Add to Cart
 
@@ -195,27 +186,41 @@ This opens the cart page and keeps the browser session active. Press Ctrl+C when
 
 #### 6. Create BOM File
 
-Create LCSC BOM CSV file from Manufacturer Part Numbers (MPNs) and quantities:
+Create LCSC BOM CSV file from Manufacturer Part Numbers (MPNs) or LCSC codes and quantities:
 
 ```bash
-# Create BOM from command line
+# Create BOM from command line using MPNs
 uv run python scripts/lcsc_tool.py create-bom-file RC1206FR-071RL:100 RC1206FR-070RL:50 -o bom.csv
 
 # Create BOM from file
 uv run python scripts/lcsc_tool.py create-bom-file --file mpns.txt -o bom.csv
+
+# Create BOM using LCSC codes (use --lcsc-codes flag)
+uv run python scripts/lcsc_tool.py create-bom-file --file lcsc_codes.txt -o bom.csv --lcsc-codes
 
 # With logging
 uv run python scripts/lcsc_tool.py create-bom-file --file mpns.txt -o bom.csv -l bom.log
 ```
 
 **File format** (one item per line):
+
+*Using MPNs:*
 ```
 RC1206FR-071RL:100
 RC1206FR-070RL:50
 0805W8F1002T5E:100
 ```
 
+*Using LCSC codes (with --lcsc-codes flag):*
+```
+C107107:100
+C137394:50
+C1790:25
+```
+
 **Output format**: CSV file matching LCSC BOM template with headers:
+
+*When using MPNs (default):*
 ```csv
 Quantity,Manufacture Part Number,Manufacturer(optional),Description(optional),LCSC Part Number(optional),Package(optional),Customer Part Number(optional),,
 100,RC1206FR-071RL,,,,,,,
@@ -223,17 +228,43 @@ Quantity,Manufacture Part Number,Manufacturer(optional),Description(optional),LC
 100,0805W8F1002T5E,,,,,,,
 ```
 
+*When using LCSC codes (--lcsc-codes):*
+```csv
+Quantity,Manufacture Part Number,Manufacturer(optional),Description(optional),LCSC Part Number(optional),Package(optional),Customer Part Number(optional),,
+100,,,,C107107,,,,
+50,,,,C137394,,,,
+25,,,,C1790,,,,
+```
+
 **Features**:
 - Simple and fast - no web scraping required
-- Only populates required columns (Quantity and Manufacture Part Number)
+- Supports both MPNs and LCSC codes
+- **LCSC codes are more reliable** - they guarantee exact part matches
+- Only populates required columns (Quantity and either MPN or LCSC Part Number)
 - Leaves optional columns empty
 - CSV format ready for direct upload to LCSC BOM tool
-- Accepts MPNs directly from your source data
+- Accepts part numbers directly from your source data
 
 **Parameters**:
-- `--file`: Input file with MPNs (MPN:QTY format)
+- `--file`: Input file with part numbers (PART:QTY format)
 - `-o, --output`: Output CSV file (required)
+- `--lcsc-codes`: Treat input as LCSC codes instead of MPNs (populates "LCSC Part Number" column)
 - `-l, --log`: Log file path
+
+**When to use LCSC codes vs MPNs**:
+
+✅ **Use LCSC codes (`--lcsc-codes`)** when:
+- You have LCSC part codes from price comparison or search results
+- You want guaranteed exact part matching (no ambiguity)
+- The check-pricing tool returned unreliable MPN data
+- You're ordering from a pre-researched parts list with LCSC codes
+
+✅ **Use MPNs (default)** when:
+- Your source data only has manufacturer part numbers
+- You're working from a schematic or design with standard MPNs
+- You don't have LCSC codes yet
+
+**Why LCSC codes are better**: LCSC codes (like C107107) uniquely identify a specific product in LCSC's catalog. MPNs can sometimes match multiple similar parts or fail to match due to variations in formatting. Using LCSC codes eliminates this ambiguity.
 
 ## When to Use Manual MCP Calls vs lcsc_tool.py
 
@@ -300,9 +331,10 @@ See [scripts/lcsc_tool.py](../scripts/lcsc_tool.py) for complete implementation 
 | Operation | Concurrency | Notes |
 |-----------|-------------|-------|
 | Search by keyword | Sequential only | playwright-mcp-server uses single shared page |
-| Check pricing (LCSC code) | 15 (default) | Fast, can handle higher concurrency |
-| Check pricing (MPN) | 1 | Requires API calls, use `--max-concurrent 1` |
+| Check pricing | Sequential (hardcoded) | Automatically runs sequentially - no configuration needed |
 | Add to cart | Sequential | Tool handles this automatically |
+
+**Note**: All LCSC operations run sequentially due to playwright-mcp-server's single shared browser page. Concurrent requests would cause race conditions.
 
 ### Result Limits
 

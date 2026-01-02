@@ -25,8 +25,6 @@ Examples:
 
     # Check pricing
     python lcsc_tool.py check-pricing input.json output.json
-    python lcsc_tool.py check-pricing input.json output.json --max-concurrent 20
-    python lcsc_tool.py check-pricing mpn_input.json output.json --max-concurrent 1  # For MPN searches
 
     # Search catalog
     python lcsc_tool.py search input.json output.json
@@ -34,9 +32,12 @@ Examples:
     python lcsc_tool.py search -s "1206 resistor 10k"  # Output to stdout
     python lcsc_tool.py search -s "capacitor 10uF" output.json  # Save to file
 
-    # Create BOM file
+    # Create BOM file (using MPNs)
     python lcsc_tool.py create-bom-file RC1206FR-071RL:100 RC1206FR-070RL:50 -o bom.csv
     python lcsc_tool.py create-bom-file --file mpns.txt -o bom.csv
+
+    # Create BOM file (using LCSC codes for guaranteed matching)
+    python lcsc_tool.py create-bom-file --file lcsc_codes.txt -o bom.csv --lcsc-codes
 """
 import asyncio
 import json
@@ -779,18 +780,44 @@ async def fetch_single_part_pricing(client, part: dict, idx: int, total: int, se
                             "tool": "browser_evaluate",
                             "args": {
                                 "function": r"""() => {
-                                    // Extract manufacturer
-                                    const mfgLink = document.querySelector('a[href*="/brand-detail/"]');
-                                    const manufacturer = mfgLink ? mfgLink.textContent.trim() : 'N/A';
+                                    // Extract data from the specifications table
+                                    const tables = document.querySelectorAll('table');
+                                    let specs = {};
 
-                                    // Extract description from meta tag (most reliable)
-                                    let description = 'N/A';
-                                    const metaDesc = document.querySelector('meta[name="description"]');
-                                    if (metaDesc) {
-                                        description = metaDesc.getAttribute('content') || 'N/A';
+                                    // Search through tables for specifications
+                                    tables.forEach(table => {
+                                        const rows = table.querySelectorAll('tr');
+                                        rows.forEach(row => {
+                                            const cells = row.querySelectorAll('td, th');
+                                            if (cells.length >= 2) {
+                                                const label = cells[0].textContent.trim();
+                                                const value = cells[1].textContent.trim();
+                                                if (label && value) {
+                                                    specs[label] = value;
+                                                }
+                                            }
+                                        });
+                                    });
+
+                                    // Extract manufacturer from specs or from manufacturer link
+                                    let manufacturer = specs['Manufacturer'] || 'N/A';
+                                    if (manufacturer === 'N/A') {
+                                        const mfgLink = document.querySelector('a[href*="/brand-detail/"]');
+                                        manufacturer = mfgLink ? mfgLink.textContent.trim() : 'N/A';
                                     }
 
-                                    // If no meta description, try h1 title
+                                    // Extract MPN from specs
+                                    const mpn = specs['Mfr. Part #'] || '';
+
+                                    // Extract description from specs table (best source)
+                                    let description = specs['Description'] || 'N/A';
+
+                                    // If no description in specs, try Key Attributes
+                                    if (description === 'N/A' && specs['Key Attributes']) {
+                                        description = specs['Key Attributes'];
+                                    }
+
+                                    // If still no description, try h1 title as fallback
                                     if (description === 'N/A') {
                                         const h1 = document.querySelector('h1');
                                         if (h1) {
@@ -838,6 +865,7 @@ async def fetch_single_part_pricing(client, part: dict, idx: int, total: int, se
 
                                     return {
                                         manufacturer: manufacturer,
+                                        mpn: mpn,
                                         description: description,
                                         stock: stock
                                     };
@@ -861,8 +889,9 @@ async def fetch_single_part_pricing(client, part: dict, idx: int, total: int, se
             if pricing_snapshot and "snapshot" in pricing_snapshot:
                 pricing = pricing_snapshot["snapshot"]
 
-            # Parse manufacturer, description, and stock
+            # Parse manufacturer, description, stock, and MPN from browser_evaluate
             manufacturer = "N/A"
+            found_mpn = mpn  # Keep original MPN if not found on page
             description = "N/A"
             stock = "N/A"
 
@@ -879,6 +908,10 @@ async def fetch_single_part_pricing(client, part: dict, idx: int, total: int, se
                             try:
                                 details_data = json.loads(json_str)
                                 manufacturer = details_data.get("manufacturer", "N/A")
+                                # Update MPN from page if available
+                                page_mpn = details_data.get("mpn", "")
+                                if page_mpn:
+                                    found_mpn = page_mpn
                                 description = details_data.get("description", "N/A")
                                 stock = details_data.get("stock", "N/A")
                             except json.JSONDecodeError:
@@ -887,7 +920,7 @@ async def fetch_single_part_pricing(client, part: dict, idx: int, total: int, se
             return {
                 "lcsc_code": lcsc_code,
                 "value": value,
-                "mpn": mpn,
+                "mpn": found_mpn,
                 "manufacturer": manufacturer,
                 "description": description,
                 "stock": stock,
@@ -911,16 +944,19 @@ async def fetch_single_part_pricing(client, part: dict, idx: int, total: int, se
             }
 
 
-async def check_lcsc_pricing(parts_list: list, output_file: Path, max_concurrent: int = 15) -> None:
-    """Fetch LCSC pricing for all parts in parallel with controlled concurrency.
+async def check_lcsc_pricing(parts_list: list, output_file: Path, max_concurrent: int = 1) -> None:
+    """Fetch LCSC pricing for all parts sequentially.
 
     Writes results to JSON file incrementally as each part completes.
     Results are sorted by original index to maintain input order in output file.
 
+    Note: Sequential processing is required due to playwright-mcp-server using a single
+    shared browser page. Concurrent requests would cause race conditions.
+
     Args:
         parts_list: List of part dicts with lcsc_code, value, mpn
         output_file: Path to write results JSON
-        max_concurrent: Maximum concurrent requests (default: 15)
+        max_concurrent: Maximum concurrent requests (default: 1, kept for future use)
     """
     config = load_mcp_config("playwright-mcp-server")
     client = Client(config)
@@ -937,7 +973,7 @@ async def check_lcsc_pricing(parts_list: list, output_file: Path, max_concurrent
     with open(output_file, 'w') as f:
         json.dump([], f)
 
-    logger.info(f"Starting to process {len(parts_list)} parts with max {max_concurrent} concurrent requests")
+    logger.info(f"Starting to process {len(parts_list)} parts sequentially")
     logger.info(f"Results will be written incrementally to: {output_file}")
 
     def write_current_results():
@@ -1310,31 +1346,40 @@ async def search_lcsc_catalog(search_specs: list, output_file: Path = None, limi
 # CREATE BOM FILE FUNCTIONALITY
 # ============================================================================
 
-async def create_bom_file(items: list, output_file: Path):
-    """Create LCSC BOM CSV file from MPNs and quantities.
+async def create_bom_file(items: list, output_file: Path, use_lcsc_codes: bool = False):
+    """Create LCSC BOM CSV file from MPNs or LCSC codes and quantities.
 
     Args:
-        items: List of (mpn, quantity) tuples
+        items: List of (part_number, quantity) tuples
         output_file: Path to output CSV file
+        use_lcsc_codes: If True, treat items as LCSC codes and populate "LCSC Part Number" column
+                       If False, treat items as MPNs and populate "Manufacture Part Number" column
 
     Returns:
         None
     """
-    logger.info(f"Processing {len(items)} parts to create BOM file")
+    part_type = "LCSC code" if use_lcsc_codes else "MPN"
+    logger.info(f"Processing {len(items)} parts to create BOM file (using {part_type}s)")
     logger.info("=" * 80)
 
     # Store BOM rows
     bom_rows = []
 
     # Process each item - no need for async operations
-    for i, (mpn, qty) in enumerate(items, start=1):
-        logger.info(f"[{i}/{len(items)}] Adding MPN: {mpn} (qty: {qty})")
+    for i, (part_number, qty) in enumerate(items, start=1):
+        logger.info(f"[{i}/{len(items)}] Adding {part_type}: {part_number} (qty: {qty})")
 
-        # Add to BOM rows
-        bom_rows.append({
-            "Quantity": qty,
-            "Manufacture Part Number": mpn
-        })
+        # Add to BOM rows - populate the appropriate column based on mode
+        if use_lcsc_codes:
+            bom_rows.append({
+                "Quantity": qty,
+                "LCSC Part Number(optional)": part_number
+            })
+        else:
+            bom_rows.append({
+                "Quantity": qty,
+                "Manufacture Part Number": part_number
+            })
 
     # Write CSV file
     output_file.parent.mkdir(parents=True, exist_ok=True)
@@ -1387,7 +1432,6 @@ Examples:
 
   # Check pricing
   python lcsc_tool.py check-pricing input.json output.json
-  python lcsc_tool.py check-pricing input.json output.json --max-concurrent 20
 
   # Search catalog
   python lcsc_tool.py search search_input.json search_results.json
@@ -1395,9 +1439,12 @@ Examples:
   python lcsc_tool.py search -s "1206 resistor 10k"  # Output to stdout
   python lcsc_tool.py search -s "capacitor 10uF" results.json  # Save to file
 
-  # Create BOM file
+  # Create BOM file (using MPNs)
   python lcsc_tool.py create-bom-file RC1206FR-071RL:100 RC1206FR-070RL:50 -o bom.csv
   python lcsc_tool.py create-bom-file --file mpns.txt -o bom.csv
+
+  # Create BOM file (using LCSC codes for guaranteed matching)
+  python lcsc_tool.py create-bom-file --file lcsc_codes.txt -o bom.csv --lcsc-codes
         """
     )
 
@@ -1480,12 +1527,6 @@ Examples:
         help="Output JSON file for pricing results"
     )
     pricing_parser.add_argument(
-        "--max-concurrent",
-        type=int,
-        default=15,
-        help="Maximum concurrent requests (default: 15, use 1 for MPN searches for better reliability)"
-    )
-    pricing_parser.add_argument(
         "-l", "--log",
         type=str,
         help="Log file path (optional, defaults to console only)"
@@ -1528,23 +1569,28 @@ Examples:
     # create-bom-file command
     bom_parser = subparsers.add_parser(
         "create-bom-file",
-        help="Create LCSC BOM CSV file from MPNs and quantities"
+        help="Create LCSC BOM CSV file from MPNs or LCSC codes and quantities"
     )
     bom_parser.add_argument(
         "items",
         nargs="*",
-        help="Manufacturer Part Numbers (MPN or MPN:QTY format, e.g., RC1206FR-071RL:100 RC1206FR-070RL:50)"
+        help="Part numbers (PART or PART:QTY format, e.g., RC1206FR-071RL:100 or C107107:100)"
     )
     bom_parser.add_argument(
         "--file",
         type=str,
-        help="File containing MPNs (MPN or MPN:QTY per line)"
+        help="File containing part numbers (PART or PART:QTY per line)"
     )
     bom_parser.add_argument(
         "-o", "--output",
         type=str,
         required=True,
         help="Output CSV file for BOM (required)"
+    )
+    bom_parser.add_argument(
+        "--lcsc-codes",
+        action="store_true",
+        help="Treat input as LCSC codes (e.g., C107107) instead of MPNs. Populates 'LCSC Part Number' column for guaranteed part matching."
     )
     bom_parser.add_argument(
         "-l", "--log",
@@ -1624,12 +1670,13 @@ Examples:
         with open(input_file) as f:
             parts_list = json.load(f)
 
-        max_concurrent = args.max_concurrent
+        # Force sequential processing due to playwright-mcp-server single shared page
+        # Concurrent requests cause race conditions where navigations overwrite each other
+        max_concurrent = 1
         logger.info(f"Loaded {len(parts_list)} parts from {input_file}")
-        logger.info(f"Max concurrent requests: {max_concurrent}")
         logger.info("")
 
-        # Fetch pricing in parallel (writes to output_file incrementally)
+        # Fetch pricing (writes to output_file incrementally)
         asyncio.run(check_lcsc_pricing(parts_list, output_file, max_concurrent))
 
         # Load results to generate summary
@@ -1690,7 +1737,7 @@ Examples:
             print(json.dumps(results, indent=2))
 
     elif args.command == "create-bom-file":
-        # Get MPN specifications from arguments or file
+        # Get part number specifications from arguments or file
         item_specs = []
         if args.file:
             file_path = Path(args.file)
@@ -1709,15 +1756,16 @@ Examples:
             return
 
         if not item_specs:
-            logger.error("No MPNs provided")
+            part_type = "LCSC codes" if args.lcsc_codes else "MPNs"
+            logger.error(f"No {part_type} provided")
             return
 
-        # Parse item specifications into (mpn, quantity) tuples
+        # Parse item specifications into (part_number, quantity) tuples
         items = []
         for spec in item_specs:
             try:
-                mpn, qty = parse_item_spec(spec)
-                items.append((mpn, qty))
+                part_number, qty = parse_item_spec(spec)
+                items.append((part_number, qty))
             except ValueError as e:
                 logger.error(f"Invalid item specification '{spec}': {e}")
                 return
@@ -1729,7 +1777,7 @@ Examples:
         logger.info(f"Output file: {output_file}")
 
         # Run the async function (keeping async for consistency, even though not strictly needed)
-        asyncio.run(create_bom_file(items, output_file))
+        asyncio.run(create_bom_file(items, output_file, use_lcsc_codes=args.lcsc_codes))
 
 
 if __name__ == "__main__":

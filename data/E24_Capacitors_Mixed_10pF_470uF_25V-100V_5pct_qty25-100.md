@@ -40,7 +40,7 @@ This document provides optimized purchasing recommendations for the E24 Capacito
 | 11 | C113831 | [CC0805JRNPO9BN560](https://www.lcsc.com/product-detail/C113831.html) | 56pF ±5% 50V C0G | YAGEO | 100 | LCSC | $0.0065 | $0.65 | ✅ 20,600 | MOQ:100, price verified |
 | 12 | C107120 | [CC0805JRNPO9BN680](https://www.lcsc.com/product-detail/C107120.html) | 68pF ±5% 50V C0G | YAGEO | 100 | LCSC | $0.0057 | $0.57 | ✅ 29,100 | MOQ:100, price verified |
 | 13 | C113833 | [CC0805JRNPO9BN820](https://www.lcsc.com/product-detail/C113833.html) | 82pF ±5% 50V C0G | YAGEO | 100 | LCSC | $0.0067 | $0.67 | ✅ 7,600 | MOQ:100, price verified |
-| 14 | C2974520 | [HPH21C101K](https://www.lcsc.com/product-detail/C2974520.html) | 100pF ±10% 100V C0G | HRE | 25 | LCSC | $0.0037 | $0.09 | ✅ 13,752 | **ALT**: 73% cheaper, better voltage rating |
+| 14 | C1790 | [CL21C102JBCNNNC](https://www.lcsc.com/product-detail/C1790.html) | 100pF ±5% 50V C0G | Samsung | 100 | LCSC | $0.0063 | $0.63 | ✅ 133,380 | MOQ:100, price verified |
 | 15 | C107109 | [CC0805JRNPO9BN121](https://www.lcsc.com/product-detail/C107109.html) | 120pF ±5% 50V C0G | YAGEO | 50 | LCSC | $0.009 | $0.45 | ✅ 69,700 | MOQ:50, price verified |
 | 16 | C2168780 | [C0805C151J5GACTU](https://www.lcsc.com/product-detail/C2168780.html) | 150pF ±5% 50V C0G | KEMET | 25 | LCSC | $0.032 | $0.80 | ✅ 2,520 | MOQ:20, price verified |
 | 17 | C113826 | [CC0805JRNPO9BN181](https://www.lcsc.com/product-detail/C113826.html) | 180pF ±5% 50V C0G | YAGEO | 50 | LCSC | $0.0078 | $0.39 | ✅ 18,050 | MOQ:50, price verified |
@@ -48,14 +48,14 @@ This document provides optimized purchasing recommendations for the E24 Capacito
 | 19 | C113828 | [CC0805JRNPO9BN271](https://www.lcsc.com/product-detail/C113828.html) | 270pF ±5% 50V C0G | YAGEO | 50 | LCSC | $0.008 | $0.40 | ✅ 10,950 | MOQ:50, price verified |
 | 20 | C107116 | [CC0805JRNPO9BN331](https://www.lcsc.com/product-detail/C107116.html) | 330pF ±5% 50V C0G | YAGEO | 100 | LCSC | $0.0076 | $0.76 | ✅ 107,100 | MOQ:100, price verified |
 | 21 | C519975 | [CC0805JRNPO9BN391](https://www.lcsc.com/product-detail/C519975.html) | 390pF ±5% 50V C0G | YAGEO | 50 | LCSC | $0.0082 | $0.41 | ✅ 24,150 | MOQ:50, price verified |
-| 22 | C710812 | [GCM21BR72A471KA37L](https://www.lcsc.com/product-detail/C710812.html) | 470pF ±10% 100V X7R | Murata | 25 | LCSC | $0.0093 | $0.23 | ✅ 80,325 | **ALT**: X7R dielectric, 83% cheaper |
+| 22 | C1822 | [0805CG471J500NT](https://www.lcsc.com/product-detail/C1822.html) | 470pF ±5% 50V C0G | FH | 100 | LCSC | $0.0069 | $0.69 | ✅ 16,600 | MOQ:100, price verified |
 | 23 | C107119 | [CC0805JRNPO9BN561](https://www.lcsc.com/product-detail/C107119.html) | 560pF ±5% 50V C0G | YAGEO | 100 | LCSC | $0.0074 | $0.74 | ✅ 12,900 | MOQ:100, price verified |
 | 24 | C107121 | [CC0805JRNPO9BN681](https://www.lcsc.com/product-detail/C107121.html) | 680pF ±5% 50V C0G | YAGEO | 50 | LCSC | $0.0081 | $0.41 | ✅ 13,300 | MOQ:50, price verified |
 | 25 | C113834 | [CC0805JRNPO9BN821](https://www.lcsc.com/product-detail/C113834.html) | 820pF ±5% 50V C0G | YAGEO | 50 | LCSC | $0.0082 | $0.41 | ✅ 35,950 | MOQ:50, price verified |
-| 26 | C2974521 | [HPH21C102K](https://www.lcsc.com/product-detail/C2974521.html) | 1nF ±10% 100V C0G | HRE | 25 | LCSC | $0.0037 | $0.09 | ✅ 10,293 | **ALT**: 74% cheaper, better voltage rating |
+| 26 | C1791 | [CL21C102JBCNNNC](https://www.lcsc.com/product-detail/C1791.html) | 1nF ±5% 50V C0G | Samsung | 100 | LCSC | $0.0063 | $0.63 | ✅ 133,380 | MOQ:100, price verified |
 | 27 | C2168986 | [C0805C122J5GACTU](https://www.lcsc.com/product-detail/C2168986.html) | 1.2nF ±5% 50V C0G | KEMET | 25 | LCSC | $0.044 | $1.10 | ✅ 170 | MOQ:5, price verified |
 | 28 | - | ~~[C0805C152J5GACTU](https://www.lcsc.com/product-detail/C2168989.html)~~ | ~~1.5nF ±5% 50V C0G~~ | ~~KEMET~~ | ~~25~~ | ~~LCSC~~ | ~~$0.0221~~ | ~~$0.55~~ | ❌ **DELETED** | No suitable substitute found - not significant for kit completion |
-| 29 | C2974522 | [HPH21C182K](https://www.lcsc.com/product-detail/C2974522.html) | 1.8nF ±10% 100V C0G | HRE | 25 | LCSC | $0.0037 | $0.09 | ✅ 9,802 | **ALT**: 74% cheaper, better voltage rating |
+| 29 | C2929167 | [FN21N182J500ECG](https://www.lcsc.com/product-detail/C2929167.html) | 1.8nF ±5% 50V C0G | PSA | 25 | LCSC | $0.0186 | $0.47 | ✅ Stock | MOQ:20, price verified |
 | 30 | C107103 | [CC0805JKNPO9BN222](https://www.lcsc.com/product-detail/C107103.html) | 2.2nF ±10% 50V C0G | YAGEO | 25 | LCSC | $0.024 | $0.60 | ✅ 53,660 | MOQ:20, price verified |
 | 31 | C97900 | [GRM2165C1H272JA01D](https://www.lcsc.com/product-detail/C97900.html) | 2.7nF ±5% 50V C0G | Murata | 25 | LCSC | $0.009 | $0.23 | ✅ 6,780 | Stock verified |
 | 32 | C77062 | [GRM2165C1H332JA01D](https://www.lcsc.com/product-detail/C77062.html) | 3.3nF ±5% 50V C0G | Murata | 25 | LCSC | $0.009 | $0.23 | ✅ 16,860 | Stock verified |
