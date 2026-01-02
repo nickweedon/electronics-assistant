@@ -7,15 +7,16 @@ This document provides optimized purchasing recommendations for the E24 Capacito
 ### Key Findings
 
 - **LCSC offers 50-85% savings** on C0G/NP0 and X7R ceramic capacitors
-- **Total estimated savings: $100-120** (56-67% vs Digikey-only ordering)
+- **Total cost: $109.71** (split 50/50 between LCSC and Mouser)
+- **Total estimated savings: $72-115** (40-51% vs Digikey-only ordering)
 - **Stock availability verified** for all recommended sources
-- **Same manufacturers** across all suppliers (YAGEO, KEMET, Samsung, Murata, etc.)
+- **Same manufacturers** across all suppliers (YAGEO, KEMET, Samsung, Murata, Rubycon, etc.)
 
 ### Recommended Strategy
 
-1. **Order from LCSC**: All ceramic capacitors (C0G/NP0 and X7R) - massive savings
-2. **Order from Mouser**: Hybrid and specialty electrolytic capacitors - better availability
-3. **Order from Digikey**: Only for items unavailable elsewhere or if combining with other orders
+1. **Order from LCSC**: All ceramic capacitors (C0G/NP0 and X7R) plus standard electrolytic - massive savings (68 items, $55.23)
+2. **Order from Mouser**: Only specialty aluminum hybrid capacitors not available at LCSC (3 items, $54.48)
+3. **Order from Digikey**: Not needed - all items available at better prices from LCSC/Mouser
 
 ---
 
@@ -69,14 +70,14 @@ This document provides optimized purchasing recommendations for the E24 Capacito
 | 40 | C2169941 | [C0805C153K5RACTU](https://www.lcsc.com/product-detail/C2169941.html) | 15nF ±10% 50V X7R | KEMET | 25 | LCSC | $0.009 | $0.23 | ✅ 80 | Stock verified |
 | 41 | C3884152 | [AC0805KRX7R9BB183](https://www.lcsc.com/product-detail/C3884152.html) | 18nF ±10% 50V X7R | YAGEO | 25 | LCSC | $0.0061 | $0.15 | ✅ Stock | Same pricing tier |
 | 42 | C452753 | [C0805C223K5RACTU](https://www.lcsc.com/product-detail/C452753.html) | 22nF ±10% 50V X7R | KEMET | 25 | LCSC | $0.009 | $0.23 | ✅ 900 | Stock verified |
-| 43 | - | [C0805C273K5RACTU](https://www.mouser.com/ProductDetail/KEMET/C0805C273K5RACTU?qs=IAf6OXM7NA%252BhSJ%252BFZzT%252B2A%3D%3D) | 27nF ±10% 50V X7R | KEMET | 25 | Mouser | $0.027 | $0.68 | ✅ 19,280 | KEMET out at LCSC |
+| 43 | C113860 | [CC0805KRX7R9BB273](https://www.lcsc.com/product-detail/C113860.html) | 27nF ±10% 50V X7R | YAGEO | 25 | LCSC | $0.0067 | $0.17 | ✅ Stock | **SUB**: YAGEO alternative, 75% cheaper |
 | 44 | C2168998 | [C0805C333K5RACTU](https://www.lcsc.com/product-detail/C2168998.html) | 33nF ±10% 50V X7R | KEMET | 25 | LCSC | $0.009 | $0.23 | ✅ 430 | Stock verified |
 | 45 | C6117859 | [AC0805KRX7R9BB393](https://www.lcsc.com/product-detail/C6117859.html) | 39nF ±10% 50V X7R | YAGEO | 25 | LCSC | $0.0061 | $0.15 | ✅ Stock | Same pricing tier |
 | 46 | C107154 | [CC0805KRX7R9BB473](https://www.lcsc.com/product-detail/C107154.html) | 47nF ±10% 50V X7R | YAGEO | 100 | LCSC | $0.0063 | $0.63 | ✅ 117,000 | **SUB**: YAGEO, 30% cheaper, MOQ:100 |
 | 47 | C107156 | [CC0805KRX7R9BB563](https://www.lcsc.com/product-detail/C107156.html) | 56nF ±10% 50V X7R | YAGEO | 100 | LCSC | $0.0073 | $0.73 | ✅ 6,300 | **SUB**: YAGEO, same pricing tier, MOQ:100 |
 | 48 | C107159 | [CC0805KRX7R9BB683](https://www.lcsc.com/product-detail/C107159.html) | 68nF ±10% 50V X7R | YAGEO | 100 | LCSC | $0.0069 | $0.69 | ✅ 56,800 | **SUB**: YAGEO, same pricing tier, MOQ:100 |
 | 49 | C327222 | [CC0805KRX7R9BB823](https://www.lcsc.com/product-detail/C327222.html) | 82nF ±10% 50V X7R | YAGEO | 25 | LCSC | $0.0061 | $0.15 | ✅ Stock | Same pricing tier |
-| 50 | - | [CL21B104KBCNFNC](https://www.mouser.com/ProductDetail/Samsung-Electro-Mechanics/CL21B104KBCNFNC?qs=h6Piwd%2FnvzleGyyZyzPHvg%3D%3D) | 100nF ±10% 50V X7R | Samsung | 25 | Mouser | $0.022 | $0.55 | ✅ 344,002 | Discontinued at LCSC |
+| 50 | C1711 | [CL21B104KBCNNNC](https://www.lcsc.com/product-detail/C1711.html) | 100nF ±10% 50V X7R | Samsung | 25 | LCSC | $0.0063 | $0.16 | ✅ Stock | **SUB**: Samsung alternative, 71% cheaper |
 | 51 | C107144 | [CC0805KRX7R9BB154](https://www.lcsc.com/product-detail/C107144.html) | 150nF ±10% 50V X7R | YAGEO | 25 | LCSC | $0.0061 | $0.15 | ✅ Stock | Same pricing tier |
 | 52 | C5378 | [CL21B224KBFNNNE](https://www.lcsc.com/product-detail/C5378.html) | 220nF ±10% 50V X7R | Samsung | 25 | LCSC | $0.0092 | $0.23 | ✅ 3.7M | 29% cheaper than DK |
 | 53 | C73142 | [CL21B334KBFNNNE](https://www.lcsc.com/product-detail/C73142.html) | 330nF ±10% 50V X7R | Samsung | 25 | LCSC | $0.0092 | $0.23 | ✅ Est. similar | Same pricing tier |
@@ -98,7 +99,7 @@ This document provides optimized purchasing recommendations for the E24 Capacito
 | 66 | - | [HHXC500ARA330MF80G](https://www.mouser.com/ProductDetail/Chemi-Con/HHXC500ARA330MF80G?qs=u4fy%2FsgLU9MsXjhGLyQcVQ%3D%3D) | 33µF ±20% 50V Hybrid | Chemi-Con | 25 | Mouser | $0.348 | $8.70 | ✅ 24,000+ | Out of stock at LCSC |
 | 67 | - | [A750MS476M1CAAE040](https://www.mouser.com/ProductDetail/KEMET/A750MS476M1CAAE040?qs=VJ13WmJgUWy34NN7nz1%252BtQ%3D%3D) | 47µF ±20% 50V Hybrid | KEMET | 25 | Mouser | $1.05 | $26.25 | ✅ 2,405 | **ALT**: Aluminum polymer hybrid |
 | **ALUMINUM ELECTROLYTIC CAPACITORS** |
-| 68 | - | [50TZV220M10X10.5](https://www.mouser.com/ProductDetail/Rubycon/50TZV220M10X10.5?qs=T3oQrply3y9JrX4cKSxFmg%3D%3D) | 220µF ±20% 50V Electro | Rubycon | 25 | Mouser | $0.361 | $9.03 | ✅ 6,126 | Price increased |
+| 68 | C88818 | [50TZV220M10X10.5](https://www.lcsc.com/product-detail/C88818.html) | 220µF ±20% 50V Electro | Rubycon | 25 | LCSC | $0.2628 | $6.57 | ✅ 3,475 | **SUB**: Same Rubycon part, 27% cheaper |
 | 69 | - | [A785MW477M1VLAS015](https://www.mouser.com/ProductDetail/KEMET/A785MW477M1VLAS015?qs=KfKDeMDtL2FGVBzrTqfyVg%3D%3D) | 470µF ±20% 35V Hybrid | KEMET | 25 | Mouser | $0.781 | $19.53 | ✅ 2,890 | **ALT**: Aluminum polymer hybrid, 35V rating |
 
 ---
@@ -111,25 +112,25 @@ This document provides optimized purchasing recommendations for the E24 Capacito
 | Category | Line Items | Total Cost |
 |----------|-----------|------------|
 | C0G/NP0 Ceramic Capacitors (0805) | 37 items | $15.96 |
-| X7R Ceramic Capacitors (0805) | 21 items | $8.12 |
+| X7R Ceramic Capacitors (0805) | 23 items | $8.45 |
 | X7R Ceramic Capacitors (1206+) | 5 items | $1.62 |
 | Aluminum Polymer Capacitors | 2 items | $22.63 |
-| **LCSC Subtotal** | **65 items** | **$48.33** |
+| Aluminum Electrolytic Capacitors | 1 item | $6.57 |
+| **LCSC Subtotal** | **68 items** | **$55.23** |
 
 #### Mouser Order
 | Category | Line Items | Total Cost |
 |----------|-----------|------------|
-| X7R Ceramic Capacitors | 1 item | $0.68 |
 | Aluminum Hybrid Capacitors | 2 items | $34.95 |
-| Aluminum Electrolytic Capacitors | 2 items | $28.56 |
-| **Mouser Subtotal** | **5 items** | **$64.19** |
+| Aluminum Electrolytic Capacitors | 1 item | $19.53 |
+| **Mouser Subtotal** | **3 items** | **$54.48** |
 
 ### Grand Total
 | Supplier | Items | Subtotal |
 |----------|-------|----------|
-| LCSC | 65 | $48.33 |
-| Mouser | 5 | $64.19 |
-| **Total** | **70** | **$112.52** |
+| LCSC | 68 | $55.23 |
+| Mouser | 3 | $54.48 |
+| **Total** | **71** | **$109.71** |
 
 ### Notes on Quantities
 - **17 items** ordered at MOQ 100 (instead of 25) - Total extra pieces: 1,275
@@ -139,10 +140,10 @@ This document provides optimized purchasing recommendations for the E24 Capacito
 - **Average cost per extra piece**: $0.007
 
 ### Kit Completion Status
-- **69 unique capacitor values** included in this order
+- **70 unique capacitor values** included in this order (was 69, added back 27nF & 100nF from LCSC)
 - **1 value omitted** (1.5nF - no suitable substitute found, not critical for kit)
-- **Total pieces for kit assembly**: 1,725 capacitors (25 per value)
-- **Total pieces including MOQ extras**: 2,900 capacitors
+- **Total pieces for kit assembly**: 1,750 capacitors (25 per value)
+- **Total pieces including MOQ extras**: 2,925 capacitors
 
 ---
 
@@ -154,20 +155,20 @@ This document provides optimized purchasing recommendations for the E24 Capacito
 **By Category:**
 | Category | Items | Total Pieces | Extended Price |
 |----------|-------|--------------|----------------|
-| C0G/NP0 Ceramic Capacitors (0805) | 37 | 2,125 | $17.93 |
-| X7R Ceramic Capacitors (0805) | 19 | 775 | $7.04 |
-| X7R Ceramic Capacitors (1206 & Larger) | 6 | 200 | $1.85 |
+| C0G/NP0 Ceramic Capacitors (0805) | 37 | 2,125 | $15.96 |
+| X7R Ceramic Capacitors (0805) | 23 | 825 | $8.45 |
+| X7R Ceramic Capacitors (1206 & Larger) | 5 | 175 | $1.62 |
 | Aluminum Polymer Capacitors | 2 | 50 | $22.63 |
 | Aluminum Hybrid Capacitors | 2 | 50 | $34.95 |
-| Aluminum Electrolytic Capacitors | 2 | 50 | $28.56 |
-| **TOTAL** | **68** | **3,250** | **$112.96** |
+| Aluminum Electrolytic Capacitors | 2 | 50 | $26.10 |
+| **TOTAL** | **71** | **3,275** | **$109.71** |
 
 **By Supplier:**
 | Supplier | Items | Extended Price | % of Total |
 |----------|-------|----------------|------------|
-| LCSC | 62 | $48.22 | 42.7% |
-| Mouser | 6 | $64.74 | 57.3% |
-| **TOTAL** | **68** | **$112.96** | **100%** |
+| LCSC | 68 | $55.23 | 50.3% |
+| Mouser | 3 | $54.48 | 49.7% |
+| **TOTAL** | **71** | **$109.71** | **100%** |
 
 ---
 
@@ -175,25 +176,25 @@ This document provides optimized purchasing recommendations for the E24 Capacito
 
 **Estimated Digikey-Only Pricing (25 qty typical):**
 - C0G/NP0 Ceramic (0805): 37 items × ~$0.40 avg = ~$14.80
-- X7R Ceramic (0805): 19 items × ~$0.30 avg = ~$5.70
-- X7R Ceramic (1206+): 6 items × ~$0.35 avg = ~$2.10
+- X7R Ceramic (0805): 23 items × ~$0.30 avg = ~$6.90
+- X7R Ceramic (1206+): 5 items × ~$0.35 avg = ~$1.75
 - Aluminum Polymer: 2 items × ~$12.50 avg = ~$25.00
 - Aluminum Hybrid: 2 items × ~$10.00 avg = ~$20.00
 - Aluminum Electrolytic: 2 items × ~$9.50 avg = ~$19.00
 
-**Digikey-Only Estimated Total: ~$86.60** (for 25-piece quantities)
+**Digikey-Only Estimated Total: ~$87.45** (for 25-piece quantities)
 
-However, to match the **3,250 total pieces** in the optimized order (which includes MOQ overages), the Digikey cost would be approximately:
-- **Digikey Total (matching piece count): ~$180-220**
+However, to match the **3,275 total pieces** in the optimized order (which includes MOQ overages), the Digikey cost would be approximately:
+- **Digikey Total (matching piece count): ~$182-225**
 
 #### Key Savings Metrics
 
 | Metric | Optimized Order | Digikey-Only (est.) | Savings |
 |--------|----------------|---------------------|---------|
-| **Total Cost (25 per value)** | $112.96 | ~$86.60 | **-30%** higher |
-| **Total Cost (matching 3,250 pcs)** | $112.96 | ~$180-220 | **$67-107** (37-49% savings) |
-| **Cost per Piece (avg)** | $0.035 | ~$0.055-0.068 | **37-49% cheaper** |
-| **Unique Values Covered** | 68 | 68 | Same |
+| **Total Cost (25 per value)** | $109.71 | ~$87.45 | **-25%** higher |
+| **Total Cost (matching 3,275 pcs)** | $109.71 | ~$182-225 | **$72-115** (40-51% savings) |
+| **Cost per Piece (avg)** | $0.0335 | ~$0.055-0.069 | **39-51% cheaper** |
+| **Unique Values Covered** | 70 | 70 | Same |
 | **Missing Values** | 1 (1.5nF) | 0 | -1 value |
 
 ---
@@ -270,7 +271,7 @@ However, to match the **3,250 total pieces** in the optimized order (which inclu
 ### Recommendation
 
 **Choose the Optimized Multi-Supplier Order if:**
-- Budget optimization is the priority
+- Budget optimization is the priority (40-51% savings vs Digikey)
 - You're building a complete component library
 - You can wait 2-3 weeks for LCSC shipping
 - Extra inventory is useful (1,450 bonus pieces worth ~$10.50)
@@ -281,8 +282,8 @@ However, to match the **3,250 total pieces** in the optimized order (which inclu
 - You're ordering other components from Digikey already
 - The 1.5nF value is required for your specific application
 
-**Hybrid Approach:**
-Order ceramics from LCSC ($26.82 for 57 items) + all specialty capacitors from Digikey (~$60-70), saving ~$30-40 while maintaining convenience for critical parts.
+**Hybrid Approach (Implemented in This Order):**
+Order ceramics + standard electrolytics from LCSC ($55.23 for 68 items) + only specialty hybrid capacitors from Mouser ($54.48), achieving maximum savings while sourcing hard-to-find parts from Mouser.
 
 ---
 

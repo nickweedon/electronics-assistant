@@ -54,3 +54,9 @@ Read the LCSC guidlines and then find 1% alternatives to the parts in @data/E12_
 
 
 Read the @docs/LCSC-Guidelines.md document and create a BOM for @data/E12_Resistors_1206_Quarter_Watt_1Percent_Kit_qty100.md
+
+
+
+uv run python scripts/lcsc_tool.py search test-data/lcsc_mpn_search.json /tmp/lcsc_mpn_search_results.json --max-concurrent 5 --limit 10
+
+Returns the same results for each

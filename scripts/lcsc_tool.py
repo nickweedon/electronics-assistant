@@ -7,7 +7,7 @@ Subcommands:
     list-cart       List all items currently in the cart
     open-cart       Open the cart in browser for manual review
     check-pricing   Check pricing and MOQ for LCSC parts (parallel execution)
-    search          Search LCSC catalog by keyword/specs (parallel execution)
+    search          Search LCSC catalog by keyword/specs (sequential execution)
     create-bom-file Create LCSC BOM CSV file from part codes and quantities
 
 Examples:
@@ -1015,26 +1015,14 @@ async def search_single_product(client: Client, search_spec: dict, idx: int, tot
 
         try:
             # Navigate and wait for page to load
-            result = await client.call_tool(
-                "browser_execute_bulk",
+            await client.call_tool(
+                "browser_navigate",
                 {
-                    "commands": [
-                        {
-                            "tool": "browser_navigate",
-                            "args": {
-                                "url": f"https://www.lcsc.com/search?q={quote_plus(keywords)}",
-                                "silent_mode": True
-                            }
-                        },
-                        {
-                            "tool": "browser_wait_for",
-                            "args": {"time": 5}
-                        }
-                    ],
-                    "stop_on_error": True,
-                    "return_all_results": False
+                    "url": f"https://www.lcsc.com/search?q={quote_plus(keywords)}",
+                    "silent_mode": True
                 }
             )
+            await asyncio.sleep(5)
 
             # Use browser_run_code to paginate with proper context separation
             # State (seen Set, allProducts) stays in Node.js context
@@ -1235,16 +1223,18 @@ async def search_single_product(client: Client, search_spec: dict, idx: int, tot
             }
 
 
-async def search_lcsc_catalog(search_specs: list, output_file: Path = None, max_concurrent: int = 10, limit: int = None) -> list:
-    """Search LCSC catalog for multiple products in parallel with controlled concurrency.
+async def search_lcsc_catalog(search_specs: list, output_file: Path = None, limit: int = None) -> list:
+    """Search LCSC catalog for multiple products sequentially.
 
     Optionally writes results to JSON file incrementally as each search completes.
     Results are sorted by original index to maintain input order.
 
+    NOTE: playwright-mcp-server uses a single shared browser page, so searches
+    must run sequentially to prevent interference.
+
     Args:
         search_specs: List of search specification dicts with keywords and optional value
         output_file: Optional path to write results JSON (if None, results only returned)
-        max_concurrent: Maximum concurrent requests (default: 10)
         limit: Maximum number of results per search (None = all results)
 
     Returns:
@@ -1252,6 +1242,9 @@ async def search_lcsc_catalog(search_specs: list, output_file: Path = None, max_
     """
     config = load_mcp_config("playwright-mcp-server")
     client = Client(config)
+
+    # Sequential execution since playwright-mcp-server uses a single shared page
+    max_concurrent = 1
 
     # Create semaphore to limit concurrent requests
     semaphore = asyncio.Semaphore(max_concurrent)
@@ -1266,7 +1259,7 @@ async def search_lcsc_catalog(search_specs: list, output_file: Path = None, max_
         with open(output_file, 'w') as f:
             json.dump([], f)
 
-    logger.info(f"Starting to search for {len(search_specs)} products with max {max_concurrent} concurrent requests")
+    logger.info(f"Starting to search for {len(search_specs)} products sequentially")
     if output_file:
         logger.info(f"Results will be written incrementally to: {output_file}")
 
@@ -1398,7 +1391,7 @@ Examples:
 
   # Search catalog
   python lcsc_tool.py search search_input.json search_results.json
-  python lcsc_tool.py search search_input.json search_results.json --max-concurrent 10
+  python lcsc_tool.py search search_input.json search_results.json --limit 100
   python lcsc_tool.py search -s "1206 resistor 10k"  # Output to stdout
   python lcsc_tool.py search -s "capacitor 10uF" results.json  # Save to file
 
@@ -1519,12 +1512,6 @@ Examples:
         "-s", "--search",
         type=str,
         help="Direct keyword search string (alternative to input file)"
-    )
-    search_parser.add_argument(
-        "--max-concurrent",
-        type=int,
-        default=10,
-        help="Maximum concurrent requests (default: 10)"
     )
     search_parser.add_argument(
         "--limit",
@@ -1678,15 +1665,13 @@ Examples:
         # Determine output destination
         output_file = Path(args.output_file) if args.output_file else None
 
-        max_concurrent = args.max_concurrent
         limit = args.limit
-        logger.info(f"Max concurrent requests: {max_concurrent}")
         if limit:
             logger.info(f"Results limit per search: {limit}")
         logger.info("")
 
-        # Search catalog in parallel
-        results = asyncio.run(search_lcsc_catalog(search_specs, output_file, max_concurrent, limit))
+        # Search catalog sequentially
+        results = asyncio.run(search_lcsc_catalog(search_specs, output_file, limit))
 
         # Generate summary
         logger.info("")

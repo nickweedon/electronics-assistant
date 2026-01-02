@@ -24,9 +24,11 @@ uv run python scripts/lcsc_tool.py search -s "capacitor 10uF" results.json
 # Batch search from input file
 uv run python scripts/lcsc_tool.py search input.json output.json
 
-# With concurrency and limit controls
-uv run python scripts/lcsc_tool.py search input.json output.json --max-concurrent 10 --limit 100
+# With result limit
+uv run python scripts/lcsc_tool.py search input.json output.json --limit 100
 ```
+
+**Note:** Searches run sequentially (not in parallel) because playwright-mcp-server uses a single shared browser page. Concurrent searches would interfere with each other.
 
 **Input format** (for batch searches):
 ```json
@@ -60,8 +62,9 @@ uv run python scripts/lcsc_tool.py search input.json output.json --max-concurren
 ```
 
 **Parameters**:
-- `--max-concurrent`: Number of parallel searches (default: 10)
 - `--limit`: Maximum results per search (default: unlimited, fetches all pages)
+
+**Performance**: Searches execute sequentially due to playwright-mcp-server's single shared browser page.
 
 #### 2. Check Pricing
 
@@ -294,11 +297,11 @@ See [scripts/lcsc_tool.py](../scripts/lcsc_tool.py) for complete implementation 
 
 ### Concurrency Settings
 
-| Operation | Recommended max-concurrent | Notes |
-|-----------|----------------------------|-------|
-| Search by keyword | 10 | Default setting, good balance |
-| Check pricing (LCSC code) | 15 | Fast, can handle higher concurrency |
-| Check pricing (MPN) | 1 | Requires API calls, use sequential |
+| Operation | Concurrency | Notes |
+|-----------|-------------|-------|
+| Search by keyword | Sequential only | playwright-mcp-server uses single shared page |
+| Check pricing (LCSC code) | 15 (default) | Fast, can handle higher concurrency |
+| Check pricing (MPN) | 1 | Requires API calls, use `--max-concurrent 1` |
 | Add to cart | Sequential | Tool handles this automatically |
 
 ### Result Limits
