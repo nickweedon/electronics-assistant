@@ -39,6 +39,7 @@ import argparse
 import logging
 import sys
 from pathlib import Path
+from urllib.parse import quote_plus
 from fastmcp import Client
 
 
@@ -947,7 +948,7 @@ async def check_lcsc_pricing(parts_list: list, output_file: Path, max_concurrent
 # SEARCH FUNCTIONALITY
 # ============================================================================
 
-async def search_single_product(client: Client, search_spec: dict, idx: int, total: int, semaphore: asyncio.Semaphore) -> dict:
+async def search_single_product(client: Client, search_spec: dict, idx: int, total: int, semaphore: asyncio.Semaphore, limit: int = None) -> dict:
     """Search LCSC catalog for a product matching the specification.
 
     Args:
@@ -956,6 +957,7 @@ async def search_single_product(client: Client, search_spec: dict, idx: int, tot
         idx: Current item index (1-based)
         total: Total number of searches
         semaphore: Asyncio semaphore for concurrency control
+        limit: Maximum number of results to return (None = all results)
 
     Returns:
         dict: Search results with matching products or error information
@@ -977,6 +979,7 @@ async def search_single_product(client: Client, search_spec: dict, idx: int, tot
         print(f"Processing {idx}/{total}: Searching for '{keywords}'", file=sys.stderr)
 
         try:
+            # Navigate, wait, and evaluate in one batch call
             result = await client.call_tool(
                 "browser_execute_bulk",
                 {
@@ -984,7 +987,7 @@ async def search_single_product(client: Client, search_spec: dict, idx: int, tot
                         {
                             "tool": "browser_navigate",
                             "args": {
-                                "url": f"https://www.lcsc.com/search?q={keywords}",
+                                "url": f"https://www.lcsc.com/search?q={quote_plus(keywords)}",
                                 "silent_mode": True
                             }
                         },
@@ -997,14 +1000,12 @@ async def search_single_product(client: Client, search_spec: dict, idx: int, tot
                             "args": {
                                 "function": r"""() => {
                                     const productLinks = document.querySelectorAll('a[href*="/product-detail/C"]');
-                                    if (productLinks.length === 0) return { found: false, message: 'No product links found' };
+                                    if (productLinks.length === 0) return [];
 
                                     const results = [];
                                     const seen = new Set();
 
-                                    productLinks.forEach((link, i) => {
-                                        if (i >= 10) return; // Limit to first 10 results
-
+                                    productLinks.forEach((link) => {
                                         const productUrl = link.href;
                                         const productCode = productUrl.match(/C\d+/)?.[0];
                                         if (!productCode || seen.has(productCode)) return;
@@ -1067,7 +1068,7 @@ async def search_single_product(client: Client, search_spec: dict, idx: int, tot
                                         });
                                     });
 
-                                    return { found: true, count: results.length, results };
+                                    return results;
                                 }"""
                             },
                             "return_result": True
@@ -1083,40 +1084,47 @@ async def search_single_product(client: Client, search_spec: dict, idx: int, tot
             last_result = bulk_results[-1] if bulk_results else None
 
             # Parse the evaluation result from the text content
-            search_data = None
+            all_products = []
             if last_result and "content" in last_result:
                 content = last_result["content"]
                 if content and len(content) > 0:
                     text_content = content[0].get("text", "")
-                    # Extract JSON from the "### Result\n{...}" format
+                    # Extract JSON from the "### Result\n[...]" format
                     if "### Result" in text_content:
-                        json_start = text_content.find("{")
+                        json_start = text_content.find("[")
+                        if json_start < 0:
+                            json_start = text_content.find("{")
                         json_end = text_content.find("\n\n###", json_start)
                         if json_start >= 0:
                             json_str = text_content[json_start:json_end if json_end > 0 else None]
                             try:
-                                search_data = json.loads(json_str)
+                                all_products = json.loads(json_str)
+                                if not isinstance(all_products, list):
+                                    all_products = [all_products]
                             except json.JSONDecodeError:
                                 pass
 
-            if not search_data or not search_data.get("found"):
+            # Apply user-specified limit if provided
+            if limit and len(all_products) > limit:
+                all_products = all_products[:limit]
+
+            if not all_products:
                 return {
                     "keywords": keywords,
                     "value": value,
-                    "error": search_data.get("message", "Search failed") if search_data else "No search data returned",
-                    "success": False,
+                    "total_found": 0,
+                    "success": True,
                     "products": [],
                     "index": idx
                 }
 
-            products = search_data.get("results", [])
-            logger.info(f"✓ [{idx}/{total}] Found {len(products)} products for '{keywords}'")
+            logger.info(f"✓ [{idx}/{total}] Found {len(all_products)} products for '{keywords}'")
 
             return {
                 "keywords": keywords,
                 "value": value,
-                "products": products,
-                "total_found": len(products),
+                "products": all_products,
+                "total_found": len(all_products),
                 "success": True,
                 "index": idx
             }
@@ -1133,7 +1141,7 @@ async def search_single_product(client: Client, search_spec: dict, idx: int, tot
             }
 
 
-async def search_lcsc_catalog(search_specs: list, output_file: Path = None, max_concurrent: int = 10) -> list:
+async def search_lcsc_catalog(search_specs: list, output_file: Path = None, max_concurrent: int = 10, limit: int = None) -> list:
     """Search LCSC catalog for multiple products in parallel with controlled concurrency.
 
     Optionally writes results to JSON file incrementally as each search completes.
@@ -1143,6 +1151,7 @@ async def search_lcsc_catalog(search_specs: list, output_file: Path = None, max_
         search_specs: List of search specification dicts with keywords and optional value
         output_file: Optional path to write results JSON (if None, results only returned)
         max_concurrent: Maximum concurrent requests (default: 10)
+        limit: Maximum number of results per search (None = all results)
 
     Returns:
         list: Search results sorted by original index
@@ -1186,7 +1195,7 @@ async def search_lcsc_catalog(search_specs: list, output_file: Path = None, max_
     async with client:
         # Create all tasks
         tasks = [
-            search_single_product(client, spec, idx + 1, len(search_specs), semaphore)
+            search_single_product(client, spec, idx + 1, len(search_specs), semaphore, limit)
             for idx, spec in enumerate(search_specs)
         ]
 
@@ -1362,6 +1371,12 @@ Examples:
         help="Maximum concurrent requests (default: 10)"
     )
     search_parser.add_argument(
+        "--limit",
+        type=int,
+        default=None,
+        help="Maximum number of results per search (default: no limit)"
+    )
+    search_parser.add_argument(
         "-l", "--log",
         type=str,
         help="Log file path (optional, defaults to console only)"
@@ -1481,11 +1496,14 @@ Examples:
         output_file = Path(args.output_file) if args.output_file else None
 
         max_concurrent = args.max_concurrent
+        limit = args.limit
         logger.info(f"Max concurrent requests: {max_concurrent}")
+        if limit:
+            logger.info(f"Results limit per search: {limit}")
         logger.info("")
 
         # Search catalog in parallel
-        results = asyncio.run(search_lcsc_catalog(search_specs, output_file, max_concurrent))
+        results = asyncio.run(search_lcsc_catalog(search_specs, output_file, max_concurrent, limit))
 
         # Generate summary
         logger.info("")
