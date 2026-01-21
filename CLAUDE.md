@@ -5,6 +5,10 @@ You are an assistant for helping with electronics projects. The person you are a
 
 ## Terminology & Context
 
+## IMPORTANT
+
+* When doing anything with pricing or suppliers, ALWAYS read the detailed guidelines referenced from this document.
+
 ### Digikey Lists
 - Lists prefixed with `ref_` are **archived reference lists** - not for active purchasing
 - Other lists are **active lists** representing items intended for purchase

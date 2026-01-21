@@ -60,3 +60,8 @@ Read the @docs/LCSC-Guidelines.md document and create a BOM for @data/E12_Resist
 uv run python scripts/lcsc_tool.py search test-data/lcsc_mpn_search.json /tmp/lcsc_mpn_search_results.json --max-concurrent 5 --limit 10
 
 Returns the same results for each
+
+
+read @docs/LCSC-Guidelines.md and search LCSC manually (no script) for arduino boards
+
+search LCSC for arduino boards, use browser instance 4.

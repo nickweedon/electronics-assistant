@@ -3,15 +3,20 @@
 LCSC management tool - supports multiple operations via subcommands.
 
 Subcommands:
-    add-to-cart     Add parts to LCSC cart (sequential execution)
+    add-to-cart     Add parts to LCSC cart (sequential, uses real browser session)
     list-cart       List all items currently in the cart
     open-cart       Open the cart in browser for manual review
     check-pricing   Check pricing and MOQ for LCSC parts (parallel execution)
-    search          Search LCSC catalog by keyword/specs (sequential execution)
+    search          Search LCSC catalog by keyword/specs (parallel execution)
     create-bom-file Create LCSC BOM CSV file from part codes and quantities
 
+Concurrency:
+    The check-pricing and search commands use a dynamically created browser pool
+    with isolated instances, enabling safe concurrent requests. Use --max-concurrent
+    to control the number of parallel browser instances (default: 5).
+
 Examples:
-    # Add parts to cart
+    # Add parts to cart (uses real browser session for login state)
     python lcsc_tool.py add-to-cart C137394:100 C137181:50
     python lcsc_tool.py add-to-cart --file codes.txt -o results.json -l progress.log
 
@@ -23,10 +28,11 @@ Examples:
     # Open cart in browser
     python lcsc_tool.py open-cart
 
-    # Check pricing
+    # Check pricing (with concurrency)
     python lcsc_tool.py check-pricing input.json output.json
+    python lcsc_tool.py check-pricing input.json output.json --max-concurrent 3
 
-    # Search catalog
+    # Search catalog (with concurrency)
     python lcsc_tool.py search input.json output.json
     python lcsc_tool.py search input.json output.json --max-concurrent 10
     python lcsc_tool.py search -s "1206 resistor 10k"  # Output to stdout
@@ -121,6 +127,48 @@ def load_mcp_config(server_name: str):
     return {
         "mcpServers": {
             server_name: full_config["mcpServers"][server_name]
+        }
+    }
+
+
+def create_isolated_mcp_config(num_instances: int = 5) -> dict:
+    """Create MCP config for isolated browser pool with specified instance count.
+
+    This generates a self-contained MCP configuration that runs playwright in Docker
+    with the specified number of isolated browser instances. Each instance can handle
+    concurrent requests without interference.
+
+    Args:
+        num_instances: Number of browser instances to create (default: 5)
+
+    Returns:
+        MCP configuration dict for use with fastmcp.Client
+    """
+    return {
+        "mcpServers": {
+            "playwright-mcp-server": {
+                "command": "docker",
+                "args": [
+                    "run", "-i", "--rm",
+                    "-v", "/mnt/c/docker/blob-storage:/mnt/blob-storage",
+                    "-e", "BLOB_STORAGE_ROOT=/mnt/blob-storage",
+                    "-e", "BLOB_MAX_SIZE_MB=2048",
+                    "-e", "BLOB_TTL_HOURS=24",
+                    "-e", "BLOB_SIZE_THRESHOLD_KB=50",
+                    "-e", "BLOB_CLEANUP_INTERVAL_MINUTES=60",
+                    "-e", "PW_MCP_PROXY_TIMEOUT_ACTION=15000",
+                    "-e", "PW_MCP_PROXY_TIMEOUT_NAVIGATION=5000",
+                    "-e", f"PW_MCP_PROXY__ISOLATED_INSTANCES={num_instances}",
+                    "-e", "PW_MCP_PROXY__ISOLATED_IS_DEFAULT=true",
+                    "-e", "PW_MCP_PROXY__ISOLATED_BROWSER=chrome",
+                    "-e", "PW_MCP_PROXY__ISOLATED_HEADLESS=true",
+                    "-e", "PW_MCP_PROXY__ISOLATED_NO_SANDBOX=true",
+                    "-e", "PW_MCP_PROXY__ISOLATED_ISOLATED=true",
+                    "-e", "PW_MCP_PROXY__ISOLATED_VIEWPORT_SIZE=1920x1080",
+                    "playwright-proxy-mcp:latest",
+                    "uv", "run", "playwright-proxy-mcp"
+                ]
+            }
         }
     }
 
@@ -944,21 +992,22 @@ async def fetch_single_part_pricing(client, part: dict, idx: int, total: int, se
             }
 
 
-async def check_lcsc_pricing(parts_list: list, output_file: Path, max_concurrent: int = 1) -> None:
-    """Fetch LCSC pricing for all parts sequentially.
+async def check_lcsc_pricing(parts_list: list, output_file: Path, max_concurrent: int = 5) -> None:
+    """Fetch LCSC pricing for all parts with concurrent browser instances.
 
     Writes results to JSON file incrementally as each part completes.
     Results are sorted by original index to maintain input order in output file.
 
-    Note: Sequential processing is required due to playwright-mcp-server using a single
-    shared browser page. Concurrent requests would cause race conditions.
+    Uses a dynamically created browser pool with the specified number of isolated
+    instances, enabling safe concurrent requests without race conditions.
 
     Args:
         parts_list: List of part dicts with lcsc_code, value, mpn
         output_file: Path to write results JSON
-        max_concurrent: Maximum concurrent requests (default: 1, kept for future use)
+        max_concurrent: Maximum concurrent browser instances (default: 5)
     """
-    config = load_mcp_config("playwright-mcp-server")
+    # Create isolated browser pool with the specified number of instances
+    config = create_isolated_mcp_config(max_concurrent)
     client = Client(config)
 
     # Create semaphore to limit concurrent requests
@@ -973,7 +1022,7 @@ async def check_lcsc_pricing(parts_list: list, output_file: Path, max_concurrent
     with open(output_file, 'w') as f:
         json.dump([], f)
 
-    logger.info(f"Starting to process {len(parts_list)} parts sequentially")
+    logger.info(f"Starting to process {len(parts_list)} parts with {max_concurrent} concurrent browser instances")
     logger.info(f"Results will be written incrementally to: {output_file}")
 
     def write_current_results():
@@ -1051,23 +1100,27 @@ async def search_single_product(client: Client, search_spec: dict, idx: int, tot
 
         try:
             # Navigate and wait for page to load
-            await client.call_tool(
+            nav_result = await client.call_tool(
                 "browser_navigate",
                 {
                     "url": f"https://www.lcsc.com/search?q={quote_plus(keywords)}",
                     "silent_mode": True
                 }
             )
+
+            # Extract browser_instance from navigation result to ensure subsequent calls use the same instance
+            browser_instance = None
+            if hasattr(nav_result, 'data') and nav_result.data and 'browser_instance' in nav_result.data:
+                browser_instance = nav_result.data['browser_instance']
+
             await asyncio.sleep(5)
 
             # Use browser_run_code to paginate with proper context separation
             # State (seen Set, allProducts) stays in Node.js context
             # Product extraction happens in browser context via page.evaluate
             max_products = limit if limit else 5000
-            code_result = await client.call_tool(
-                "browser_run_code",
-                {
-                    "code": f"""async (page) => {{
+            run_code_args = {
+                "code": f"""async (page) => {{
                         const maxProducts = {max_products};
                         const allProducts = [];
                         const seen = new Set();
@@ -1205,7 +1258,14 @@ async def search_single_product(client: Client, search_spec: dict, idx: int, tot
                         // Trim to limit and return
                         return allProducts.slice(0, maxProducts);
                     }}"""
-                }
+            }
+            # Add browser_instance if we captured one from navigation
+            if browser_instance:
+                run_code_args["browser_instance"] = browser_instance
+
+            code_result = await client.call_tool(
+                "browser_run_code",
+                run_code_args
             )
 
             # Parse the result from browser_run_code
@@ -1259,28 +1319,27 @@ async def search_single_product(client: Client, search_spec: dict, idx: int, tot
             }
 
 
-async def search_lcsc_catalog(search_specs: list, output_file: Path = None, limit: int = None) -> list:
-    """Search LCSC catalog for multiple products sequentially.
+async def search_lcsc_catalog(search_specs: list, output_file: Path = None, limit: int = None, max_concurrent: int = 5) -> list:
+    """Search LCSC catalog for multiple products with concurrent browser instances.
 
     Optionally writes results to JSON file incrementally as each search completes.
     Results are sorted by original index to maintain input order.
 
-    NOTE: playwright-mcp-server uses a single shared browser page, so searches
-    must run sequentially to prevent interference.
+    Uses a dynamically created browser pool with the specified number of isolated
+    instances, enabling safe concurrent searches without interference.
 
     Args:
         search_specs: List of search specification dicts with keywords and optional value
         output_file: Optional path to write results JSON (if None, results only returned)
         limit: Maximum number of results per search (None = all results)
+        max_concurrent: Maximum concurrent browser instances (default: 5)
 
     Returns:
         list: Search results sorted by original index
     """
-    config = load_mcp_config("playwright-mcp-server")
+    # Create isolated browser pool with the specified number of instances
+    config = create_isolated_mcp_config(max_concurrent)
     client = Client(config)
-
-    # Sequential execution since playwright-mcp-server uses a single shared page
-    max_concurrent = 1
 
     # Create semaphore to limit concurrent requests
     semaphore = asyncio.Semaphore(max_concurrent)
@@ -1295,7 +1354,7 @@ async def search_lcsc_catalog(search_specs: list, output_file: Path = None, limi
         with open(output_file, 'w') as f:
             json.dump([], f)
 
-    logger.info(f"Starting to search for {len(search_specs)} products sequentially")
+    logger.info(f"Starting to search for {len(search_specs)} products with {max_concurrent} concurrent browser instances")
     if output_file:
         logger.info(f"Results will be written incrementally to: {output_file}")
 
@@ -1527,6 +1586,12 @@ Examples:
         help="Output JSON file for pricing results"
     )
     pricing_parser.add_argument(
+        "--max-concurrent",
+        type=int,
+        default=5,
+        help="Maximum concurrent browser instances (default: 5)"
+    )
+    pricing_parser.add_argument(
         "-l", "--log",
         type=str,
         help="Log file path (optional, defaults to console only)"
@@ -1559,6 +1624,12 @@ Examples:
         type=int,
         default=None,
         help="Maximum number of results per search (default: no limit)"
+    )
+    search_parser.add_argument(
+        "--max-concurrent",
+        type=int,
+        default=5,
+        help="Maximum concurrent browser instances (default: 5)"
     )
     search_parser.add_argument(
         "-l", "--log",
@@ -1670,10 +1741,9 @@ Examples:
         with open(input_file) as f:
             parts_list = json.load(f)
 
-        # Force sequential processing due to playwright-mcp-server single shared page
-        # Concurrent requests cause race conditions where navigations overwrite each other
-        max_concurrent = 1
+        max_concurrent = args.max_concurrent
         logger.info(f"Loaded {len(parts_list)} parts from {input_file}")
+        logger.info(f"Using {max_concurrent} concurrent browser instances")
         logger.info("")
 
         # Fetch pricing (writes to output_file incrementally)
@@ -1713,12 +1783,14 @@ Examples:
         output_file = Path(args.output_file) if args.output_file else None
 
         limit = args.limit
+        max_concurrent = args.max_concurrent
         if limit:
             logger.info(f"Results limit per search: {limit}")
+        logger.info(f"Using {max_concurrent} concurrent browser instances")
         logger.info("")
 
-        # Search catalog sequentially
-        results = asyncio.run(search_lcsc_catalog(search_specs, output_file, limit))
+        # Search catalog with concurrent browser instances
+        results = asyncio.run(search_lcsc_catalog(search_specs, output_file, limit, max_concurrent))
 
         # Generate summary
         logger.info("")

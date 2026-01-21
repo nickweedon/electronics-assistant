@@ -28,7 +28,7 @@ uv run python scripts/lcsc_tool.py search input.json output.json
 uv run python scripts/lcsc_tool.py search input.json output.json --limit 100
 ```
 
-**Note:** Searches run sequentially (not in parallel) because playwright-mcp-server uses a single shared browser page. Concurrent searches would interfere with each other.
+**Concurrency:** Searches run in parallel using isolated browser instances. Use `--max-concurrent` to control the number of parallel browsers (default: 5).
 
 **Input format** (for batch searches):
 ```json
@@ -63,8 +63,7 @@ uv run python scripts/lcsc_tool.py search input.json output.json --limit 100
 
 **Parameters**:
 - `--limit`: Maximum results per search (default: unlimited, fetches all pages)
-
-**Performance**: Searches execute sequentially due to playwright-mcp-server's single shared browser page.
+- `--max-concurrent`: Number of parallel browser instances (default: 5)
 
 #### 2. Check Pricing
 
@@ -73,6 +72,9 @@ Fetch detailed pricing and stock information:
 ```bash
 # Check pricing by LCSC codes or MPNs
 uv run python scripts/lcsc_tool.py check-pricing input.json output.json
+
+# With custom concurrency
+uv run python scripts/lcsc_tool.py check-pricing input.json output.json --max-concurrent 3
 ```
 
 **Input format**:
@@ -103,7 +105,7 @@ uv run python scripts/lcsc_tool.py check-pricing input.json output.json
 ]
 ```
 
-**Note**: Processing runs sequentially (not in parallel) because playwright-mcp-server uses a single shared browser page. Concurrent requests would cause race conditions where navigations overwrite each other.
+**Concurrency:** Pricing checks run in parallel using isolated browser instances. Use `--max-concurrent` to control the number of parallel browsers (default: 5).
 
 #### 3. Add to Cart
 
@@ -328,13 +330,14 @@ See [scripts/lcsc_tool.py](../scripts/lcsc_tool.py) for complete implementation 
 
 ### Concurrency Settings
 
-| Operation | Concurrency | Notes |
-|-----------|-------------|-------|
-| Search by keyword | Sequential only | playwright-mcp-server uses single shared page |
-| Check pricing | Sequential (hardcoded) | Automatically runs sequentially - no configuration needed |
-| Add to cart | Sequential | Tool handles this automatically |
+| Operation | Default Concurrency | Notes |
+|-----------|---------------------|-------|
+| Search by keyword | 5 parallel | Uses isolated browser pool, configurable via `--max-concurrent` |
+| Check pricing | 5 parallel | Uses isolated browser pool, configurable via `--max-concurrent` |
+| Add to cart | Sequential | Uses real browser session for login state |
+| List cart | Sequential | Uses real browser session for login state |
 
-**Note**: All LCSC operations run sequentially due to playwright-mcp-server's single shared browser page. Concurrent requests would cause race conditions.
+**Browser Pool:** The `check-pricing` and `search` commands dynamically create an isolated browser pool with the specified number of instances. Each instance runs independently, enabling safe concurrent requests without race conditions.
 
 ### Result Limits
 
