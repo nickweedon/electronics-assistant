@@ -103,6 +103,30 @@
         "run",
         "partsbox-mcp"
       ]
+    },
+    "digikey": {
+      "command": "docker",
+      "args": [
+        "run",
+        "-i",
+        "--rm",
+        "-p",
+        "8139",
+        "-v",
+        "/mnt/c/docker/digikey-mcp-env:/workspace/.env:ro",
+        "-v",
+        "/mnt/c/docker/digikey-localhost-key.pem:/workspace/localhost-key.pem:ro",
+        "-v",
+        "/mnt/c/docker/digikey-localhost-cert.pem:/workspace/localhost-cert.pem:ro",
+        "-v",
+        "/mnt/c/docker/digikey-tokens:/workspace/.digikey_tokens",
+        "-v",
+        "/var/run/docker.sock:/var/run/docker.sock:ro",
+        "digikey-mcp:latest",
+        "/bin/bash",
+        "-c",
+        "cd /workspace && uv run digikey_mcp_server.py"
+      ]
     }
  }
 }

@@ -35,7 +35,9 @@ Examples:
     # Search catalog (with concurrency)
     python lcsc_tool.py search input.json output.json
     python lcsc_tool.py search input.json output.json --max-concurrent 10
-    python lcsc_tool.py search -s "1206 resistor 10k"  # Output to stdout
+    python lcsc_tool.py search -s "1206 resistor 10k"  # Output to stdout (quiet by default)
+    python lcsc_tool.py search -s "1206 resistor 10k" --verbose  # Show progress messages
+    python lcsc_tool.py search -s "1206 resistor 10k" 2>/dev/null  # Clean JSON only (suppress MCP logs)
     python lcsc_tool.py search -s "capacitor 10uF" output.json  # Save to file
 
     # Create BOM file (using MPNs)
@@ -51,6 +53,8 @@ import argparse
 import logging
 import sys
 import csv
+import os
+import contextlib
 from pathlib import Path
 from urllib.parse import quote_plus
 from fastmcp import Client
@@ -58,6 +62,23 @@ from fastmcp import Client
 
 # Global logger
 logger = None
+
+
+@contextlib.contextmanager
+def suppress_stderr():
+    """Context manager to suppress stderr output."""
+    stderr_fd = sys.stderr.fileno()
+    # Save the original stderr file descriptor
+    with os.fdopen(os.dup(stderr_fd), 'wb') as old_stderr:
+        # Open /dev/null for writing
+        with open(os.devnull, 'wb') as devnull:
+            # Redirect stderr to /dev/null
+            os.dup2(devnull.fileno(), stderr_fd)
+            try:
+                yield
+            finally:
+                # Restore stderr
+                os.dup2(old_stderr.fileno(), stderr_fd)
 
 
 def parse_item_spec(spec: str, default_qty: int = 100):
@@ -1068,7 +1089,7 @@ async def check_lcsc_pricing(parts_list: list, output_file: Path, max_concurrent
 # SEARCH FUNCTIONALITY
 # ============================================================================
 
-async def search_single_product(client: Client, search_spec: dict, idx: int, total: int, semaphore: asyncio.Semaphore, limit: int = None) -> dict:
+async def search_single_product(client: Client, search_spec: dict, idx: int, total: int, semaphore: asyncio.Semaphore, limit: int = None, quiet: bool = False) -> dict:
     """Search LCSC catalog for a product matching the specification with pagination support.
 
     Args:
@@ -1078,6 +1099,7 @@ async def search_single_product(client: Client, search_spec: dict, idx: int, tot
         total: Total number of searches
         semaphore: Asyncio semaphore for concurrency control
         limit: Maximum number of results to return (None = all results up to 5000)
+        quiet: If True, suppress progress messages (default: False)
 
     Returns:
         dict: Search results with matching products or error information
@@ -1096,7 +1118,8 @@ async def search_single_product(client: Client, search_spec: dict, idx: int, tot
         }
 
     async with semaphore:
-        print(f"Processing {idx}/{total}: Searching for '{keywords}'", file=sys.stderr)
+        if not quiet:
+            print(f"Processing {idx}/{total}: Searching for '{keywords}'", file=sys.stderr)
 
         try:
             # Navigate and wait for page to load
@@ -1269,19 +1292,25 @@ async def search_single_product(client: Client, search_spec: dict, idx: int, tot
             )
 
             # Parse the result from browser_run_code
-            # The result is in .data.content[0].text as a markdown-formatted string
-            # containing: "### Result\n[...json array...]\n\n### Ran Playwright code\n..."
+            # The result is in .content[0].text as a markdown-formatted string
+            # containing: "### Result\n[...json array...]\n### Ran Playwright code\n..."
             all_products = []
-            if code_result.data and "content" in code_result.data:
-                content = code_result.data["content"]
-                if content and len(content) > 0 and "text" in content[0]:
-                    text = content[0]["text"]
+            if code_result.content:
+                content = code_result.content
+                if content and len(content) > 0:
+                    text = content[0].text
+
+                    # Check if result is double-encoded (JSON-serialized CallToolResult)
+                    if text.startswith('{"content":['):
+                        outer_data = json.loads(text)
+                        text = outer_data['content'][0]['text']
+
                     # Extract JSON array from markdown text
-                    # Format: "### Result\n[...]\n\n### Ran Playwright code\n..."
+                    # Format: "### Result\n[...]\n### Ran Playwright code\n..."
+                    # Note: Only ONE newline between result and the "Ran Playwright code" section
                     import re
-                    match = re.search(r'### Result\n(\[.*?\])\n\n### Ran Playwright code', text, re.DOTALL)
+                    match = re.search(r'### Result\n(\[.*?\])\n### Ran Playwright code', text, re.DOTALL)
                     if match:
-                        import json
                         all_products = json.loads(match.group(1))
                         if not isinstance(all_products, list):
                             all_products = [all_products] if all_products else []
@@ -1296,7 +1325,8 @@ async def search_single_product(client: Client, search_spec: dict, idx: int, tot
                     "index": idx
                 }
 
-            logger.info(f"✓ [{idx}/{total}] Found {len(all_products)} products for '{keywords}'")
+            if not quiet:
+                logger.info(f"✓ [{idx}/{total}] Found {len(all_products)} products for '{keywords}'")
 
             return {
                 "keywords": keywords,
@@ -1308,7 +1338,8 @@ async def search_single_product(client: Client, search_spec: dict, idx: int, tot
             }
 
         except Exception as e:
-            logger.error(f"✗ [{idx}/{total}] Error searching for '{keywords}': {e}")
+            if not quiet:
+                logger.error(f"✗ [{idx}/{total}] Error searching for '{keywords}': {e}")
             return {
                 "keywords": keywords,
                 "value": value,
@@ -1319,7 +1350,7 @@ async def search_single_product(client: Client, search_spec: dict, idx: int, tot
             }
 
 
-async def search_lcsc_catalog(search_specs: list, output_file: Path = None, limit: int = None, max_concurrent: int = 5) -> list:
+async def search_lcsc_catalog(search_specs: list, output_file: Path = None, limit: int = None, max_concurrent: int = 5, quiet: bool = False) -> list:
     """Search LCSC catalog for multiple products with concurrent browser instances.
 
     Optionally writes results to JSON file incrementally as each search completes.
@@ -1333,72 +1364,80 @@ async def search_lcsc_catalog(search_specs: list, output_file: Path = None, limi
         output_file: Optional path to write results JSON (if None, results only returned)
         limit: Maximum number of results per search (None = all results)
         max_concurrent: Maximum concurrent browser instances (default: 5)
+        quiet: If True, suppress all progress and logging messages (default: False)
 
     Returns:
         list: Search results sorted by original index
     """
     # Create isolated browser pool with the specified number of instances
     config = create_isolated_mcp_config(max_concurrent)
-    client = Client(config)
 
-    # Create semaphore to limit concurrent requests
-    semaphore = asyncio.Semaphore(max_concurrent)
+    # In quiet mode, suppress stderr to hide MCP server startup messages
+    stderr_context = suppress_stderr() if quiet else contextlib.nullcontext()
 
-    # Track all results by index
-    results_dict = {}
-    completed_count = 0
+    with stderr_context:
+        client = Client(config)
 
-    # Initialize the output file with empty array if specified
-    if output_file:
-        output_file.parent.mkdir(parents=True, exist_ok=True)
-        with open(output_file, 'w') as f:
-            json.dump([], f)
+        # Create semaphore to limit concurrent requests
+        semaphore = asyncio.Semaphore(max_concurrent)
 
-    logger.info(f"Starting to search for {len(search_specs)} products with {max_concurrent} concurrent browser instances")
-    if output_file:
-        logger.info(f"Results will be written incrementally to: {output_file}")
+        # Track all results by index
+        results_dict = {}
+        completed_count = 0
 
-    def write_current_results():
-        """Write all completed results in index order to file."""
-        # Sort results by index and remove index field
-        sorted_results = []
-        for idx in sorted(results_dict.keys()):
-            entry = results_dict[idx]
-            entry_clean = {k: v for k, v in entry.items() if k != "index"}
-            sorted_results.append(entry_clean)
-
-        # Write to file if output_file specified
+        # Initialize the output file with empty array if specified
         if output_file:
+            output_file.parent.mkdir(parents=True, exist_ok=True)
             with open(output_file, 'w') as f:
-                json.dump(sorted_results, f, indent=2)
+                json.dump([], f)
 
-        return sorted_results
+        if not quiet:
+            logger.info(f"Starting to search for {len(search_specs)} products with {max_concurrent} concurrent browser instances")
+            if output_file:
+                logger.info(f"Results will be written incrementally to: {output_file}")
 
-    async with client:
-        # Create all tasks
-        tasks = [
-            search_single_product(client, spec, idx + 1, len(search_specs), semaphore, limit)
-            for idx, spec in enumerate(search_specs)
-        ]
+        def write_current_results():
+            """Write all completed results in index order to file."""
+            # Sort results by index and remove index field
+            sorted_results = []
+            for idx in sorted(results_dict.keys()):
+                entry = results_dict[idx]
+                entry_clean = {k: v for k, v in entry.items() if k != "index"}
+                sorted_results.append(entry_clean)
 
-        # Process results as they complete
-        for coro in asyncio.as_completed(tasks):
-            result = await coro
-            idx = result.get("index", 0) - 1  # Convert 1-based to 0-based
-            results_dict[idx] = result
-            completed_count += 1
+            # Write to file if output_file specified
+            if output_file:
+                with open(output_file, 'w') as f:
+                    json.dump(sorted_results, f, indent=2)
 
-            # Write all completed results to file after each completion
-            write_current_results()
+            return sorted_results
 
-    final_results = write_current_results()
+        async with client:
+            # Create all tasks
+            tasks = [
+                search_single_product(client, spec, idx + 1, len(search_specs), semaphore, limit, quiet)
+                for idx, spec in enumerate(search_specs)
+            ]
 
-    if output_file:
-        logger.info(f"✓ All searches processed. Results saved to {output_file}")
-    else:
-        logger.info(f"✓ All searches processed.")
+            # Process results as they complete
+            for coro in asyncio.as_completed(tasks):
+                result = await coro
+                idx = result.get("index", 0) - 1  # Convert 1-based to 0-based
+                results_dict[idx] = result
+                completed_count += 1
 
-    return final_results
+                # Write all completed results to file after each completion
+                write_current_results()
+
+        final_results = write_current_results()
+
+        if not quiet:
+            if output_file:
+                logger.info(f"✓ All searches processed. Results saved to {output_file}")
+            else:
+                logger.info(f"✓ All searches processed.")
+
+        return final_results
 
 
 # ============================================================================
@@ -1632,6 +1671,11 @@ Examples:
         help="Maximum concurrent browser instances (default: 5)"
     )
     search_parser.add_argument(
+        "-v", "--verbose",
+        action="store_true",
+        help="Show progress messages and logging (default: quiet mode)"
+    )
+    search_parser.add_argument(
         "-l", "--log",
         type=str,
         help="Log file path (optional, defaults to console only)"
@@ -1763,17 +1807,22 @@ Examples:
         logger.info("=" * 80)
 
     elif args.command == "search":
+        # Determine quiet mode (opposite of verbose)
+        quiet_mode = not args.verbose
+
         # Determine input source: direct search string or input file
         if args.search:
             # Direct keyword search
             search_specs = [{"keywords": args.search, "value": ""}]
-            logger.info(f"Searching for: '{args.search}'")
+            if not quiet_mode:
+                logger.info(f"Searching for: '{args.search}'")
         elif args.input_file:
             # Load from input file
             input_file = Path(args.input_file)
             with open(input_file) as f:
                 search_specs = json.load(f)
-            logger.info(f"Loaded {len(search_specs)} search specifications from {input_file}")
+            if not quiet_mode:
+                logger.info(f"Loaded {len(search_specs)} search specifications from {input_file}")
         else:
             logger.error("Error: Either provide an input file or use -s/--search for direct keyword search")
             search_parser.print_help()
@@ -1784,25 +1833,27 @@ Examples:
 
         limit = args.limit
         max_concurrent = args.max_concurrent
-        if limit:
-            logger.info(f"Results limit per search: {limit}")
-        logger.info(f"Using {max_concurrent} concurrent browser instances")
-        logger.info("")
+        if not quiet_mode:
+            if limit:
+                logger.info(f"Results limit per search: {limit}")
+            logger.info(f"Using {max_concurrent} concurrent browser instances")
+            logger.info("")
 
         # Search catalog with concurrent browser instances
-        results = asyncio.run(search_lcsc_catalog(search_specs, output_file, limit, max_concurrent))
+        results = asyncio.run(search_lcsc_catalog(search_specs, output_file, limit, max_concurrent, quiet_mode))
 
         # Generate summary
-        logger.info("")
-        logger.info("=" * 80)
-        logger.info(f"Summary:")
-        logger.info(f"  Total searches: {len(results)}")
-        logger.info(f"  Successful: {sum(1 for r in results if r.get('success'))}")
-        logger.info(f"  Failed: {sum(1 for r in results if not r.get('success'))}")
-        logger.info(f"  Total products found: {sum(r.get('total_found', 0) for r in results if r.get('success'))}")
-        if output_file:
-            logger.info(f"  Results file: {output_file}")
-        logger.info("=" * 80)
+        if not quiet_mode:
+            logger.info("")
+            logger.info("=" * 80)
+            logger.info(f"Summary:")
+            logger.info(f"  Total searches: {len(results)}")
+            logger.info(f"  Successful: {sum(1 for r in results if r.get('success'))}")
+            logger.info(f"  Failed: {sum(1 for r in results if not r.get('success'))}")
+            logger.info(f"  Total products found: {sum(r.get('total_found', 0) for r in results if r.get('success'))}")
+            if output_file:
+                logger.info(f"  Results file: {output_file}")
+            logger.info("=" * 80)
 
         # Output to stdout if no output file specified
         if not output_file:
