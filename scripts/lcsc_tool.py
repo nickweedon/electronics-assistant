@@ -820,6 +820,7 @@ async def fetch_single_part_pricing(client, part: dict, idx: int, total: int, se
         print(f"Processing {idx}/{total}: {lcsc_code} ({value})", file=sys.stderr)
 
         try:
+            # Navigate and wait for page to fully load (SPA needs 6+ seconds)
             result = await client.call_tool(
                 "browser_execute_bulk",
                 {
@@ -834,59 +835,77 @@ async def fetch_single_part_pricing(client, part: dict, idx: int, total: int, se
                         {
                             "tool": "browser_wait_for",
                             "args": {
-                                "text": "Standard Packaging"
+                                "time": 6
                             }
-                        },
-                        {
-                            "tool": "browser_snapshot",
-                            "args": {
-                                "jmespath_query": "[[].children[].children[].children[].children[].children[?role == 'table'], [].children[].children[].children[].children[].children[].children[?role == 'table']] | [] | [].children[1].children[:6].{qty: children[0].children[0].name.value, unit_price: children[1].name.value, ext_price: children[2].name.value} | []",
-                                "output_format": "json"
-                            },
-                            "return_result": True
                         },
                         {
                             "tool": "browser_evaluate",
                             "args": {
-                                "function": r"""() => {
-                                    // Extract data from the specifications table
-                                    const tables = document.querySelectorAll('table');
-                                    let specs = {};
+                                "function": """() => {
+                                    // Extract all product information in one comprehensive pass
+                                    const bodyText = document.body.innerText || document.body.textContent || '';
 
-                                    // Search through tables for specifications
-                                    tables.forEach(table => {
-                                        const rows = table.querySelectorAll('tr');
-                                        rows.forEach(row => {
-                                            const cells = row.querySelectorAll('td, th');
-                                            if (cells.length >= 2) {
-                                                const label = cells[0].textContent.trim();
-                                                const value = cells[1].textContent.trim();
-                                                if (label && value) {
-                                                    specs[label] = value;
-                                                }
-                                            }
-                                        });
-                                    });
+                                    // Extract manufacturer - use structured field approach
+                                    let manufacturer = 'N/A';
 
-                                    // Extract manufacturer from specs or from manufacturer link
-                                    let manufacturer = specs['Manufacturer'] || 'N/A';
-                                    if (manufacturer === 'N/A') {
-                                        const mfgLink = document.querySelector('a[href*="/brand-detail/"]');
-                                        manufacturer = mfgLink ? mfgLink.textContent.trim() : 'N/A';
+                                    // Look for "Manufacturer" followed by tab/newline and the value
+                                    const mfgPatterns = [
+                                        /Manufacturer[\\t\\s]*\\n+([A-Za-z][A-Za-z0-9\\s&\\-,.'()]+?)(?:\\n|Asian Brands|$)/i,
+                                        /Manufacturer[:\\t\\s]+([A-Za-z][A-Za-z0-9\\s&\\-,.'()]+?)(?:\\t|\\n|$)/i
+                                    ];
+
+                                    for (const pattern of mfgPatterns) {
+                                        const match = bodyText.match(pattern);
+                                        if (match) {
+                                            manufacturer = match[1].trim();
+                                            // Remove trailing "Asian Brands" or similar suffixes
+                                            manufacturer = manufacturer.replace(/\\s+(Asian|European|American)\\s+Brands.*$/i, '').trim();
+                                            break;
+                                        }
                                     }
 
-                                    // Extract MPN from specs
-                                    const mpn = specs['Mfr. Part #'] || '';
+                                    // Extract MPN - look for "Mfr. Part #" field
+                                    let mpn = '';
+                                    const mpnPatterns = [
+                                        /Mfr\\.?\\s*Part\\s*#[:\\t\\s]*\\n*([A-Z0-9][A-Z0-9\\-_./+]+)/i,
+                                        /Part\\s*Number[:\\t\\s]*\\n*([A-Z0-9][A-Z0-9\\-_./+]+)/i,
+                                        /MPN[:\\t\\s]*\\n*([A-Z0-9][A-Z0-9\\-_./+]+)/i
+                                    ];
 
-                                    // Extract description from specs table (best source)
-                                    let description = specs['Description'] || 'N/A';
-
-                                    // If no description in specs, try Key Attributes
-                                    if (description === 'N/A' && specs['Key Attributes']) {
-                                        description = specs['Key Attributes'];
+                                    for (const pattern of mpnPatterns) {
+                                        const match = bodyText.match(pattern);
+                                        if (match) {
+                                            mpn = match[1].trim();
+                                            break;
+                                        }
                                     }
 
-                                    // If still no description, try h1 title as fallback
+                                    // Extract description - prioritize structured fields
+                                    let description = 'N/A';
+
+                                    // Method 1: Look for "Description" field in product specs
+                                    const descMatch = bodyText.match(/Description[:\\t\\s]*\\n*([^\\n]{20,200})/i);
+                                    if (descMatch) {
+                                        description = descMatch[1].trim();
+                                    }
+
+                                    // Method 2: Look for "Key Attributes" field
+                                    if (description === 'N/A') {
+                                        const keyAttrMatch = bodyText.match(/Key Attributes[:\\t\\s]*\\n*([^\\n]{20,200})/i);
+                                        if (keyAttrMatch) {
+                                            description = keyAttrMatch[1].trim();
+                                        }
+                                    }
+
+                                    // Method 3: Meta description tag
+                                    if (description === 'N/A') {
+                                        const metaDesc = document.querySelector('meta[name=\"description\"]');
+                                        if (metaDesc && metaDesc.content) {
+                                            description = metaDesc.content.trim();
+                                        }
+                                    }
+
+                                    // Method 4: H1 title
                                     if (description === 'N/A') {
                                         const h1 = document.querySelector('h1');
                                         if (h1) {
@@ -894,41 +913,51 @@ async def fetch_single_part_pricing(client, part: dict, idx: int, total: int, se
                                         }
                                     }
 
-                                    // Extract stock quantity
+                                    // Extract stock - look for stock information
                                     let stock = 'N/A';
-                                    const bodyText = document.body.textContent || '';
+                                    const stockPatterns = [
+                                        /In[- ]?Stock:?[\\t\\s]*([0-9,]+)/i,
+                                        /Stock:?[\\t\\s]*([0-9,]+)/i,
+                                        /([0-9,]+)\\s*(?:pcs|pieces|units)\\s*(?:in|available)/i,
+                                        /Stock\\s*Qty[.:]?[\\t\\s]*([0-9,]+)/i,
+                                        /Available[:\\t\\s]+([0-9,]+)/i
+                                    ];
 
-                                    // LCSC shows "In-Stock:" on one line and the number on the next line
-                                    const lines = bodyText.split('\n');
-                                    for (let i = 0; i < lines.length; i++) {
-                                        if (lines[i].includes('In-Stock:')) {
-                                            // Check next 3 lines for a number
-                                            for (let j = 1; j <= 3 && i + j < lines.length; j++) {
-                                                const nextLine = lines[i + j].trim();
-                                                const numberMatch = nextLine.match(/^([0-9,]+)$/);
-                                                if (numberMatch) {
-                                                    stock = numberMatch[1].replace(/,/g, '');
-                                                    break;
-                                                }
-                                            }
+                                    for (const pattern of stockPatterns) {
+                                        const match = bodyText.match(pattern);
+                                        if (match) {
+                                            stock = match[1].replace(/,/g, '');
                                             break;
                                         }
                                     }
 
-                                    // Fallback: try inline patterns
-                                    if (stock === 'N/A') {
-                                        const stockPatterns = [
-                                            /In Stock[:\\s]+([0-9,]+)/i,
-                                            /Stock[:\\s]+([0-9,]+)/i,
-                                            /([0-9,]+)\\s*pcs in stock/i
-                                        ];
+                                    // Extract pricing table - look for pricing information
+                                    const pricingRows = [];
+                                    const priceTables = document.querySelectorAll('table');
 
-                                        for (const pattern of stockPatterns) {
-                                            const match = bodyText.match(pattern);
-                                            if (match) {
-                                                stock = match[1].replace(/,/g, '');
-                                                break;
+                                    for (const table of priceTables) {
+                                        const tableText = table.innerText;
+                                        // Look for pricing table indicators
+                                        if (tableText.includes('Unit Price') || (tableText.includes('Qty') && tableText.includes('$'))) {
+                                            const rows = table.querySelectorAll('tr');
+                                            for (const row of rows) {
+                                                const cells = row.querySelectorAll('td');
+                                                if (cells.length >= 2) {
+                                                    const qty = cells[0].textContent.trim();
+                                                    const price = cells[1].textContent.trim();
+
+                                                    // Only add if qty looks like a number and price has $
+                                                    if (qty.match(/^\\d+/) && price.includes('$')) {
+                                                        pricingRows.push({
+                                                            qty: qty,
+                                                            unit_price: price,
+                                                            ext_price: cells.length >= 3 ? cells[2].textContent.trim() : ''
+                                                        });
+                                                    }
+                                                }
                                             }
+                                            // Only use first pricing table found
+                                            if (pricingRows.length > 0) break;
                                         }
                                     }
 
@@ -936,7 +965,8 @@ async def fetch_single_part_pricing(client, part: dict, idx: int, total: int, se
                                         manufacturer: manufacturer,
                                         mpn: mpn,
                                         description: description,
-                                        stock: stock
+                                        stock: stock,
+                                        pricing: pricingRows
                                     };
                                 }"""
                             },
@@ -948,43 +978,48 @@ async def fetch_single_part_pricing(client, part: dict, idx: int, total: int, se
                 }
             )
 
-            # Extract pricing data from the result
+            # Extract data from the result
             bulk_results = result.data.get("results", [])
-            pricing_snapshot = bulk_results[-2] if len(bulk_results) >= 2 else None
-            details_result = bulk_results[-1] if bulk_results else None
 
-            # Parse pricing data
-            pricing = []
-            if pricing_snapshot and "snapshot" in pricing_snapshot:
-                pricing = pricing_snapshot["snapshot"]
+            # Results order: [navigate, wait_for, browser_evaluate]
+            # With return_all_results=False, results array still has all positions but
+            # only commands with return_result=True have actual data (others are null)
+            # browser_evaluate is at index 2 (third command)
+            page_scrape_result = bulk_results[2] if len(bulk_results) >= 3 else None
 
-            # Parse manufacturer, description, stock, and MPN from browser_evaluate
+            # Initialize with defaults
             manufacturer = "N/A"
             found_mpn = mpn  # Keep original MPN if not found on page
             description = "N/A"
             stock = "N/A"
+            pricing = []
 
-            if details_result and "content" in details_result:
-                content = details_result["content"]
+            # Parse the browser_evaluate result
+            if page_scrape_result and "content" in page_scrape_result:
+                content = page_scrape_result["content"]
                 if content and len(content) > 0:
                     text_content = content[0].get("text", "")
-                    # Extract JSON from the "### Result\n{...}" format
                     if "### Result" in text_content:
                         json_start = text_content.find("{")
-                        json_end = text_content.find("\n\n###", json_start)
+                        # Look for the end of JSON - either "\n###" or end of string
+                        json_end = text_content.find("\n###", json_start)
                         if json_start >= 0:
-                            json_str = text_content[json_start:json_end if json_end > 0 else None]
+                            json_str = text_content[json_start:json_end if json_end > 0 else len(text_content)].strip()
                             try:
                                 details_data = json.loads(json_str)
                                 manufacturer = details_data.get("manufacturer", "N/A")
-                                # Update MPN from page if available
                                 page_mpn = details_data.get("mpn", "")
                                 if page_mpn:
                                     found_mpn = page_mpn
+                                else:
+                                    found_mpn = mpn  # Keep original if not found
                                 description = details_data.get("description", "N/A")
                                 stock = details_data.get("stock", "N/A")
-                            except json.JSONDecodeError:
-                                pass
+                                pricing = details_data.get("pricing", [])
+                            except json.JSONDecodeError as e:
+                                print(f"  JSON parse error for {lcsc_code}: {e}", file=sys.stderr)
+                                print(f"  Attempted to parse: {json_str[:500]}", file=sys.stderr)
+                                # Keep defaults if parsing fails
 
             return {
                 "lcsc_code": lcsc_code,
