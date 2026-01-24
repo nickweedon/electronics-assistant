@@ -1,0 +1,75 @@
+{
+  // markdownlint-cli2 configuration
+  // See: https://github.com/DavidAnson/markdownlint-cli2
+
+  // Automatically fix issues where possible
+  "fix": true,
+
+  // Respect .gitignore files
+  "gitignore": true,
+
+  // Ignore these patterns
+  "ignores": [
+    "**/node_modules/**",
+    "**/vendor/**",
+    "**/.git/**",
+    "**/dist/**",
+    "**/build/**"
+  ],
+
+  // Rule configuration
+  "config": {
+    // Set default state for all rules
+    "default": true,
+
+    // Disable line length rule (MD013)
+    "MD013": false,
+
+    // Allow inline HTML (useful for technical docs)
+    "MD033": false,
+
+    // Don't require language specified for fenced code blocks
+    // (relaxed for quick code snippets)
+    "MD040": false,
+
+    // Don't require first line to be a top-level heading
+    // (many docs have front matter or intro text)
+    "MD041": false,
+
+    // Configure list indentation to 2 spaces
+    "MD007": {
+      "indent": 2
+    },
+
+    // Allow multiple headings with the same content
+    // (common in technical docs with repeated sections)
+    "MD024": {
+      "siblings_only": true
+    },
+
+    // Configure trailing spaces to allow 2 for line breaks
+    "MD009": {
+      "br_spaces": 2
+    },
+
+    // Use consistent unordered list style (dash)
+    "MD004": {
+      "style": "dash"
+    },
+
+    // Use consistent emphasis style (asterisk)
+    "MD049": {
+      "style": "asterisk"
+    },
+
+    // Use consistent strong style (asterisk)
+    "MD050": {
+      "style": "asterisk"
+    },
+
+    // Use consistent code fence style (backtick)
+    "MD048": {
+      "style": "backtick"
+    }
+  }
+}
