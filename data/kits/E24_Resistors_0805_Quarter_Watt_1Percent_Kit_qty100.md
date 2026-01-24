@@ -4,126 +4,99 @@
 
 ## Complete List - E24 Series 1% 0805 Resistors (117 values)
 
-| # | Value | MPN | LCSC | Manufacturer | Stock | MOQ | Unit Price (100+) | Description |
-| --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| 1 | 0Ω | N/A | C51934133 | N/A | N/A | 10 | $0.0432 | N/A |
-| 2 | 1Ω | N/A | C5936590 | N/A | N/A | 50 | $0.0060 | N/A |
-| 3 | 1.1Ω | N/A | C20162927 | N/A | N/A | 1 | $0.0312 | N/A |
-| 4 | 1.2Ω | N/A | C5575961 | N/A | N/A | 1 | $0.0451 | N/A |
-| 5 | 1.3Ω | N/A | C6732977 | N/A | N/A | 50 | $0.0054 | N/A |
-| 6 | 1.5Ω | N/A | C6165034 | N/A | N/A | 50 | $0.0137 | N/A |
-| 7 | 1.6Ω | N/A | C6966015 | N/A | N/A | 1 | $0.0930 | N/A |
-| 8 | 2.4Ω | N/A | C5862580 | N/A | N/A | 1 | $0.0814 | N/A |
-| 9 | 2.7Ω | N/A | C5720069 | N/A | N/A | 50 | $0.0137 | N/A |
-| 10 | 3Ω | N/A | C5720097 | N/A | N/A | 20 | $0.0244 | N/A |
-| 11 | 3.3Ω | N/A | C326880 | N/A | N/A | 50 | $0.0142 | N/A |
-| 12 | 3.6Ω | N/A | C365313 | N/A | N/A | 100 | $0.0043 | N/A |
-| 13 | 3.9Ω | N/A | C5842685 | N/A | N/A | 1 | $0.0312 | N/A |
-| 14 | 4.3Ω | N/A | C6732981 | N/A | N/A | 1 | $0.0515 | N/A |
-| 15 | 4.7Ω | N/A | C6732985 | N/A | N/A | 100 | $0.0044 | N/A |
-| 16 | 5.1Ω | N/A | C5862594 | N/A | N/A | 50 | $0.0156 | N/A |
-| 17 | 5.6Ω | N/A | C431855 | N/A | N/A | 100 | $0.0038 | N/A |
-| 18 | 6.2Ω | N/A | C365340 | N/A | N/A | 100 | $0.0013 | N/A |
-| 19 | 6.8Ω | N/A | C6117825 | N/A | N/A | 50 | $0.0201 | N/A |
-| 20 | 7.5Ω | N/A | C160067 | N/A | N/A | 50 | $0.0141 | N/A |
-| 21 | 8.2Ω | N/A | C5936640 | N/A | N/A | 1 | $0.0296 | N/A |
-| 22 | 9.1Ω | N/A | C7335974 | N/A | N/A | 1 | $0.0416 | N/A |
-| 23 | 10Ω | N/A | C727983 | N/A | N/A | 50 | $0.0185 | N/A |
-| 24 | 13Ω | N/A | C365242 | N/A | N/A | 50 | $0.0169 | N/A |
-| 25 | 15Ω | N/A | C20142755 | N/A | N/A | 50 | $0.0046 | N/A |
-| 26 | 16Ω | N/A | C317225 | N/A | N/A | 50 | $0.0092 | N/A |
-| 27 | 18Ω | N/A | C365252 | N/A | N/A | 100 | $0.0013 | N/A |
-| 28 | 20Ω | N/A | C6752450 | N/A | N/A | 50 | $0.0060 | N/A |
-| 29 | 22Ω | N/A | C6263199 | N/A | N/A | 50 | $0.0061 | N/A |
-| 30 | 24Ω | N/A | C7063827 | N/A | N/A | 1 | $0.2777 | N/A |
-| 31 | 27Ω | N/A | C20162941 | N/A | N/A | 50 | $0.0060 | N/A |
-| 32 | 33Ω | N/A | C5575998 | N/A | N/A | 50 | $0.0049 | N/A |
-| 33 | 36Ω | N/A | C6378734 | N/A | N/A | 50 | $0.0061 | N/A |
-| 34 | 39Ω | N/A | C727994 | N/A | N/A | 100 | $0.0089 | N/A |
-| 35 | 43Ω | N/A | C317276 | N/A | N/A | 100 | $0.0063 | N/A |
-| 36 | 47Ω | N/A | C6732977 | N/A | N/A | 50 | $0.0054 | N/A |
-| 37 | 51Ω | N/A | C7335974 | N/A | N/A | 1 | $0.0416 | N/A |
-| 38 | 82Ω | N/A | C365351 | N/A | N/A | 100 | $0.0025 | N/A |
-| 39 | 91Ω | N/A | C3019111 | N/A | N/A | 100 | $0.0043 | N/A |
-| 40 | 100Ω | N/A | C727982 | N/A | N/A | 50 | $0.0103 | N/A |
-| 41 | 110Ω | N/A | C6664732 | N/A | N/A | 1 | $0.2777 | N/A |
-| 42 | 120Ω | N/A | C6752431 | N/A | N/A | 50 | $0.0072 | N/A |
-| 43 | 130Ω | N/A | C317296 | N/A | N/A | 50 | $0.0055 | N/A |
-| 44 | 150Ω | N/A | C7065937 | N/A | N/A | 50 | $0.0061 | N/A |
-| 45 | 160Ω | N/A | C6732985 | N/A | N/A | 100 | $0.0044 | N/A |
-| 46 | 180Ω | N/A | C6732957 | N/A | N/A | 100 | $0.0067 | N/A |
-| 47 | 200Ω | N/A | C5445402 | N/A | N/A | 50 | $0.0060 | N/A |
-| 48 | 220Ω | N/A | C20162934 | N/A | N/A | 50 | $0.0060 | N/A |
-| 49 | 240Ω | N/A | C723645 | N/A | N/A | 100 | $0.0053 | N/A |
-| 50 | 270Ω | N/A | C6378740 | N/A | N/A | 50 | $0.0061 | N/A |
-| 51 | 300Ω | N/A | C365325 | N/A | N/A | 100 | $0.0017 | N/A |
-| 52 | 330Ω | N/A | C20142771 | N/A | N/A | 100 | $0.0044 | N/A |
-| 53 | 470Ω | N/A | C5120103 | N/A | N/A | 50 | $0.0101 | N/A |
-| 54 | 510Ω | N/A | C431851 | N/A | N/A | 50 | $0.0045 | N/A |
-| 55 | 560Ω | N/A | C317256 | N/A | N/A | 50 | $0.0028 | N/A |
-| 56 | 620Ω | N/A | C5895015 | N/A | N/A | 1 | $0.0896 | N/A |
-| 57 | 680Ω | N/A | C20142789 | N/A | N/A | 50 | $0.0049 | N/A |
-| 58 | 750Ω | N/A | C20142800 | N/A | N/A | 100 | $0.0081 | N/A |
-| 59 | 820Ω | N/A | C365349 | N/A | N/A | 100 | $0.0056 | N/A |
-| 60 | 910Ω | N/A | C363270 | N/A | N/A | 100 | $0.0033 | N/A |
-| 61 | 1kΩ | N/A | C859135 | N/A | N/A | 100 | $0.0060 | N/A |
-| 62 | 1.2kΩ | N/A | C6378734 | N/A | N/A | 50 | $0.0061 | N/A |
-| 63 | 1.3kΩ | N/A | C365283 | N/A | N/A | 100 | $0.0019 | N/A |
-| 64 | 1.5kΩ | N/A | C160067 | N/A | N/A | 50 | $0.0141 | N/A |
-| 65 | 1.6kΩ | N/A | C317263 | N/A | N/A | 50 | $0.0124 | N/A |
-| 66 | 1.8kΩ | N/A | C20142771 | N/A | N/A | 100 | $0.0044 | N/A |
-| 67 | 3kΩ | N/A | C6732971 | N/A | N/A | 100 | $0.0051 | N/A |
-| 68 | 3.3kΩ | N/A | C6113946 | N/A | N/A | 100 | $0.0053 | N/A |
-| 69 | 3.6kΩ | N/A | C365301 | N/A | N/A | 100 | $0.0013 | N/A |
-| 70 | 3.9kΩ | N/A | C5752165 | N/A | N/A | 1 | $0.0896 | N/A |
-| 71 | 4.3kΩ | N/A | C365313 | N/A | N/A | 100 | $0.0043 | N/A |
-| 72 | 4.7kΩ | N/A | C6457904 | N/A | N/A | 100 | $0.0082 | N/A |
-| 73 | 5.1kΩ | N/A | C5720075 | N/A | N/A | 50 | $0.0061 | N/A |
-| 74 | 5.6kΩ | N/A | C6732985 | N/A | N/A | 100 | $0.0044 | N/A |
-| 75 | 6.2kΩ | N/A | C5575998 | N/A | N/A | 50 | $0.0049 | N/A |
-| 76 | 6.8kΩ | N/A | C431855 | N/A | N/A | 100 | $0.0038 | N/A |
-| 77 | 7.5kΩ | N/A | C728000 | N/A | N/A | 100 | $0.0092 | N/A |
-| 78 | 8.2kΩ | N/A | C5575961 | N/A | N/A | 1 | $0.0451 | N/A |
-| 79 | 9.1kΩ | N/A | C317276 | N/A | N/A | 100 | $0.0063 | N/A |
-| 80 | 10kΩ | N/A | C365293 | N/A | N/A | 100 | $0.0014 | N/A |
-| 81 | 11kΩ | N/A | C365296 | N/A | N/A | 100 | $0.0014 | N/A |
-| 82 | 16kΩ | N/A | C6296044 | N/A | N/A | 1 | $0.0896 | N/A |
-| 83 | 18kΩ | N/A | C83390 | N/A | N/A | 1 | $0.0106 | N/A |
-| 84 | 20kΩ | N/A | C5936593 | N/A | N/A | 100 | $0.0042 | N/A |
-| 85 | 22kΩ | N/A | C6457890 | N/A | N/A | 50 | $0.0098 | N/A |
-| 86 | 24kΩ | N/A | C5842685 | N/A | N/A | 1 | $0.0312 | N/A |
-| 87 | 27kΩ | N/A | C363260 | N/A | N/A | 100 | $0.0014 | N/A |
-| 88 | 30kΩ | N/A | C5720075 | N/A | N/A | 50 | $0.0061 | N/A |
-| 89 | 33kΩ | N/A | C365292 | N/A | N/A | 100 | $0.0016 | N/A |
-| 90 | 39kΩ | N/A | C365297 | N/A | N/A | 100 | $0.0014 | N/A |
-| 91 | 43kΩ | N/A | C6117825 | N/A | N/A | 50 | $0.0201 | N/A |
-| 92 | 47kΩ | N/A | C20162963 | N/A | N/A | 50 | $0.0061 | N/A |
-| 93 | 51kΩ | N/A | C5936640 | N/A | N/A | 1 | $0.0296 | N/A |
-| 94 | 56kΩ | N/A | C365325 | N/A | N/A | 100 | $0.0017 | N/A |
-| 95 | 62kΩ | N/A | C727983 | N/A | N/A | 50 | $0.0185 | N/A |
-| 96 | 100kΩ | N/A | C723424 | N/A | N/A | 100 | $0.0055 | N/A |
-| 97 | 110kΩ | N/A | C317293 | N/A | N/A | 50 | $0.0054 | N/A |
-| 98 | 120kΩ | N/A | C365234 | N/A | N/A | 100 | $0.0022 | N/A |
-| 99 | 130kΩ | N/A | C365239 | N/A | N/A | 100 | $0.0019 | N/A |
-| 100 | 150kΩ | N/A | C6165020 | N/A | N/A | 100 | $0.0067 | N/A |
-| 101 | 160kΩ | N/A | C317296 | N/A | N/A | 50 | $0.0055 | N/A |
-| 102 | 180kΩ | N/A | C317297 | N/A | N/A | 50 | $0.0127 | N/A |
-| 103 | 200kΩ | N/A | C5862594 | N/A | N/A | 50 | $0.0156 | N/A |
-| 104 | 220kΩ | N/A | C365266 | N/A | N/A | 100 | $0.0020 | N/A |
-| 105 | 240kΩ | N/A | C363250 | N/A | N/A | 100 | $0.0013 | N/A |
-| 106 | 270kΩ | N/A | C723645 | N/A | N/A | 100 | $0.0053 | N/A |
-| 107 | 300kΩ | N/A | C365283 | N/A | N/A | 100 | $0.0019 | N/A |
-| 108 | 330kΩ | N/A | C365290 | N/A | N/A | 50 | $0.0071 | N/A |
-| 109 | 360kΩ | N/A | C365293 | N/A | N/A | 100 | $0.0014 | N/A |
-| 110 | 390kΩ | N/A | C365296 | N/A | N/A | 100 | $0.0014 | N/A |
-| 111 | 560kΩ | N/A | C317304 | N/A | N/A | 50 | $0.0055 | N/A |
-| 112 | 620kΩ | N/A | C317305 | N/A | N/A | 50 | $0.0060 | N/A |
-| 113 | 680kΩ | N/A | C276233 | N/A | N/A | 50 | $0.0029 | N/A |
-| 114 | 750kΩ | N/A | C6732989 | N/A | N/A | 100 | $0.0044 | N/A |
-| 115 | 820kΩ | N/A | C7080393 | N/A | N/A | 1 | $0.0896 | N/A |
-| 116 | 910kΩ | N/A | C7063827 | N/A | N/A | 1 | $0.2777 | N/A |
-| 117 | 1MΩ | N/A | C7210042 | N/A | N/A | 100 | $0.0075 | N/A |
-| **TOTAL** | | | | | | | **$2.43** | |
+| # | Value | MPN | LCSC | Manufacturer | Stock | MOQ | Unit Price (100+) | Description | Quantity |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| 1 | 0Ω | RE0805FAR000 | C51934133 | JIERR | 1720 | 10 | $0.0345 | 500mW 0Ω Alloy Resistor ±50ppm/℃ ±1% 0805 Chip Resistor - Surface Mount RoHS | 100 |
+| 2 | 1Ω | AC0805FR-7W1RL | C5936590 | YAGEO | 150 | 50 | $ 0.0191 | 1Ω 250mW 150V Thick Film Resistor ±1% ±200ppm/℃ 0805 Chip Resistor - Surface Mount RoHS | 100 |
+| 3 | 1.1Ω | RC0805FR-7W1R1L | C20162927 | YAGEO | N/A | 1 | $ 0.0312 | 1.1Ω 250mW Thick Film Resistor ±1% ±200ppm/℃ 0805 Chip Resistor - Surface Mount RoHS | 100 |
+| 4 | 1.2Ω | AC0805FR-7W1R2L | C5575961 | YAGEO | N/A | 1 | $ 0.0451 | 250mW 1.2Ω Thick Film Resistor ±1% ±200ppm/℃ 0805 Chip Resistor - Surface Mount RoHS | 100 |
+| 5 | 1.5Ω | RC0805FR-7W1R5L | C6165034 | YAGEO | 50 | 50 | $ 0.0137 | 1.5Ω 250mW 150V Thick Film Resistor ±1% ±200ppm/℃ 0805 Chip Resistor - Surface Mount RoHS | 100 |
+| 6 | 1.6Ω | RC0805FR-7W1R6L | C6966015 | YAGEO | N/A | 1 | $ 0.093 | 250mW 1.6Ω Thick Film Resistor ±1% ±200ppm/℃ 0805 Chip Resistor - Surface Mount RoHS | 100 |
+| 7 | 2.4Ω | RC0805FR-7W2R4L | C5862580 | YAGEO | N/A | 1 | $ 0.0814 | 2.4Ω 250mW Thick Film Resistor ±1% ±200ppm/℃ 0805 Chip Resistor - Surface Mount RoHS | 100 |
+| 8 | 3Ω | RC0805FR-7W3RL | C5720097 | YAGEO | 3960 | 20 | $ 0.0244 | 3Ω 250mW Thick Film Resistor ±1% ±200ppm/℃ 0805 Chip Resistor - Surface Mount RoHS | 100 |
+| 9 | 3.3Ω | RC0805FR-7W3R3L | C326880 | YAGEO | 3250 | 50 | $ 0.0142 | 250mW 3.3Ω 150V Thick Film Resistor ±1% ±200ppm/℃ 0805 Chip Resistor - Surface Mount RoHS | 100 |
+| 10 | 3.9Ω | RC0805FR-7W3R9L | C5842685 | YAGEO | N/A | 1 | $ 0.0312 | 250mW 3.9Ω Thick Film Resistor ±1% ±200ppm/℃ 0805 Chip Resistor - Surface Mount RoHS | 100 |
+| 11 | 4.3Ω | AC0805FR-7W4R3L | C6732981 | YAGEO | N/A | 1 | $ 0.0515 | 250mW 4.3Ω Thick Film Resistor ±1% ±200ppm/℃ 0805 Chip Resistor - Surface Mount RoHS | 100 |
+| 12 | 5.1Ω | RC0805FR-7W5R1L | C5862594 | YAGEO | 5800 | 50 | $ 0.0156 | 5.1Ω 250mW Thick Film Resistor ±1% ±200ppm/℃ 0805 Chip Resistor - Surface Mount RoHS | 100 |
+| 13 | 6.2Ω | HPCR0805F6R20K9 | C365340 | RESI | N/A | 100 | $ 0.0013 | 6.2Ω 250mW 150V Thick Film Resistor ±100ppm/℃ ±1% 0805 Chip Resistor - Surface Mount RoHS | 100 |
+| 14 | 6.8Ω | AC0805FR-7W6R8L | C6117825 | YAGEO | 2200 | 50 | $ 0.0201 | 250mW 6.8Ω Thick Film Resistor ±1% ±200ppm/℃ 0805 Chip Resistor - Surface Mount RoHS | 100 |
+| 15 | 8.2Ω | AC0805FR-7W8R2L | C5936640 | YAGEO | N/A | 1 | $ 0.0296 | 250mW 8.2Ω Thick Film Resistor ±1% ±200ppm/℃ 0805 Chip Resistor - Surface Mount RoHS | 100 |
+| 16 | 9.1Ω | RC0805FR-7W9R1L | C7335974 | YAGEO | N/A | 1 | $ 0.0416 | 9.1Ω 250mW Thick Film Resistor ±1% ±200ppm/℃ 0805 Chip Resistor - Surface Mount RoHS | 100 |
+| 17 | 13Ω | HPCR0805F13R0K9 | C365242 | RESI | 4450 | 50 | $ 0.0169 | 13Ω 250mW 150V Thick Film Resistor ±100ppm/℃ ±1% 0805 Chip Resistor - Surface Mount RoHS | 100 |
+| 18 | 15Ω | AC0805FR-7W15RL | C20142755 | YAGEO | N/A | 50 | $ 0.0046 | 15Ω ±1% 250mW 0805 Thick Film Resistor | 100 |
+| 19 | 16Ω | RK73H2ATTD16R0F | C317225 | KOA | N/A | 50 | $ 0.0092 | 250mW 16Ω 150V Thick Film Resistor ±100ppm/℃ ±1% 0805 Chip Resistor - Surface Mount RoHS | 100 |
+| 20 | 18Ω | HPCR0805F18R0K9 | C365252 | RESI | N/A | 100 | $ 0.0013 | 250mW 18Ω 150V Thick Film Resistor ±100ppm/℃ ±1% 0805 Chip Resistor - Surface Mount RoHS | 100 |
+| 21 | 20Ω | RC0805FR-7W20RL | C6752450 | YAGEO | 3900 | 50 | $ 0.006 | 20Ω 250mW Thick Film Resistor ±1% ±200ppm/℃ 0805 Chip Resistor - Surface Mount RoHS | 100 |
+| 22 | 22Ω | RC0805FR-7W22RL | C6263199 | YAGEO | 2150 | 50 | $ 0.0061 | 22Ω 250mW 150V Thick Film Resistor ±100ppm/℃ ±1% 0805 Chip Resistor - Surface Mount RoHS | 100 |
+| 23 | 24Ω | RS73F2ARTTD24R0F | C7063827 | KOA | N/A | 1 | $ 0.2777 | 24Ω 250mW Thick Film Resistor ±25ppm/℃ ±1% 0805 Chip Resistor - Surface Mount RoHS | 100 |
+| 24 | 27Ω | RC0805FR-7W27RL | C20162941 | YAGEO | 4650 | 50 | $ 0.006 | 250mW 27Ω Thick Film Resistor ±1% ±200ppm/℃ 0805 Chip Resistor - Surface Mount RoHS | 100 |
+| 25 | 33Ω | AC0805FR-7W33RL | C5575998 | YAGEO | 3100 | 50 | $ 0.0049 | 33Ω 250mW Thick Film Resistor ±100ppm/℃ ±1% 0805 Chip Resistor - Surface Mount RoHS | 100 |
+| 26 | 39Ω | AC0805FR-7W39RL | C727994 | YAGEO | 1600 | 100 | $ 0.0089 | 39Ω 250mW 150V Thick Film Resistor ±100ppm/℃ ±1% 0805 Chip Resistor - Surface Mount RoHS | 100 |
+| 27 | 47Ω | AC0805FR-7W47RL | C6732977 | YAGEO | 5350 | 50 | $ 0.0054 | 250mW 47Ω 150V Thick Film Resistor ±100ppm/℃ ±1% 0805 Chip Resistor - Surface Mount RoHS | 100 |
+| 28 | 82Ω | HPCR0805F82R0K9 | C365351 | RESI | N/A | 100 | $ 0.0025 | 82Ω 250mW 150V Thick Film Resistor ±100ppm/℃ ±1% 0805 Chip Resistor - Surface Mount RoHS | 100 |
+| 29 | 91Ω | RC0805FR-7W91RL | C3019111 | YAGEO | N/A | 100 | $ 0.0043 | 91Ω ±1% 250mW 0805 Thick Film Resistor | 100 |
+| 30 | 100Ω | AC0805FR-7W100RL | C727982 | YAGEO | 34200 | 50 | $ 0.0103 | 250mW 100Ω 150V Thick Film Resistor ±100ppm/℃ ±1% 0805 Chip Resistor - Surface Mount RoHS | 100 |
+| 31 | 110Ω | RS73G2ARTTD1100F | C6664732 | KOA | N/A | 1 | $ 0.2777 | 110Ω 250mW Thick Film Resistor ±50ppm/℃ ±1% 0805 Chip Resistor - Surface Mount RoHS | 100 |
+| 32 | 120Ω | RC0805FR-7W120RL | C6752431 | YAGEO | N/A | 50 | $ 0.0072 | 250mW 120Ω Thick Film Resistor ±1% ±200ppm/℃ 0805 Chip Resistor - Surface Mount RoHS | 100 |
+| 33 | 150Ω | AC0805FR-7W150RL | C7065937 | YAGEO | N/A | 100 | $ 0.0053 | 250mW 150Ω Thick Film Resistor ±100ppm/℃ ±1% 0805 Chip Resistor - Surface Mount RoHS | 100 |
+| 34 | 180Ω | AC0805FR-7W180RL | C6732957 | YAGEO | 2400 | 100 | $ 0.0067 | 250mW 180Ω Thick Film Resistor ±100ppm/℃ ±1% 0805 Chip Resistor - Surface Mount RoHS | 100 |
+| 35 | 200Ω | RC0805FR-7W200RL | C5445402 | YAGEO | 2000 | 50 | $ 0.006 | 250mW 200Ω Thick Film Resistor ±1% ±200ppm/℃ 0805 Chip Resistor - Surface Mount RoHS | 100 |
+| 36 | 220Ω | RC0805FR-7W220RL | C20162934 | YAGEO | 4000 | 50 | $ 0.006 | 250mW 220Ω Thick Film Resistor ±1% ±200ppm/℃ 0805 Chip Resistor - Surface Mount RoHS | 100 |
+| 37 | 240Ω | RC0805FR-7W240RL | C723645 | YAGEO | N/A | 100 | $ 0.0053 | 240Ω 250mW 150V Thick Film Resistor ±1% ±200ppm/℃ 0805 Chip Resistor - Surface Mount RoHS | 100 |
+| 38 | 270Ω | RC0805FR-7W270RL | C6378740 | YAGEO | 4950 | 50 | $ 0.0061 | 250mW 270Ω Thick Film Resistor ±1% ±200ppm/℃ 0805 Chip Resistor - Surface Mount RoHS | 100 |
+| 39 | 470Ω | AC0805FR-7W470RL | C5120103 | YAGEO | 4550 | 50 | $ 0.0101 | 470Ω ±1% 250mW 0805 Thick Film Resistor | 100 |
+| 40 | 510Ω | MR08X5100FTL | C431851 | Walsin | N/A | 50 | $ 0.0045 | 250mW 510Ω 150V ±100ppm/℃ ±1% 0805 Chip Resistor - Surface Mount RoHS | 100 |
+| 41 | 560Ω | RK73H2ATTD5600F | C317256 | KOA | N/A | 50 | $ 0.0028 | 250mW 560Ω 150V Thick Film Resistor ±100ppm/℃ ±1% 0805 Chip Resistor - Surface Mount RoHS | 100 |
+| 42 | 620Ω | SG73S2ARTTD6200F | C5895015 | KOA | 5800 | 50 | $ 0.0156 | 250mW 620Ω Thick Film Resistor ±1% ±200ppm/℃ 0805 Chip Resistor - Surface Mount RoHS | 100 |
+| 43 | 680Ω | AC0805FR-7W680RL | C20142789 | YAGEO | 4950 | 50 | $ 0.0049 | 680Ω 250mW Thick Film Resistor ±100ppm/℃ ±1% 0805 Chip Resistor - Surface Mount RoHS | 100 |
+| 44 | 750Ω | AC0805FR-7W750RL | C20142800 | YAGEO | 7600 | 100 | $ 0.0081 | 250mW 750Ω Thick Film Resistor ±100ppm/℃ ±1% 0805 Chip Resistor - Surface Mount RoHS | 100 |
+| 45 | 820Ω | HPCR0805F820RK9 | C365349 | RESI | N/A | 100 | $ 0.0056 | 820Ω 250mW 150V Thick Film Resistor ±100ppm/℃ ±1% 0805 Chip Resistor - Surface Mount RoHS | 100 |
+| 46 | 910Ω | HPCR0805F910RK9 | C363270 | RESI | N/A | 100 | $ 0.0033 | 910Ω 250mW 150V Thick Film Resistor ±100ppm/℃ ±1% 0805 Chip Resistor - Surface Mount RoHS | 100 |
+| 47 | 1kΩ | RC0805FR-7W1KL | C859135 | YAGEO | 12800 | 100 | $ 0.006 | 250mW 1kΩ Thick Film Resistor ±200ppm/℃ ±1% 0805 Chip Resistor - Surface Mount RoHS | 100 |
+| 48 | 1.2kΩ | RC0805FR-7W1K2L | C6378734 | YAGEO | 5000 | 50 | $ 0.0061 | 250mW 1.2kΩ Thick Film Resistor ±1% ±200ppm/℃ 0805 Chip Resistor - Surface Mount RoHS | 100 |
+| 49 | 1.5kΩ | RK73H2ATTD1501F | C160067 | KOA | 15550 | 50 | $ 0.0141 | 1.5kΩ 250mW 150V Thick Film Resistor ±100ppm/℃ ±1% 0805 Chip Resistor - Surface Mount RoHS | 100 |
+| 50 | 1.6kΩ | RK73H2ATTD1601F | C317263 | KOA | 150 | 50 | $ 0.0124 | 1.6kΩ 250mW 150V Thick Film Resistor ±100ppm/℃ ±1% 0805 Chip Resistor - Surface Mount RoHS | 100 |
+| 51 | 1.8kΩ | AC0805FR-7W1K8L | C20142771 | YAGEO | 3500 | 100 | $ 0.0044 | 250mW 1.8kΩ Thick Film Resistor ±100ppm/℃ ±1% 0805 Chip Resistor - Surface Mount RoHS | 100 |
+| 52 | 3kΩ | AC0805FR-7W3KL | C6732971 | YAGEO | 2900 | 100 | $ 0.0051 | 250mW 3kΩ 150V Thick Film Resistor ±100ppm/℃ ±1% 0805 Chip Resistor - Surface Mount RoHS | 100 |
+| 53 | 3.3kΩ | AC0805FR-7W3K3L | C6113946 | YAGEO | 100 | 100 | $ 0.0053 | 3.3kΩ 250mW Thick Film Resistor ±100ppm/℃ ±1% 0805 Chip Resistor - Surface Mount RoHS | 100 |
+| 54 | 3.6kΩ | HPCR0805F3K60K9 | C365301 | RESI | N/A | 100 | $ 0.0013 | 3.6kΩ 250mW 150V Thick Film Resistor ±100ppm/℃ ±1% 0805 Chip Resistor - Surface Mount RoHS | 100 |
+| 55 | 3.9kΩ | SG73S2ARTTD3901F | C5752165 | KOA | N/A | 1 | $ 0.0896 | 250mW 3.9kΩ Thick Film Resistor ±1% ±200ppm/℃ 0805 Chip Resistor - Surface Mount RoHS | 100 |
+| 56 | 4.3kΩ | HPCR0805F4K30K9 | C365313 | RESI | N/A | 100 | $ 0.0043 | 4.3kΩ 250mW 150V Thick Film Resistor ±100ppm/℃ ±1% 0805 Chip Resistor - Surface Mount RoHS | 100 |
+| 57 | 4.7kΩ | AC0805FR-7W4K7L | C6457904 | YAGEO | N/A | 100 | $ 0.0082 | 250mW 4.7kΩ 150V Thick Film Resistor ±100ppm/℃ ±1% 0805 Chip Resistor - Surface Mount RoHS | 100 |
+| 58 | 5.6kΩ | AC0805FR-7W5K6L | C6732985 | YAGEO | 1800 | 100 | $ 0.0044 | 250mW 5.6kΩ Thick Film Resistor ±100ppm/℃ ±1% 0805 Chip Resistor - Surface Mount RoHS | 100 |
+| 59 | 6.8kΩ | MR08X6801FTL | C431855 | Walsin | 3700 | 100 | $ 0.0038 | 6.8kΩ ±1% 250mW 0805 Thick Film Resistor | 100 |
+| 60 | 7.5kΩ | AC0805FR-7W7K5L | C728000 | YAGEO | 3400 | 100 | $ 0.0092 | 7.5kΩ 250mW 150V Thick Film Resistor ±100ppm/℃ ±1% 0805 Chip Resistor - Surface Mount RoHS | 100 |
+| 61 | 9.1kΩ | RK73H2ATTD9101F | C317276 | KOA | 3200 | 100 | $ 0.0063 | 250mW 9.1kΩ 150V Thick Film Resistor ±100ppm/℃ ±1% 0805 Chip Resistor - Surface Mount RoHS | 100 |
+| 62 | 16kΩ | SG73S2ARTTD1602F | C6296044 | KOA | N/A | 1 | $ 0.0312 | 16kΩ 250mW Thick Film Resistor ±1% ±200ppm/℃ 0805 Chip Resistor - Surface Mount RoHS | 100 |
+| 63 | 18kΩ | TC0525F1802T5E | C83390 | UNI-ROYAL | 6 | 1 | $ 0.0068 | 18kΩ ±1% 250mW 0805 Thin Film Resistor | 100 |
+| 64 | 20kΩ | AC0805FR-7W20KL | C5936593 | YAGEO | 3700 | 100 | $ 0.0042 | 250mW 20kΩ 150V Thick Film Resistor ±100ppm/℃ ±1% 0805 Chip Resistor - Surface Mount RoHS | 100 |
+| 65 | 22kΩ | AC0805FR-7W22KL | C6457890 | YAGEO | 3150 | 50 | $ 0.0098 | 250mW 22kΩ 150V Thick Film Resistor ±100ppm/℃ ±1% 0805 Chip Resistor - Surface Mount RoHS | 100 |
+| 66 | 27kΩ | HPCR0805F27K0K9 | C363260 | RESI | N/A | 100 | $ 0.0014 | 27kΩ 250mW 150V Thick Film Resistor ±100ppm/℃ ±1% 0805 Chip Resistor - Surface Mount RoHS | 100 |
+| 67 | 30kΩ | RC0805FR-7W30KL | C5720075 | YAGEO | 4850 | 50 | $ 0.0061 | 250mW 30kΩ Thick Film Resistor ±1% ±200ppm/℃ 0805 Chip Resistor - Surface Mount RoHS | 100 |
+| 68 | 33kΩ | HPCR0805F33K0K9 | C365292 | RESI | N/A | 100 | $ 0.0016 | 250mW 33kΩ 150V Thick Film Resistor ±100ppm/℃ ±1% 0805 Chip Resistor - Surface Mount RoHS | 100 |
+| 69 | 39kΩ | HPCR0805F39K0K9 | C365297 | RESI | N/A | 100 | $ 0.0014 | 39kΩ 250mW 150V Thick Film Resistor ±100ppm/℃ ±1% 0805 Chip Resistor - Surface Mount RoHS | 100 |
+| 70 | 47kΩ | RC0805FR-7W47KL | C20162963 | YAGEO | 2750 | 50 | $ 0.0061 | 47kΩ 250mW Thick Film Resistor ±1% ±200ppm/℃ 0805 Chip Resistor - Surface Mount RoHS | 100 |
+| 71 | 56kΩ | HPCR0805F56K0K9 | C365325 | RESI | N/A | 100 | $ 0.0017 | 56kΩ 250mW 150V Thick Film Resistor ±100ppm/℃ ±1% 0805 Chip Resistor - Surface Mount RoHS | 100 |
+| 72 | 100kΩ | RC0805FR-7W100KL | C723424 | YAGEO | N/A | 100 | $ 0.0014 | 100kΩ 250mW 150V Thick Film Resistor ±1% ±200ppm/℃ 0805 Chip Resistor - Surface Mount RoHS | 100 |
+| 73 | 110kΩ | RK73H2ATTD1103F | C317293 | KOA | N/A | 50 | $ 0.0054 | 110kΩ 250mW 150V Thick Film Resistor ±100ppm/℃ ±1% 0805 Chip Resistor - Surface Mount RoHS | 100 |
+| 74 | 120kΩ | HPCR0805F120KK9 | C365234 | RESI | N/A | 100 | $ 0.0022 | 250mW 120kΩ 150V Thick Film Resistor ±100ppm/℃ ±1% 0805 Chip Resistor - Surface Mount RoHS | 100 |
+| 75 | 130kΩ | HPCR0805F130KK9 | C365239 | RESI | N/A | 100 | $ 0.0019 | 130kΩ 250mW 150V Thick Film Resistor ±100ppm/℃ ±1% 0805 Chip Resistor - Surface Mount RoHS | 100 |
+| 76 | 150kΩ | RC0805FR-7W150KL | C6165020 | YAGEO | 5500 | 100 | $ 0.0067 | 250mW 150kΩ 150V Thick Film Resistor ±1% ±200ppm/℃ 0805 Chip Resistor - Surface Mount RoHS | 100 |
+| 77 | 160kΩ | RK73H2ATTD1603F | C317296 | KOA | 100 | 50 | $ 0.0055 | 250mW 160kΩ 150V Thick Film Resistor ±100ppm/℃ ±1% 0805 Chip Resistor - Surface Mount RoHS | 100 |
+| 78 | 180kΩ | RK73H2ATTD1803F | C317297 | KOA | N/A | 50 | $ 0.0127 | 180kΩ 250mW 150V Thick Film Resistor ±100ppm/℃ ±1% 0805 Chip Resistor - Surface Mount RoHS | 100 |
+| 79 | 220kΩ | HPCR0805F220KK9 | C365266 | RESI | N/A | 100 | $ 0.002 | 220kΩ 250mW 150V Thick Film Resistor ±100ppm/℃ ±1% 0805 Chip Resistor - Surface Mount RoHS | 100 |
+| 80 | 240kΩ | HPCR0805F240KK9 | C363250 | RESI | N/A | 100 | $ 0.0013 | 240kΩ 250mW 150V Thick Film Resistor ±100ppm/℃ ±1% 0805 Chip Resistor - Surface Mount RoHS | 100 |
+| 81 | 300kΩ | HPCR0805F300KK9 | C365283 | RESI | 500 | 100 | $ 0.0019 | 300kΩ 250mW 150V Thick Film Resistor ±100ppm/℃ ±1% 0805 Chip Resistor - Surface Mount RoHS | 100 |
+| 82 | 330kΩ | HPCR0805F330KK9 | C365290 | RESI | 50 | 50 | $ 0.0071 | 250mW 330kΩ 150V Thick Film Resistor ±100ppm/℃ ±1% 0805 Chip Resistor - Surface Mount RoHS | 100 |
+| 83 | 360kΩ | HPCR0805F360KK9 | C365293 | RESI | 200 | 100 | $ 0.001 | 250mW 360kΩ 150V Thick Film Resistor ±100ppm/℃ ±1% 0805 Chip Resistor - Surface Mount RoHS | 100 |
+| 84 | 390kΩ | HPCR0805F390KK9 | C365296 | RESI | N/A | 1 | $ 0.0896 | 250mW 390kΩ 150V Thick Film Resistor ±100ppm/℃ ±1% 0805 Chip Resistor - Surface Mount RoHS | 100 |
+| 85 | 560kΩ | RK73H2ATTD5603F | C317304 | KOA | N/A | 50 | $ 0.0055 | 250mW 560kΩ 150V Thick Film Resistor ±100ppm/℃ ±1% 0805 Chip Resistor - Surface Mount RoHS | 100 |
+| 86 | 620kΩ | RK73H2ATTD6203F | C317305 | KOA | N/A | 50 | $ 0.006 | 620kΩ 250mW 150V Thick Film Resistor ±100ppm/℃ ±1% 0805 Chip Resistor - Surface Mount RoHS | 100 |
+| 87 | 680kΩ | RK73H2ATTD6803F | C276233 | KOA | N/A | 50 | $ 0.0029 | 250mW 680kΩ 150V Thick Film Resistor ±100ppm/℃ ±1% 0805 Chip Resistor - Surface Mount RoHS | 100 |
+| 88 | 750kΩ | AC0805FR-7W750KL | C6732989 | YAGEO | 4700 | 100 | $ 0.0044 | 250mW 750kΩ Thick Film Resistor ±100ppm/℃ ±1% 0805 Chip Resistor - Surface Mount RoHS | 100 |
+| 89 | 820kΩ | SG73S2ARTTD8203F | C7080393 | KOA | N/A | 1 | $ 0.0896 | 250mW 820kΩ Thick Film Resistor ±1% ±200ppm/℃ 0805 Chip Resistor - Surface Mount RoHS | 100 |
+| 90 | 1MΩ | AC0805FR-7W1ML | C7210042 | YAGEO | 2000 | 100 | $ 0.0075 | 250mW 1MΩ Thick Film Resistor ±100ppm/℃ ±1% 0805 Chip Resistor - Surface Mount RoHS | 100 |
+| **TOTAL** | | | | | | | **$X.XX** | | **9000** |
 
 ## Summary
 
@@ -134,9 +107,9 @@
 
 ## Missing E24 Values
 
-The following 26 E24 values were not found with the required specifications (1% tolerance, 0805 package, 250mW or better):
+The following 53 E24 values were not found with the required specifications (1% tolerance, 0805 package, 250mW or better):
 
-1.8Ω, 2Ω, 2.2Ω, 11Ω, 12Ω, 30Ω, 56Ω, 62Ω, 68Ω, 75Ω, 1.1kΩ, 2kΩ, 2.2kΩ, 2.4kΩ, 2.7kΩ, 12kΩ, 13kΩ, 15kΩ, 36kΩ, 68kΩ, 75kΩ, 82kΩ, 91kΩ, 430kΩ, 470kΩ, 510kΩ
+1.3Ω, 1.8Ω, 2Ω, 2.2Ω, 2.7Ω, 3.6Ω, 4.7Ω, 5.6Ω, 7.5Ω, 10Ω, 11Ω, 12Ω, 30Ω, 36Ω, 43Ω, 51Ω, 56Ω, 62Ω, 68Ω, 75Ω, 130Ω, 160Ω, 300Ω, 330Ω, 1.1kΩ, 1.3kΩ, 2kΩ, 2.2kΩ, 2.4kΩ, 2.7kΩ, 5.1kΩ, 6.2kΩ, 8.2kΩ, 10kΩ, 11kΩ, 12kΩ, 13kΩ, 15kΩ, 24kΩ, 36kΩ, 43kΩ, 51kΩ, 62kΩ, 68kΩ, 75kΩ, 82kΩ, 91kΩ, 200kΩ, 270kΩ, 430kΩ, 470kΩ, 510kΩ, 910kΩ
 
 ## Notes
 

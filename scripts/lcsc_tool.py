@@ -646,8 +646,8 @@ async def open_cart_in_browser():
 # CHECK PRICING FUNCTIONALITY
 # ============================================================================
 
-async def fetch_single_part_pricing(client, part: dict, idx: int, total: int, semaphore: asyncio.Semaphore) -> dict:
-    """Fetch pricing for a single part with semaphore-controlled concurrency.
+async def fetch_single_part_pricing(client, part: dict, idx: int, total: int, semaphore: asyncio.Semaphore, max_retries: int = 3) -> dict:
+    """Fetch pricing for a single part with semaphore-controlled concurrency and retry logic.
 
     Args:
         client: FastMCP client instance
@@ -655,6 +655,7 @@ async def fetch_single_part_pricing(client, part: dict, idx: int, total: int, se
         idx: Current item index (1-based)
         total: Total number of parts
         semaphore: Asyncio semaphore for concurrency control
+        max_retries: Maximum number of retry attempts for transient failures (default: 3)
 
     Returns:
         dict: Pricing data or error information
@@ -819,29 +820,32 @@ async def fetch_single_part_pricing(client, part: dict, idx: int, total: int, se
 
         print(f"Processing {idx}/{total}: {lcsc_code} ({value})", file=sys.stderr)
 
-        try:
-            # Navigate and wait for page to fully load (SPA needs 6+ seconds)
-            result = await client.call_tool(
-                "browser_execute_bulk",
-                {
-                    "commands": [
-                        {
-                            "tool": "browser_navigate",
-                            "args": {
-                                "url": f"https://www.lcsc.com/product-detail/{lcsc_code}.html",
-                                "silent_mode": True
-                            }
-                        },
-                        {
-                            "tool": "browser_wait_for",
-                            "args": {
-                                "time": 6
-                            }
-                        },
-                        {
-                            "tool": "browser_evaluate",
-                            "args": {
-                                "function": """() => {
+        # Retry loop for transient failures
+        last_error = None
+        for attempt in range(1, max_retries + 1):
+            try:
+                # Navigate and wait for page to fully load (SPA needs 6+ seconds)
+                result = await client.call_tool(
+                    "browser_execute_bulk",
+                    {
+                        "commands": [
+                            {
+                                "tool": "browser_navigate",
+                                "args": {
+                                    "url": f"https://www.lcsc.com/product-detail/{lcsc_code}.html",
+                                    "silent_mode": True
+                                }
+                            },
+                            {
+                                "tool": "browser_wait_for",
+                                "args": {
+                                    "time": 6
+                                }
+                            },
+                            {
+                                "tool": "browser_evaluate",
+                                "args": {
+                                    "function": """() => {
                                     // Extract all product information in one comprehensive pass
                                     const bodyText = document.body.innerText || document.body.textContent || '';
 
@@ -931,6 +935,24 @@ async def fetch_single_part_pricing(client, part: dict, idx: int, total: int, se
                                         }
                                     }
 
+                                    // Check for out-of-stock indicators and return 0 instead of N/A
+                                    if (stock === 'N/A') {
+                                        const outOfStockPatterns = [
+                                            /out\\s*of\\s*stock/i,
+                                            /sold\\s*out/i,
+                                            /unavailable/i,
+                                            /no\\s*stock/i,
+                                            /stock:\\s*0\\b/i,
+                                            /in-stock:\\s*0\\b/i
+                                        ];
+                                        for (const pattern of outOfStockPatterns) {
+                                            if (bodyText.match(pattern)) {
+                                                stock = '0';
+                                                break;
+                                            }
+                                        }
+                                    }
+
                                     // Extract pricing table - look for pricing information
                                     const pricingRows = [];
                                     const priceTables = document.querySelectorAll('table');
@@ -968,84 +990,124 @@ async def fetch_single_part_pricing(client, part: dict, idx: int, total: int, se
                                         stock: stock,
                                         pricing: pricingRows
                                     };
-                                }"""
-                            },
-                            "return_result": True
+                                    }"""
+                                },
+                                "return_result": True
+                            }
+                        ],
+                        "stop_on_error": True,
+                        "return_all_results": False
+                    }
+                )
+
+                # Extract data from the result
+                bulk_results = result.data.get("results", [])
+
+                # Results order: [navigate, wait_for, browser_evaluate]
+                # With return_all_results=False, results array still has all positions but
+                # only commands with return_result=True have actual data (others are null)
+                # browser_evaluate is at index 2 (third command)
+                page_scrape_result = bulk_results[2] if len(bulk_results) >= 3 else None
+
+                # Initialize with defaults
+                manufacturer = "N/A"
+                found_mpn = mpn  # Keep original MPN if not found on page
+                description = "N/A"
+                stock = "N/A"
+                pricing = []
+
+                # Parse the browser_evaluate result
+                if page_scrape_result and "content" in page_scrape_result:
+                    content = page_scrape_result["content"]
+                    if content and len(content) > 0:
+                        text_content = content[0].get("text", "")
+                        if "### Result" in text_content:
+                            json_start = text_content.find("{")
+                            # Look for the end of JSON - either "\n###" or end of string
+                            json_end = text_content.find("\n###", json_start)
+                            if json_start >= 0:
+                                json_str = text_content[json_start:json_end if json_end > 0 else len(text_content)].strip()
+                                try:
+                                    details_data = json.loads(json_str)
+                                    manufacturer = details_data.get("manufacturer", "N/A")
+                                    page_mpn = details_data.get("mpn", "")
+                                    if page_mpn:
+                                        found_mpn = page_mpn
+                                    else:
+                                        found_mpn = mpn  # Keep original if not found
+                                    description = details_data.get("description", "N/A")
+                                    stock = details_data.get("stock", "N/A")
+                                    pricing = details_data.get("pricing", [])
+                                except json.JSONDecodeError as e:
+                                    print(f"  JSON parse error for {lcsc_code}: {e}", file=sys.stderr)
+                                    print(f"  Attempted to parse: {json_str[:500]}", file=sys.stderr)
+                                    # Keep defaults if parsing fails
+
+                # Validate that we got meaningful data - check if key fields are populated
+                # If MPN is empty AND manufacturer is N/A AND no pricing, treat as transient failure
+                has_mpn = found_mpn and found_mpn != mpn  # Got a new MPN from the page
+                has_manufacturer = manufacturer and manufacturer != "N/A"
+                has_pricing = len(pricing) > 0
+                has_description = description and description != "N/A"
+
+                if not has_mpn and not has_manufacturer and not has_pricing and not has_description:
+                    # No meaningful data extracted - likely a page load failure
+                    if attempt < max_retries:
+                        print(f"  Attempt {attempt}/{max_retries} failed: No data extracted, retrying...", file=sys.stderr)
+                        await asyncio.sleep(2)  # Wait before retry
+                        continue  # Retry
+                    else:
+                        # All retries exhausted
+                        return {
+                            "lcsc_code": lcsc_code,
+                            "value": value,
+                            "mpn": mpn,
+                            "manufacturer": "N/A",
+                            "description": "N/A",
+                            "stock": "0",
+                            "pricing": [],
+                            "error": "Failed to extract product data after multiple attempts",
+                            "success": False,
+                            "index": idx
                         }
-                    ],
-                    "stop_on_error": True,
-                    "return_all_results": False
+
+                # Convert stock "N/A" to "0" for consistency (out-of-stock items)
+                if stock == "N/A":
+                    stock = "0"
+
+                return {
+                    "lcsc_code": lcsc_code,
+                    "value": value,
+                    "mpn": found_mpn,
+                    "manufacturer": manufacturer,
+                    "description": description,
+                    "stock": stock,
+                    "pricing": pricing,
+                    "success": True,
+                    "index": idx
                 }
-            )
 
-            # Extract data from the result
-            bulk_results = result.data.get("results", [])
+            except Exception as e:
+                last_error = str(e)
+                if attempt < max_retries:
+                    print(f"  Attempt {attempt}/{max_retries} failed: {e}, retrying...", file=sys.stderr)
+                    await asyncio.sleep(2)  # Wait before retry
+                    continue  # Retry
+                else:
+                    print(f"Error processing {lcsc_code} after {max_retries} attempts: {e}", file=sys.stderr)
 
-            # Results order: [navigate, wait_for, browser_evaluate]
-            # With return_all_results=False, results array still has all positions but
-            # only commands with return_result=True have actual data (others are null)
-            # browser_evaluate is at index 2 (third command)
-            page_scrape_result = bulk_results[2] if len(bulk_results) >= 3 else None
-
-            # Initialize with defaults
-            manufacturer = "N/A"
-            found_mpn = mpn  # Keep original MPN if not found on page
-            description = "N/A"
-            stock = "N/A"
-            pricing = []
-
-            # Parse the browser_evaluate result
-            if page_scrape_result and "content" in page_scrape_result:
-                content = page_scrape_result["content"]
-                if content and len(content) > 0:
-                    text_content = content[0].get("text", "")
-                    if "### Result" in text_content:
-                        json_start = text_content.find("{")
-                        # Look for the end of JSON - either "\n###" or end of string
-                        json_end = text_content.find("\n###", json_start)
-                        if json_start >= 0:
-                            json_str = text_content[json_start:json_end if json_end > 0 else len(text_content)].strip()
-                            try:
-                                details_data = json.loads(json_str)
-                                manufacturer = details_data.get("manufacturer", "N/A")
-                                page_mpn = details_data.get("mpn", "")
-                                if page_mpn:
-                                    found_mpn = page_mpn
-                                else:
-                                    found_mpn = mpn  # Keep original if not found
-                                description = details_data.get("description", "N/A")
-                                stock = details_data.get("stock", "N/A")
-                                pricing = details_data.get("pricing", [])
-                            except json.JSONDecodeError as e:
-                                print(f"  JSON parse error for {lcsc_code}: {e}", file=sys.stderr)
-                                print(f"  Attempted to parse: {json_str[:500]}", file=sys.stderr)
-                                # Keep defaults if parsing fails
-
-            return {
-                "lcsc_code": lcsc_code,
-                "value": value,
-                "mpn": found_mpn,
-                "manufacturer": manufacturer,
-                "description": description,
-                "stock": stock,
-                "pricing": pricing,
-                "success": True,
-                "index": idx
-            }
-
-        except Exception as e:
-            print(f"Error processing {lcsc_code}: {e}", file=sys.stderr)
-            return {
-                "lcsc_code": lcsc_code,
-                "value": value,
-                "mpn": mpn,
-                "manufacturer": "N/A",
-                "description": "N/A",
-                "stock": "N/A",
-                "error": str(e),
-                "success": False,
-                "index": idx
-            }
+        # All retries exhausted due to exceptions
+        return {
+            "lcsc_code": lcsc_code,
+            "value": value,
+            "mpn": mpn,
+            "manufacturer": "N/A",
+            "description": "N/A",
+            "stock": "0",
+            "error": last_error or "Unknown error after retries",
+            "success": False,
+            "index": idx
+        }
 
 
 async def check_lcsc_pricing(parts_list: list, output_file: Path, max_concurrent: int = 5) -> None:

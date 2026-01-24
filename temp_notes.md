@@ -71,3 +71,9 @@ build out a new E24 1% 0805 resistor kit from LCSC. Also include blanks (0 ohm).
 
 
 Investigate the @scripts/lcsc_tool.py check-pricing command and fix the problem where it is erroneously returning N/A for many fields such as description and manufacturer. Also ensure that any browser_wait commands are waiting on elements to appear and not always ONLY a hard coded timeout limit. Be sure though that any element that is waited on is ALWAYS rendered and that it is not just one that appears only for particular kinds of items.
+
+
+Fix @data/kits/E24_Resistors_0805_Quarter_Watt_1Percent_Kit_qty100.md  and:
+1) Fix any duplicate LCSC codes, remove the duplicate and find the missing item.
+2) Add a new column called Quantity and set it to 100 for all items.
+3) Fix any 'N/A' stock fields and either update the stock quantity or find an alternative is there is none in stock or insufficient in stock.

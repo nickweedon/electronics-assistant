@@ -28,7 +28,7 @@ uv run python scripts/lcsc_tool.py search input.json output.json
 uv run python scripts/lcsc_tool.py search input.json output.json --limit 100
 ```
 
-**Concurrency:** Searches run in parallel using isolated browser instances. Use `--max-concurrent` to control the number of parallel browsers (default: 5).
+**Concurrency:** Searches run in parallel using isolated browser instances. Use `--max-concurrent` to control the number of parallel browsers (default: 5). You should aim to use one browser per 5 items. For example, for 50 items use `--max-concurrent 10`.
 
 **Input format** (for batch searches):
 ```json
