@@ -24,7 +24,7 @@
 | 16 | 9.1Ω | 125mW | ±1% | GR0805F9R1T5G00 | C49653336 | GiantOhm | 3300 | 100 | $ 0.0012 | 9.1Ω 125mW 150V Thick Film Resistor ±200ppm/℃ ±1% 0805 Chip Resistor - Surface Mount RoHS | 100 | ✓ In Stock | None |
 | 17 | 13Ω | 250mW | ±1% | HPCR0805F13R0K9 | C365242 | RESI | 4450 | 50 | $ 0.0169 | 13Ω 250mW 150V Thick Film Resistor ±100ppm/℃ ±1% 0805 Chip Resistor - Surface Mount RoHS | 100 | ✓ In Stock | None |
 | 18 | 15Ω | 250mW | ±1% | RC0805FR-7W15RL | C163402 | YAGEO | 3000 | 100 | $ 0.0059 | 250mW 15Ω 150V Thick Film Resistor ±1% ±200ppm/℃ 0805 Chip Resistor - Surface Mount RoHS | 100 | ✓ In Stock | None |
-| 19 | 16Ω | 250mW | ±1% | HPCR0805F16R0K9 | C365249 | RESI | 450 | 50 | N/A | 250mW 16Ω 150V Thick Film Resistor ±100ppm/℃ ±1% 0805 Chip Resistor - Surface Mount RoHS | 100 | ✓ In Stock | None |
+| 19 | 16Ω | 250mW | ±1% | HPCR0805F16R0K9 | C365249 | RESI | 450 | 50 | $ 0.0159 | 250mW 16Ω 150V Thick Film Resistor ±100ppm/℃ ±1% 0805 Chip Resistor - Surface Mount RoHS | 100 | ✓ In Stock | None |
 | 20 | 18Ω | 125mW | ±1% | RC0805FR-0718RL | C137583 | YAGEO | 18800 | 100 | $ 0.0024 | 125mW 18Ω 150V Thick Film Resistor ±100ppm/℃ ±1% 0805 Chip Resistor - Surface Mount RoHS | 100 | ✓ In Stock | None |
 | 21 | 20Ω | 250mW | ±1% | RC0805FR-7W20RL | C6752450 | YAGEO | 3900 | 50 | $ 0.006 | 20Ω 250mW Thick Film Resistor ±1% ±200ppm/℃ 0805 Chip Resistor - Surface Mount RoHS | 100 | ✓ In Stock | None |
 | 22 | 22Ω | 250mW | ±1% | RC0805FR-7W22RL | C6263199 | YAGEO | 2150 | 50 | $ 0.0061 | 22Ω 250mW 150V Thick Film Resistor ±100ppm/℃ ±1% 0805 Chip Resistor - Surface Mount RoHS | 100 | ✓ In Stock | None |
@@ -34,7 +34,7 @@
 | 26 | 39Ω | 250mW | ±1% | AC0805FR-7W39RL | C727994 | YAGEO | 1600 | 100 | $ 0.0089 | 39Ω 250mW 150V Thick Film Resistor ±100ppm/℃ ±1% 0805 Chip Resistor - Surface Mount RoHS | 100 | ✓ In Stock | None |
 | 27 | 47Ω | 250mW | ±1% | AC0805FR-7W47RL | C6732977 | YAGEO | 5350 | 50 | $ 0.0054 | 250mW 47Ω 150V Thick Film Resistor ±100ppm/℃ ±1% 0805 Chip Resistor - Surface Mount RoHS | 100 | ✓ In Stock | None |
 | 28 | 82Ω | 125mW | ±1% | 0805 | C2889522 | VO | 400 | 100 | $ 0.0019 | 125mW 82Ω 150V Thick Film Resistor ±100ppm/℃ ±1% 0805 Chip Resistor - Surface Mount RoHS | 100 | ✓ In Stock | None |
-| 29 | 91Ω | 250mW | ±1% | HPCR0805F91R0K9 | C365357 | RESI | 150 | 50 | N/A | 91Ω 250mW 150V Thick Film Resistor ±100ppm/℃ ±1% 0805 Chip Resistor - Surface Mount RoHS | 100 | ✓ In Stock | None |
+| 29 | 91Ω | 250mW | ±1% | HPCR0805F91R0K9 | C365357 | RESI | 150 | 50 | $ 0.0119 | 91Ω 250mW 150V Thick Film Resistor ±100ppm/℃ ±1% 0805 Chip Resistor - Surface Mount RoHS | 100 | ✓ In Stock | None |
 | 30 | 100Ω | 250mW | ±1% | AC0805FR-7W100RL | C727982 | YAGEO | 34200 | 50 | $ 0.0103 | 250mW 100Ω 150V Thick Film Resistor ±100ppm/℃ ±1% 0805 Chip Resistor - Surface Mount RoHS | 100 | ✓ In Stock | None |
 | 31 | 110Ω | 125mW | ±1% | 0805W8F1103T5E | C17422 | UNI-ROYAL | 90600 | 100 | $ 0.0021 | 110kΩ ±1% 125mW 0805 Thick Film Resistor | 100 | ✓ In Stock | None |
 | 32 | 120Ω | 125mW | ±1% | RC0805FR-07120RL | C114245 | YAGEO | 26000 | 100 | $ 0.0024 | 125mW 120Ω 150V Thick Film Resistor ±100ppm/℃ ±1% 0805 Chip Resistor - Surface Mount RoHS | 100 | ✓ In Stock | None |
@@ -83,7 +83,7 @@
 | 75 | 130kΩ | 125mW | ±1% | RC0805FR-07130KL | C483008 | YAGEO | 3800 | 100 | $ 0.0023 | 125mW 130kΩ 150V Thick Film Resistor ±100ppm/℃ ±1% 0805 Chip Resistor - Surface Mount RoHS | 100 | ✓ In Stock | None |
 | 76 | 150kΩ | 250mW | ±1% | RC0805FR-7W150KL | C6165020 | YAGEO | 5500 | 100 | $ 0.0067 | 250mW 150kΩ 150V Thick Film Resistor ±1% ±200ppm/℃ 0805 Chip Resistor - Surface Mount RoHS | 100 | ✓ In Stock | None |
 | 77 | 160kΩ | 250mW | ±1% | RK73H2ATTD1603F | C317296 | KOA | 100 | 50 | $ 0.0055 | 250mW 160kΩ 150V Thick Film Resistor ±100ppm/℃ ±1% 0805 Chip Resistor - Surface Mount RoHS | 100 | ✓ In Stock | None |
-| 78 | 180kΩ | 250mW | ±1% | HPCR0805F180KK9 | C365250 | RESI | 5050 | 50 | N/A | 180kΩ 250mW 150V Thick Film Resistor ±100ppm/℃ ±1% 0805 Chip Resistor - Surface Mount RoHS | 100 | ✓ In Stock | None |
+| 78 | 180kΩ | 250mW | ±1% | HPCR0805F180KK9 | C365250 | RESI | 5050 | 50 | $ 0.0166 | 180kΩ 250mW 150V Thick Film Resistor ±100ppm/℃ ±1% 0805 Chip Resistor - Surface Mount RoHS | 100 | ✓ In Stock | None |
 | 79 | 220kΩ | 125mW | ±1% | RC0805FR-07220KL | C137568 | YAGEO | 119200 | 100 | $ 0.0024 | 125mW 220kΩ 150V Thick Film Resistor ±100ppm/℃ ±1% 0805 Chip Resistor - Surface Mount RoHS | 100 | ✓ In Stock | None |
 | 80 | 240kΩ | 125mW | ±1% | FRC0805F2403TS | C2907245 | FOJAN | 52400 | 100 | $ 0.0018 | 240kΩ ±1% 125mW 0805 Thick Film Resistor | 100 | ✓ In Stock | None |
 | 81 | 300kΩ | 250mW | ±1% | HPCR0805F300KK9 | C365283 | RESI | 500 | 100 | $ 0.0019 | 300kΩ 250mW 150V Thick Film Resistor ±100ppm/℃ ±1% 0805 Chip Resistor - Surface Mount RoHS | 100 | ✓ In Stock | None |
@@ -91,7 +91,7 @@
 | 83 | 360kΩ | 250mW | ±1% | HPCR0805F360KK9 | C365293 | RESI | 200 | 100 | $ 0.001 | 250mW 360kΩ 150V Thick Film Resistor ±100ppm/℃ ±1% 0805 Chip Resistor - Surface Mount RoHS | 100 | ✓ In Stock | None |
 | 84 | 390kΩ | 125mW | ±1% | 0805 | C2889496 | VO | 1900 | 100 | $ 0.0018 | 125mW 390kΩ 150V Thick Film Resistor ±100ppm/℃ ±1% 0805 Chip Resistor - Surface Mount RoHS | 100 | ✓ In Stock | None |
 | 85 | 560kΩ | 125mW | ±1% | RC0805FR-07560KL | C185286 | YAGEO | 22600 | 100 | $ 0.0024 | 560kΩ 125mW 150V Thick Film Resistor ±100ppm/℃ ±1% 0805 Chip Resistor - Surface Mount RoHS | 100 | ✓ In Stock | None |
-| 86 | 620kΩ | 250mW | ±1% | HPCR0805F620KK9 | C365330 | RESI | 3950 | 50 | N/A | 620kΩ 250mW 150V Thick Film Resistor ±100ppm/℃ ±1% 0805 Chip Resistor - Surface Mount RoHS | 100 | ✓ In Stock | None |
+| 86 | 620kΩ | 250mW | ±1% | HPCR0805F620KK9 | C365330 | RESI | 3950 | 50 | $ 0.0163 | 620kΩ 250mW 150V Thick Film Resistor ±100ppm/℃ ±1% 0805 Chip Resistor - Surface Mount RoHS | 100 | ✓ In Stock | None |
 | 87 | 680kΩ | 125mW | ±1% | 0805W8F6803T5E | C17797 | UNI-ROYAL | 231500 | 100 | $ 0.0020 | 680kΩ ±1% 125mW 0805 Thick Film Resistor | 100 | ✓ In Stock | None |
 | 88 | 750kΩ | 250mW | ±1% | AC0805FR-7W750KL | C6732989 | YAGEO | 4700 | 100 | $ 0.0044 | 250mW 750kΩ Thick Film Resistor ±100ppm/℃ ±1% 0805 Chip Resistor - Surface Mount RoHS | 100 | ✓ In Stock | None |
 | 89 | 820kΩ | 125mW | ±1% | 0805W8F8203T5E | C50136 | UNI-ROYAL | 21300 | 1 | $ 0.0019 | 820kΩ ±1% 125mW 0805 Thick Film Resistor | 100 | ✓ In Stock | None |
