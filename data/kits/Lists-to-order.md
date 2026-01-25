@@ -24,3 +24,7 @@ The following makes up my full order list:
 ## Optional/Convenience Components (LCSC)
 
 - Low_Priority_Components_Kit.md
+
+## Motor Control & Power Management (LCSC)
+
+- Motor_Control_Components_LCSC_Kit.md
