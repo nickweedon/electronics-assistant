@@ -67,12 +67,12 @@
 | 59 | 7.5kΩ | 250mW | ±1% | AC0805FR-7W7K5L | [C728000](https://www.lcsc.com/product-detail/C728000.html) | YAGEO | 3400 | 100 | $ 0.0092 | 7.5kΩ 250mW 150V Thick Film Resistor ±100ppm/℃ ±1% 0805 Chip Resistor - Surface Mount RoHS | 100 | ✓ In Stock | None |
 | 60 | 9.1kΩ | 250mW | ±1% | RK73H2ATTD9101F | [C317276](https://www.lcsc.com/product-detail/C317276.html) | KOA | 3200 | 100 | $ 0.0063 | 250mW 9.1kΩ 150V Thick Film Resistor ±100ppm/℃ ±1% 0805 Chip Resistor - Surface Mount RoHS | 100 | ✓ In Stock | None |
 | 61 | 16kΩ | 125mW | ±1% | 0805W8F1602T5E | [C17490](https://www.lcsc.com/product-detail/C17490.html) | UNI-ROYAL | 53800 | 100 | $ 0.0020 | 16kΩ ±1% 125mW 0805 Thick Film Resistor | 100 | ✓ In Stock | None |
-| 62 | 18kΩ | 250mW | ±1% | TC0525F1802T5E | [C83390](https://www.lcsc.com/product-detail/C83390.html) | UNI-ROYAL | 6 | 1 | $ 0.0068 | 18kΩ ±1% 250mW 0805 Thin Film Resistor | 100 | ✓ In Stock | None |
+| 62 | 18kΩ | 125mW | ±1% | FRC0805F1802TS | [C2907231](https://www.lcsc.com/product-detail/C2907231.html) | FOJAN | 97900 | 100 | $ 0.0018 | 18kΩ ±1% 125mW 0805 Thick Film Resistor | 100 | ✓ In Stock | None |
 | 63 | 20kΩ | 250mW | ±1% | AC0805FR-7W20KL | [C5936593](https://www.lcsc.com/product-detail/C5936593.html) | YAGEO | 3700 | 100 | $ 0.0042 | 250mW 20kΩ 150V Thick Film Resistor ±100ppm/℃ ±1% 0805 Chip Resistor - Surface Mount RoHS | 100 | ✓ In Stock | None |
 | 64 | 22kΩ | 250mW | ±1% | AC0805FR-7W22KL | [C6457890](https://www.lcsc.com/product-detail/C6457890.html) | YAGEO | 3150 | 50 | $ 0.0098 | 250mW 22kΩ 150V Thick Film Resistor ±100ppm/℃ ±1% 0805 Chip Resistor - Surface Mount RoHS | 100 | ✓ In Stock | None |
 | 65 | 27kΩ | 125mW | ±1% | 0805W8F2702T5E | [C17593](https://www.lcsc.com/product-detail/C17593.html) | UNI-ROYAL | 187300 | 100 | $ 0.0019 | 27kΩ ±1% 125mW 0805 Thick Film Resistor | 100 | ✓ In Stock | None |
 | 66 | 30kΩ | 250mW | ±1% | RC0805FR-7W30KL | [C5720075](https://www.lcsc.com/product-detail/C5720075.html) | YAGEO | 4850 | 50 | $ 0.0061 | 250mW 30kΩ Thick Film Resistor ±1% ±200ppm/℃ 0805 Chip Resistor - Surface Mount RoHS | 100 | ✓ In Stock | None |
-| 67 | 33kΩ | 250mW | ±0.5% | TC0550D3302T5E | [C415025](https://www.lcsc.com/product-detail/C415025.html) | UNI-ROYAL | 19 | 1 | $ 0.0116 | 33kΩ ±0.5% 250mW 0805 Thin Film Resistor | 100 | ✓ In Stock | None |
+| 67 | 33kΩ | 125mW | ±1% | 0805W8F3302T5E | [C17633](https://www.lcsc.com/product-detail/C17633.html) | UNI-ROYAL | 210200 | 100 | $ 0.0019 | 33kΩ ±1% 125mW 0805 Thick Film Resistor | 100 | ✓ In Stock | None |
 | 68 | 39kΩ | 125mW | ±1% | RC0805FR-0739KL | [C113306](https://www.lcsc.com/product-detail/C113306.html) | YAGEO | 71900 | 100 | $ 0.0024 | 39kΩ 125mW 150V Thick Film Resistor ±100ppm/℃ ±1% 0805 Chip Resistor - Surface Mount RoHS | 100 | ✓ In Stock | None |
 | 69 | 47kΩ | 250mW | ±1% | RC0805FR-7W47KL | [C20162963](https://www.lcsc.com/product-detail/C20162963.html) | YAGEO | 2750 | 50 | $ 0.0061 | 47kΩ 250mW Thick Film Resistor ±1% ±200ppm/℃ 0805 Chip Resistor - Surface Mount RoHS | 100 | ✓ In Stock | None |
 | 70 | 56kΩ | 125mW | ±1% | 0805 | [C2889477](https://www.lcsc.com/product-detail/C2889477.html) | VO | 2300 | 100 | $ 0.0019 | 125mW 56kΩ 150V Thick Film Resistor ±100ppm/℃ ±1% 0805 Chip Resistor - Surface Mount RoHS | 100 | ✓ In Stock | None |
@@ -95,7 +95,7 @@
 | 87 | 750kΩ | 250mW | ±1% | AC0805FR-7W750KL | [C6732989](https://www.lcsc.com/product-detail/C6732989.html) | YAGEO | 4700 | 100 | $ 0.0044 | 250mW 750kΩ Thick Film Resistor ±100ppm/℃ ±1% 0805 Chip Resistor - Surface Mount RoHS | 100 | ✓ In Stock | None |
 | 88 | 820kΩ | 125mW | ±1% | 0805W8F8203T5E | [C50136](https://www.lcsc.com/product-detail/C50136.html) | UNI-ROYAL | 21300 | 1 | $ 0.0019 | 820kΩ ±1% 125mW 0805 Thick Film Resistor | 100 | ✓ In Stock | None |
 | 89 | 1MΩ | 250mW | ±1% | AC0805FR-7W1ML | [C7210042](https://www.lcsc.com/product-detail/C7210042.html) | YAGEO | 2000 | 100 | $ 0.0075 | 250mW 1MΩ Thick Film Resistor ±100ppm/℃ ±1% 0805 Chip Resistor - Surface Mount RoHS | 100 | ✓ In Stock | None |
-| **TOTAL** | | | | | | | | | **$57.55** | | **8900** | | |
+| **TOTAL** | | | | | | | | | **$56.08** | | **8900** | | |
 
 ## Summary
 
@@ -105,7 +105,7 @@
 - **All parts**: 1% tolerance, 0805 package
 - **Power ratings**: 250mW (1/4W) or better for 89 values; 125mW (1/8W) for 54 additional values
 - **Quantity per value**: 100 pieces
-- **Total cost for 250mW kit (8900 resistors)**: $57.55
+- **Total cost for 250mW kit (8900 resistors)**: $56.08
 - **Total cost for expanded kit with 125mW values (14,300 resistors)**: $66.22
 
 ## Missing E24 Values

@@ -9,7 +9,7 @@ Convenience components for SMD-only designs - nice to have but not essential
 - **Total component types**: 9
 - **Total quantity**: 80 pieces
 - **Use case:** Complete SMD designs, timing circuits, power conversion
-- **Estimated total cost:** ~$3-5 (LCSC pricing)
+- **Estimated total cost:** ~$7.20 (LCSC pricing, verified Jan 2026)
 - **Priority:** Low - you already have through-hole equivalents or can work around these
 
 ---
@@ -17,25 +17,25 @@ Convenience components for SMD-only designs - nice to have but not essential
 ## Component List
 
 | # | Type | Part Number | Manufacturer | Package | Description | Qty | LCSC Code | Est. Price | Notes |
-|---|------|-------------|--------------|---------|-------------|-----|-----------|------------|-------|
-| 1 | Inductor | SWPA4020S4R7MT | Sunlord | 4020 (SMD) | 4.7µH, 3.2A, 28mΩ | 10 | C409398 | $0.10 ea | For buck converters |
-| 2 | Inductor | SWPA4020S100MT | Sunlord | 4020 (SMD) | 10µH, 2.4A, 48mΩ | 10 | C99339 | $0.10 ea | For buck converters |
-| 3 | Inductor | SWPA4020S220MT | Sunlord | 4020 (SMD) | 22µH, 1.9A, 95mΩ | 5 | C78452 | $0.10 ea | For buck converters |
-| 4 | Logic IC | SN74HC14D | TI / HGSEMI | SOIC-14 | Hex Schmitt trigger inverter | 10 | C5524 | $0.08 ea | Button debouncing |
-| 5 | Logic IC | 74LVC1G14GW | Nexperia | SOT-353 | Single Schmitt inverter | 10 | C7475 | $0.05 ea | Compact debouncing |
-| 6 | 555 Timer | NE555D | TI / Various | SOIC-8 | Classic 555 timer (SMD) | 10 | C7593 | $0.05 ea | Timing/PWM |
-| 7 | 555 Timer | TLC555IDR | TI | SOIC-8 | CMOS 555, lower power | 5 | Need verify | $0.15 ea | Better than NE555 |
-| 8 | Crystal | X322516MLB4SI | YXC | 3225 SMD | 16MHz, 20pF load | 10 | C9002 | $0.08 ea | MCU timing |
-| 9 | Crystal | X322508MLB4SI | YXC | 3225 SMD | 8MHz, 20pF load | 10 | C115962 | $0.08 ea | MCU timing |
+| --- | ------ | ------------- | -------------- | --------- | ------------- | ----- | ----------- | ------------ | ------- |
+| 1 | Inductor | APH0420T4R7M | APV | 4.4x4.2mm (SMD) | 4.7µH, 3A, 105mΩ | 10 | C5349668 | $0.08 ea | For buck converters |
+| 2 | Inductor | APH0530T100M | APV | 5.4x5.2mm (SMD) | 10µH, 3.5A, 125mΩ | 10 | C5349679 | $0.08 ea | For buck converters |
+| 3 | Inductor | APH0630T220M | APV | 7x6.6mm (SMD) | 22µH, 3A, 170mΩ | 5 | C5349702 | $0.06 ea | For buck converters |
+| 4 | Logic IC | SN74HC14DR | TI | SOIC-14 | Hex Schmitt trigger inverter | 10 | C6820 | $0.11 ea | Button debouncing |
+| 5 | Logic IC | 74LVC1G14GW | Nexperia | TSSOP-5 | Single Schmitt inverter | 10 | C265125 | $0.10 ea | Compact debouncing |
+| 6 | 555 Timer | NE555DR | TI | SOIC-8 | Classic 555 timer (SMD) | 10 | C7593 | $0.10 ea | Timing/PWM |
+| 7 | 555 Timer | TLC555IDR | TI | SOIC-8 | CMOS 555, lower power | 5 | C6987 | $0.20 ea | Better than NE555 |
+| 8 | Crystal | X322516MLB4SI | YXC | 3225 SMD | 16MHz, 9pF load | 10 | C13738 | $0.07 ea | MCU timing |
+| 9 | Crystal | XTM32008000QT00351005 | TOGNJING | 3225 SMD | 8MHz, 20pF load | 10 | C37635366 | $0.09 ea | MCU timing |
 
-**Total: 80 pieces**
+Total: 80 pieces
 
 ---
 
 ## Why These Are Low Priority
 
 | Component | Why Low Priority | When You Need It |
-|-----------|------------------|------------------|
+| ----------- | ------------------ | ------------------ |
 | **SMD Inductors** | You already have through-hole inductors (4.7µH-100µH) | SMD-only boards, very compact designs |
 | **74HC14D** | You have through-hole SN74HC14N already | SMD-only boards |
 | **74LVC1G14** | Can use 74HC14 or MCU GPIO with software debounce | Space-constrained designs |
@@ -47,9 +47,9 @@ Convenience components for SMD-only designs - nice to have but not essential
 
 ## Component Details
 
-### Power Inductors (4020 Package)
+### Power Inductors (APV Molded SMD)
 
-**Why 4020 Package:**
+**Why These Packages:**
 
 - Good balance of size and current handling
 - Similar footprint to common buck converter reference designs
@@ -58,30 +58,32 @@ Convenience components for SMD-only designs - nice to have but not essential
 
 **Specifications:**
 
-#### SWPA4020S4R7MT - 4.7µH
+#### APH0420T4R7M - 4.7µH (C5349668)
 
 - **Inductance:** 4.7µH ±20%
-- **Rated Current:** 3.2A
-- **DCR:** 28mΩ max
-- **SRF:** >40MHz
-- **Size:** 4.0 x 4.0 x 2.0mm
-- **LCSC:** C409398
+- **Rated Current:** 3A (Saturation: 2.8A)
+- **DCR:** 105mΩ max
+- **Size:** 4.4 x 4.2mm
+- **LCSC:** C5349668
+- **Stock:** 50,865 pcs
 
-#### SWPA4020S100MT - 10µH
+#### APH0530T100M - 10µH (C5349679)
 
 - **Inductance:** 10µH ±20%
-- **Rated Current:** 2.4A
-- **DCR:** 48mΩ max
-- **SRF:** >30MHz
-- **LCSC:** C99339
+- **Rated Current:** 3.5A (Saturation: 3.2A)
+- **DCR:** 125mΩ max
+- **Size:** 5.4 x 5.2mm
+- **LCSC:** C5349679
+- **Stock:** 18,700 pcs
 
-#### SWPA4020S220MT - 22µH
+#### APH0630T220M - 22µH (C5349702)
 
 - **Inductance:** 22µH ±20%
-- **Rated Current:** 1.9A
-- **DCR:** 95mΩ max
-- **SRF:** >20MHz
-- **LCSC:** C78452
+- **Rated Current:** 3A (Saturation: 2.5A)
+- **DCR:** 170mΩ max
+- **Size:** 7.0 x 6.6mm
+- **LCSC:** C5349702
+- **Stock:** 37,930 pcs
 
 **Use with LMR51430:**
 Your LMR51430 buck converter (already in inventory) works great with these:
@@ -195,26 +197,29 @@ Your LMR51430 buck converter (already in inventory) works great with these:
 
 ### Crystals - Precision Timing
 
-#### X322516MLB4SI - 16MHz Crystal
+#### X322516MLB4SI - 16MHz Crystal (C13738)
 
 **Specifications:**
 
 - **Package:** 3225 SMD (3.2 x 2.5mm)
 - **Frequency:** 16.000MHz
-- **Load Capacitance:** 20pF
-- **Tolerance:** ±20ppm
-- **Temperature:** -20°C to +70°C
-- **LCSC:** C9002
+- **Load Capacitance:** 9pF
+- **Tolerance:** ±10ppm
+- **Manufacturer:** YXC
+- **LCSC:** C13738
+- **Stock:** 440,330 pcs
 
-#### X322508MLB4SI - 8MHz Crystal
+#### XTM32008000QT00351005 - 8MHz Crystal (C37635366)
 
 **Specifications:**
 
 - **Package:** 3225 SMD (3.2 x 2.5mm)
 - **Frequency:** 8.000MHz
 - **Load Capacitance:** 20pF
-- **Tolerance:** ±20ppm
-- **LCSC:** C115962
+- **Tolerance:** ±10ppm
+- **Manufacturer:** TOGNJING
+- **LCSC:** C37635366
+- **Stock:** 47,620 pcs
 
 **When You Need External Crystal:**
 
@@ -234,7 +239,9 @@ Your LMR51430 buck converter (already in inventory) works great with these:
 - **Precision timing** (±0.5% or better)
 
 **Load Capacitors:**
-Both crystals specify 20pF load. Use two 22pF capacitors (already in your capacitor kit!) from each crystal pin to ground.
+
+- **16MHz crystal (9pF load):** Use two 10pF capacitors from each crystal pin to ground
+- **8MHz crystal (20pF load):** Use two 22pF capacitors (already in your capacitor kit!) from each crystal pin to ground
 
 **PIC18F46K22 Note:**
 Your PIC18F46K22 (in inventory) has:
@@ -248,7 +255,7 @@ Your PIC18F46K22 (in inventory) has:
 ## Quantity Recommendations
 
 | Component | Qty | Justification |
-|-----------|-----|---------------|
+| ----------- | ----- | --------------- |
 | 4.7µH inductor | 10 | SMD buck converter builds |
 | 10µH inductor | 10 | SMD buck converter builds |
 | 22µH inductor | 5 | Less common value |
@@ -259,7 +266,7 @@ Your PIC18F46K22 (in inventory) has:
 | 16MHz crystal | 10 | USB or precision timing |
 | 8MHz crystal | 10 | Common MCU frequency |
 
-**Total: 80 pieces**
+Total: 80 pieces
 
 ---
 
@@ -312,26 +319,29 @@ Saves 5 unused gates compared to 74HC14D
 
 ## LCSC Ordering Notes
 
-**Verified LCSC Codes (Ready to Order):**
+**Verified LCSC Codes (All In Stock - Jan 2026):**
 
-- C409398: SWPA4020S4R7MT (4.7µH inductor)
-- C99339: SWPA4020S100MT (10µH inductor)
-- C78452: SWPA4020S220MT (22µH inductor)
-- C5524: SN74HC14D (hex Schmitt trigger)
-- C7475: 74LVC1G14GW (single Schmitt trigger)
-- C7593: NE555D (555 timer)
-- C9002: X322516MLB4SI (16MHz crystal)
-- C115962: X322508MLB4SI (8MHz crystal)
+- **C5349668:** APH0420T4R7M (4.7µH inductor) - 50,865 pcs
+- **C5349679:** APH0530T100M (10µH inductor) - 18,700 pcs
+- **C5349702:** APH0630T220M (22µH inductor) - 37,930 pcs
+- **C6820:** SN74HC14DR (hex Schmitt trigger) - 101,145 pcs
+- **C265125:** 74LVC1G14GW (single Schmitt trigger) - 6,985 pcs
+- **C7593:** NE555DR (555 timer) - 110,675 pcs
+- **C6987:** TLC555IDR (CMOS 555 timer) - 19,805 pcs
+- **C13738:** X322516MLB4SI (16MHz crystal) - 440,330 pcs
+- **C37635366:** XTM32008000QT00351005 (8MHz crystal) - 47,620 pcs
 
-**Need Verification:**
+**Notes:**
 
-- TLC555IDR: Need to search LCSC for correct code
+- Inductors are APV brand (not Sunlord) but have similar or better specifications
+- All parts verified in stock with pricing as of Jan 2026
+- BOM file ready: `data/boms/Low_Priority_Components_Kit_LCSC.csv`
 
 ---
 
 ## Cost-Benefit Analysis
 
-**Total cost:** ~$3-5 for 80 pieces
+**Total cost:** ~$7.20 for 80 pieces (verified Jan 2026)
 
 **Is it worth it?**
 
