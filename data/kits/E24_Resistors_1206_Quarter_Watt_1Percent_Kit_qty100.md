@@ -152,7 +152,7 @@
 |144|820KΩ|RC1206FR-07820KL|C246057|250mW (1/4W)|±1%|2,000|100|$ 0.0042 (100+ MOQ)|LCSC|RES SMD 820KΩ 1% 1/4W 1206||
 |145|910KΩ|RV1206FR-07910KL|C873615|250mW (1/4W)|±1%|4,950|50|$ 0.0055 (50+ MOQ)|LCSC|RES SMD 910KΩ 1% 1/4W 1206||
 |146|1MΩ|RC1206FR-071ML|C108083|250mW (1/4W)|±1%|64,400|100|$ 0.0041 (100+ MOQ)|LCSC|RES SMD 1MΩ 1% 1/4W 1206||
-|**TOTAL**||||||||**$1.29**||||
+|**TOTAL**||||||||**$131.26**||||
 
 ## Summary
 
@@ -170,9 +170,9 @@
 - **E12 values cost**: ~$0.97 (44 values × 100 pcs = 4,400 resistors @ avg $0.0022/pc)
 - **LCSC non-E12 values cost**: ~$0.25 (55 values × 100 pcs = 5,500 resistors @ avg $0.0045/pc)
 - **Mouser values cost**: $0.08 (3 values × 100 pcs = 300 resistors @ $0.026/pc)
-- **Total cost for full kit**: ~$1.29 (14,600 resistors)
-- **Average cost per value**: $0.009
-- **Average cost per resistor**: $0.00009
+- **Total cost for full kit**: ~$131.26 (14,600 resistors)
+- **Average cost per value**: $0.899
+- **Average cost per resistor**: $0.00899
 
 ### Important Notes
 
