@@ -26,7 +26,7 @@
 |18|4.7Ω|RC1206FR-074R7L|C137258|250mW (1/4W)|±1%|27,800|50|$ 0.0118 (50+ MOQ)|LCSC|RES SMD 4.7Ω 1% 1/4W 1206||
 |19|5.1Ω||C137247|250mW (1/4W)|±1%|103,500|50|$ 0.0127 (50+ MOQ)|LCSC|RES SMD 5.1Ω 1% 1/4W 1206||
 |20|5.6Ω|RC1206FR-075R6L|C137246|250mW (1/4W)|±1%|14,300|50|$ 0.0116 (50+ MOQ)|LCSC|RES SMD 5.6Ω 1% 1/4W 1206||
-|21|6.2Ω|RLD06911JTP|C7422233|250mW (1/4W)|±1%|0|100|$ 0.0026 (100+ MOQ)|LCSC|RES SMD 6.2Ω 1% 1/4W 1206|Out of stock at LCSC|
+|21|6.2Ω|RC1206FR-076R2L|603-RC1206FR-076R2L|250mW (1/4W)|±1%|36,567|1|$0.022|Mouser|RES SMD 6.2Ω 1% 1/4W 1206|Out of stock at LCSC|
 |22|6.8Ω|RC1206FR-0711RL|C163369|250mW (1/4W)|±1%|3,900|50|$ 0.0131 (50+ MOQ)|LCSC|RES SMD 6.8Ω 1% 1/4W 1206||
 |23|7.5Ω|RC1206FR-077R5L|C488949|250mW (1/4W)|±1%|4,550|50|$ 0.0117 (50+ MOQ)|LCSC|RES SMD 7.5Ω 1% 1/4W 1206||
 |24|8.2Ω|RC1206FR-078R2L|C488973|250mW (1/4W)|±1%|6,900|50|$ 0.0123 (50+ MOQ)|LCSC|RES SMD 8.2Ω 1% 1/4W 1206||
@@ -98,7 +98,7 @@
 |90|4.7KΩ|RC1206FR-074K7L|C137262|250mW (1/4W)|±1%|89,400|100|$ 0.0041 (100+ MOQ)|LCSC|RES SMD 4.7KΩ 1% 1/4W 1206||
 |91|5.1KΩ|RC1206FR-075K1L|C163372|250mW (1/4W)|±1%|92,400|100|$ 0.0041 (100+ MOQ)|LCSC|RES SMD 5.1KΩ 1% 1/4W 1206||
 |92|5.6KΩ|RC1206FR-075K6L|C137248|250mW (1/4W)|±1%|700|100|$ 0.0042 (100+ MOQ)|LCSC|RES SMD 5.6KΩ 1% 1/4W 1206||
-|93|6.2KΩ|RC1206FR-076K2L|C137237|250mW (1/4W)|±1%|0|100|$ 0.0042 (100+ MOQ)|LCSC|RES SMD 6.2KΩ 1% 1/4W 1206|Out of stock at LCSC|
+|93|6.2KΩ|RC1206FR-076K2L|603-RC1206FR-076K2L|250mW (1/4W)|±1%|43,959|1|$0.009|Mouser|RES SMD 6.2KΩ 1% 1/4W 1206|Out of stock at LCSC|
 |94|6.8KΩ|RC1206FR-076K8L|C246053|250mW (1/4W)|±1%|24,500|100|$ 0.0044 (100+ MOQ)|LCSC|RES SMD 6.8KΩ 1% 1/4W 1206||
 |95|7.5KΩ|RC1206FR-07300RL|C137232|250mW (1/4W)|±1%|18,400|100|$ 0.0042 (100+ MOQ)|LCSC|RES SMD 7.5KΩ 1% 1/4W 1206||
 |96|8.2KΩ|RC1206FR-078K2L|C137226|250mW (1/4W)|±1%|38,420|10|$ 0.053 (10+ MOQ)|LCSC|RES SMD 8.2KΩ 1% 1/4W 1206||
@@ -161,8 +161,8 @@
 - **Quantity per value**: 100 pieces
 - **Total resistors**: 14,600 resistors
 - **Values**: 44 of 146 (reused from existing kit)
-- **Values from LCSC**: 143 of 146
-- **Values from Mouser**: 3 of 146 (cannot source from LCSC with adequate stock)
+- **Values from LCSC**: 141 of 146
+- **Values from Mouser**: 5 of 146 (cannot source from LCSC with adequate stock)
 - **Kit status**: ✅ COMPLETE - All 146 E24 values sourced!
 
 ### Cost Breakdown
@@ -176,10 +176,12 @@
 
 ### Important Notes
 
-- **Mouser-only values** (3 values cannot be sourced from LCSC with ≥100 stock):
+- **Mouser-only values** (5 values cannot be sourced from LCSC with ≥100 stock):
+  - 6.2Ω (RC1206FR-076R2L) - Out of stock at LCSC
   - 9.1Ω (RC1206FR-079R1L) - LCSC has only 50 units
   - 91Ω (RC1206FR-0791RL) - Out of stock at LCSC
   - 3KΩ → 3.01KΩ (RC1206FR-073K01L) - Out of stock at LCSC
+  - 6.2KΩ (RC1206FR-076K2L) - Out of stock at LCSC
 - **Closest matches**: Three values use nearest available YAGEO parts:
   - 2Ω → 2.05Ω (RC1206FR-072R05L)
   - 2.4KΩ → 2.49KΩ (RC1206FR-072K49L)
@@ -193,7 +195,7 @@ Values marked "****" are reused from the existing E12 resistor kit.
 
 **Supplier breakdown:**
 
-- **LCSC**: 143 of 146 values (98%) - Primary supplier offering excellent pricing
-- **Mouser**: 3 of 146 values (2%) - Only for values that cannot be sourced from LCSC with adequate stock (≥100 units)
+- **LCSC**: 141 of 146 values (97%) - Primary supplier offering excellent pricing
+- **Mouser**: 5 of 146 values (3%) - Only for values that cannot be sourced from LCSC with adequate stock (≥100 units)
 
 The E24 series includes all E12 values plus additional intermediate values, providing finer resistance graduations (approximately 10% steps vs 20% for E12).
