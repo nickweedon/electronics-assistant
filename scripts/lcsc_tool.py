@@ -186,6 +186,7 @@ def create_isolated_mcp_config(num_instances: int = 5) -> dict:
                     "-e", "PW_MCP_PROXY__ISOLATED_NO_SANDBOX=true",
                     "-e", "PW_MCP_PROXY__ISOLATED_ISOLATED=true",
                     "-e", "PW_MCP_PROXY__ISOLATED_VIEWPORT_SIZE=1920x1080",
+                    "-e", "PW_MCP_PROXY__ISOLATED_ENABLE_STEALTH=true",
                     "playwright-proxy-mcp:latest",
                     "uv", "run", "playwright-proxy-mcp"
                 ]
