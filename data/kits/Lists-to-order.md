@@ -27,4 +27,4 @@ The following makes up my full order list:
 
 ## Motor Control & Power Management (LCSC)
 
-- Motor_Control_Components_LCSC_Kit.md
+- Motor_Control_Components_LCSC_Kit.md [LCSC BOM - Good configuration]
