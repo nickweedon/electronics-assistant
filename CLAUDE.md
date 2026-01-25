@@ -54,6 +54,14 @@ See detailed guidelines:
 
 When the user asks to see images, use `xdg-open` as the preferred tool to display them.
 
+### BOM File Storage
+
+Store all BOM (Bill of Materials) files in the local directory:
+
+- **Local directory:** `data/boms/`
+
+BOM files are gitignored to avoid committing supplier-specific order files to the repository.
+
 ### Temporary File Storage
 
 Store all temporary files (screenshots, PDFs, or any files created solely for displaying results) in the **"Temp Files"** folder at this path:
