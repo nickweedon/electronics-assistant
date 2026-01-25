@@ -36,6 +36,8 @@
         "-e",
         "PW_MCP_PROXY__ISOLATED_ISOLATED=true",
         "-e",
+        "PW_MCP_PROXY__ISOLATED_ENABLE_STEALTH=true",
+        "-e",
         "PW_MCP_PROXY__ISOLATED_VIEWPORT_SIZE=1920x1080",
         "playwright-proxy-mcp:latest",
         "uv",
@@ -68,6 +70,7 @@
         "PW_MCP_PROXY__REALSESSION_SAVE_SESSION": "true",
         "PW_MCP_PROXY__REALSESSION_SAVE_TRACE": "true",
         "PW_MCP_PROXY__REALSESSION_BROWSER": "chrome",
+        "PW_MCP_PROXY__REALSESSION_ENABLE_STEALTH": "true",
         "PW_MCP_PROXY__REALSESSION_WSL_WINDOWS": "true"
       }
     },
@@ -126,6 +129,29 @@
         "/bin/bash",
         "-c",
         "cd /workspace && uv run digikey_mcp_server.py"
+      ]
+    },
+    "mcp-resource-server": {
+      "command": "docker",
+      "args": [
+        "run",
+        "--rm",
+        "-i",
+        "-v",
+        "/mnt/c/docker/blob-storage:/mnt/blob-storage",
+        "-e",
+        "RESOURCE_SERVER_DEBUG=true",
+        "-e",
+        "RESOURCE_SERVER_MASK_ERRORS=false",
+        "-e",
+        "BLOB_STORAGE_ROOT=/mnt/blob-storage",
+        "-e",
+        "BLOB_MAX_SIZE_MB=100",
+        "-e",
+        "BLOB_TTL_HOURS=24",
+        "-e",
+        "HOST_BLOB_STORAGE_ROOT=/mnt/c/docker/blob-storage",
+        "mcp-resource-server:latest"
       ]
     }
  }
