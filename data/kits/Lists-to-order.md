@@ -10,7 +10,7 @@ The following makes up my full order list:
 
 ## Active Components (LCSC)
 
-- Current-SMD-on-hand.md
+- Current-SMD-on-hand.md (I currently have this)
 - SMD_Mixed_Components_LCSC_Kit.md [LCSC BOM]
 
 ## Protection Components (Digikey)
