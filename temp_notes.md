@@ -82,3 +82,6 @@ Fix @data/kits/E24_Resistors_0805_Quarter_Watt_1Percent_Kit_qty100.md  and:
 Fix @data/kits/E24_Resistors_0805_Quarter_Watt_1Percent_Kit_qty100.md  and:
 1) Fix any duplicate LCSC codes, remove the duplicate and find the missing item.
 2) Fix any 'N/A' stock fields and either update the stock quantity or find an alternative is there is none in stock or insufficient in stock.
+
+
+Search for the items recommended from aliexpress. Do some analysis and provide a list of links to specific items that you recommend.

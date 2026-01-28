@@ -40,7 +40,7 @@ For tasks requiring many repetitive operations, follow [MCP Scripting Guidelines
 
 For web scraping and browser automation tasks, follow [Playwright MCP Server Guidelines](docs/Playwright-MCP-Server-Guidelines.md).
 
-**CRITICAL**: When searching or extracting product data from **Amazon** or **eBay**, you MUST read and follow [Amazon & eBay Scraping Guidelines](docs/Amazon-eBay-Scraping-Guidelines.md) before making any queries. This document contains:
+**CRITICAL**: When searching or extracting product data from **Amazon**, **eBay**, or **AliExpress**, you MUST read and follow [Amazon, eBay & AliExpress Scraping Guidelines](docs/Amazon-eBay-AliExpress-Scraping-Guidelines.md) before making any queries. This document contains:
 
 - Correct DOM selectors (sites change frequently)
 - Proper link construction (avoiding expired session tokens)
@@ -81,7 +81,7 @@ Store all temporary files (screenshots, PDFs, or any files created solely for di
 Refer to the following local documents for detailed instructions:
 
 - [Playwright MCP Server Guidelines](docs/Playwright-MCP-Server-Guidelines.md)
-- [Amazon & eBay Scraping Guidelines](docs/Amazon-eBay-Scraping-Guidelines.md)
+- [Amazon, eBay & AliExpress Scraping Guidelines](docs/Amazon-eBay-AliExpress-Scraping-Guidelines.md)
 - [MCP Scripting Guidelines](docs/MCP-Scripting-Guidelines.md)
 - [LCSC Guidelines](docs/LCSC-Guidelines.md)
 - [Pricing Guidelines](docs/Pricing-Guidelines.md)
