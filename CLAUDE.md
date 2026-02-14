@@ -49,12 +49,11 @@ For web scraping and browser automation tasks, follow [Playwright MCP Server Gui
 ### Electronics Suppliers
 
 - **Primary**: Digikey MCP server (where lists are stored)
-- **Secondary**: LCSC, Mouser, Farnell for price comparison
+- **Secondary**: Mouser, Farnell for price comparison
 
 See detailed guidelines:
 
 - [Pricing Guidelines](docs/Pricing-Guidelines.md) - Price comparison rules and MOQ checks
-- [LCSC Guidelines](docs/LCSC-Guidelines.md) - LCSC-specific operations
 
 ### Images
 
@@ -83,7 +82,6 @@ Refer to the following local documents for detailed instructions:
 - [Playwright MCP Server Guidelines](docs/Playwright-MCP-Server-Guidelines.md)
 - [Amazon, eBay & AliExpress Scraping Guidelines](docs/Amazon-eBay-AliExpress-Scraping-Guidelines.md)
 - [MCP Scripting Guidelines](docs/MCP-Scripting-Guidelines.md)
-- [LCSC Guidelines](docs/LCSC-Guidelines.md)
 - [Pricing Guidelines](docs/Pricing-Guidelines.md)
 - [Digikey MCP Server Guidelines](docs/Digikey-MCP-Server-Guidelines.md)
 - [PartsBox MCP Server Guidelines](docs/PartsBox-MCP-Server-Guidelines.md)
