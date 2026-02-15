@@ -1,79 +1,5 @@
 {
   "mcpServers": {
-    "playwright-mcp-server": {
-      "comment": "Playwright MCP Server",
-      "command": "docker",
-      "args": [
-        "run",
-        "-i",
-        "--rm",
-        "-v",
-        "/mnt/c/docker/blob-storage:/mnt/blob-storage",
-        "-e",
-        "BLOB_STORAGE_ROOT=/mnt/blob-storage",
-        "-e",
-        "BLOB_MAX_SIZE_MB=2048",
-        "-e",
-        "BLOB_TTL_HOURS=24",
-        "-e",
-        "BLOB_SIZE_THRESHOLD_KB=50",
-        "-e",
-        "BLOB_CLEANUP_INTERVAL_MINUTES=60",
-        "-e",
-        "PW_MCP_PROXY_TIMEOUT_ACTION=15000",
-        "-e",
-        "PW_MCP_PROXY_TIMEOUT_NAVIGATION=5000",
-        "-e",
-        "PW_MCP_PROXY__ISOLATED_INSTANCES=5",
-        "-e",
-        "PW_MCP_PROXY__ISOLATED_IS_DEFAULT=true",
-        "-e",
-        "PW_MCP_PROXY__ISOLATED_BROWSER=chrome",
-        "-e",
-        "PW_MCP_PROXY__ISOLATED_HEADLESS=true",
-        "-e",
-        "PW_MCP_PROXY__ISOLATED_NO_SANDBOX=true",
-        "-e",
-        "PW_MCP_PROXY__ISOLATED_ISOLATED=true",
-        "-e",
-        "PW_MCP_PROXY__ISOLATED_ENABLE_STEALTH=true",
-        "-e",
-        "PW_MCP_PROXY__ISOLATED_VIEWPORT_SIZE=1920x1080",
-        "playwright-proxy-mcp:latest",
-        "uv",
-        "run",
-        "playwright-proxy-mcp"
-      ]
-    },
-    "playwright-real-session-mcp-server": {
-      "comment": "Playwright MCP Server for use with browser and a real user session. Do not use this unless explicitly asked to.",
-      "command": "uv",
-      "args": [
-        "run",
-        "--directory",
-        "/opt/src/mcp/playwright-proxy-mcp",
-        "playwright-proxy-mcp"
-      ],
-      "env": {
-        "BLOB_STORAGE_ROOT": "/mnt/c/docker/blob-storage",
-        "BLOB_MAX_SIZE_MB": "2048",
-        "BLOB_TTL_HOURS": "24",
-        "BLOB_SIZE_THRESHOLD_KB": "50",
-        "BLOB_CLEANUP_INTERVAL_MINUTES": "60",
-        "PW_MCP_PROXY_TIMEOUT_ACTION": "15000",
-        "PW_MCP_PROXY_TIMEOUT_NAVIGATION": "5000",
-        "PW_MCP_PROXY__REALSESSION_INSTANCES": "1",
-        "PW_MCP_PROXY__REALSESSION_IS_DEFAULT": "true",
-        "PW_MCP_PROXY__REALSESSION_USER_DATA_DIR": "c:/tools/playwright/playwright-output",
-        "PW_MCP_PROXY__REALSESSION_OUTPUT_DIR": "c:/tools/playwright/mcp-output",
-        "PW_MCP_PROXY__REALSESSION_STORAGE_STATE": "c:/tools/playwright/browser-profile/state.json",
-        "PW_MCP_PROXY__REALSESSION_SAVE_SESSION": "true",
-        "PW_MCP_PROXY__REALSESSION_SAVE_TRACE": "true",
-        "PW_MCP_PROXY__REALSESSION_BROWSER": "chrome",
-        "PW_MCP_PROXY__REALSESSION_ENABLE_STEALTH": "true",
-        "PW_MCP_PROXY__REALSESSION_WSL_WINDOWS": "true"
-      }
-    },
     "mouser": {
       "command": "docker",
       "args": [
@@ -83,28 +9,6 @@
         "--env-file",
         "/mnt/c/docker/mouser-mcp/.env",
         "mouser-mcp:latest"
-      ]
-    },
-    "partsbox": {
-      "command": "docker",
-      "args": [
-        "run",
-        "-i",
-        "--rm",
-        "-v",
-        "/mnt/c/docker/partsbox-mcp-env:/workspace/.env:ro",
-        "-v",
-        "/mnt/c/docker/blob-storage:/mnt/blob-storage",
-        "-e",
-        "PARTSBOX_BLOB_STORAGE_ROOT=/mnt/blob-storage",
-        "-e",
-        "PARTSBOX_BLOB_STORAGE_MAX_SIZE_MB=2048",
-        "-e",
-        "PARTSBOX_BLOB_STORAGE_TTL_HOURS=24",
-        "partsbox-mcp:latest",
-        "uv",
-        "run",
-        "partsbox-mcp"
       ]
     },
     "digikey": {
@@ -129,29 +33,6 @@
         "/bin/bash",
         "-c",
         "cd /workspace && uv run digikey_mcp_server.py"
-      ]
-    },
-    "mcp-resource-server": {
-      "command": "docker",
-      "args": [
-        "run",
-        "--rm",
-        "-i",
-        "-v",
-        "/mnt/c/docker/blob-storage:/mnt/blob-storage",
-        "-e",
-        "RESOURCE_SERVER_DEBUG=true",
-        "-e",
-        "RESOURCE_SERVER_MASK_ERRORS=false",
-        "-e",
-        "BLOB_STORAGE_ROOT=/mnt/blob-storage",
-        "-e",
-        "BLOB_MAX_SIZE_MB=100",
-        "-e",
-        "BLOB_TTL_HOURS=24",
-        "-e",
-        "HOST_BLOB_STORAGE_ROOT=/mnt/c/docker/blob-storage",
-        "mcp-resource-server:latest"
       ]
     }
  }

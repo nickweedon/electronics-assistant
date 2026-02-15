@@ -1,4 +1,5 @@
 __pycache__/
 data/boms/*
 !data/boms/.gitkeep
-scripts-temp/
+scripts-temp/.claude/skills/partsbox-api/scripts/.venv/
+.claude/skills/partsbox-api/scripts/__pycache__/

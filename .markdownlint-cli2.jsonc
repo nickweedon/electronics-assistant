@@ -36,6 +36,10 @@
     // (many docs have front matter or intro text)
     "MD041": false,
 
+    // Disable table column style (MD060)
+    // Compact tables without space-padded pipes are acceptable
+    "MD060": false,
+
     // Configure list indentation to 2 spaces
     "MD007": {
       "indent": 2
