@@ -1,0 +1,3658 @@
+{
+  "success": true,
+  "data": {
+    "Products": [
+      {
+        "Description": {
+          "ProductDescription": "STACKING HEADER ARDUINO SHIELD",
+          "DetailedDescription": "Arduino Boards or other MCU Boards - Connector"
+        },
+        "Manufacturer": {
+          "Id": 1528,
+          "Name": "Adafruit Industries LLC"
+        },
+        "ManufacturerProductNumber": "85",
+        "UnitPrice": 1.95,
+        "ProductUrl": "https://www.digikey.com/en/products/detail/adafruit-industries-llc/85/5154649",
+        "DatasheetUrl": "//mm.digikey.com/Volume0/opasdata/d220001/medias/docus/2155/85_Web.pdf",
+        "PhotoUrl": "https://mm.digikey.com/Volume0/opasdata/d220001/medias/images/4850/1528_85.jpg",
+        "ProductVariations": [
+          {
+            "DigiKeyProductNumber": "1528-1074-ND",
+            "PackageType": {
+              "Id": 3,
+              "Name": "Bulk"
+            },
+            "StandardPricing": [
+              {
+                "BreakQuantity": 1,
+                "UnitPrice": 1.95,
+                "TotalPrice": 1.95
+              }
+            ],
+            "MyPricing": [],
+            "MarketPlace": false,
+            "TariffActive": false,
+            "Supplier": {
+              "Id": 1528,
+              "Name": "Adafruit Industries LLC"
+            },
+            "QuantityAvailableforPackageType": 187,
+            "MaxQuantityForDistribution": 0,
+            "MinimumOrderQuantity": 1,
+            "StandardPackage": 0,
+            "DigiReelFee": 0.0
+          }
+        ],
+        "QuantityAvailable": 187,
+        "ProductStatus": {
+          "Id": 0,
+          "Status": "Active"
+        },
+        "BackOrderNotAllowed": false,
+        "NormallyStocking": true,
+        "Discontinued": false,
+        "EndOfLife": false,
+        "Ncnr": false,
+        "PrimaryVideoUrl": null,
+        "Parameters": [
+          {
+            "ParameterId": 184,
+            "ParameterText": "Accessory Type",
+            "ParameterType": "String",
+            "ValueId": "333006",
+            "ValueText": "Connector"
+          },
+          {
+            "ParameterId": 984,
+            "ParameterText": "Utilized IC / Part",
+            "ParameterType": "String",
+            "ValueId": "314604",
+            "ValueText": "Arduino Boards or other MCU Boards"
+          }
+        ],
+        "BaseProductNumber": null,
+        "Category": {
+          "CategoryId": 33,
+          "ParentId": 0,
+          "Name": "Development Boards, Kits, Programmers",
+          "ProductCount": 0,
+          "NewProductCount": 0,
+          "ImageUrl": "https://www.digikey.com//mm.digikey.com/Volume0/opasdata/d220001/derivates/3/200/310/411/MFG_ATATMEL-ICE_tmb.jpg",
+          "SeoDescription": "Development board, kit, and programmer products include tools and assemblies used for product development and evaluation purposes. Evaluation boards are produced by a manufacturer to allow prospective users a convenient way to characterize device behavior in context of a known-good implementation, whereas development boards and kits typically include additional features or accessories intended to aid a user in developing their own product based on some device. Programmers and related products are used for configuring products having a behavior that is user-adjustable or user-specified, such as a programmable oscillator or microcontroller.",
+          "ChildCategories": [
+            {
+              "CategoryId": 783,
+              "ParentId": 33,
+              "Name": "Accessories",
+              "ProductCount": 0,
+              "NewProductCount": 0,
+              "ImageUrl": "https://www.digikey.com//mm.digikey.com/Volume0/opasdata/d220001/derivates/3/200/457/624/MFG_TC2030-IDC_tmb.jpg",
+              "SeoDescription": "Supplementary items used with other devices in this category.",
+              "ChildCategories": []
+            }
+          ]
+        },
+        "DateLastBuyChance": null,
+        "ManufacturerLeadWeeks": "4",
+        "ManufacturerPublicQuantity": 0,
+        "Series": {
+          "Id": 818,
+          "Name": "-"
+        },
+        "ShippingInfo": null,
+        "Classifications": {
+          "ReachStatus": "REACH not applicable",
+          "RohsStatus": "ROHS3 Compliant",
+          "MoistureSensitivityLevel": "1  (Unlimited)",
+          "ExportControlClassNumber": "EAR99",
+          "HtsusCode": "8536.69.4040"
+        },
+        "OtherNames": [
+          "1428-1074-ND",
+          "1528-1074",
+          "1428-1074"
+        ]
+      },
+      {
+        "Description": {
+          "ProductDescription": "GRAVITY DIGITAL 5A RELAY MODULE",
+          "DetailedDescription": "Electromechanical Relay Gravity Platform Evaluation Expansion Board"
+        },
+        "Manufacturer": {
+          "Id": 1738,
+          "Name": "DFRobot"
+        },
+        "ManufacturerProductNumber": "DFR0017",
+        "UnitPrice": 2.6,
+        "ProductUrl": "https://www.digikey.com/en/products/detail/dfrobot/DFR0017/6588499",
+        "DatasheetUrl": "//mm.digikey.com/Volume0/opasdata/d220001/medias/docus/2532/DFR0017_Web.pdf",
+        "PhotoUrl": "https://mm.digikey.com/Volume0/opasdata/d220001/medias/images/2314/DFR0017.JPG",
+        "ProductVariations": [
+          {
+            "DigiKeyProductNumber": "1738-1077-ND",
+            "PackageType": {
+              "Id": 3,
+              "Name": "Bulk"
+            },
+            "StandardPricing": [
+              {
+                "BreakQuantity": 1,
+                "UnitPrice": 2.6,
+                "TotalPrice": 2.6
+              }
+            ],
+            "MyPricing": [],
+            "MarketPlace": false,
+            "TariffActive": true,
+            "Supplier": {
+              "Id": 1738,
+              "Name": "DFRobot"
+            },
+            "QuantityAvailableforPackageType": 901,
+            "MaxQuantityForDistribution": 0,
+            "MinimumOrderQuantity": 1,
+            "StandardPackage": 0,
+            "DigiReelFee": 0.0
+          }
+        ],
+        "QuantityAvailable": 901,
+        "ProductStatus": {
+          "Id": 0,
+          "Status": "Active"
+        },
+        "BackOrderNotAllowed": false,
+        "NormallyStocking": true,
+        "Discontinued": false,
+        "EndOfLife": false,
+        "Ncnr": false,
+        "PrimaryVideoUrl": null,
+        "Parameters": [
+          {
+            "ParameterId": 1742,
+            "ParameterText": "Platform",
+            "ParameterType": "String",
+            "ValueId": "351061",
+            "ValueText": "Gravity"
+          },
+          {
+            "ParameterId": 183,
+            "ParameterText": "Type",
+            "ParameterType": "String",
+            "ValueId": "395622",
+            "ValueText": "Relay"
+          },
+          {
+            "ParameterId": 110,
+            "ParameterText": "Function",
+            "ParameterType": "String",
+            "ValueId": "343623",
+            "ValueText": "Electromechanical"
+          },
+          {
+            "ParameterId": 984,
+            "ParameterText": "Utilized IC / Part",
+            "ParameterType": "String",
+            "ValueId": "1",
+            "ValueText": "-"
+          },
+          {
+            "ParameterId": 224,
+            "ParameterText": "Contents",
+            "ParameterType": "String",
+            "ValueId": "321636",
+            "ValueText": "Board(s), Cable(s)"
+          }
+        ],
+        "BaseProductNumber": {
+          "Id": 127005,
+          "Name": "-"
+        },
+        "Category": {
+          "CategoryId": 33,
+          "ParentId": 0,
+          "Name": "Development Boards, Kits, Programmers",
+          "ProductCount": 0,
+          "NewProductCount": 0,
+          "ImageUrl": "https://www.digikey.com//mm.digikey.com/Volume0/opasdata/d220001/derivates/3/200/310/411/MFG_ATATMEL-ICE_tmb.jpg",
+          "SeoDescription": "Development board, kit, and programmer products include tools and assemblies used for product development and evaluation purposes. Evaluation boards are produced by a manufacturer to allow prospective users a convenient way to characterize device behavior in context of a known-good implementation, whereas development boards and kits typically include additional features or accessories intended to aid a user in developing their own product based on some device. Programmers and related products are used for configuring products having a behavior that is user-adjustable or user-specified, such as a programmable oscillator or microcontroller.",
+          "ChildCategories": [
+            {
+              "CategoryId": 2041,
+              "ParentId": 33,
+              "Name": "Evaluation Boards",
+              "ProductCount": 0,
+              "NewProductCount": 0,
+              "ImageUrl": "https://www.digikey.com//mm.digikey.com/Volume0/opasdata/d220001/derivates/3/300/282/325/MFG_EVAL-ADE9000EBZ_tmb.jpg",
+              "SeoDescription": "Evaluation boards are produced by a manufacturer to allow prospective users a convenient way to characterize device behavior in context of a known-good implementation. Types of evaluation boards include analog to digital converters (ADCs), audio amplifiers, digital to analog converters (DACs), complex logic (FPGA, CPLD), MCU, DSP, expansion boards, daughter cards, LED drivers, linear voltage regulators, op amps, sensors, RF, RFID, DC/DC & AC/DC (Off-Line) SMPS, and more.",
+              "ChildCategories": [
+                {
+                  "CategoryId": 797,
+                  "ParentId": 2041,
+                  "Name": "Expansion Boards, Daughter Cards",
+                  "ProductCount": 0,
+                  "NewProductCount": 0,
+                  "ImageUrl": "https://www.digikey.com//mm.digikey.com/Volume0/opasdata/d220001/derivates/3/300/271/097/MFG_3191_tmb%2864x64%29.jpg",
+                  "SeoDescription": "Evaluation and expansion boards and daughter cards are used to add functionality to microcontroller platforms and are designed to stack onto existing pin headers or preconfigured attachment ports. Common function types include, amplifiers, atomizers, audio, clock timing, interface connectivity, data acquisition/logging, display, human interface, memory, motor drivers, optoelectronics, power management, prototyping, relay and transistors, RF and sensor arrays.",
+                  "ChildCategories": []
+                }
+              ]
+            }
+          ]
+        },
+        "DateLastBuyChance": null,
+        "ManufacturerLeadWeeks": "9",
+        "ManufacturerPublicQuantity": 0,
+        "Series": {
+          "Id": 818,
+          "Name": "-"
+        },
+        "ShippingInfo": null,
+        "Classifications": {
+          "ReachStatus": "REACH Unknown",
+          "RohsStatus": "ROHS3 Compliant",
+          "MoistureSensitivityLevel": "1  (Unlimited)",
+          "ExportControlClassNumber": "EAR99",
+          "HtsusCode": "8536.49.0075"
+        },
+        "OtherNames": [
+          "1738-1077"
+        ]
+      },
+      {
+        "Description": {
+          "ProductDescription": "AHT20 - TEMPERATURE & HUMIDITY S",
+          "DetailedDescription": "AHT20 Humidity, Temperature Sensor Qwiic, STEMMA QT Platform Evaluation Expansion Board"
+        },
+        "Manufacturer": {
+          "Id": 1528,
+          "Name": "Adafruit Industries LLC"
+        },
+        "ManufacturerProductNumber": "4566",
+        "UnitPrice": 4.5,
+        "ProductUrl": "https://www.digikey.com/en/products/detail/adafruit-industries-llc/4566/12396895",
+        "DatasheetUrl": "https://cdn-learn.adafruit.com/downloads/pdf/adafruit-aht20.pdf",
+        "PhotoUrl": "https://mm.digikey.com/Volume0/opasdata/d220001/medias/images/1051/4566.jpg",
+        "ProductVariations": [
+          {
+            "DigiKeyProductNumber": "1528-4566-ND",
+            "PackageType": {
+              "Id": 3,
+              "Name": "Bulk"
+            },
+            "StandardPricing": [
+              {
+                "BreakQuantity": 1,
+                "UnitPrice": 4.5,
+                "TotalPrice": 4.5
+              }
+            ],
+            "MyPricing": [],
+            "MarketPlace": false,
+            "TariffActive": false,
+            "Supplier": {
+              "Id": 1528,
+              "Name": "Adafruit Industries LLC"
+            },
+            "QuantityAvailableforPackageType": 264,
+            "MaxQuantityForDistribution": 0,
+            "MinimumOrderQuantity": 1,
+            "StandardPackage": 0,
+            "DigiReelFee": 0.0
+          }
+        ],
+        "QuantityAvailable": 264,
+        "ProductStatus": {
+          "Id": 0,
+          "Status": "Active"
+        },
+        "BackOrderNotAllowed": false,
+        "NormallyStocking": true,
+        "Discontinued": false,
+        "EndOfLife": false,
+        "Ncnr": false,
+        "PrimaryVideoUrl": null,
+        "Parameters": [
+          {
+            "ParameterId": 1742,
+            "ParameterText": "Platform",
+            "ParameterType": "String",
+            "ValueId": "426603",
+            "ValueText": "Qwiic, STEMMA QT"
+          },
+          {
+            "ParameterId": 183,
+            "ParameterText": "Type",
+            "ParameterType": "String",
+            "ValueId": "401166",
+            "ValueText": "Sensor"
+          },
+          {
+            "ParameterId": 110,
+            "ParameterText": "Function",
+            "ParameterType": "String",
+            "ValueId": "356668",
+            "ValueText": "Humidity, Temperature"
+          },
+          {
+            "ParameterId": 984,
+            "ParameterText": "Utilized IC / Part",
+            "ParameterType": "String",
+            "ValueId": "446685",
+            "ValueText": "AHT20"
+          },
+          {
+            "ParameterId": 224,
+            "ParameterText": "Contents",
+            "ParameterType": "String",
+            "ValueId": "321774",
+            "ValueText": "Board(s), Header(s)"
+          }
+        ],
+        "BaseProductNumber": null,
+        "Category": {
+          "CategoryId": 33,
+          "ParentId": 0,
+          "Name": "Development Boards, Kits, Programmers",
+          "ProductCount": 0,
+          "NewProductCount": 0,
+          "ImageUrl": "https://www.digikey.com//mm.digikey.com/Volume0/opasdata/d220001/derivates/3/200/310/411/MFG_ATATMEL-ICE_tmb.jpg",
+          "SeoDescription": "Development board, kit, and programmer products include tools and assemblies used for product development and evaluation purposes. Evaluation boards are produced by a manufacturer to allow prospective users a convenient way to characterize device behavior in context of a known-good implementation, whereas development boards and kits typically include additional features or accessories intended to aid a user in developing their own product based on some device. Programmers and related products are used for configuring products having a behavior that is user-adjustable or user-specified, such as a programmable oscillator or microcontroller.",
+          "ChildCategories": [
+            {
+              "CategoryId": 2041,
+              "ParentId": 33,
+              "Name": "Evaluation Boards",
+              "ProductCount": 0,
+              "NewProductCount": 0,
+              "ImageUrl": "https://www.digikey.com//mm.digikey.com/Volume0/opasdata/d220001/derivates/3/300/282/325/MFG_EVAL-ADE9000EBZ_tmb.jpg",
+              "SeoDescription": "Evaluation boards are produced by a manufacturer to allow prospective users a convenient way to characterize device behavior in context of a known-good implementation. Types of evaluation boards include analog to digital converters (ADCs), audio amplifiers, digital to analog converters (DACs), complex logic (FPGA, CPLD), MCU, DSP, expansion boards, daughter cards, LED drivers, linear voltage regulators, op amps, sensors, RF, RFID, DC/DC & AC/DC (Off-Line) SMPS, and more.",
+              "ChildCategories": [
+                {
+                  "CategoryId": 797,
+                  "ParentId": 2041,
+                  "Name": "Expansion Boards, Daughter Cards",
+                  "ProductCount": 0,
+                  "NewProductCount": 0,
+                  "ImageUrl": "https://www.digikey.com//mm.digikey.com/Volume0/opasdata/d220001/derivates/3/300/271/097/MFG_3191_tmb%2864x64%29.jpg",
+                  "SeoDescription": "Evaluation and expansion boards and daughter cards are used to add functionality to microcontroller platforms and are designed to stack onto existing pin headers or preconfigured attachment ports. Common function types include, amplifiers, atomizers, audio, clock timing, interface connectivity, data acquisition/logging, display, human interface, memory, motor drivers, optoelectronics, power management, prototyping, relay and transistors, RF and sensor arrays.",
+                  "ChildCategories": []
+                }
+              ]
+            }
+          ]
+        },
+        "DateLastBuyChance": null,
+        "ManufacturerLeadWeeks": "4",
+        "ManufacturerPublicQuantity": 0,
+        "Series": {
+          "Id": 818,
+          "Name": "-"
+        },
+        "ShippingInfo": null,
+        "Classifications": {
+          "ReachStatus": "REACH not applicable",
+          "RohsStatus": "ROHS3 Compliant",
+          "MoistureSensitivityLevel": "1  (Unlimited)",
+          "ExportControlClassNumber": "EAR99",
+          "HtsusCode": "8473.30.1180"
+        },
+        "OtherNames": [
+          "1528-4566"
+        ]
+      },
+      {
+        "Description": {
+          "ProductDescription": "XIAO RP2040",
+          "DetailedDescription": "RP2040 XIAO RP2040 - ARM\u00ae Cortex\u00ae-M0+ MCU 32-Bit Embedded Evaluation Board"
+        },
+        "Manufacturer": {
+          "Id": 1597,
+          "Name": "Seeed Technology Co., Ltd"
+        },
+        "ManufacturerProductNumber": "102010428",
+        "UnitPrice": 4.68,
+        "ProductUrl": "https://www.digikey.com/en/products/detail/seeed-technology-co-ltd/102010428/14672129",
+        "DatasheetUrl": "https://files.seeedstudio.com/wiki/XIAO-RP2040/res/rp2040_datasheet.pdf",
+        "PhotoUrl": "https://mm.digikey.com/Volume0/opasdata/d220001/medias/images/4428/MFG_102010428.jpg",
+        "ProductVariations": [
+          {
+            "DigiKeyProductNumber": "1597-102010428-ND",
+            "PackageType": {
+              "Id": 62,
+              "Name": "Bag"
+            },
+            "StandardPricing": [
+              {
+                "BreakQuantity": 1,
+                "UnitPrice": 4.68,
+                "TotalPrice": 4.68
+              }
+            ],
+            "MyPricing": [],
+            "MarketPlace": false,
+            "TariffActive": true,
+            "Supplier": {
+              "Id": 1597,
+              "Name": "Seeed Technology Co., Ltd"
+            },
+            "QuantityAvailableforPackageType": 6273,
+            "MaxQuantityForDistribution": 0,
+            "MinimumOrderQuantity": 1,
+            "StandardPackage": 0,
+            "DigiReelFee": 0.0
+          }
+        ],
+        "QuantityAvailable": 6273,
+        "ProductStatus": {
+          "Id": 0,
+          "Status": "Active"
+        },
+        "BackOrderNotAllowed": false,
+        "NormallyStocking": true,
+        "Discontinued": false,
+        "EndOfLife": false,
+        "Ncnr": false,
+        "PrimaryVideoUrl": null,
+        "Parameters": [
+          {
+            "ParameterId": 183,
+            "ParameterText": "Type",
+            "ParameterType": "String",
+            "ValueId": "374374",
+            "ValueText": "MCU 32-Bit"
+          },
+          {
+            "ParameterId": 506,
+            "ParameterText": "Core Processor",
+            "ParameterType": "String",
+            "ValueId": "314885",
+            "ValueText": "ARM\u00ae Cortex\u00ae-M0+"
+          },
+          {
+            "ParameterId": 1742,
+            "ParameterText": "Platform",
+            "ParameterType": "String",
+            "ValueId": "509855",
+            "ValueText": "XIAO RP2040"
+          },
+          {
+            "ParameterId": 984,
+            "ParameterText": "Utilized IC / Part",
+            "ParameterType": "String",
+            "ValueId": "486327",
+            "ValueText": "RP2040"
+          },
+          {
+            "ParameterId": 69,
+            "ParameterText": "Mounting Type",
+            "ParameterType": "String",
+            "ValueId": "347431",
+            "ValueText": "Fixed"
+          },
+          {
+            "ParameterId": 224,
+            "ParameterText": "Contents",
+            "ParameterType": "String",
+            "ValueId": "321634",
+            "ValueText": "Board(s), Accessories"
+          }
+        ],
+        "BaseProductNumber": null,
+        "Category": {
+          "CategoryId": 33,
+          "ParentId": 0,
+          "Name": "Development Boards, Kits, Programmers",
+          "ProductCount": 0,
+          "NewProductCount": 0,
+          "ImageUrl": "https://www.digikey.com//mm.digikey.com/Volume0/opasdata/d220001/derivates/3/200/310/411/MFG_ATATMEL-ICE_tmb.jpg",
+          "SeoDescription": "Development board, kit, and programmer products include tools and assemblies used for product development and evaluation purposes. Evaluation boards are produced by a manufacturer to allow prospective users a convenient way to characterize device behavior in context of a known-good implementation, whereas development boards and kits typically include additional features or accessories intended to aid a user in developing their own product based on some device. Programmers and related products are used for configuring products having a behavior that is user-adjustable or user-specified, such as a programmable oscillator or microcontroller.",
+          "ChildCategories": [
+            {
+              "CategoryId": 2041,
+              "ParentId": 33,
+              "Name": "Evaluation Boards",
+              "ProductCount": 0,
+              "NewProductCount": 0,
+              "ImageUrl": "https://www.digikey.com//mm.digikey.com/Volume0/opasdata/d220001/derivates/3/300/282/325/MFG_EVAL-ADE9000EBZ_tmb.jpg",
+              "SeoDescription": "Evaluation boards are produced by a manufacturer to allow prospective users a convenient way to characterize device behavior in context of a known-good implementation. Types of evaluation boards include analog to digital converters (ADCs), audio amplifiers, digital to analog converters (DACs), complex logic (FPGA, CPLD), MCU, DSP, expansion boards, daughter cards, LED drivers, linear voltage regulators, op amps, sensors, RF, RFID, DC/DC & AC/DC (Off-Line) SMPS, and more.",
+              "ChildCategories": [
+                {
+                  "CategoryId": 786,
+                  "ParentId": 2041,
+                  "Name": "Embedded MCU, DSP Evaluation Boards",
+                  "ProductCount": 0,
+                  "NewProductCount": 0,
+                  "ImageUrl": "https://www.digikey.com//mm.digikey.com/Volume0/opasdata/d220001/derivates/3/001/149/427/MFG_RASPBERRY-PI-4B-2GB_1_tmb.jpg",
+                  "SeoDescription": "Products within this family provide a convenient means of evaluating the performance or behavior of microcontroller, microprocessor, and digital signal processor components in the context of a proven hardware implementation. Included products vary in their intended use case, and may range from unpopulated PCBs intended to facilitate evaluation to a range of microcontroller families, to single board computers with extensive peripheral support.",
+                  "ChildCategories": []
+                }
+              ]
+            }
+          ]
+        },
+        "DateLastBuyChance": null,
+        "ManufacturerLeadWeeks": "42",
+        "ManufacturerPublicQuantity": 0,
+        "Series": {
+          "Id": 818,
+          "Name": "-"
+        },
+        "ShippingInfo": null,
+        "Classifications": {
+          "ReachStatus": "REACH Unknown",
+          "RohsStatus": "Unknown",
+          "MoistureSensitivityLevel": "1  (Unlimited)",
+          "ExportControlClassNumber": "3A991A2",
+          "HtsusCode": "8471.50.0150"
+        },
+        "OtherNames": [
+          "6196-102010428",
+          "1597-102010428"
+        ]
+      },
+      {
+        "Description": {
+          "ProductDescription": "MINI RFID UNIT 2 WS1850S",
+          "DetailedDescription": "WS1850S RFID Reader RF RFID Wireless M5Stack Platform Evaluation Expansion Board"
+        },
+        "Manufacturer": {
+          "Id": 2221,
+          "Name": "M5Stack Technology Co., Ltd."
+        },
+        "ManufacturerProductNumber": "U031-B",
+        "UnitPrice": 4.95,
+        "ProductUrl": "https://www.digikey.com/en/products/detail/m5stack-technology-co-ltd/U031-B/15965508",
+        "DatasheetUrl": "https://shop.m5stack.com/products/rfid-unit-2-ws1850s?variant=40753463885996",
+        "PhotoUrl": "https://mm.digikey.com/Volume0/opasdata/d220001/medias/images/5010/U031-B.jpg",
+        "ProductVariations": [
+          {
+            "DigiKeyProductNumber": "2221-U031-B-ND",
+            "PackageType": {
+              "Id": 61,
+              "Name": "Box"
+            },
+            "StandardPricing": [
+              {
+                "BreakQuantity": 1,
+                "UnitPrice": 4.95,
+                "TotalPrice": 4.95
+              }
+            ],
+            "MyPricing": [],
+            "MarketPlace": false,
+            "TariffActive": true,
+            "Supplier": {
+              "Id": 2221,
+              "Name": "M5Stack Technology Co., Ltd."
+            },
+            "QuantityAvailableforPackageType": 204,
+            "MaxQuantityForDistribution": 0,
+            "MinimumOrderQuantity": 1,
+            "StandardPackage": 0,
+            "DigiReelFee": 0.0
+          }
+        ],
+        "QuantityAvailable": 204,
+        "ProductStatus": {
+          "Id": 0,
+          "Status": "Active"
+        },
+        "BackOrderNotAllowed": false,
+        "NormallyStocking": true,
+        "Discontinued": false,
+        "EndOfLife": false,
+        "Ncnr": false,
+        "PrimaryVideoUrl": null,
+        "Parameters": [
+          {
+            "ParameterId": 1742,
+            "ParameterText": "Platform",
+            "ParameterType": "String",
+            "ValueId": "425045",
+            "ValueText": "M5Stack"
+          },
+          {
+            "ParameterId": 183,
+            "ParameterText": "Type",
+            "ParameterType": "String",
+            "ValueId": "878274",
+            "ValueText": "RF RFID Wireless"
+          },
+          {
+            "ParameterId": 110,
+            "ParameterText": "Function",
+            "ParameterType": "String",
+            "ValueId": "396271",
+            "ValueText": "RFID Reader"
+          },
+          {
+            "ParameterId": 984,
+            "ParameterText": "Utilized IC / Part",
+            "ParameterType": "String",
+            "ValueId": "676648",
+            "ValueText": "WS1850S"
+          },
+          {
+            "ParameterId": 224,
+            "ParameterText": "Contents",
+            "ParameterType": "String",
+            "ValueId": "321636",
+            "ValueText": "Board(s), Cable(s)"
+          }
+        ],
+        "BaseProductNumber": null,
+        "Category": {
+          "CategoryId": 33,
+          "ParentId": 0,
+          "Name": "Development Boards, Kits, Programmers",
+          "ProductCount": 0,
+          "NewProductCount": 0,
+          "ImageUrl": "https://www.digikey.com//mm.digikey.com/Volume0/opasdata/d220001/derivates/3/200/310/411/MFG_ATATMEL-ICE_tmb.jpg",
+          "SeoDescription": "Development board, kit, and programmer products include tools and assemblies used for product development and evaluation purposes. Evaluation boards are produced by a manufacturer to allow prospective users a convenient way to characterize device behavior in context of a known-good implementation, whereas development boards and kits typically include additional features or accessories intended to aid a user in developing their own product based on some device. Programmers and related products are used for configuring products having a behavior that is user-adjustable or user-specified, such as a programmable oscillator or microcontroller.",
+          "ChildCategories": [
+            {
+              "CategoryId": 2041,
+              "ParentId": 33,
+              "Name": "Evaluation Boards",
+              "ProductCount": 0,
+              "NewProductCount": 0,
+              "ImageUrl": "https://www.digikey.com//mm.digikey.com/Volume0/opasdata/d220001/derivates/3/300/282/325/MFG_EVAL-ADE9000EBZ_tmb.jpg",
+              "SeoDescription": "Evaluation boards are produced by a manufacturer to allow prospective users a convenient way to characterize device behavior in context of a known-good implementation. Types of evaluation boards include analog to digital converters (ADCs), audio amplifiers, digital to analog converters (DACs), complex logic (FPGA, CPLD), MCU, DSP, expansion boards, daughter cards, LED drivers, linear voltage regulators, op amps, sensors, RF, RFID, DC/DC & AC/DC (Off-Line) SMPS, and more.",
+              "ChildCategories": [
+                {
+                  "CategoryId": 797,
+                  "ParentId": 2041,
+                  "Name": "Expansion Boards, Daughter Cards",
+                  "ProductCount": 0,
+                  "NewProductCount": 0,
+                  "ImageUrl": "https://www.digikey.com//mm.digikey.com/Volume0/opasdata/d220001/derivates/3/300/271/097/MFG_3191_tmb%2864x64%29.jpg",
+                  "SeoDescription": "Evaluation and expansion boards and daughter cards are used to add functionality to microcontroller platforms and are designed to stack onto existing pin headers or preconfigured attachment ports. Common function types include, amplifiers, atomizers, audio, clock timing, interface connectivity, data acquisition/logging, display, human interface, memory, motor drivers, optoelectronics, power management, prototyping, relay and transistors, RF and sensor arrays.",
+                  "ChildCategories": []
+                }
+              ]
+            }
+          ]
+        },
+        "DateLastBuyChance": null,
+        "ManufacturerLeadWeeks": "30",
+        "ManufacturerPublicQuantity": 0,
+        "Series": {
+          "Id": 818,
+          "Name": "-"
+        },
+        "ShippingInfo": null,
+        "Classifications": {
+          "ReachStatus": "REACH Unknown",
+          "RohsStatus": "ROHS3 Compliant",
+          "MoistureSensitivityLevel": "1  (Unlimited)",
+          "ExportControlClassNumber": "EAR99",
+          "HtsusCode": "8543.70.9860"
+        },
+        "OtherNames": [
+          "2221-U031-B"
+        ]
+      },
+      {
+        "Description": {
+          "ProductDescription": "XIAO SAMD21",
+          "DetailedDescription": "ATSAMD21G18 XIAO SAMD21 SAM D ARM\u00ae Cortex\u00ae-M0+ MCU 32-Bit Embedded Evaluation Board"
+        },
+        "Manufacturer": {
+          "Id": 1597,
+          "Name": "Seeed Technology Co., Ltd"
+        },
+        "ManufacturerProductNumber": "102010328",
+        "UnitPrice": 5.4,
+        "ProductUrl": "https://www.digikey.com/en/products/detail/seeed-technology-co-ltd/102010328/11506471",
+        "DatasheetUrl": "//mm.digikey.com/Volume0/opasdata/d220001/medias/docus/57/102010328_Web.pdf",
+        "PhotoUrl": "https://mm.digikey.com/Volume0/opasdata/d220001/medias/images/57/MFG_102010328.jpg",
+        "ProductVariations": [
+          {
+            "DigiKeyProductNumber": "1597-102010328-ND",
+            "PackageType": {
+              "Id": 3,
+              "Name": "Bulk"
+            },
+            "StandardPricing": [
+              {
+                "BreakQuantity": 1,
+                "UnitPrice": 5.4,
+                "TotalPrice": 5.4
+              }
+            ],
+            "MyPricing": [],
+            "MarketPlace": false,
+            "TariffActive": true,
+            "Supplier": {
+              "Id": 1597,
+              "Name": "Seeed Technology Co., Ltd"
+            },
+            "QuantityAvailableforPackageType": 3176,
+            "MaxQuantityForDistribution": 0,
+            "MinimumOrderQuantity": 1,
+            "StandardPackage": 0,
+            "DigiReelFee": 0.0
+          }
+        ],
+        "QuantityAvailable": 3176,
+        "ProductStatus": {
+          "Id": 0,
+          "Status": "Active"
+        },
+        "BackOrderNotAllowed": false,
+        "NormallyStocking": true,
+        "Discontinued": false,
+        "EndOfLife": false,
+        "Ncnr": false,
+        "PrimaryVideoUrl": null,
+        "Parameters": [
+          {
+            "ParameterId": 183,
+            "ParameterText": "Type",
+            "ParameterType": "String",
+            "ValueId": "374374",
+            "ValueText": "MCU 32-Bit"
+          },
+          {
+            "ParameterId": 506,
+            "ParameterText": "Core Processor",
+            "ParameterType": "String",
+            "ValueId": "314885",
+            "ValueText": "ARM\u00ae Cortex\u00ae-M0+"
+          },
+          {
+            "ParameterId": 1742,
+            "ParameterText": "Platform",
+            "ParameterType": "String",
+            "ValueId": "858056",
+            "ValueText": "XIAO SAMD21"
+          },
+          {
+            "ParameterId": 984,
+            "ParameterText": "Utilized IC / Part",
+            "ParameterType": "String",
+            "ValueId": "316219",
+            "ValueText": "ATSAMD21G18"
+          },
+          {
+            "ParameterId": 69,
+            "ParameterText": "Mounting Type",
+            "ParameterType": "String",
+            "ValueId": "347431",
+            "ValueText": "Fixed"
+          },
+          {
+            "ParameterId": 224,
+            "ParameterText": "Contents",
+            "ParameterType": "String",
+            "ValueId": "321634",
+            "ValueText": "Board(s), Accessories"
+          }
+        ],
+        "BaseProductNumber": {
+          "Id": 113978,
+          "Name": "ATSAMD21G18"
+        },
+        "Category": {
+          "CategoryId": 33,
+          "ParentId": 0,
+          "Name": "Development Boards, Kits, Programmers",
+          "ProductCount": 0,
+          "NewProductCount": 0,
+          "ImageUrl": "https://www.digikey.com//mm.digikey.com/Volume0/opasdata/d220001/derivates/3/200/310/411/MFG_ATATMEL-ICE_tmb.jpg",
+          "SeoDescription": "Development board, kit, and programmer products include tools and assemblies used for product development and evaluation purposes. Evaluation boards are produced by a manufacturer to allow prospective users a convenient way to characterize device behavior in context of a known-good implementation, whereas development boards and kits typically include additional features or accessories intended to aid a user in developing their own product based on some device. Programmers and related products are used for configuring products having a behavior that is user-adjustable or user-specified, such as a programmable oscillator or microcontroller.",
+          "ChildCategories": [
+            {
+              "CategoryId": 2041,
+              "ParentId": 33,
+              "Name": "Evaluation Boards",
+              "ProductCount": 0,
+              "NewProductCount": 0,
+              "ImageUrl": "https://www.digikey.com//mm.digikey.com/Volume0/opasdata/d220001/derivates/3/300/282/325/MFG_EVAL-ADE9000EBZ_tmb.jpg",
+              "SeoDescription": "Evaluation boards are produced by a manufacturer to allow prospective users a convenient way to characterize device behavior in context of a known-good implementation. Types of evaluation boards include analog to digital converters (ADCs), audio amplifiers, digital to analog converters (DACs), complex logic (FPGA, CPLD), MCU, DSP, expansion boards, daughter cards, LED drivers, linear voltage regulators, op amps, sensors, RF, RFID, DC/DC & AC/DC (Off-Line) SMPS, and more.",
+              "ChildCategories": [
+                {
+                  "CategoryId": 786,
+                  "ParentId": 2041,
+                  "Name": "Embedded MCU, DSP Evaluation Boards",
+                  "ProductCount": 0,
+                  "NewProductCount": 0,
+                  "ImageUrl": "https://www.digikey.com//mm.digikey.com/Volume0/opasdata/d220001/derivates/3/001/149/427/MFG_RASPBERRY-PI-4B-2GB_1_tmb.jpg",
+                  "SeoDescription": "Products within this family provide a convenient means of evaluating the performance or behavior of microcontroller, microprocessor, and digital signal processor components in the context of a proven hardware implementation. Included products vary in their intended use case, and may range from unpopulated PCBs intended to facilitate evaluation to a range of microcontroller families, to single board computers with extensive peripheral support.",
+                  "ChildCategories": []
+                }
+              ]
+            }
+          ]
+        },
+        "DateLastBuyChance": null,
+        "ManufacturerLeadWeeks": "32",
+        "ManufacturerPublicQuantity": 0,
+        "Series": {
+          "Id": 48055,
+          "Name": "SAM D"
+        },
+        "ShippingInfo": null,
+        "Classifications": {
+          "ReachStatus": "REACH Unknown",
+          "RohsStatus": "Unknown",
+          "MoistureSensitivityLevel": "1  (Unlimited)",
+          "ExportControlClassNumber": "3A991A2",
+          "HtsusCode": "8471.50.0150"
+        },
+        "OtherNames": [
+          "1597-102010328"
+        ]
+      },
+      {
+        "Description": {
+          "ProductDescription": "DFRDUINO NANO ATMEGA328 EVAL BRD",
+          "DetailedDescription": "ATmega328 DFRduino Nano AVR\u00ae AVR MCU 8-Bit Embedded Evaluation Board"
+        },
+        "Manufacturer": {
+          "Id": 1738,
+          "Name": "DFRobot"
+        },
+        "ManufacturerProductNumber": "DFR0010",
+        "UnitPrice": 5.9,
+        "ProductUrl": "https://www.digikey.com/en/products/detail/dfrobot/DFR0010/6588448",
+        "DatasheetUrl": "//mm.digikey.com/Volume0/opasdata/d220001/medias/docus/2267/DFR0010_Web.pdf",
+        "PhotoUrl": "https://mm.digikey.com/Volume0/opasdata/d220001/medias/images/2093/DFR0010.JPG",
+        "ProductVariations": [
+          {
+            "DigiKeyProductNumber": "1738-1026-ND",
+            "PackageType": {
+              "Id": 3,
+              "Name": "Bulk"
+            },
+            "StandardPricing": [
+              {
+                "BreakQuantity": 1,
+                "UnitPrice": 5.9,
+                "TotalPrice": 5.9
+              }
+            ],
+            "MyPricing": [],
+            "MarketPlace": false,
+            "TariffActive": true,
+            "Supplier": {
+              "Id": 1738,
+              "Name": "DFRobot"
+            },
+            "QuantityAvailableforPackageType": 703,
+            "MaxQuantityForDistribution": 0,
+            "MinimumOrderQuantity": 1,
+            "StandardPackage": 0,
+            "DigiReelFee": 0.0
+          }
+        ],
+        "QuantityAvailable": 703,
+        "ProductStatus": {
+          "Id": 0,
+          "Status": "Active"
+        },
+        "BackOrderNotAllowed": false,
+        "NormallyStocking": true,
+        "Discontinued": false,
+        "EndOfLife": false,
+        "Ncnr": false,
+        "PrimaryVideoUrl": null,
+        "Parameters": [
+          {
+            "ParameterId": 183,
+            "ParameterText": "Type",
+            "ParameterType": "String",
+            "ValueId": "374375",
+            "ValueText": "MCU 8-Bit"
+          },
+          {
+            "ParameterId": 506,
+            "ParameterText": "Core Processor",
+            "ParameterType": "String",
+            "ValueId": "317125",
+            "ValueText": "AVR"
+          },
+          {
+            "ParameterId": 1742,
+            "ParameterText": "Platform",
+            "ParameterType": "String",
+            "ValueId": "338424",
+            "ValueText": "DFRduino Nano"
+          },
+          {
+            "ParameterId": 984,
+            "ParameterText": "Utilized IC / Part",
+            "ParameterType": "String",
+            "ValueId": "316020",
+            "ValueText": "ATmega328"
+          },
+          {
+            "ParameterId": 69,
+            "ParameterText": "Mounting Type",
+            "ParameterType": "String",
+            "ValueId": "347431",
+            "ValueText": "Fixed"
+          },
+          {
+            "ParameterId": 224,
+            "ParameterText": "Contents",
+            "ParameterType": "String",
+            "ValueId": "321631",
+            "ValueText": "Board(s)"
+          }
+        ],
+        "BaseProductNumber": null,
+        "Category": {
+          "CategoryId": 33,
+          "ParentId": 0,
+          "Name": "Development Boards, Kits, Programmers",
+          "ProductCount": 0,
+          "NewProductCount": 0,
+          "ImageUrl": "https://www.digikey.com//mm.digikey.com/Volume0/opasdata/d220001/derivates/3/200/310/411/MFG_ATATMEL-ICE_tmb.jpg",
+          "SeoDescription": "Development board, kit, and programmer products include tools and assemblies used for product development and evaluation purposes. Evaluation boards are produced by a manufacturer to allow prospective users a convenient way to characterize device behavior in context of a known-good implementation, whereas development boards and kits typically include additional features or accessories intended to aid a user in developing their own product based on some device. Programmers and related products are used for configuring products having a behavior that is user-adjustable or user-specified, such as a programmable oscillator or microcontroller.",
+          "ChildCategories": [
+            {
+              "CategoryId": 2041,
+              "ParentId": 33,
+              "Name": "Evaluation Boards",
+              "ProductCount": 0,
+              "NewProductCount": 0,
+              "ImageUrl": "https://www.digikey.com//mm.digikey.com/Volume0/opasdata/d220001/derivates/3/300/282/325/MFG_EVAL-ADE9000EBZ_tmb.jpg",
+              "SeoDescription": "Evaluation boards are produced by a manufacturer to allow prospective users a convenient way to characterize device behavior in context of a known-good implementation. Types of evaluation boards include analog to digital converters (ADCs), audio amplifiers, digital to analog converters (DACs), complex logic (FPGA, CPLD), MCU, DSP, expansion boards, daughter cards, LED drivers, linear voltage regulators, op amps, sensors, RF, RFID, DC/DC & AC/DC (Off-Line) SMPS, and more.",
+              "ChildCategories": [
+                {
+                  "CategoryId": 786,
+                  "ParentId": 2041,
+                  "Name": "Embedded MCU, DSP Evaluation Boards",
+                  "ProductCount": 0,
+                  "NewProductCount": 0,
+                  "ImageUrl": "https://www.digikey.com//mm.digikey.com/Volume0/opasdata/d220001/derivates/3/001/149/427/MFG_RASPBERRY-PI-4B-2GB_1_tmb.jpg",
+                  "SeoDescription": "Products within this family provide a convenient means of evaluating the performance or behavior of microcontroller, microprocessor, and digital signal processor components in the context of a proven hardware implementation. Included products vary in their intended use case, and may range from unpopulated PCBs intended to facilitate evaluation to a range of microcontroller families, to single board computers with extensive peripheral support.",
+                  "ChildCategories": []
+                }
+              ]
+            }
+          ]
+        },
+        "DateLastBuyChance": null,
+        "ManufacturerLeadWeeks": "9",
+        "ManufacturerPublicQuantity": 0,
+        "Series": {
+          "Id": 11718,
+          "Name": "AVR\u00ae"
+        },
+        "ShippingInfo": null,
+        "Classifications": {
+          "ReachStatus": "REACH Unknown",
+          "RohsStatus": "Not Applicable",
+          "MoistureSensitivityLevel": "1  (Unlimited)",
+          "ExportControlClassNumber": "EAR99",
+          "HtsusCode": "8471.50.0150"
+        },
+        "OtherNames": [
+          "1738-1026"
+        ]
+      },
+      {
+        "Description": {
+          "ProductDescription": "DFPLAYER - A MINI MP3 PLAYER",
+          "DetailedDescription": "MP3 Player Audio Arduino Platform Evaluation Expansion Board"
+        },
+        "Manufacturer": {
+          "Id": 1738,
+          "Name": "DFRobot"
+        },
+        "ManufacturerProductNumber": "DFR0299",
+        "UnitPrice": 5.9,
+        "ProductUrl": "https://www.digikey.com/en/products/detail/dfrobot/DFR0299/6588463",
+        "DatasheetUrl": "https://raw.githubusercontent.com/Arduinolibrary/DFPlayer_Mini_mp3/master/DFPlayer%20Mini%20Manual.pdf",
+        "PhotoUrl": "https://mm.digikey.com/Volume0/opasdata/d220001/medias/images/2522/DFR0299.JPG",
+        "ProductVariations": [
+          {
+            "DigiKeyProductNumber": "1738-1041-ND",
+            "PackageType": {
+              "Id": 3,
+              "Name": "Bulk"
+            },
+            "StandardPricing": [
+              {
+                "BreakQuantity": 1,
+                "UnitPrice": 5.9,
+                "TotalPrice": 5.9
+              }
+            ],
+            "MyPricing": [],
+            "MarketPlace": false,
+            "TariffActive": true,
+            "Supplier": {
+              "Id": 1738,
+              "Name": "DFRobot"
+            },
+            "QuantityAvailableforPackageType": 568,
+            "MaxQuantityForDistribution": 0,
+            "MinimumOrderQuantity": 1,
+            "StandardPackage": 0,
+            "DigiReelFee": 0.0
+          }
+        ],
+        "QuantityAvailable": 568,
+        "ProductStatus": {
+          "Id": 0,
+          "Status": "Active"
+        },
+        "BackOrderNotAllowed": false,
+        "NormallyStocking": true,
+        "Discontinued": false,
+        "EndOfLife": false,
+        "Ncnr": false,
+        "PrimaryVideoUrl": null,
+        "Parameters": [
+          {
+            "ParameterId": 1742,
+            "ParameterText": "Platform",
+            "ParameterType": "String",
+            "ValueId": "314594",
+            "ValueText": "Arduino"
+          },
+          {
+            "ParameterId": 183,
+            "ParameterText": "Type",
+            "ParameterType": "String",
+            "ValueId": "316418",
+            "ValueText": "Audio"
+          },
+          {
+            "ParameterId": 110,
+            "ParameterText": "Function",
+            "ParameterType": "String",
+            "ValueId": "377383",
+            "ValueText": "MP3 Player"
+          },
+          {
+            "ParameterId": 984,
+            "ParameterText": "Utilized IC / Part",
+            "ParameterType": "String",
+            "ValueId": "1",
+            "ValueText": "-"
+          },
+          {
+            "ParameterId": 224,
+            "ParameterText": "Contents",
+            "ParameterType": "String",
+            "ValueId": "321631",
+            "ValueText": "Board(s)"
+          }
+        ],
+        "BaseProductNumber": null,
+        "Category": {
+          "CategoryId": 33,
+          "ParentId": 0,
+          "Name": "Development Boards, Kits, Programmers",
+          "ProductCount": 0,
+          "NewProductCount": 0,
+          "ImageUrl": "https://www.digikey.com//mm.digikey.com/Volume0/opasdata/d220001/derivates/3/200/310/411/MFG_ATATMEL-ICE_tmb.jpg",
+          "SeoDescription": "Development board, kit, and programmer products include tools and assemblies used for product development and evaluation purposes. Evaluation boards are produced by a manufacturer to allow prospective users a convenient way to characterize device behavior in context of a known-good implementation, whereas development boards and kits typically include additional features or accessories intended to aid a user in developing their own product based on some device. Programmers and related products are used for configuring products having a behavior that is user-adjustable or user-specified, such as a programmable oscillator or microcontroller.",
+          "ChildCategories": [
+            {
+              "CategoryId": 2041,
+              "ParentId": 33,
+              "Name": "Evaluation Boards",
+              "ProductCount": 0,
+              "NewProductCount": 0,
+              "ImageUrl": "https://www.digikey.com//mm.digikey.com/Volume0/opasdata/d220001/derivates/3/300/282/325/MFG_EVAL-ADE9000EBZ_tmb.jpg",
+              "SeoDescription": "Evaluation boards are produced by a manufacturer to allow prospective users a convenient way to characterize device behavior in context of a known-good implementation. Types of evaluation boards include analog to digital converters (ADCs), audio amplifiers, digital to analog converters (DACs), complex logic (FPGA, CPLD), MCU, DSP, expansion boards, daughter cards, LED drivers, linear voltage regulators, op amps, sensors, RF, RFID, DC/DC & AC/DC (Off-Line) SMPS, and more.",
+              "ChildCategories": [
+                {
+                  "CategoryId": 797,
+                  "ParentId": 2041,
+                  "Name": "Expansion Boards, Daughter Cards",
+                  "ProductCount": 0,
+                  "NewProductCount": 0,
+                  "ImageUrl": "https://www.digikey.com//mm.digikey.com/Volume0/opasdata/d220001/derivates/3/300/271/097/MFG_3191_tmb%2864x64%29.jpg",
+                  "SeoDescription": "Evaluation and expansion boards and daughter cards are used to add functionality to microcontroller platforms and are designed to stack onto existing pin headers or preconfigured attachment ports. Common function types include, amplifiers, atomizers, audio, clock timing, interface connectivity, data acquisition/logging, display, human interface, memory, motor drivers, optoelectronics, power management, prototyping, relay and transistors, RF and sensor arrays.",
+                  "ChildCategories": []
+                }
+              ]
+            }
+          ]
+        },
+        "DateLastBuyChance": null,
+        "ManufacturerLeadWeeks": "9",
+        "ManufacturerPublicQuantity": 0,
+        "Series": {
+          "Id": 818,
+          "Name": "-"
+        },
+        "ShippingInfo": null,
+        "Classifications": {
+          "ReachStatus": "REACH Unknown",
+          "RohsStatus": "ROHS3 Compliant",
+          "MoistureSensitivityLevel": "1  (Unlimited)",
+          "ExportControlClassNumber": "EAR99",
+          "HtsusCode": "8473.30.1180"
+        },
+        "OtherNames": [
+          "1738-1041"
+        ]
+      },
+      {
+        "Description": {
+          "ProductDescription": "ADAFRUIT NAU7802 24-BIT ADC - ST",
+          "DetailedDescription": "NAU7802 Analog to Digital Converter (ADC) Data Acquisition Qwiic, STEMMA QT Platform Evaluation Expansion Board"
+        },
+        "Manufacturer": {
+          "Id": 1528,
+          "Name": "Adafruit Industries LLC"
+        },
+        "ManufacturerProductNumber": "4538",
+        "UnitPrice": 5.95,
+        "ProductUrl": "https://www.digikey.com/en/products/detail/adafruit-industries-llc/4538/16584123",
+        "DatasheetUrl": "https://cdn-learn.adafruit.com/downloads/pdf/adafruit-nau7802-24-bit-adc-stemma-qt-qwiic.pdf",
+        "PhotoUrl": "https://mm.digikey.com/Volume0/opasdata/d220001/medias/images/2880/MFG_4538.jpg",
+        "ProductVariations": [
+          {
+            "DigiKeyProductNumber": "1528-4538-ND",
+            "PackageType": {
+              "Id": 3,
+              "Name": "Bulk"
+            },
+            "StandardPricing": [
+              {
+                "BreakQuantity": 1,
+                "UnitPrice": 5.95,
+                "TotalPrice": 5.95
+              }
+            ],
+            "MyPricing": [],
+            "MarketPlace": false,
+            "TariffActive": false,
+            "Supplier": {
+              "Id": 1528,
+              "Name": "Adafruit Industries LLC"
+            },
+            "QuantityAvailableforPackageType": 666,
+            "MaxQuantityForDistribution": 0,
+            "MinimumOrderQuantity": 1,
+            "StandardPackage": 0,
+            "DigiReelFee": 0.0
+          }
+        ],
+        "QuantityAvailable": 666,
+        "ProductStatus": {
+          "Id": 0,
+          "Status": "Active"
+        },
+        "BackOrderNotAllowed": false,
+        "NormallyStocking": true,
+        "Discontinued": false,
+        "EndOfLife": false,
+        "Ncnr": false,
+        "PrimaryVideoUrl": null,
+        "Parameters": [
+          {
+            "ParameterId": 1742,
+            "ParameterText": "Platform",
+            "ParameterType": "String",
+            "ValueId": "426603",
+            "ValueText": "Qwiic, STEMMA QT"
+          },
+          {
+            "ParameterId": 183,
+            "ParameterText": "Type",
+            "ParameterType": "String",
+            "ValueId": "337196",
+            "ValueText": "Data Acquisition"
+          },
+          {
+            "ParameterId": 110,
+            "ParameterText": "Function",
+            "ParameterType": "String",
+            "ValueId": "313824",
+            "ValueText": "Analog to Digital Converter (ADC)"
+          },
+          {
+            "ParameterId": 984,
+            "ParameterText": "Utilized IC / Part",
+            "ParameterType": "String",
+            "ValueId": "378868",
+            "ValueText": "NAU7802"
+          },
+          {
+            "ParameterId": 224,
+            "ParameterText": "Contents",
+            "ParameterType": "String",
+            "ValueId": "321774",
+            "ValueText": "Board(s), Header(s)"
+          }
+        ],
+        "BaseProductNumber": {
+          "Id": 328082,
+          "Name": "NAU7802"
+        },
+        "Category": {
+          "CategoryId": 33,
+          "ParentId": 0,
+          "Name": "Development Boards, Kits, Programmers",
+          "ProductCount": 0,
+          "NewProductCount": 0,
+          "ImageUrl": "https://www.digikey.com//mm.digikey.com/Volume0/opasdata/d220001/derivates/3/200/310/411/MFG_ATATMEL-ICE_tmb.jpg",
+          "SeoDescription": "Development board, kit, and programmer products include tools and assemblies used for product development and evaluation purposes. Evaluation boards are produced by a manufacturer to allow prospective users a convenient way to characterize device behavior in context of a known-good implementation, whereas development boards and kits typically include additional features or accessories intended to aid a user in developing their own product based on some device. Programmers and related products are used for configuring products having a behavior that is user-adjustable or user-specified, such as a programmable oscillator or microcontroller.",
+          "ChildCategories": [
+            {
+              "CategoryId": 2041,
+              "ParentId": 33,
+              "Name": "Evaluation Boards",
+              "ProductCount": 0,
+              "NewProductCount": 0,
+              "ImageUrl": "https://www.digikey.com//mm.digikey.com/Volume0/opasdata/d220001/derivates/3/300/282/325/MFG_EVAL-ADE9000EBZ_tmb.jpg",
+              "SeoDescription": "Evaluation boards are produced by a manufacturer to allow prospective users a convenient way to characterize device behavior in context of a known-good implementation. Types of evaluation boards include analog to digital converters (ADCs), audio amplifiers, digital to analog converters (DACs), complex logic (FPGA, CPLD), MCU, DSP, expansion boards, daughter cards, LED drivers, linear voltage regulators, op amps, sensors, RF, RFID, DC/DC & AC/DC (Off-Line) SMPS, and more.",
+              "ChildCategories": [
+                {
+                  "CategoryId": 797,
+                  "ParentId": 2041,
+                  "Name": "Expansion Boards, Daughter Cards",
+                  "ProductCount": 0,
+                  "NewProductCount": 0,
+                  "ImageUrl": "https://www.digikey.com//mm.digikey.com/Volume0/opasdata/d220001/derivates/3/300/271/097/MFG_3191_tmb%2864x64%29.jpg",
+                  "SeoDescription": "Evaluation and expansion boards and daughter cards are used to add functionality to microcontroller platforms and are designed to stack onto existing pin headers or preconfigured attachment ports. Common function types include, amplifiers, atomizers, audio, clock timing, interface connectivity, data acquisition/logging, display, human interface, memory, motor drivers, optoelectronics, power management, prototyping, relay and transistors, RF and sensor arrays.",
+                  "ChildCategories": []
+                }
+              ]
+            }
+          ]
+        },
+        "DateLastBuyChance": null,
+        "ManufacturerLeadWeeks": "4",
+        "ManufacturerPublicQuantity": 0,
+        "Series": {
+          "Id": 818,
+          "Name": "-"
+        },
+        "ShippingInfo": null,
+        "Classifications": {
+          "ReachStatus": "REACH Unknown",
+          "RohsStatus": "ROHS3 Compliant",
+          "MoistureSensitivityLevel": "1  (Unlimited)",
+          "ExportControlClassNumber": "EAR99",
+          "HtsusCode": "8473.30.1180"
+        },
+        "OtherNames": [
+          "1528-4538"
+        ]
+      },
+      {
+        "Description": {
+          "ProductDescription": "STEMMA QT I2C 16 GPIO MCP23017",
+          "DetailedDescription": "MCP23017 I/O Expansion Interface Qwiic, STEMMA QT Platform Evaluation Expansion Board"
+        },
+        "Manufacturer": {
+          "Id": 1528,
+          "Name": "Adafruit Industries LLC"
+        },
+        "ManufacturerProductNumber": "5346",
+        "UnitPrice": 5.95,
+        "ProductUrl": "https://www.digikey.com/en/products/detail/adafruit-industries-llc/5346/15913270",
+        "DatasheetUrl": null,
+        "PhotoUrl": "https://mm.digikey.com/Volume0/opasdata/d220001/medias/images/2627/MFG_5346.jpg",
+        "ProductVariations": [
+          {
+            "DigiKeyProductNumber": "1528-5346-ND",
+            "PackageType": {
+              "Id": 3,
+              "Name": "Bulk"
+            },
+            "StandardPricing": [
+              {
+                "BreakQuantity": 1,
+                "UnitPrice": 5.95,
+                "TotalPrice": 5.95
+              }
+            ],
+            "MyPricing": [],
+            "MarketPlace": false,
+            "TariffActive": false,
+            "Supplier": {
+              "Id": 1528,
+              "Name": "Adafruit Industries LLC"
+            },
+            "QuantityAvailableforPackageType": 190,
+            "MaxQuantityForDistribution": 0,
+            "MinimumOrderQuantity": 1,
+            "StandardPackage": 0,
+            "DigiReelFee": 0.0
+          }
+        ],
+        "QuantityAvailable": 190,
+        "ProductStatus": {
+          "Id": 0,
+          "Status": "Active"
+        },
+        "BackOrderNotAllowed": false,
+        "NormallyStocking": true,
+        "Discontinued": false,
+        "EndOfLife": false,
+        "Ncnr": false,
+        "PrimaryVideoUrl": null,
+        "Parameters": [
+          {
+            "ParameterId": 1742,
+            "ParameterText": "Platform",
+            "ParameterType": "String",
+            "ValueId": "426603",
+            "ValueText": "Qwiic, STEMMA QT"
+          },
+          {
+            "ParameterId": 183,
+            "ParameterText": "Type",
+            "ParameterType": "String",
+            "ValueId": "359346",
+            "ValueText": "Interface"
+          },
+          {
+            "ParameterId": 110,
+            "ParameterText": "Function",
+            "ParameterType": "String",
+            "ValueId": "356893",
+            "ValueText": "I/O Expansion"
+          },
+          {
+            "ParameterId": 984,
+            "ParameterText": "Utilized IC / Part",
+            "ParameterType": "String",
+            "ValueId": "374199",
+            "ValueText": "MCP23017"
+          },
+          {
+            "ParameterId": 224,
+            "ParameterText": "Contents",
+            "ParameterType": "String",
+            "ValueId": "321774",
+            "ValueText": "Board(s), Header(s)"
+          }
+        ],
+        "BaseProductNumber": {
+          "Id": 37055,
+          "Name": "MCP23017"
+        },
+        "Category": {
+          "CategoryId": 33,
+          "ParentId": 0,
+          "Name": "Development Boards, Kits, Programmers",
+          "ProductCount": 0,
+          "NewProductCount": 0,
+          "ImageUrl": "https://www.digikey.com//mm.digikey.com/Volume0/opasdata/d220001/derivates/3/200/310/411/MFG_ATATMEL-ICE_tmb.jpg",
+          "SeoDescription": "Development board, kit, and programmer products include tools and assemblies used for product development and evaluation purposes. Evaluation boards are produced by a manufacturer to allow prospective users a convenient way to characterize device behavior in context of a known-good implementation, whereas development boards and kits typically include additional features or accessories intended to aid a user in developing their own product based on some device. Programmers and related products are used for configuring products having a behavior that is user-adjustable or user-specified, such as a programmable oscillator or microcontroller.",
+          "ChildCategories": [
+            {
+              "CategoryId": 2041,
+              "ParentId": 33,
+              "Name": "Evaluation Boards",
+              "ProductCount": 0,
+              "NewProductCount": 0,
+              "ImageUrl": "https://www.digikey.com//mm.digikey.com/Volume0/opasdata/d220001/derivates/3/300/282/325/MFG_EVAL-ADE9000EBZ_tmb.jpg",
+              "SeoDescription": "Evaluation boards are produced by a manufacturer to allow prospective users a convenient way to characterize device behavior in context of a known-good implementation. Types of evaluation boards include analog to digital converters (ADCs), audio amplifiers, digital to analog converters (DACs), complex logic (FPGA, CPLD), MCU, DSP, expansion boards, daughter cards, LED drivers, linear voltage regulators, op amps, sensors, RF, RFID, DC/DC & AC/DC (Off-Line) SMPS, and more.",
+              "ChildCategories": [
+                {
+                  "CategoryId": 797,
+                  "ParentId": 2041,
+                  "Name": "Expansion Boards, Daughter Cards",
+                  "ProductCount": 0,
+                  "NewProductCount": 0,
+                  "ImageUrl": "https://www.digikey.com//mm.digikey.com/Volume0/opasdata/d220001/derivates/3/300/271/097/MFG_3191_tmb%2864x64%29.jpg",
+                  "SeoDescription": "Evaluation and expansion boards and daughter cards are used to add functionality to microcontroller platforms and are designed to stack onto existing pin headers or preconfigured attachment ports. Common function types include, amplifiers, atomizers, audio, clock timing, interface connectivity, data acquisition/logging, display, human interface, memory, motor drivers, optoelectronics, power management, prototyping, relay and transistors, RF and sensor arrays.",
+                  "ChildCategories": []
+                }
+              ]
+            }
+          ]
+        },
+        "DateLastBuyChance": null,
+        "ManufacturerLeadWeeks": "4",
+        "ManufacturerPublicQuantity": 0,
+        "Series": {
+          "Id": 818,
+          "Name": "-"
+        },
+        "ShippingInfo": null,
+        "Classifications": {
+          "ReachStatus": "REACH not applicable",
+          "RohsStatus": "ROHS3 Compliant",
+          "MoistureSensitivityLevel": "1  (Unlimited)",
+          "ExportControlClassNumber": "EAR99",
+          "HtsusCode": "8473.30.1180"
+        },
+        "OtherNames": [
+          "1528-5346"
+        ]
+      },
+      {
+        "Description": {
+          "ProductDescription": "STEMMA QT USB TO GPIO MCP2221A",
+          "DetailedDescription": "MCP2221A USB to GPIO Interface Qwiic, STEMMA QT Platform Evaluation Expansion Board"
+        },
+        "Manufacturer": {
+          "Id": 1528,
+          "Name": "Adafruit Industries LLC"
+        },
+        "ManufacturerProductNumber": "4471",
+        "UnitPrice": 6.5,
+        "ProductUrl": "https://www.digikey.com/en/products/detail/adafruit-industries-llc/4471/11497510",
+        "DatasheetUrl": "https://cdn-learn.adafruit.com/downloads/pdf/circuitpython-libraries-on-any-computer-with-mcp2221.pdf",
+        "PhotoUrl": "https://mm.digikey.com/Volume0/opasdata/d220001/medias/images/54/MFG_4471.jpg",
+        "ProductVariations": [
+          {
+            "DigiKeyProductNumber": "1528-4471-ND",
+            "PackageType": {
+              "Id": 3,
+              "Name": "Bulk"
+            },
+            "StandardPricing": [
+              {
+                "BreakQuantity": 1,
+                "UnitPrice": 6.5,
+                "TotalPrice": 6.5
+              }
+            ],
+            "MyPricing": [],
+            "MarketPlace": false,
+            "TariffActive": false,
+            "Supplier": {
+              "Id": 1528,
+              "Name": "Adafruit Industries LLC"
+            },
+            "QuantityAvailableforPackageType": 684,
+            "MaxQuantityForDistribution": 0,
+            "MinimumOrderQuantity": 1,
+            "StandardPackage": 0,
+            "DigiReelFee": 0.0
+          }
+        ],
+        "QuantityAvailable": 684,
+        "ProductStatus": {
+          "Id": 0,
+          "Status": "Active"
+        },
+        "BackOrderNotAllowed": false,
+        "NormallyStocking": true,
+        "Discontinued": false,
+        "EndOfLife": false,
+        "Ncnr": false,
+        "PrimaryVideoUrl": null,
+        "Parameters": [
+          {
+            "ParameterId": 1742,
+            "ParameterText": "Platform",
+            "ParameterType": "String",
+            "ValueId": "426603",
+            "ValueText": "Qwiic, STEMMA QT"
+          },
+          {
+            "ParameterId": 183,
+            "ParameterText": "Type",
+            "ParameterType": "String",
+            "ValueId": "359346",
+            "ValueText": "Interface"
+          },
+          {
+            "ParameterId": 110,
+            "ParameterText": "Function",
+            "ParameterType": "String",
+            "ValueId": "770980",
+            "ValueText": "USB to GPIO"
+          },
+          {
+            "ParameterId": 984,
+            "ParameterText": "Utilized IC / Part",
+            "ParameterType": "String",
+            "ValueId": "432875",
+            "ValueText": "MCP2221A"
+          },
+          {
+            "ParameterId": 224,
+            "ParameterText": "Contents",
+            "ParameterType": "String",
+            "ValueId": "321774",
+            "ValueText": "Board(s), Header(s)"
+          }
+        ],
+        "BaseProductNumber": {
+          "Id": 114185,
+          "Name": "MCP2221"
+        },
+        "Category": {
+          "CategoryId": 33,
+          "ParentId": 0,
+          "Name": "Development Boards, Kits, Programmers",
+          "ProductCount": 0,
+          "NewProductCount": 0,
+          "ImageUrl": "https://www.digikey.com//mm.digikey.com/Volume0/opasdata/d220001/derivates/3/200/310/411/MFG_ATATMEL-ICE_tmb.jpg",
+          "SeoDescription": "Development board, kit, and programmer products include tools and assemblies used for product development and evaluation purposes. Evaluation boards are produced by a manufacturer to allow prospective users a convenient way to characterize device behavior in context of a known-good implementation, whereas development boards and kits typically include additional features or accessories intended to aid a user in developing their own product based on some device. Programmers and related products are used for configuring products having a behavior that is user-adjustable or user-specified, such as a programmable oscillator or microcontroller.",
+          "ChildCategories": [
+            {
+              "CategoryId": 2041,
+              "ParentId": 33,
+              "Name": "Evaluation Boards",
+              "ProductCount": 0,
+              "NewProductCount": 0,
+              "ImageUrl": "https://www.digikey.com//mm.digikey.com/Volume0/opasdata/d220001/derivates/3/300/282/325/MFG_EVAL-ADE9000EBZ_tmb.jpg",
+              "SeoDescription": "Evaluation boards are produced by a manufacturer to allow prospective users a convenient way to characterize device behavior in context of a known-good implementation. Types of evaluation boards include analog to digital converters (ADCs), audio amplifiers, digital to analog converters (DACs), complex logic (FPGA, CPLD), MCU, DSP, expansion boards, daughter cards, LED drivers, linear voltage regulators, op amps, sensors, RF, RFID, DC/DC & AC/DC (Off-Line) SMPS, and more.",
+              "ChildCategories": [
+                {
+                  "CategoryId": 797,
+                  "ParentId": 2041,
+                  "Name": "Expansion Boards, Daughter Cards",
+                  "ProductCount": 0,
+                  "NewProductCount": 0,
+                  "ImageUrl": "https://www.digikey.com//mm.digikey.com/Volume0/opasdata/d220001/derivates/3/300/271/097/MFG_3191_tmb%2864x64%29.jpg",
+                  "SeoDescription": "Evaluation and expansion boards and daughter cards are used to add functionality to microcontroller platforms and are designed to stack onto existing pin headers or preconfigured attachment ports. Common function types include, amplifiers, atomizers, audio, clock timing, interface connectivity, data acquisition/logging, display, human interface, memory, motor drivers, optoelectronics, power management, prototyping, relay and transistors, RF and sensor arrays.",
+                  "ChildCategories": []
+                }
+              ]
+            }
+          ]
+        },
+        "DateLastBuyChance": null,
+        "ManufacturerLeadWeeks": "4",
+        "ManufacturerPublicQuantity": 0,
+        "Series": {
+          "Id": 818,
+          "Name": "-"
+        },
+        "ShippingInfo": null,
+        "Classifications": {
+          "ReachStatus": "REACH not applicable",
+          "RohsStatus": "ROHS3 Compliant",
+          "MoistureSensitivityLevel": "1  (Unlimited)",
+          "ExportControlClassNumber": "EAR99",
+          "HtsusCode": "8473.30.1180"
+        },
+        "OtherNames": [
+          "1528-4471"
+        ]
+      },
+      {
+        "Description": {
+          "ProductDescription": "XIAO SAMD21 PRE-SOLDERED",
+          "DetailedDescription": "ATSAMD21G18 XIAO SAMD21 SAM D ARM\u00ae Cortex\u00ae-M0 MCU 32-Bit Embedded Evaluation Board"
+        },
+        "Manufacturer": {
+          "Id": 1597,
+          "Name": "Seeed Technology Co., Ltd"
+        },
+        "ManufacturerProductNumber": "102010388",
+        "UnitPrice": 6.5,
+        "ProductUrl": "https://www.digikey.com/en/products/detail/seeed-technology-co-ltd/102010388/13572076",
+        "DatasheetUrl": "https://files.seeedstudio.com/Seeed_EDU/Course_documents/Seeeduino%20XIAO.zip",
+        "PhotoUrl": "https://mm.digikey.com/Volume0/opasdata/d220001/medias/images/4251/MFG_102010388.jpg",
+        "ProductVariations": [
+          {
+            "DigiKeyProductNumber": "1597-102010388-ND",
+            "PackageType": {
+              "Id": 3,
+              "Name": "Bulk"
+            },
+            "StandardPricing": [
+              {
+                "BreakQuantity": 1,
+                "UnitPrice": 6.5,
+                "TotalPrice": 6.5
+              }
+            ],
+            "MyPricing": [],
+            "MarketPlace": false,
+            "TariffActive": true,
+            "Supplier": {
+              "Id": 1597,
+              "Name": "Seeed Technology Co., Ltd"
+            },
+            "QuantityAvailableforPackageType": 684,
+            "MaxQuantityForDistribution": 0,
+            "MinimumOrderQuantity": 1,
+            "StandardPackage": 0,
+            "DigiReelFee": 0.0
+          }
+        ],
+        "QuantityAvailable": 684,
+        "ProductStatus": {
+          "Id": 0,
+          "Status": "Active"
+        },
+        "BackOrderNotAllowed": false,
+        "NormallyStocking": true,
+        "Discontinued": false,
+        "EndOfLife": false,
+        "Ncnr": false,
+        "PrimaryVideoUrl": null,
+        "Parameters": [
+          {
+            "ParameterId": 183,
+            "ParameterText": "Type",
+            "ParameterType": "String",
+            "ValueId": "374374",
+            "ValueText": "MCU 32-Bit"
+          },
+          {
+            "ParameterId": 506,
+            "ParameterText": "Core Processor",
+            "ParameterType": "String",
+            "ValueId": "314883",
+            "ValueText": "ARM\u00ae Cortex\u00ae-M0"
+          },
+          {
+            "ParameterId": 1742,
+            "ParameterText": "Platform",
+            "ParameterType": "String",
+            "ValueId": "858056",
+            "ValueText": "XIAO SAMD21"
+          },
+          {
+            "ParameterId": 984,
+            "ParameterText": "Utilized IC / Part",
+            "ParameterType": "String",
+            "ValueId": "316219",
+            "ValueText": "ATSAMD21G18"
+          },
+          {
+            "ParameterId": 69,
+            "ParameterText": "Mounting Type",
+            "ParameterType": "String",
+            "ValueId": "347431",
+            "ValueText": "Fixed"
+          },
+          {
+            "ParameterId": 224,
+            "ParameterText": "Contents",
+            "ParameterType": "String",
+            "ValueId": "321631",
+            "ValueText": "Board(s)"
+          }
+        ],
+        "BaseProductNumber": {
+          "Id": 113978,
+          "Name": "ATSAMD21G18"
+        },
+        "Category": {
+          "CategoryId": 33,
+          "ParentId": 0,
+          "Name": "Development Boards, Kits, Programmers",
+          "ProductCount": 0,
+          "NewProductCount": 0,
+          "ImageUrl": "https://www.digikey.com//mm.digikey.com/Volume0/opasdata/d220001/derivates/3/200/310/411/MFG_ATATMEL-ICE_tmb.jpg",
+          "SeoDescription": "Development board, kit, and programmer products include tools and assemblies used for product development and evaluation purposes. Evaluation boards are produced by a manufacturer to allow prospective users a convenient way to characterize device behavior in context of a known-good implementation, whereas development boards and kits typically include additional features or accessories intended to aid a user in developing their own product based on some device. Programmers and related products are used for configuring products having a behavior that is user-adjustable or user-specified, such as a programmable oscillator or microcontroller.",
+          "ChildCategories": [
+            {
+              "CategoryId": 2041,
+              "ParentId": 33,
+              "Name": "Evaluation Boards",
+              "ProductCount": 0,
+              "NewProductCount": 0,
+              "ImageUrl": "https://www.digikey.com//mm.digikey.com/Volume0/opasdata/d220001/derivates/3/300/282/325/MFG_EVAL-ADE9000EBZ_tmb.jpg",
+              "SeoDescription": "Evaluation boards are produced by a manufacturer to allow prospective users a convenient way to characterize device behavior in context of a known-good implementation. Types of evaluation boards include analog to digital converters (ADCs), audio amplifiers, digital to analog converters (DACs), complex logic (FPGA, CPLD), MCU, DSP, expansion boards, daughter cards, LED drivers, linear voltage regulators, op amps, sensors, RF, RFID, DC/DC & AC/DC (Off-Line) SMPS, and more.",
+              "ChildCategories": [
+                {
+                  "CategoryId": 786,
+                  "ParentId": 2041,
+                  "Name": "Embedded MCU, DSP Evaluation Boards",
+                  "ProductCount": 0,
+                  "NewProductCount": 0,
+                  "ImageUrl": "https://www.digikey.com//mm.digikey.com/Volume0/opasdata/d220001/derivates/3/001/149/427/MFG_RASPBERRY-PI-4B-2GB_1_tmb.jpg",
+                  "SeoDescription": "Products within this family provide a convenient means of evaluating the performance or behavior of microcontroller, microprocessor, and digital signal processor components in the context of a proven hardware implementation. Included products vary in their intended use case, and may range from unpopulated PCBs intended to facilitate evaluation to a range of microcontroller families, to single board computers with extensive peripheral support.",
+                  "ChildCategories": []
+                }
+              ]
+            }
+          ]
+        },
+        "DateLastBuyChance": null,
+        "ManufacturerLeadWeeks": "32",
+        "ManufacturerPublicQuantity": 0,
+        "Series": {
+          "Id": 48055,
+          "Name": "SAM D"
+        },
+        "ShippingInfo": null,
+        "Classifications": {
+          "ReachStatus": "REACH Unknown",
+          "RohsStatus": "ROHS3 Compliant",
+          "MoistureSensitivityLevel": "1  (Unlimited)",
+          "ExportControlClassNumber": "3A991A2",
+          "HtsusCode": "8471.50.0150"
+        },
+        "OtherNames": [
+          "1597-102010388",
+          "6196-102010388"
+        ]
+      },
+      {
+        "Description": {
+          "ProductDescription": "STEMMA QT TSL2591 DIGITAL LIGHT",
+          "DetailedDescription": "TSL2591 Light Sensor Qwiic, STEMMA QT Platform Evaluation Expansion Board"
+        },
+        "Manufacturer": {
+          "Id": 1528,
+          "Name": "Adafruit Industries LLC"
+        },
+        "ManufacturerProductNumber": "1980",
+        "UnitPrice": 6.95,
+        "ProductUrl": "https://www.digikey.com/en/products/detail/adafruit-industries-llc/1980/4990786",
+        "DatasheetUrl": "https://cdn-shop.adafruit.com/datasheets/TSL25911_Datasheet_EN_v1.pdf",
+        "PhotoUrl": "https://mm.digikey.com/Volume0/opasdata/d220001/medias/images/2816/MFG_1980.jpg",
+        "ProductVariations": [
+          {
+            "DigiKeyProductNumber": "1528-1037-ND",
+            "PackageType": {
+              "Id": 61,
+              "Name": "Box"
+            },
+            "StandardPricing": [
+              {
+                "BreakQuantity": 1,
+                "UnitPrice": 6.95,
+                "TotalPrice": 6.95
+              }
+            ],
+            "MyPricing": [],
+            "MarketPlace": false,
+            "TariffActive": false,
+            "Supplier": {
+              "Id": 1528,
+              "Name": "Adafruit Industries LLC"
+            },
+            "QuantityAvailableforPackageType": 205,
+            "MaxQuantityForDistribution": 0,
+            "MinimumOrderQuantity": 1,
+            "StandardPackage": 0,
+            "DigiReelFee": 0.0
+          }
+        ],
+        "QuantityAvailable": 205,
+        "ProductStatus": {
+          "Id": 0,
+          "Status": "Active"
+        },
+        "BackOrderNotAllowed": false,
+        "NormallyStocking": true,
+        "Discontinued": false,
+        "EndOfLife": false,
+        "Ncnr": false,
+        "PrimaryVideoUrl": null,
+        "Parameters": [
+          {
+            "ParameterId": 1742,
+            "ParameterText": "Platform",
+            "ParameterType": "String",
+            "ValueId": "426603",
+            "ValueText": "Qwiic, STEMMA QT"
+          },
+          {
+            "ParameterId": 183,
+            "ParameterText": "Type",
+            "ParameterType": "String",
+            "ValueId": "401166",
+            "ValueText": "Sensor"
+          },
+          {
+            "ParameterId": 110,
+            "ParameterText": "Function",
+            "ParameterType": "String",
+            "ValueId": "364875",
+            "ValueText": "Light"
+          },
+          {
+            "ParameterId": 984,
+            "ParameterText": "Utilized IC / Part",
+            "ParameterType": "String",
+            "ValueId": "416281",
+            "ValueText": "TSL2591"
+          },
+          {
+            "ParameterId": 224,
+            "ParameterText": "Contents",
+            "ParameterType": "String",
+            "ValueId": "321774",
+            "ValueText": "Board(s), Header(s)"
+          }
+        ],
+        "BaseProductNumber": {
+          "Id": 350153,
+          "Name": "TSL2591"
+        },
+        "Category": {
+          "CategoryId": 33,
+          "ParentId": 0,
+          "Name": "Development Boards, Kits, Programmers",
+          "ProductCount": 0,
+          "NewProductCount": 0,
+          "ImageUrl": "https://www.digikey.com//mm.digikey.com/Volume0/opasdata/d220001/derivates/3/200/310/411/MFG_ATATMEL-ICE_tmb.jpg",
+          "SeoDescription": "Development board, kit, and programmer products include tools and assemblies used for product development and evaluation purposes. Evaluation boards are produced by a manufacturer to allow prospective users a convenient way to characterize device behavior in context of a known-good implementation, whereas development boards and kits typically include additional features or accessories intended to aid a user in developing their own product based on some device. Programmers and related products are used for configuring products having a behavior that is user-adjustable or user-specified, such as a programmable oscillator or microcontroller.",
+          "ChildCategories": [
+            {
+              "CategoryId": 2041,
+              "ParentId": 33,
+              "Name": "Evaluation Boards",
+              "ProductCount": 0,
+              "NewProductCount": 0,
+              "ImageUrl": "https://www.digikey.com//mm.digikey.com/Volume0/opasdata/d220001/derivates/3/300/282/325/MFG_EVAL-ADE9000EBZ_tmb.jpg",
+              "SeoDescription": "Evaluation boards are produced by a manufacturer to allow prospective users a convenient way to characterize device behavior in context of a known-good implementation. Types of evaluation boards include analog to digital converters (ADCs), audio amplifiers, digital to analog converters (DACs), complex logic (FPGA, CPLD), MCU, DSP, expansion boards, daughter cards, LED drivers, linear voltage regulators, op amps, sensors, RF, RFID, DC/DC & AC/DC (Off-Line) SMPS, and more.",
+              "ChildCategories": [
+                {
+                  "CategoryId": 797,
+                  "ParentId": 2041,
+                  "Name": "Expansion Boards, Daughter Cards",
+                  "ProductCount": 0,
+                  "NewProductCount": 0,
+                  "ImageUrl": "https://www.digikey.com//mm.digikey.com/Volume0/opasdata/d220001/derivates/3/300/271/097/MFG_3191_tmb%2864x64%29.jpg",
+                  "SeoDescription": "Evaluation and expansion boards and daughter cards are used to add functionality to microcontroller platforms and are designed to stack onto existing pin headers or preconfigured attachment ports. Common function types include, amplifiers, atomizers, audio, clock timing, interface connectivity, data acquisition/logging, display, human interface, memory, motor drivers, optoelectronics, power management, prototyping, relay and transistors, RF and sensor arrays.",
+                  "ChildCategories": []
+                }
+              ]
+            }
+          ]
+        },
+        "DateLastBuyChance": null,
+        "ManufacturerLeadWeeks": "4",
+        "ManufacturerPublicQuantity": 0,
+        "Series": {
+          "Id": 818,
+          "Name": "-"
+        },
+        "ShippingInfo": null,
+        "Classifications": {
+          "ReachStatus": "REACH not applicable",
+          "RohsStatus": "ROHS3 Compliant",
+          "MoistureSensitivityLevel": "1  (Unlimited)",
+          "ExportControlClassNumber": "EAR99",
+          "HtsusCode": "8473.30.1180"
+        },
+        "OtherNames": [
+          "1528-1037"
+        ]
+      },
+      {
+        "Description": {
+          "ProductDescription": "STEMMA SOIL SENSOR - I2C CAPACIT",
+          "DetailedDescription": "ATSAMD10 Moisture Sensor STEMMA Platform Evaluation Expansion Board"
+        },
+        "Manufacturer": {
+          "Id": 1528,
+          "Name": "Adafruit Industries LLC"
+        },
+        "ManufacturerProductNumber": "4026",
+        "UnitPrice": 7.5,
+        "ProductUrl": "https://www.digikey.com/en/products/detail/adafruit-industries-llc/4026/9745252",
+        "DatasheetUrl": "//mm.digikey.com/Volume0/opasdata/d220001/medias/docus/698/4026_Web.pdf",
+        "PhotoUrl": "https://mm.digikey.com/Volume0/opasdata/d220001/medias/images/4848/MFG_1528_4026.jpg",
+        "ProductVariations": [
+          {
+            "DigiKeyProductNumber": "1528-2753-ND",
+            "PackageType": {
+              "Id": 3,
+              "Name": "Bulk"
+            },
+            "StandardPricing": [
+              {
+                "BreakQuantity": 1,
+                "UnitPrice": 7.5,
+                "TotalPrice": 7.5
+              }
+            ],
+            "MyPricing": [],
+            "MarketPlace": false,
+            "TariffActive": false,
+            "Supplier": {
+              "Id": 1528,
+              "Name": "Adafruit Industries LLC"
+            },
+            "QuantityAvailableforPackageType": 400,
+            "MaxQuantityForDistribution": 0,
+            "MinimumOrderQuantity": 1,
+            "StandardPackage": 0,
+            "DigiReelFee": 0.0
+          }
+        ],
+        "QuantityAvailable": 400,
+        "ProductStatus": {
+          "Id": 0,
+          "Status": "Active"
+        },
+        "BackOrderNotAllowed": false,
+        "NormallyStocking": true,
+        "Discontinued": false,
+        "EndOfLife": false,
+        "Ncnr": false,
+        "PrimaryVideoUrl": null,
+        "Parameters": [
+          {
+            "ParameterId": 1742,
+            "ParameterText": "Platform",
+            "ParameterType": "String",
+            "ValueId": "408289",
+            "ValueText": "STEMMA"
+          },
+          {
+            "ParameterId": 183,
+            "ParameterText": "Type",
+            "ParameterType": "String",
+            "ValueId": "401166",
+            "ValueText": "Sensor"
+          },
+          {
+            "ParameterId": 110,
+            "ParameterText": "Function",
+            "ParameterType": "String",
+            "ValueId": "376919",
+            "ValueText": "Moisture"
+          },
+          {
+            "ParameterId": 984,
+            "ParameterText": "Utilized IC / Part",
+            "ParameterType": "String",
+            "ValueId": "316209",
+            "ValueText": "ATSAMD10"
+          },
+          {
+            "ParameterId": 224,
+            "ParameterText": "Contents",
+            "ParameterType": "String",
+            "ValueId": "321631",
+            "ValueText": "Board(s)"
+          }
+        ],
+        "BaseProductNumber": null,
+        "Category": {
+          "CategoryId": 33,
+          "ParentId": 0,
+          "Name": "Development Boards, Kits, Programmers",
+          "ProductCount": 0,
+          "NewProductCount": 0,
+          "ImageUrl": "https://www.digikey.com//mm.digikey.com/Volume0/opasdata/d220001/derivates/3/200/310/411/MFG_ATATMEL-ICE_tmb.jpg",
+          "SeoDescription": "Development board, kit, and programmer products include tools and assemblies used for product development and evaluation purposes. Evaluation boards are produced by a manufacturer to allow prospective users a convenient way to characterize device behavior in context of a known-good implementation, whereas development boards and kits typically include additional features or accessories intended to aid a user in developing their own product based on some device. Programmers and related products are used for configuring products having a behavior that is user-adjustable or user-specified, such as a programmable oscillator or microcontroller.",
+          "ChildCategories": [
+            {
+              "CategoryId": 2041,
+              "ParentId": 33,
+              "Name": "Evaluation Boards",
+              "ProductCount": 0,
+              "NewProductCount": 0,
+              "ImageUrl": "https://www.digikey.com//mm.digikey.com/Volume0/opasdata/d220001/derivates/3/300/282/325/MFG_EVAL-ADE9000EBZ_tmb.jpg",
+              "SeoDescription": "Evaluation boards are produced by a manufacturer to allow prospective users a convenient way to characterize device behavior in context of a known-good implementation. Types of evaluation boards include analog to digital converters (ADCs), audio amplifiers, digital to analog converters (DACs), complex logic (FPGA, CPLD), MCU, DSP, expansion boards, daughter cards, LED drivers, linear voltage regulators, op amps, sensors, RF, RFID, DC/DC & AC/DC (Off-Line) SMPS, and more.",
+              "ChildCategories": [
+                {
+                  "CategoryId": 797,
+                  "ParentId": 2041,
+                  "Name": "Expansion Boards, Daughter Cards",
+                  "ProductCount": 0,
+                  "NewProductCount": 0,
+                  "ImageUrl": "https://www.digikey.com//mm.digikey.com/Volume0/opasdata/d220001/derivates/3/300/271/097/MFG_3191_tmb%2864x64%29.jpg",
+                  "SeoDescription": "Evaluation and expansion boards and daughter cards are used to add functionality to microcontroller platforms and are designed to stack onto existing pin headers or preconfigured attachment ports. Common function types include, amplifiers, atomizers, audio, clock timing, interface connectivity, data acquisition/logging, display, human interface, memory, motor drivers, optoelectronics, power management, prototyping, relay and transistors, RF and sensor arrays.",
+                  "ChildCategories": []
+                }
+              ]
+            }
+          ]
+        },
+        "DateLastBuyChance": null,
+        "ManufacturerLeadWeeks": "18",
+        "ManufacturerPublicQuantity": 0,
+        "Series": {
+          "Id": 818,
+          "Name": "-"
+        },
+        "ShippingInfo": null,
+        "Classifications": {
+          "ReachStatus": "REACH not applicable",
+          "RohsStatus": "ROHS3 Compliant",
+          "MoistureSensitivityLevel": "1  (Unlimited)",
+          "ExportControlClassNumber": "EAR99",
+          "HtsusCode": "8473.30.1180"
+        },
+        "OtherNames": [
+          "1528-2753"
+        ]
+      },
+      {
+        "Description": {
+          "ProductDescription": "QT PY SAMD21 WITH STEMMA QT",
+          "DetailedDescription": "ATSAMD21E18 QT Py - ARM\u00ae Cortex\u00ae-M0+ MCU 32-Bit Embedded Evaluation Board"
+        },
+        "Manufacturer": {
+          "Id": 1528,
+          "Name": "Adafruit Industries LLC"
+        },
+        "ManufacturerProductNumber": "4600",
+        "UnitPrice": 7.5,
+        "ProductUrl": "https://www.digikey.com/en/products/detail/adafruit-industries-llc/4600/13543375",
+        "DatasheetUrl": "https://cdn-learn.adafruit.com/downloads/pdf/adafruit-qt-py.pdf",
+        "PhotoUrl": "https://mm.digikey.com/Volume0/opasdata/d220001/medias/images/4846/MFG_1528_4600.jpg",
+        "ProductVariations": [
+          {
+            "DigiKeyProductNumber": "1528-4600-ND",
+            "PackageType": {
+              "Id": 3,
+              "Name": "Bulk"
+            },
+            "StandardPricing": [
+              {
+                "BreakQuantity": 1,
+                "UnitPrice": 7.5,
+                "TotalPrice": 7.5
+              }
+            ],
+            "MyPricing": [],
+            "MarketPlace": false,
+            "TariffActive": false,
+            "Supplier": {
+              "Id": 1528,
+              "Name": "Adafruit Industries LLC"
+            },
+            "QuantityAvailableforPackageType": 350,
+            "MaxQuantityForDistribution": 0,
+            "MinimumOrderQuantity": 1,
+            "StandardPackage": 0,
+            "DigiReelFee": 0.0
+          }
+        ],
+        "QuantityAvailable": 350,
+        "ProductStatus": {
+          "Id": 0,
+          "Status": "Active"
+        },
+        "BackOrderNotAllowed": false,
+        "NormallyStocking": true,
+        "Discontinued": false,
+        "EndOfLife": false,
+        "Ncnr": false,
+        "PrimaryVideoUrl": null,
+        "Parameters": [
+          {
+            "ParameterId": 183,
+            "ParameterText": "Type",
+            "ParameterType": "String",
+            "ValueId": "374374",
+            "ValueText": "MCU 32-Bit"
+          },
+          {
+            "ParameterId": 506,
+            "ParameterText": "Core Processor",
+            "ParameterType": "String",
+            "ValueId": "314885",
+            "ValueText": "ARM\u00ae Cortex\u00ae-M0+"
+          },
+          {
+            "ParameterId": 1742,
+            "ParameterText": "Platform",
+            "ParameterType": "String",
+            "ValueId": "692694",
+            "ValueText": "QT Py"
+          },
+          {
+            "ParameterId": 984,
+            "ParameterText": "Utilized IC / Part",
+            "ParameterType": "String",
+            "ValueId": "316217",
+            "ValueText": "ATSAMD21E18"
+          },
+          {
+            "ParameterId": 69,
+            "ParameterText": "Mounting Type",
+            "ParameterType": "String",
+            "ValueId": "347431",
+            "ValueText": "Fixed"
+          },
+          {
+            "ParameterId": 224,
+            "ParameterText": "Contents",
+            "ParameterType": "String",
+            "ValueId": "321631",
+            "ValueText": "Board(s)"
+          }
+        ],
+        "BaseProductNumber": null,
+        "Category": {
+          "CategoryId": 33,
+          "ParentId": 0,
+          "Name": "Development Boards, Kits, Programmers",
+          "ProductCount": 0,
+          "NewProductCount": 0,
+          "ImageUrl": "https://www.digikey.com//mm.digikey.com/Volume0/opasdata/d220001/derivates/3/200/310/411/MFG_ATATMEL-ICE_tmb.jpg",
+          "SeoDescription": "Development board, kit, and programmer products include tools and assemblies used for product development and evaluation purposes. Evaluation boards are produced by a manufacturer to allow prospective users a convenient way to characterize device behavior in context of a known-good implementation, whereas development boards and kits typically include additional features or accessories intended to aid a user in developing their own product based on some device. Programmers and related products are used for configuring products having a behavior that is user-adjustable or user-specified, such as a programmable oscillator or microcontroller.",
+          "ChildCategories": [
+            {
+              "CategoryId": 2041,
+              "ParentId": 33,
+              "Name": "Evaluation Boards",
+              "ProductCount": 0,
+              "NewProductCount": 0,
+              "ImageUrl": "https://www.digikey.com//mm.digikey.com/Volume0/opasdata/d220001/derivates/3/300/282/325/MFG_EVAL-ADE9000EBZ_tmb.jpg",
+              "SeoDescription": "Evaluation boards are produced by a manufacturer to allow prospective users a convenient way to characterize device behavior in context of a known-good implementation. Types of evaluation boards include analog to digital converters (ADCs), audio amplifiers, digital to analog converters (DACs), complex logic (FPGA, CPLD), MCU, DSP, expansion boards, daughter cards, LED drivers, linear voltage regulators, op amps, sensors, RF, RFID, DC/DC & AC/DC (Off-Line) SMPS, and more.",
+              "ChildCategories": [
+                {
+                  "CategoryId": 786,
+                  "ParentId": 2041,
+                  "Name": "Embedded MCU, DSP Evaluation Boards",
+                  "ProductCount": 0,
+                  "NewProductCount": 0,
+                  "ImageUrl": "https://www.digikey.com//mm.digikey.com/Volume0/opasdata/d220001/derivates/3/001/149/427/MFG_RASPBERRY-PI-4B-2GB_1_tmb.jpg",
+                  "SeoDescription": "Products within this family provide a convenient means of evaluating the performance or behavior of microcontroller, microprocessor, and digital signal processor components in the context of a proven hardware implementation. Included products vary in their intended use case, and may range from unpopulated PCBs intended to facilitate evaluation to a range of microcontroller families, to single board computers with extensive peripheral support.",
+                  "ChildCategories": []
+                }
+              ]
+            }
+          ]
+        },
+        "DateLastBuyChance": null,
+        "ManufacturerLeadWeeks": "4",
+        "ManufacturerPublicQuantity": 0,
+        "Series": {
+          "Id": 818,
+          "Name": "-"
+        },
+        "ShippingInfo": null,
+        "Classifications": {
+          "ReachStatus": "REACH not applicable",
+          "RohsStatus": "ROHS3 Compliant",
+          "MoistureSensitivityLevel": "1  (Unlimited)",
+          "ExportControlClassNumber": "3A991A2",
+          "HtsusCode": "8471.50.0150"
+        },
+        "OtherNames": [
+          "1528-4600"
+        ]
+      },
+      {
+        "Description": {
+          "ProductDescription": "QUAD DAC W/ EEPROM STEMMA QWIIC",
+          "DetailedDescription": "MCP4728, MCP4728A4 Digital to Analog Converter (DAC) Data Acquisition Qwiic, STEMMA QT Platform Evaluation Expansion Board"
+        },
+        "Manufacturer": {
+          "Id": 1528,
+          "Name": "Adafruit Industries LLC"
+        },
+        "ManufacturerProductNumber": "4470",
+        "UnitPrice": 7.5,
+        "ProductUrl": "https://www.digikey.com/en/products/detail/adafruit-industries-llc/4470/11503312",
+        "DatasheetUrl": "https://cdn-learn.adafruit.com/downloads/pdf/adafruit-mcp4728-i2c-quad-dac.pdf",
+        "PhotoUrl": "https://mm.digikey.com/Volume0/opasdata/d220001/medias/images/447/MFG_4470.jpg",
+        "ProductVariations": [
+          {
+            "DigiKeyProductNumber": "1528-4470-ND",
+            "PackageType": {
+              "Id": 3,
+              "Name": "Bulk"
+            },
+            "StandardPricing": [
+              {
+                "BreakQuantity": 1,
+                "UnitPrice": 7.5,
+                "TotalPrice": 7.5
+              }
+            ],
+            "MyPricing": [],
+            "MarketPlace": false,
+            "TariffActive": false,
+            "Supplier": {
+              "Id": 1528,
+              "Name": "Adafruit Industries LLC"
+            },
+            "QuantityAvailableforPackageType": 133,
+            "MaxQuantityForDistribution": 0,
+            "MinimumOrderQuantity": 1,
+            "StandardPackage": 0,
+            "DigiReelFee": 0.0
+          }
+        ],
+        "QuantityAvailable": 133,
+        "ProductStatus": {
+          "Id": 0,
+          "Status": "Active"
+        },
+        "BackOrderNotAllowed": false,
+        "NormallyStocking": true,
+        "Discontinued": false,
+        "EndOfLife": false,
+        "Ncnr": false,
+        "PrimaryVideoUrl": null,
+        "Parameters": [
+          {
+            "ParameterId": 1742,
+            "ParameterText": "Platform",
+            "ParameterType": "String",
+            "ValueId": "426603",
+            "ValueText": "Qwiic, STEMMA QT"
+          },
+          {
+            "ParameterId": 183,
+            "ParameterText": "Type",
+            "ParameterType": "String",
+            "ValueId": "337196",
+            "ValueText": "Data Acquisition"
+          },
+          {
+            "ParameterId": 110,
+            "ParameterText": "Function",
+            "ParameterType": "String",
+            "ValueId": "338850",
+            "ValueText": "Digital to Analog Converter (DAC)"
+          },
+          {
+            "ParameterId": 984,
+            "ParameterText": "Utilized IC / Part",
+            "ParameterType": "String",
+            "ValueId": "763786",
+            "ValueText": "MCP4728, MCP4728A4"
+          },
+          {
+            "ParameterId": 224,
+            "ParameterText": "Contents",
+            "ParameterType": "String",
+            "ValueId": "321774",
+            "ValueText": "Board(s), Header(s)"
+          }
+        ],
+        "BaseProductNumber": {
+          "Id": 72877,
+          "Name": "MCP4728"
+        },
+        "Category": {
+          "CategoryId": 33,
+          "ParentId": 0,
+          "Name": "Development Boards, Kits, Programmers",
+          "ProductCount": 0,
+          "NewProductCount": 0,
+          "ImageUrl": "https://www.digikey.com//mm.digikey.com/Volume0/opasdata/d220001/derivates/3/200/310/411/MFG_ATATMEL-ICE_tmb.jpg",
+          "SeoDescription": "Development board, kit, and programmer products include tools and assemblies used for product development and evaluation purposes. Evaluation boards are produced by a manufacturer to allow prospective users a convenient way to characterize device behavior in context of a known-good implementation, whereas development boards and kits typically include additional features or accessories intended to aid a user in developing their own product based on some device. Programmers and related products are used for configuring products having a behavior that is user-adjustable or user-specified, such as a programmable oscillator or microcontroller.",
+          "ChildCategories": [
+            {
+              "CategoryId": 2041,
+              "ParentId": 33,
+              "Name": "Evaluation Boards",
+              "ProductCount": 0,
+              "NewProductCount": 0,
+              "ImageUrl": "https://www.digikey.com//mm.digikey.com/Volume0/opasdata/d220001/derivates/3/300/282/325/MFG_EVAL-ADE9000EBZ_tmb.jpg",
+              "SeoDescription": "Evaluation boards are produced by a manufacturer to allow prospective users a convenient way to characterize device behavior in context of a known-good implementation. Types of evaluation boards include analog to digital converters (ADCs), audio amplifiers, digital to analog converters (DACs), complex logic (FPGA, CPLD), MCU, DSP, expansion boards, daughter cards, LED drivers, linear voltage regulators, op amps, sensors, RF, RFID, DC/DC & AC/DC (Off-Line) SMPS, and more.",
+              "ChildCategories": [
+                {
+                  "CategoryId": 797,
+                  "ParentId": 2041,
+                  "Name": "Expansion Boards, Daughter Cards",
+                  "ProductCount": 0,
+                  "NewProductCount": 0,
+                  "ImageUrl": "https://www.digikey.com//mm.digikey.com/Volume0/opasdata/d220001/derivates/3/300/271/097/MFG_3191_tmb%2864x64%29.jpg",
+                  "SeoDescription": "Evaluation and expansion boards and daughter cards are used to add functionality to microcontroller platforms and are designed to stack onto existing pin headers or preconfigured attachment ports. Common function types include, amplifiers, atomizers, audio, clock timing, interface connectivity, data acquisition/logging, display, human interface, memory, motor drivers, optoelectronics, power management, prototyping, relay and transistors, RF and sensor arrays.",
+                  "ChildCategories": []
+                }
+              ]
+            }
+          ]
+        },
+        "DateLastBuyChance": null,
+        "ManufacturerLeadWeeks": "4",
+        "ManufacturerPublicQuantity": 0,
+        "Series": {
+          "Id": 818,
+          "Name": "-"
+        },
+        "ShippingInfo": null,
+        "Classifications": {
+          "ReachStatus": "REACH not applicable",
+          "RohsStatus": "ROHS3 Compliant",
+          "MoistureSensitivityLevel": "1  (Unlimited)",
+          "ExportControlClassNumber": "EAR99",
+          "HtsusCode": "8473.30.1180"
+        },
+        "OtherNames": [
+          "1528-4470"
+        ]
+      },
+      {
+        "Description": {
+          "ProductDescription": "SEEEDUINO NANO",
+          "DetailedDescription": "ATmega328P Seeeduino Nano AVR\u00ae ATmega AVR MCU 8-Bit Embedded Evaluation Board"
+        },
+        "Manufacturer": {
+          "Id": 1597,
+          "Name": "Seeed Technology Co., Ltd"
+        },
+        "ManufacturerProductNumber": "102010268",
+        "UnitPrice": 7.6,
+        "ProductUrl": "https://www.digikey.com/en/products/detail/seeed-technology-co-ltd/102010268/10290292",
+        "DatasheetUrl": "//mm.digikey.com/Volume0/opasdata/d220001/medias/docus/317/102010268_Web.pdf",
+        "PhotoUrl": "https://mm.digikey.com/Volume0/opasdata/d220001/medias/images/1074/MFG_102010268.jpg",
+        "ProductVariations": [
+          {
+            "DigiKeyProductNumber": "1597-102010268-ND",
+            "PackageType": {
+              "Id": 3,
+              "Name": "Bulk"
+            },
+            "StandardPricing": [
+              {
+                "BreakQuantity": 1,
+                "UnitPrice": 7.6,
+                "TotalPrice": 7.6
+              }
+            ],
+            "MyPricing": [],
+            "MarketPlace": false,
+            "TariffActive": true,
+            "Supplier": {
+              "Id": 1597,
+              "Name": "Seeed Technology Co., Ltd"
+            },
+            "QuantityAvailableforPackageType": 865,
+            "MaxQuantityForDistribution": 0,
+            "MinimumOrderQuantity": 1,
+            "StandardPackage": 0,
+            "DigiReelFee": 0.0
+          }
+        ],
+        "QuantityAvailable": 865,
+        "ProductStatus": {
+          "Id": 0,
+          "Status": "Active"
+        },
+        "BackOrderNotAllowed": false,
+        "NormallyStocking": true,
+        "Discontinued": false,
+        "EndOfLife": false,
+        "Ncnr": false,
+        "PrimaryVideoUrl": null,
+        "Parameters": [
+          {
+            "ParameterId": 183,
+            "ParameterText": "Type",
+            "ParameterType": "String",
+            "ValueId": "374375",
+            "ValueText": "MCU 8-Bit"
+          },
+          {
+            "ParameterId": 506,
+            "ParameterText": "Core Processor",
+            "ParameterType": "String",
+            "ValueId": "317125",
+            "ValueText": "AVR"
+          },
+          {
+            "ParameterId": 1742,
+            "ParameterText": "Platform",
+            "ParameterType": "String",
+            "ValueId": "401038",
+            "ValueText": "Seeeduino Nano"
+          },
+          {
+            "ParameterId": 984,
+            "ParameterText": "Utilized IC / Part",
+            "ParameterType": "String",
+            "ValueId": "316028",
+            "ValueText": "ATmega328P"
+          },
+          {
+            "ParameterId": 69,
+            "ParameterText": "Mounting Type",
+            "ParameterType": "String",
+            "ValueId": "347431",
+            "ValueText": "Fixed"
+          },
+          {
+            "ParameterId": 224,
+            "ParameterText": "Contents",
+            "ParameterType": "String",
+            "ValueId": "321631",
+            "ValueText": "Board(s)"
+          }
+        ],
+        "BaseProductNumber": null,
+        "Category": {
+          "CategoryId": 33,
+          "ParentId": 0,
+          "Name": "Development Boards, Kits, Programmers",
+          "ProductCount": 0,
+          "NewProductCount": 0,
+          "ImageUrl": "https://www.digikey.com//mm.digikey.com/Volume0/opasdata/d220001/derivates/3/200/310/411/MFG_ATATMEL-ICE_tmb.jpg",
+          "SeoDescription": "Development board, kit, and programmer products include tools and assemblies used for product development and evaluation purposes. Evaluation boards are produced by a manufacturer to allow prospective users a convenient way to characterize device behavior in context of a known-good implementation, whereas development boards and kits typically include additional features or accessories intended to aid a user in developing their own product based on some device. Programmers and related products are used for configuring products having a behavior that is user-adjustable or user-specified, such as a programmable oscillator or microcontroller.",
+          "ChildCategories": [
+            {
+              "CategoryId": 2041,
+              "ParentId": 33,
+              "Name": "Evaluation Boards",
+              "ProductCount": 0,
+              "NewProductCount": 0,
+              "ImageUrl": "https://www.digikey.com//mm.digikey.com/Volume0/opasdata/d220001/derivates/3/300/282/325/MFG_EVAL-ADE9000EBZ_tmb.jpg",
+              "SeoDescription": "Evaluation boards are produced by a manufacturer to allow prospective users a convenient way to characterize device behavior in context of a known-good implementation. Types of evaluation boards include analog to digital converters (ADCs), audio amplifiers, digital to analog converters (DACs), complex logic (FPGA, CPLD), MCU, DSP, expansion boards, daughter cards, LED drivers, linear voltage regulators, op amps, sensors, RF, RFID, DC/DC & AC/DC (Off-Line) SMPS, and more.",
+              "ChildCategories": [
+                {
+                  "CategoryId": 786,
+                  "ParentId": 2041,
+                  "Name": "Embedded MCU, DSP Evaluation Boards",
+                  "ProductCount": 0,
+                  "NewProductCount": 0,
+                  "ImageUrl": "https://www.digikey.com//mm.digikey.com/Volume0/opasdata/d220001/derivates/3/001/149/427/MFG_RASPBERRY-PI-4B-2GB_1_tmb.jpg",
+                  "SeoDescription": "Products within this family provide a convenient means of evaluating the performance or behavior of microcontroller, microprocessor, and digital signal processor components in the context of a proven hardware implementation. Included products vary in their intended use case, and may range from unpopulated PCBs intended to facilitate evaluation to a range of microcontroller families, to single board computers with extensive peripheral support.",
+                  "ChildCategories": []
+                }
+              ]
+            }
+          ]
+        },
+        "DateLastBuyChance": null,
+        "ManufacturerLeadWeeks": "33",
+        "ManufacturerPublicQuantity": 0,
+        "Series": {
+          "Id": 22385,
+          "Name": "AVR\u00ae ATmega"
+        },
+        "ShippingInfo": null,
+        "Classifications": {
+          "ReachStatus": "REACH Unknown",
+          "RohsStatus": "Unknown",
+          "MoistureSensitivityLevel": "1  (Unlimited)",
+          "ExportControlClassNumber": "EAR99",
+          "HtsusCode": "8471.50.0150"
+        },
+        "OtherNames": [
+          "1597-102010268"
+        ]
+      },
+      {
+        "Description": {
+          "ProductDescription": "ATOMS3 LITE ESP32S3 DEV KIT",
+          "DetailedDescription": "ESP32-S3FN8 AtomS3 Lite ESP32-S Xtensa\u00ae MPU 802.11 b/g/n (WiFi/WLAN/Wi-Fi 4), Bluetooth\u00ae 5.x (BLE) RF (Transceiver) 2.4GHz Embedded Evaluation Board"
+        },
+        "Manufacturer": {
+          "Id": 2221,
+          "Name": "M5Stack Technology Co., Ltd."
+        },
+        "ManufacturerProductNumber": "C124",
+        "UnitPrice": 7.68,
+        "ProductUrl": "https://www.digikey.com/en/products/detail/m5stack-technology-co-ltd/C124/18070571",
+        "DatasheetUrl": "//mm.digikey.com/Volume0/opasdata/d220001/medias/docus/5062/C124_Web.pdf",
+        "PhotoUrl": "https://mm.digikey.com/Volume0/opasdata/d220001/medias/images/4806/MFG_C124.jpg",
+        "ProductVariations": [
+          {
+            "DigiKeyProductNumber": "2221-C124-ND",
+            "PackageType": {
+              "Id": 3,
+              "Name": "Bulk"
+            },
+            "StandardPricing": [
+              {
+                "BreakQuantity": 1,
+                "UnitPrice": 7.68,
+                "TotalPrice": 7.68
+              }
+            ],
+            "MyPricing": [],
+            "MarketPlace": false,
+            "TariffActive": true,
+            "Supplier": {
+              "Id": 2221,
+              "Name": "M5Stack Technology Co., Ltd."
+            },
+            "QuantityAvailableforPackageType": 1205,
+            "MaxQuantityForDistribution": 0,
+            "MinimumOrderQuantity": 1,
+            "StandardPackage": 0,
+            "DigiReelFee": 0.0
+          }
+        ],
+        "QuantityAvailable": 1205,
+        "ProductStatus": {
+          "Id": 0,
+          "Status": "Active"
+        },
+        "BackOrderNotAllowed": false,
+        "NormallyStocking": true,
+        "Discontinued": false,
+        "EndOfLife": false,
+        "Ncnr": false,
+        "PrimaryVideoUrl": null,
+        "Parameters": [
+          {
+            "ParameterId": 183,
+            "ParameterText": "Type",
+            "ParameterType": "String",
+            "ValueId": "377600",
+            "ValueText": "MPU"
+          },
+          {
+            "ParameterId": 506,
+            "ParameterText": "Core Processor",
+            "ParameterType": "String",
+            "ValueId": "503748",
+            "ValueText": "Xtensa\u00ae"
+          },
+          {
+            "ParameterId": 1742,
+            "ParameterText": "Platform",
+            "ParameterType": "String",
+            "ValueId": "878116",
+            "ValueText": "AtomS3 Lite"
+          },
+          {
+            "ParameterId": 984,
+            "ParameterText": "Utilized IC / Part",
+            "ParameterType": "String",
+            "ValueId": "731249",
+            "ValueText": "ESP32-S3FN8"
+          },
+          {
+            "ParameterId": 69,
+            "ParameterText": "Mounting Type",
+            "ParameterType": "String",
+            "ValueId": "347431",
+            "ValueText": "Fixed"
+          },
+          {
+            "ParameterId": 224,
+            "ParameterText": "Contents",
+            "ParameterType": "String",
+            "ValueId": "321631",
+            "ValueText": "Board(s)"
+          }
+        ],
+        "BaseProductNumber": {
+          "Id": 630668,
+          "Name": "ESP32-S3"
+        },
+        "Category": {
+          "CategoryId": 33,
+          "ParentId": 0,
+          "Name": "Development Boards, Kits, Programmers",
+          "ProductCount": 0,
+          "NewProductCount": 0,
+          "ImageUrl": "https://www.digikey.com//mm.digikey.com/Volume0/opasdata/d220001/derivates/3/200/310/411/MFG_ATATMEL-ICE_tmb.jpg",
+          "SeoDescription": "Development board, kit, and programmer products include tools and assemblies used for product development and evaluation purposes. Evaluation boards are produced by a manufacturer to allow prospective users a convenient way to characterize device behavior in context of a known-good implementation, whereas development boards and kits typically include additional features or accessories intended to aid a user in developing their own product based on some device. Programmers and related products are used for configuring products having a behavior that is user-adjustable or user-specified, such as a programmable oscillator or microcontroller.",
+          "ChildCategories": [
+            {
+              "CategoryId": 2041,
+              "ParentId": 33,
+              "Name": "Evaluation Boards",
+              "ProductCount": 0,
+              "NewProductCount": 0,
+              "ImageUrl": "https://www.digikey.com//mm.digikey.com/Volume0/opasdata/d220001/derivates/3/300/282/325/MFG_EVAL-ADE9000EBZ_tmb.jpg",
+              "SeoDescription": "Evaluation boards are produced by a manufacturer to allow prospective users a convenient way to characterize device behavior in context of a known-good implementation. Types of evaluation boards include analog to digital converters (ADCs), audio amplifiers, digital to analog converters (DACs), complex logic (FPGA, CPLD), MCU, DSP, expansion boards, daughter cards, LED drivers, linear voltage regulators, op amps, sensors, RF, RFID, DC/DC & AC/DC (Off-Line) SMPS, and more.",
+              "ChildCategories": [
+                {
+                  "CategoryId": 786,
+                  "ParentId": 2041,
+                  "Name": "Embedded MCU, DSP Evaluation Boards",
+                  "ProductCount": 0,
+                  "NewProductCount": 0,
+                  "ImageUrl": "https://www.digikey.com//mm.digikey.com/Volume0/opasdata/d220001/derivates/3/001/149/427/MFG_RASPBERRY-PI-4B-2GB_1_tmb.jpg",
+                  "SeoDescription": "Products within this family provide a convenient means of evaluating the performance or behavior of microcontroller, microprocessor, and digital signal processor components in the context of a proven hardware implementation. Included products vary in their intended use case, and may range from unpopulated PCBs intended to facilitate evaluation to a range of microcontroller families, to single board computers with extensive peripheral support.",
+                  "ChildCategories": []
+                }
+              ]
+            }
+          ]
+        },
+        "DateLastBuyChance": null,
+        "ManufacturerLeadWeeks": "30",
+        "ManufacturerPublicQuantity": 0,
+        "Series": {
+          "Id": 109235,
+          "Name": "ESP32-S"
+        },
+        "ShippingInfo": null,
+        "Classifications": {
+          "ReachStatus": "REACH Unknown",
+          "RohsStatus": "ROHS3 Compliant",
+          "MoistureSensitivityLevel": "1  (Unlimited)",
+          "ExportControlClassNumber": "5A992C",
+          "HtsusCode": "8517.62.0090"
+        },
+        "OtherNames": [
+          "2221-C124"
+        ]
+      },
+      {
+        "Description": {
+          "ProductDescription": "TCS3200 RGB COLOR SENSOR BOARD",
+          "DetailedDescription": "TCS3200 Color Sensor Arduino Platform Evaluation Expansion Board"
+        },
+        "Manufacturer": {
+          "Id": 1738,
+          "Name": "DFRobot"
+        },
+        "ManufacturerProductNumber": "SEN0101",
+        "UnitPrice": 7.9,
+        "ProductUrl": "https://www.digikey.com/en/products/detail/dfrobot/SEN0101/6588457",
+        "DatasheetUrl": "//mm.digikey.com/Volume0/opasdata/d220001/medias/docus/2107/SEN0101_Web.pdf",
+        "PhotoUrl": "https://mm.digikey.com/Volume0/opasdata/d220001/medias/images/2514/SEN0101.JPG",
+        "ProductVariations": [
+          {
+            "DigiKeyProductNumber": "1738-1035-ND",
+            "PackageType": {
+              "Id": 3,
+              "Name": "Bulk"
+            },
+            "StandardPricing": [
+              {
+                "BreakQuantity": 1,
+                "UnitPrice": 7.9,
+                "TotalPrice": 7.9
+              }
+            ],
+            "MyPricing": [],
+            "MarketPlace": false,
+            "TariffActive": true,
+            "Supplier": {
+              "Id": 1738,
+              "Name": "DFRobot"
+            },
+            "QuantityAvailableforPackageType": 566,
+            "MaxQuantityForDistribution": 0,
+            "MinimumOrderQuantity": 1,
+            "StandardPackage": 0,
+            "DigiReelFee": 0.0
+          }
+        ],
+        "QuantityAvailable": 566,
+        "ProductStatus": {
+          "Id": 0,
+          "Status": "Active"
+        },
+        "BackOrderNotAllowed": false,
+        "NormallyStocking": true,
+        "Discontinued": false,
+        "EndOfLife": false,
+        "Ncnr": false,
+        "PrimaryVideoUrl": "https://www.digikey.com/api/videos/videoplayer/smallplayer/5767545399001",
+        "Parameters": [
+          {
+            "ParameterId": 1742,
+            "ParameterText": "Platform",
+            "ParameterType": "String",
+            "ValueId": "314594",
+            "ValueText": "Arduino"
+          },
+          {
+            "ParameterId": 183,
+            "ParameterText": "Type",
+            "ParameterType": "String",
+            "ValueId": "401166",
+            "ValueText": "Sensor"
+          },
+          {
+            "ParameterId": 110,
+            "ParameterText": "Function",
+            "ParameterType": "String",
+            "ValueId": "332179",
+            "ValueText": "Color"
+          },
+          {
+            "ParameterId": 984,
+            "ParameterText": "Utilized IC / Part",
+            "ParameterType": "String",
+            "ValueId": "410612",
+            "ValueText": "TCS3200"
+          },
+          {
+            "ParameterId": 224,
+            "ParameterText": "Contents",
+            "ParameterType": "String",
+            "ValueId": "321631",
+            "ValueText": "Board(s)"
+          }
+        ],
+        "BaseProductNumber": null,
+        "Category": {
+          "CategoryId": 33,
+          "ParentId": 0,
+          "Name": "Development Boards, Kits, Programmers",
+          "ProductCount": 0,
+          "NewProductCount": 0,
+          "ImageUrl": "https://www.digikey.com//mm.digikey.com/Volume0/opasdata/d220001/derivates/3/200/310/411/MFG_ATATMEL-ICE_tmb.jpg",
+          "SeoDescription": "Development board, kit, and programmer products include tools and assemblies used for product development and evaluation purposes. Evaluation boards are produced by a manufacturer to allow prospective users a convenient way to characterize device behavior in context of a known-good implementation, whereas development boards and kits typically include additional features or accessories intended to aid a user in developing their own product based on some device. Programmers and related products are used for configuring products having a behavior that is user-adjustable or user-specified, such as a programmable oscillator or microcontroller.",
+          "ChildCategories": [
+            {
+              "CategoryId": 2041,
+              "ParentId": 33,
+              "Name": "Evaluation Boards",
+              "ProductCount": 0,
+              "NewProductCount": 0,
+              "ImageUrl": "https://www.digikey.com//mm.digikey.com/Volume0/opasdata/d220001/derivates/3/300/282/325/MFG_EVAL-ADE9000EBZ_tmb.jpg",
+              "SeoDescription": "Evaluation boards are produced by a manufacturer to allow prospective users a convenient way to characterize device behavior in context of a known-good implementation. Types of evaluation boards include analog to digital converters (ADCs), audio amplifiers, digital to analog converters (DACs), complex logic (FPGA, CPLD), MCU, DSP, expansion boards, daughter cards, LED drivers, linear voltage regulators, op amps, sensors, RF, RFID, DC/DC & AC/DC (Off-Line) SMPS, and more.",
+              "ChildCategories": [
+                {
+                  "CategoryId": 797,
+                  "ParentId": 2041,
+                  "Name": "Expansion Boards, Daughter Cards",
+                  "ProductCount": 0,
+                  "NewProductCount": 0,
+                  "ImageUrl": "https://www.digikey.com//mm.digikey.com/Volume0/opasdata/d220001/derivates/3/300/271/097/MFG_3191_tmb%2864x64%29.jpg",
+                  "SeoDescription": "Evaluation and expansion boards and daughter cards are used to add functionality to microcontroller platforms and are designed to stack onto existing pin headers or preconfigured attachment ports. Common function types include, amplifiers, atomizers, audio, clock timing, interface connectivity, data acquisition/logging, display, human interface, memory, motor drivers, optoelectronics, power management, prototyping, relay and transistors, RF and sensor arrays.",
+                  "ChildCategories": []
+                }
+              ]
+            }
+          ]
+        },
+        "DateLastBuyChance": null,
+        "ManufacturerLeadWeeks": "9",
+        "ManufacturerPublicQuantity": 0,
+        "Series": {
+          "Id": 818,
+          "Name": "-"
+        },
+        "ShippingInfo": null,
+        "Classifications": {
+          "ReachStatus": "REACH Unknown",
+          "RohsStatus": "ROHS3 Compliant",
+          "MoistureSensitivityLevel": "1  (Unlimited)",
+          "ExportControlClassNumber": "EAR99",
+          "HtsusCode": "8473.30.1180"
+        },
+        "OtherNames": [
+          "1738-1035"
+        ]
+      },
+      {
+        "Description": {
+          "ProductDescription": "CARDKB MINI KEYBOARD PROGRAMMABL",
+          "DetailedDescription": "ATMega8A Keyboard/Keypad Connectivity Arduino Platform Evaluation Expansion Board"
+        },
+        "Manufacturer": {
+          "Id": 2221,
+          "Name": "M5Stack Technology Co., Ltd."
+        },
+        "ManufacturerProductNumber": "U035-B",
+        "UnitPrice": 7.95,
+        "ProductUrl": "https://www.digikey.com/en/products/detail/m5stack-technology-co-ltd/U035-B/16679766",
+        "DatasheetUrl": "https://shop.m5stack.com/products/cardkb-mini-keyboard-programmable-unit-v1-1-mega8a?variant=43165484482817",
+        "PhotoUrl": "https://mm.digikey.com/Volume0/opasdata/d220001/medias/images/4232/MFG_U035-B.jpg",
+        "ProductVariations": [
+          {
+            "DigiKeyProductNumber": "2221-U035-B-ND",
+            "PackageType": {
+              "Id": 3,
+              "Name": "Bulk"
+            },
+            "StandardPricing": [
+              {
+                "BreakQuantity": 1,
+                "UnitPrice": 7.95,
+                "TotalPrice": 7.95
+              }
+            ],
+            "MyPricing": [],
+            "MarketPlace": false,
+            "TariffActive": true,
+            "Supplier": {
+              "Id": 2221,
+              "Name": "M5Stack Technology Co., Ltd."
+            },
+            "QuantityAvailableforPackageType": 609,
+            "MaxQuantityForDistribution": 0,
+            "MinimumOrderQuantity": 1,
+            "StandardPackage": 0,
+            "DigiReelFee": 0.0
+          }
+        ],
+        "QuantityAvailable": 609,
+        "ProductStatus": {
+          "Id": 0,
+          "Status": "Active"
+        },
+        "BackOrderNotAllowed": false,
+        "NormallyStocking": true,
+        "Discontinued": false,
+        "EndOfLife": false,
+        "Ncnr": false,
+        "PrimaryVideoUrl": null,
+        "Parameters": [
+          {
+            "ParameterId": 1742,
+            "ParameterText": "Platform",
+            "ParameterType": "String",
+            "ValueId": "314594",
+            "ValueText": "Arduino"
+          },
+          {
+            "ParameterId": 183,
+            "ParameterText": "Type",
+            "ParameterType": "String",
+            "ValueId": "333002",
+            "ValueText": "Connectivity"
+          },
+          {
+            "ParameterId": 110,
+            "ParameterText": "Function",
+            "ParameterType": "String",
+            "ValueId": "707529",
+            "ValueText": "Keyboard/Keypad"
+          },
+          {
+            "ParameterId": 984,
+            "ParameterText": "Utilized IC / Part",
+            "ParameterType": "String",
+            "ValueId": "707530",
+            "ValueText": "ATMega8A"
+          },
+          {
+            "ParameterId": 224,
+            "ParameterText": "Contents",
+            "ParameterType": "String",
+            "ValueId": "321631",
+            "ValueText": "Board(s)"
+          }
+        ],
+        "BaseProductNumber": null,
+        "Category": {
+          "CategoryId": 33,
+          "ParentId": 0,
+          "Name": "Development Boards, Kits, Programmers",
+          "ProductCount": 0,
+          "NewProductCount": 0,
+          "ImageUrl": "https://www.digikey.com//mm.digikey.com/Volume0/opasdata/d220001/derivates/3/200/310/411/MFG_ATATMEL-ICE_tmb.jpg",
+          "SeoDescription": "Development board, kit, and programmer products include tools and assemblies used for product development and evaluation purposes. Evaluation boards are produced by a manufacturer to allow prospective users a convenient way to characterize device behavior in context of a known-good implementation, whereas development boards and kits typically include additional features or accessories intended to aid a user in developing their own product based on some device. Programmers and related products are used for configuring products having a behavior that is user-adjustable or user-specified, such as a programmable oscillator or microcontroller.",
+          "ChildCategories": [
+            {
+              "CategoryId": 2041,
+              "ParentId": 33,
+              "Name": "Evaluation Boards",
+              "ProductCount": 0,
+              "NewProductCount": 0,
+              "ImageUrl": "https://www.digikey.com//mm.digikey.com/Volume0/opasdata/d220001/derivates/3/300/282/325/MFG_EVAL-ADE9000EBZ_tmb.jpg",
+              "SeoDescription": "Evaluation boards are produced by a manufacturer to allow prospective users a convenient way to characterize device behavior in context of a known-good implementation. Types of evaluation boards include analog to digital converters (ADCs), audio amplifiers, digital to analog converters (DACs), complex logic (FPGA, CPLD), MCU, DSP, expansion boards, daughter cards, LED drivers, linear voltage regulators, op amps, sensors, RF, RFID, DC/DC & AC/DC (Off-Line) SMPS, and more.",
+              "ChildCategories": [
+                {
+                  "CategoryId": 797,
+                  "ParentId": 2041,
+                  "Name": "Expansion Boards, Daughter Cards",
+                  "ProductCount": 0,
+                  "NewProductCount": 0,
+                  "ImageUrl": "https://www.digikey.com//mm.digikey.com/Volume0/opasdata/d220001/derivates/3/300/271/097/MFG_3191_tmb%2864x64%29.jpg",
+                  "SeoDescription": "Evaluation and expansion boards and daughter cards are used to add functionality to microcontroller platforms and are designed to stack onto existing pin headers or preconfigured attachment ports. Common function types include, amplifiers, atomizers, audio, clock timing, interface connectivity, data acquisition/logging, display, human interface, memory, motor drivers, optoelectronics, power management, prototyping, relay and transistors, RF and sensor arrays.",
+                  "ChildCategories": []
+                }
+              ]
+            }
+          ]
+        },
+        "DateLastBuyChance": null,
+        "ManufacturerLeadWeeks": "30",
+        "ManufacturerPublicQuantity": 0,
+        "Series": {
+          "Id": 818,
+          "Name": "-"
+        },
+        "ShippingInfo": null,
+        "Classifications": {
+          "ReachStatus": "REACH Unknown",
+          "RohsStatus": "ROHS3 Compliant",
+          "MoistureSensitivityLevel": "1  (Unlimited)",
+          "ExportControlClassNumber": "EAR99",
+          "HtsusCode": "8543.70.9860"
+        },
+        "OtherNames": [
+          "2221-U035-B"
+        ]
+      }
+    ],
+    "ProductsCount": 2652,
+    "ExactMatches": [],
+    "FilterOptions": {
+      "Manufacturers": [
+        {
+          "Id": 5479,
+          "Value": "3DR Inc",
+          "ProductCount": 1
+        },
+        {
+          "Id": 1613,
+          "Value": "4D Systems Pty Ltd",
+          "ProductCount": 8
+        },
+        {
+          "Id": 3082,
+          "Value": "5G HUB",
+          "ProductCount": 1
+        },
+        {
+          "Id": 1891,
+          "Value": "Acconeer AB",
+          "ProductCount": 2
+        },
+        {
+          "Id": 1528,
+          "Value": "Adafruit Industries LLC",
+          "ProductCount": 355
+        },
+        {
+          "Id": 4570,
+          "Value": "Ai-Thinker",
+          "ProductCount": 1
+        },
+        {
+          "Id": 2944,
+          "Value": "Airgain",
+          "ProductCount": 2
+        },
+        {
+          "Id": 3992,
+          "Value": "Alchemy Power Inc.",
+          "ProductCount": 2
+        },
+        {
+          "Id": 2003,
+          "Value": "Alorium Technology, LLC",
+          "ProductCount": 11
+        },
+        {
+          "Id": 544,
+          "Value": "Altera",
+          "ProductCount": 2
+        },
+        {
+          "Id": 475,
+          "Value": "ams-OSRAM USA INC.",
+          "ProductCount": 3
+        },
+        {
+          "Id": 505,
+          "Value": "Analog Devices Inc.",
+          "ProductCount": 73
+        },
+        {
+          "Id": 175,
+          "Value": "Analog Devices Inc./Maxim Integrated",
+          "ProductCount": 29
+        },
+        {
+          "Id": 1050,
+          "Value": "Arduino",
+          "ProductCount": 236
+        },
+        {
+          "Id": 685,
+          "Value": "ARM",
+          "ProductCount": 3
+        },
+        {
+          "Id": 1790,
+          "Value": "Azoteq (Pty) Ltd",
+          "ProductCount": 3
+        },
+        {
+          "Id": 828,
+          "Value": "Bosch Sensortec",
+          "ProductCount": 1
+        },
+        {
+          "Id": 2005,
+          "Value": "Bridgetek Pte Ltd.",
+          "ProductCount": 4
+        },
+        {
+          "Id": 600443,
+          "Value": "CANADUINO\u00ae",
+          "ProductCount": 16
+        },
+        {
+          "Id": 5913,
+          "Value": "Circuit Concepts, LLC",
+          "ProductCount": 1
+        },
+        {
+          "Id": 3614,
+          "Value": "Cytron Technologies Sdn Bhd",
+          "ProductCount": 3
+        },
+        {
+          "Id": 1738,
+          "Value": "DFRobot",
+          "ProductCount": 240
+        },
+        {
+          "Id": 602,
+          "Value": "Digi",
+          "ProductCount": 1
+        },
+        {
+          "Id": 7,
+          "Value": "DigiKey Kit (VA)",
+          "ProductCount": 3
+        },
+        {
+          "Id": 1286,
+          "Value": "Digilent, Inc.",
+          "ProductCount": 16
+        },
+        {
+          "Id": 1481,
+          "Value": "Display Visions",
+          "ProductCount": 3
+        },
+        {
+          "Id": 3289,
+          "Value": "Earth People Technology",
+          "ProductCount": 6
+        },
+        {
+          "Id": 5131,
+          "Value": "Elecrow",
+          "ProductCount": 2
+        },
+        {
+          "Id": 1904,
+          "Value": "Espressif Systems",
+          "ProductCount": 2
+        },
+        {
+          "Id": 819,
+          "Value": "Everspin Technologies Inc.",
+          "ProductCount": 1
+        },
+        {
+          "Id": 1711,
+          "Value": "GHI Electronics, LLC",
+          "ProductCount": 3
+        },
+        {
+          "Id": 2077,
+          "Value": "GroupGets LLC",
+          "ProductCount": 1
+        },
+        {
+          "Id": 164,
+          "Value": "Hammond Manufacturing",
+          "ProductCount": 19
+        },
+        {
+          "Id": 1900,
+          "Value": "Helium Systems, Inc.",
+          "ProductCount": 3
+        },
+        {
+          "Id": 480,
+          "Value": "Honeywell Sensing and Productivity Solutions",
+          "ProductCount": 1
+        },
+        {
+          "Id": 448,
+          "Value": "Infineon Technologies",
+          "ProductCount": 90
+        },
+        {
+          "Id": 1475,
+          "Value": "Inventek Systems",
+          "ProductCount": 8
+        },
+        {
+          "Id": 3430,
+          "Value": "IOT-BOTS.COM",
+          "ProductCount": 33
+        },
+        {
+          "Id": 1927,
+          "Value": "Kitronik Ltd.",
+          "ProductCount": 3
+        },
+        {
+          "Id": 4291,
+          "Value": "Labsland",
+          "ProductCount": 1
+        },
+        {
+          "Id": 1829,
+          "Value": "Lantronix, Inc.",
+          "ProductCount": 1
+        },
+        {
+          "Id": 220,
+          "Value": "Lattice Semiconductor Corporation",
+          "ProductCount": 5
+        },
+        {
+          "Id": 2221,
+          "Value": "M5Stack Technology Co., Ltd.",
+          "ProductCount": 138
+        },
+        {
+          "Id": 1910,
+          "Value": "Maker Emporium Ltd",
+          "ProductCount": 9
+        },
+        {
+          "Id": 635,
+          "Value": "Matrix Orbital",
+          "ProductCount": 2
+        },
+        {
+          "Id": 150,
+          "Value": "Microchip Technology",
+          "ProductCount": 30
+        },
+        {
+          "Id": 1471,
+          "Value": "MikroElektronika",
+          "ProductCount": 13
+        },
+        {
+          "Id": 2508,
+          "Value": "Mitsumi Electric Company Ltd",
+          "ProductCount": 8
+        },
+        {
+          "Id": 3673,
+          "Value": "Move-X",
+          "ProductCount": 1
+        },
+        {
+          "Id": 591,
+          "Value": "Multi-Tech Systems Inc.",
+          "ProductCount": 1
+        },
+        {
+          "Id": 1816,
+          "Value": "Neonode Inc.",
+          "ProductCount": 1
+        },
+        {
+          "Id": 757,
+          "Value": "Newhaven Display Intl",
+          "ProductCount": 11
+        },
+        {
+          "Id": 816,
+          "Value": "Nuvoton Technology Corporation",
+          "ProductCount": 25
+        },
+        {
+          "Id": 390,
+          "Value": "NVE Corp/Isolation Products",
+          "ProductCount": 1
+        },
+        {
+          "Id": 568,
+          "Value": "NXP USA Inc.",
+          "ProductCount": 160
+        },
+        {
+          "Id": 1188,
+          "Value": "Olimex LTD",
+          "ProductCount": 59
+        },
+        {
+          "Id": 39,
+          "Value": "Omron Electronics Inc-EMC Div",
+          "ProductCount": 1
+        },
+        {
+          "Id": 2070,
+          "Value": "Onion Corporation",
+          "ProductCount": 1
+        },
+        {
+          "Id": 488,
+          "Value": "onsemi",
+          "ProductCount": 17
+        },
+        {
+          "Id": 3444,
+          "Value": "Orient Display",
+          "ProductCount": 1
+        },
+        {
+          "Id": 2234,
+          "Value": "OSEPP Electronics LTD",
+          "ProductCount": 19
+        },
+        {
+          "Id": 149,
+          "Value": "Parallax Inc.",
+          "ProductCount": 4
+        },
+        {
+          "Id": 1878,
+          "Value": "Particle Industries, Inc.",
+          "ProductCount": 1
+        },
+        {
+          "Id": 1452,
+          "Value": "Pervasive Displays",
+          "ProductCount": 3
+        },
+        {
+          "Id": 2568,
+          "Value": "Phase Dock Inc.",
+          "ProductCount": 9
+        },
+        {
+          "Id": 1778,
+          "Value": "Pimoroni Ltd",
+          "ProductCount": 15
+        },
+        {
+          "Id": 3405,
+          "Value": "Playing With Fusion, Inc",
+          "ProductCount": 9
+        },
+        {
+          "Id": 2183,
+          "Value": "Pololu",
+          "ProductCount": 57
+        },
+        {
+          "Id": 4272,
+          "Value": "PTSolns",
+          "ProductCount": 12
+        },
+        {
+          "Id": 2312,
+          "Value": "Qorvo",
+          "ProductCount": 2
+        },
+        {
+          "Id": 4735,
+          "Value": "RAKwireless Technology Limited",
+          "ProductCount": 7
+        },
+        {
+          "Id": 20,
+          "Value": "Renesas Electronics Corporation",
+          "ProductCount": 53
+        },
+        {
+          "Id": 357,
+          "Value": "RF Solutions",
+          "ProductCount": 6
+        },
+        {
+          "Id": 5436,
+          "Value": "Riverdi",
+          "ProductCount": 1
+        },
+        {
+          "Id": 846,
+          "Value": "Rohm Semiconductor",
+          "ProductCount": 19
+        },
+        {
+          "Id": 4520,
+          "Value": "SB Components Ltd",
+          "ProductCount": 8
+        },
+        {
+          "Id": 1988,
+          "Value": "Schmartboard, Inc.",
+          "ProductCount": 10
+        },
+        {
+          "Id": 1485,
+          "Value": "Seco",
+          "ProductCount": 1
+        },
+        {
+          "Id": 1597,
+          "Value": "Seeed Technology Co., Ltd",
+          "ProductCount": 187
+        },
+        {
+          "Id": 899,
+          "Value": "Segger Microcontroller Systems",
+          "ProductCount": 1
+        },
+        {
+          "Id": 600,
+          "Value": "Semtech Corporation",
+          "ProductCount": 5
+        },
+        {
+          "Id": 1649,
+          "Value": "Sensirion AG",
+          "ProductCount": 2
+        },
+        {
+          "Id": 5141,
+          "Value": "SEQUENT MICROSYSTEMS",
+          "ProductCount": 3
+        },
+        {
+          "Id": 336,
+          "Value": "Silicon Labs",
+          "ProductCount": 1
+        },
+        {
+          "Id": 5032,
+          "Value": "Soldered Electronics",
+          "ProductCount": 4
+        },
+        {
+          "Id": 4422,
+          "Value": "SOLO Motor Controllers",
+          "ProductCount": 2
+        },
+        {
+          "Id": 1568,
+          "Value": "SparkFun Electronics",
+          "ProductCount": 239
+        },
+        {
+          "Id": 497,
+          "Value": "STMicroelectronics",
+          "ProductCount": 198
+        },
+        {
+          "Id": 4411,
+          "Value": "SunFounder",
+          "ProductCount": 9
+        },
+        {
+          "Id": 3944,
+          "Value": "Syntiant Corp.",
+          "ProductCount": 1
+        },
+        {
+          "Id": 5536,
+          "Value": "TAEJIN",
+          "ProductCount": 4
+        },
+        {
+          "Id": 17,
+          "Value": "TE Connectivity AMP Connectors",
+          "ProductCount": 3
+        },
+        {
+          "Id": 223,
+          "Value": "TE Connectivity Measurement Specialties",
+          "ProductCount": 1
+        },
+        {
+          "Id": 943,
+          "Value": "Telit Cinterion",
+          "ProductCount": 7
+        },
+        {
+          "Id": 771,
+          "Value": "Terasic Inc.",
+          "ProductCount": 12
+        },
+        {
+          "Id": 296,
+          "Value": "Texas Instruments",
+          "ProductCount": 1
+        },
+        {
+          "Id": 1894,
+          "Value": "Thinxtra Solutions Limited",
+          "ProductCount": 3
+        },
+        {
+          "Id": 1832,
+          "Value": "TinyCircuits",
+          "ProductCount": 25
+        },
+        {
+          "Id": 3887,
+          "Value": "TokyLabs",
+          "ProductCount": 4
+        },
+        {
+          "Id": 1686,
+          "Value": "Trenz Electronic GmbH",
+          "ProductCount": 9
+        },
+        {
+          "Id": 3647,
+          "Value": "UNIVERSAL-SOLDER Electronics Ltd",
+          "ProductCount": 4
+        },
+        {
+          "Id": 600178,
+          "Value": "Velleman",
+          "ProductCount": 1
+        },
+        {
+          "Id": 2100,
+          "Value": "Watterott Electronic GmbH",
+          "ProductCount": 2
+        },
+        {
+          "Id": 1278,
+          "Value": "WIZnet",
+          "ProductCount": 7
+        },
+        {
+          "Id": 732,
+          "Value": "W\u00fcrth Elektronik",
+          "ProductCount": 3
+        }
+      ],
+      "Packaging": null,
+      "Status": null,
+      "Series": null,
+      "ParametricFilters": null,
+      "TopCategories": [
+        {
+          "RootCategory": {
+            "Id": 2041,
+            "Name": "Evaluation Boards",
+            "ProductCount": 0
+          },
+          "Category": {
+            "Id": 786,
+            "Name": "Embedded MCU, DSP Evaluation Boards",
+            "ProductCount": 827
+          },
+          "Score": 0.0,
+          "ImageUrl": "https://mm.digikey.com/Volume0/opasdata/d220001/derivates/3/001/149/427/MFG_RASPBERRY-PI-4B-2GB_1_tmb.jpg"
+        },
+        {
+          "RootCategory": {
+            "Id": 2041,
+            "Name": "Evaluation Boards",
+            "ProductCount": 0
+          },
+          "Category": {
+            "Id": 797,
+            "Name": "Expansion Boards, Daughter Cards",
+            "ProductCount": 1362
+          },
+          "Score": 0.0,
+          "ImageUrl": "https://mm.digikey.com/Volume0/opasdata/d220001/derivates/3/300/271/097/MFG_3191_tmb%2864x64%29.jpg"
+        },
+        {
+          "RootCategory": {
+            "Id": 27,
+            "Name": "Boxes, Enclosures, Racks",
+            "ProductCount": 0
+          },
+          "Category": {
+            "Id": 975,
+            "Name": "Evaluation, Development Board Enclosures",
+            "ProductCount": 77
+          },
+          "Score": 0.0,
+          "ImageUrl": "https://mm.digikey.com/Volume0/opasdata/d220001/derivates/3/030/368/RASPBERRY-PI-4-CASE-BLACK-GREY_tmb%2864x64%29.jpg"
+        },
+        {
+          "RootCategory": {
+            "Id": 47,
+            "Name": "Maker/DIY, Educational",
+            "ProductCount": 0
+          },
+          "Category": {
+            "Id": 942,
+            "Name": "Robotics Kits",
+            "ProductCount": 70
+          },
+          "Score": 0.0,
+          "ImageUrl": "https://mm.digikey.com/Volume0/opasdata/d220001/derivates/3/300/263/695/MFG_T050000_box_tmb.jpg"
+        },
+        {
+          "RootCategory": {
+            "Id": 2041,
+            "Name": "Evaluation Boards",
+            "ProductCount": 0
+          },
+          "Category": {
+            "Id": 796,
+            "Name": "Embedded Complex Logic (FPGA, CPLD) Evaluation Boards",
+            "ProductCount": 65
+          },
+          "Score": 0.0,
+          "ImageUrl": "https://mm.digikey.com/Volume0/opasdata/d220001/derivates/3/200/425/654/P0496_tmb.jpg"
+        },
+        {
+          "RootCategory": {
+            "Id": 2041,
+            "Name": "Evaluation Boards",
+            "ProductCount": 0
+          },
+          "Category": {
+            "Id": 1165,
+            "Name": "RF, RFID, Wireless Evaluation Boards",
+            "ProductCount": 64
+          },
+          "Score": 0.0,
+          "ImageUrl": "https://mm.digikey.com/Volume0/opasdata/d220001/derivates/3/200/442/232/MFG_XR112_Front_tmb.jpg"
+        },
+        {
+          "RootCategory": {
+            "Id": 47,
+            "Name": "Maker/DIY, Educational",
+            "ProductCount": 0
+          },
+          "Category": {
+            "Id": 939,
+            "Name": "Educational Kits",
+            "ProductCount": 61
+          },
+          "Score": 0.0,
+          "ImageUrl": "https://mm.digikey.com/Volume0/opasdata/d220001/derivates/3/300/285/235/MFG_ADALM-PLUTO_tmb.jpg"
+        },
+        {
+          "RootCategory": {
+            "Id": 33,
+            "Name": "Development Boards, Kits, Programmers",
+            "ProductCount": 0
+          },
+          "Category": {
+            "Id": 783,
+            "Name": "Accessories",
+            "ProductCount": 53
+          },
+          "Score": 0.0,
+          "ImageUrl": "https://mm.digikey.com/Volume0/opasdata/d220001/derivates/3/200/457/624/MFG_TC2030-IDC_tmb.jpg"
+        },
+        {
+          "RootCategory": {
+            "Id": 13,
+            "Name": "Motors, Actuators, Solenoids and Drivers",
+            "ProductCount": 0
+          },
+          "Category": {
+            "Id": 181,
+            "Name": "Motor Driver Boards, Modules",
+            "ProductCount": 33
+          },
+          "Score": 0.0,
+          "ImageUrl": "https://mm.digikey.com/Volume0/opasdata/d220001/derivates/3/010/132/MFG_410-334-2_tmb.jpg"
+        },
+        {
+          "RootCategory": {
+            "Id": 33,
+            "Name": "Development Boards, Kits, Programmers",
+            "ProductCount": 0
+          },
+          "Category": {
+            "Id": 784,
+            "Name": "Software, Services",
+            "ProductCount": 13
+          },
+          "Score": 0.0,
+          "ImageUrl": "https://mm.digikey.com/Volume0/opasdata/d220001/derivates/3/002/401/635/MFG_2700192_tmb.jpg"
+        },
+        {
+          "RootCategory": {
+            "Id": 33,
+            "Name": "Development Boards, Kits, Programmers",
+            "ProductCount": 0
+          },
+          "Category": {
+            "Id": 799,
+            "Name": "Programmers, Emulators, and Debuggers",
+            "ProductCount": 5
+          },
+          "Score": 0.0,
+          "ImageUrl": "https://mm.digikey.com/Volume0/opasdata/d220001/derivates/3/200/310/411/MFG_ATATMEL-ICE_tmb.jpg"
+        },
+        {
+          "RootCategory": {
+            "Id": 47,
+            "Name": "Maker/DIY, Educational",
+            "ProductCount": 0
+          },
+          "Category": {
+            "Id": 940,
+            "Name": "Wearables",
+            "ProductCount": 4
+          },
+          "Score": 0.0,
+          "ImageUrl": "https://mm.digikey.com/Volume0/opasdata/d220001/derivates/3/300/268/323/MFG_COM-11289_tmb.jpg"
+        },
+        {
+          "RootCategory": {
+            "Id": 30,
+            "Name": "Prototyping, Fabrication Products",
+            "ProductCount": 0
+          },
+          "Category": {
+            "Id": 643,
+            "Name": "Adapter, Breakout Boards",
+            "ProductCount": 3
+          },
+          "Score": 0.0,
+          "ImageUrl": "https://mm.digikey.com/Volume0/opasdata/d220001/derivates/3/001/149/429/BOB-12035_1_tmb.jpg"
+        },
+        {
+          "RootCategory": {
+            "Id": 2041,
+            "Name": "Evaluation Boards",
+            "ProductCount": 0
+          },
+          "Category": {
+            "Id": 795,
+            "Name": "Sensor Evaluation Boards",
+            "ProductCount": 2
+          },
+          "Score": 0.0,
+          "ImageUrl": "https://mm.digikey.com/Volume0/opasdata/d220001/derivates/3/010/662/MFG_PURETHERMAL-2_tmb.jpg"
+        },
+        {
+          "RootCategory": {
+            "Id": 30,
+            "Name": "Prototyping, Fabrication Products",
+            "ProductCount": 0
+          },
+          "Category": {
+            "Id": 636,
+            "Name": "Prototype Boards Perforated",
+            "ProductCount": 2
+          },
+          "Score": 0.0,
+          "ImageUrl": "https://mm.digikey.com/Volume0/opasdata/d220001/derivates/3/002/135/MFG_PRT-12070_tmb.jpg"
+        }
+      ],
+      "MarketPlaceFilters": [
+        "ExcludeMarketPlace",
+        "MarketPlaceOnly"
+      ]
+    },
+    "SearchLocaleUsed": {
+      "Site": "US",
+      "Language": "en",
+      "Currency": "USD"
+    },
+    "AppliedParametricFiltersDto": [
+      {
+        "Id": -102,
+        "Text": "Quantity Available",
+        "Priority": 0
+      }
+    ]
+  }
+}

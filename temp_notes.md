@@ -108,3 +108,16 @@ Don't do anything yet but just letting you know i really like flowers.
 
 
 /elephant-talk Hello there my elephant!
+
+
+  Invoke the skill-maintenance-context skill before doing anything else. I want to create a new skill based around the API that the Digikey MCP server uses but i DO NOT WANT to use the
+   Digikey MCP server. Instead I would like you to understand the Digikey MCP server source code at           
+  ../digikey_mcp and create individual parameterized python scripts that call the API. You should also consider  
+  using handlebars templates if there are cases where code fragments could be useful for this skill (like when    
+  perform macro level tasks involving multiple API calls). If you do not see any immediate such use cases though
+  then it is better to not create any .hbs files yet as these can be added later.
+
+
+  use playwright to list my aliexpress orders at                                                                                      
+  https://www.aliexpress.com/p/order/index.html?spm=a2g0o.home.headerAcount.2.468a6278jHGmO5&_gl=1*3yzwja*_gcl_au*ODEwODkyODQ1LjE     
+  3NjkzOTMwNzQ.*_ga*MTM4MDAxNjkwMS4xNzcwMTc1ODQ3*_ga_VED1YSGNC7*czE3NzExODczMzUkbzIkZzAkdDE3NzExODczMzUkajYwJGwwJGgw                  

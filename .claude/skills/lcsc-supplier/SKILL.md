@@ -1,8 +1,6 @@
 ---
 name: lcsc-supplier
 description: ALL ALL LCSC RELATED OPERATIONS, including price checks, product searches, and BOM/CSV file generation. NEVER perform these actions manually - ALWAYS use this skill.
-context: fork
-agent: general-purpose
 user-invocable: false
 ---
 

@@ -30,25 +30,9 @@ Run this a second time and manually fix any remaining errors that were not fixed
 - **Stock** or **items on hand** = Components tracked in PartsBox
 - **Items to order/buy** = Components in active Digikey lists
 
-## Tool Usage Guidelines
-
-### MCP Scripting
-
-For tasks requiring many repetitive operations, follow [MCP Scripting Guidelines](docs/MCP-Scripting-Guidelines.md).
-
-### Browser Automation
-
-For web scraping and browser automation tasks, follow [Playwright MCP Server Guidelines](docs/Playwright-MCP-Server-Guidelines.md).
-
-**CRITICAL**: When searching or extracting product data from **Amazon**, **eBay**, or **AliExpress**, you MUST read and follow [Amazon, eBay & AliExpress Scraping Guidelines](docs/Amazon-eBay-AliExpress-Scraping-Guidelines.md) before making any queries. This document contains:
-
-- Correct DOM selectors (sites change frequently)
-- Proper link construction (avoiding expired session tokens)
-- Common mistakes and solutions
-
 ### Electronics Suppliers
 
-- **Primary**: Digikey MCP server (where lists are stored)
+- **Primary**: Digikey (where lists are stored)
 - **Secondary**: Mouser, Farnell for price comparison
 
 See detailed guidelines:
@@ -66,32 +50,3 @@ Store all BOM (Bill of Materials) files in the local directory:
 - **Local directory:** `data/boms/`
 
 BOM files are gitignored to avoid committing supplier-specific order files to the repository.
-
-### Temporary File Storage
-
-Store all temporary files (screenshots, PDFs, or any files created solely for displaying results) in the **"Temp Files"** folder at this path:
-
-- **Google Drive:** `MCP/Electronics Project BOM Helper/Temp Files` (Folder ID: `1q4VYWPhUks3aC9u4F6zLF8JzX0OMW5XA`)
-
-## Reference Documents
-
-### MCP Server Guidelines
-
-Refer to the following local documents for detailed instructions:
-
-- [Playwright MCP Server Guidelines](docs/Playwright-MCP-Server-Guidelines.md)
-- [Amazon, eBay & AliExpress Scraping Guidelines](docs/Amazon-eBay-AliExpress-Scraping-Guidelines.md)
-- [MCP Scripting Guidelines](docs/MCP-Scripting-Guidelines.md)
-- [Pricing Guidelines](docs/Pricing-Guidelines.md)
-- [Digikey MCP Server Guidelines](docs/Digikey-MCP-Server-Guidelines.md)
-- [PartsBox MCP Server Guidelines](docs/PartsBox-MCP-Server-Guidelines.md)
-- [Google Docs MCP Server Guidelines](docs/Google-Docs-MCP-Server-Guidelines.md)
-- [Using JMESPath](docs/Using-JMESPath.md)
-
-### Inventory & Planning Documents
-
-**Note:** The following documents contain current inventory snapshots and are available when needed:
-
-- `docs/PartsBox-Through-Hole-Summary.md` - Parts already on hand
-- `docs/Remaining-Kits-To-Build.md` - Gaps in SMD kit and planned orders
-- `docs/Active-Lists-Summary.md` - Quick summary of active Digikey lists

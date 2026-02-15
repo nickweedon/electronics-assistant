@@ -1,0 +1,4 @@
+node_modules/
+screenshots/*.png
+!screenshots/.gitkeep
+*.log
