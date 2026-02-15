@@ -85,3 +85,26 @@ Fix @data/kits/E24_Resistors_0805_Quarter_Watt_1Percent_Kit_qty100.md  and:
 
 
 Search for the items recommended from aliexpress. Do some analysis and provide a list of links to specific items that you recommend.
+
+
+/create-skill Create a new local skill called 'lcsc-supplier' that should be invoked whenever interaction is needed with the LCSC electronics supplier. This skill should ALWAYS also trigger the 'playwright' skill. The behavior of this skill should be taken from the existing instructions in this projects CLAUDE.md file and its pertinent linked documents. We are essentially turning this existing CLAUDE.md based behavior into a skill.
+One caveat however is that will no longer be using scripts/lcsc_tool.py as it has now been deprecated in favor of 
+
+
+Do a price check at LCSC on the first ten of the items in @data/kits/E24_Capacitors_Mixed_10pF_470uF_25V-100V_5pct_qty25-100.md 
+
+Do a price check at LCSC on the first ten of the items in this file
+
+
+
+
+So don't respond or do anything yet and DO NOT activate and skills but i'm just telling you that i am curious about how elephants talk.  
+
+Alright, lets do it now!
+
+
+
+Don't do anything yet but just letting you know i really like flowers. 
+
+
+/elephant-talk Hello there my elephant!

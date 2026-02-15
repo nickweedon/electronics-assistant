@@ -1,0 +1,49 @@
+{
+  "success": true,
+  "data": {
+    "lcscCode": "C107107",
+    "mpn": "CC0805JRNPO9BN100",
+    "manufacturer": "YAGEO",
+    "description": "10pF ±5% 50V Ceramic Capacitor NP0 0805",
+    "stock": "165400",
+    "pricing": [
+      {
+        "qty": "100+",
+        "unit_price": "$ 0.0062",
+        "ext_price": "$ 0.62"
+      },
+      {
+        "qty": "1,000+",
+        "unit_price": "$ 0.0049",
+        "ext_price": "$ 4.90"
+      },
+      {
+        "qty": "4,000+",
+        "unit_price": "$ 0.0043",
+        "ext_price": "$ 17.20"
+      },
+      {
+        "qty": "8,000+",
+        "unit_price": "$ 0.0039",
+        "ext_price": "$ 31.20"
+      },
+      {
+        "qty": "48,000+",
+        "unit_price": "$ 0.0035",
+        "ext_price": "$ 168.00"
+      },
+      {
+        "qty": "100,000+",
+        "unit_price": "$ 0.0033",
+        "ext_price": "$ 330.00"
+      }
+    ]
+  },
+  "metadata": {
+    "url": "https://www.lcsc.com/product-detail/C107107.html",
+    "timestamp": "2026-02-14T23:59:33.443Z",
+    "duration": 6676,
+    "browser": "chromium",
+    "screenshots": []
+  }
+}
