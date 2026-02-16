@@ -1,7 +1,6 @@
 ---
 name: partsbox-api
 description: "Direct PartsBox API access via Python scripts for inventory, stock, projects, and orders."
-user-invocable: false
 allowed-tools: Bash, Read, Grep, Glob, Write
 ---
 
