@@ -3,6 +3,16 @@ FROM ubuntu:24.04
 # Avoid prompts from apt
 ENV DEBIAN_FRONTEND=noninteractive
 
+# Set up locales to avoid locale warnings
+RUN apt-get update && apt-get install -y locales && \
+    locale-gen en_US.UTF-8 && \
+    update-locale LANG=en_US.UTF-8 && \
+    rm -rf /var/lib/apt/lists/*
+
+ENV LANG=en_US.UTF-8
+ENV LANGUAGE=en_US:en
+ENV LC_ALL=en_US.UTF-8
+
 # Install system dependencies and development tools
 RUN apt-get update && apt-get install -y \
     # Essential build tools
