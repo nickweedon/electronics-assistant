@@ -1,0 +1,48 @@
+services:
+  devcontainer:
+    build:
+      context: .
+      dockerfile: Dockerfile
+
+    volumes:
+      # Mount project directory (read-write, cached)
+      - ..:/workspace:rw,cached
+
+      # Docker-outside-of-Docker: mount host Docker socket
+      - /var/run/docker.sock:/var/run/docker.sock
+
+      # Persist bash history
+      - devcontainer-bashhistory:/home/vscode/.bash_history_mount
+
+      # Claude Code credentials (mounted to stay synced with host)
+      - ${HOME}/.claude/.credentials.json:/home/vscode/.claude/.credentials.json:ro
+
+      # Mount claude-monorepo from host
+      - /opt/src/claude/claude-monorepo:/home/vscode/claude-monorepo:cached
+
+      # Playwright browser profiles (persistent named volume)
+      - playwright-browsers:/home/vscode/.cache/ms-playwright
+
+    # Keep container running
+    command: sleep infinity
+
+    # Use host network for easier connectivity
+    network_mode: host
+
+    # Grant privileges needed for Docker access
+    privileged: false
+
+    environment:
+      # Ensure Docker socket is accessible
+      DOCKER_HOST: unix:///var/run/docker.sock
+
+      # X11 forwarding for WSL (connects to host's X server)
+      # WSL typically exposes X11 on the host IP
+      DISPLAY: "${DISPLAY:-host.docker.internal:0}"
+
+      # Disable Wayland to force X11 usage
+      WAYLAND_DISPLAY: ""
+
+volumes:
+  devcontainer-bashhistory:
+  playwright-browsers:

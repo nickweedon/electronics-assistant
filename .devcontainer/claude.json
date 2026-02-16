@@ -1,0 +1,10 @@
+{
+  "userID": "9594d4ab6161e77a2195bcb17d7d8e898757f9e93c9efa15e47b50fab213d05a",
+  "hasCompletedOnboarding": true,
+  "installMethod": "native",
+  "projects": {
+    "/workspace": {
+      "hasTrustDialogAccepted": true
+    }
+  }
+}

@@ -1,0 +1,32 @@
+{
+	"name": "electronics-assistant",
+	"dockerComposeFile": "compose.yml",
+	"service": "devcontainer",
+	"workspaceFolder": "/workspace",
+	"remoteUser": "vscode",
+
+	"customizations": {
+		"vscode": {
+			"extensions": [
+				"anthropics.claude-code",
+				"s-hiraoku.vscode-sidebar-terminal"
+			],
+			"settings": {
+				"terminal.integrated.defaultProfile.linux": "bash",
+				"terminal.integrated.profiles.linux": {
+					"bash": {
+						"path": "/bin/bash"
+					}
+				}
+			}
+		}
+	},
+
+	"features": {
+		"ghcr.io/anthropics/devcontainer-features/claude-code:1.0": {}
+	},
+
+	"remoteEnv": {
+		"PATH": "${containerEnv:PATH}:/home/vscode/.local/bin"
+	}
+}

@@ -3,3 +3,6 @@ data/boms/*
 !data/boms/.gitkeep
 scripts-temp/.claude/skills/partsbox-api/scripts/.venv/
 .claude/skills/partsbox-api/scripts/__pycache__/
+
+# Claude Code credentials file (contains OAuth tokens)
+.devcontainer/credentials.json
