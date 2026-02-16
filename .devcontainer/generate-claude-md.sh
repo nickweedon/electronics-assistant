@@ -19,6 +19,7 @@ PIP_VERSION=$(pip --version 2>/dev/null | awk '{print $2}')
 DOCKER_VERSION=$(docker --version 2>/dev/null | awk '{print $3}' | sed 's/,//')
 GH_VERSION=$(gh --version 2>/dev/null | head -1 | awk '{print $3}')
 JQ_VERSION=$(jq --version 2>/dev/null | sed 's/jq-//')
+TREE_VERSION=$(tree --version 2>/dev/null | head -1 | awk '{print $2}')
 CLAUDE_VERSION=$(claude --version 2>/dev/null | head -1 | sed 's/[\/&]/\\&/g')
 PLAYWRIGHT_VERSION=$(npm list -g playwright 2>/dev/null | grep playwright@ | awk -F@ '{print $2}' | head -1 | awk '{print $1}')
 
@@ -60,6 +61,7 @@ cat > "$CLAUDE_MD" << 'EOF'
 
 ### Utilities
 - **jq**: $JQ_VERSION (JSON processor)
+- **tree**: $TREE_VERSION (directory tree visualization)
 - **curl**: Installed
 - **wget**: Installed
 - **vim**: Installed
@@ -201,8 +203,13 @@ The `~/.claude/` directory contains symlinks to the claude-monorepo repository:
 └── templates -> ~/claude-monorepo/claude/templates/
 \`\`\`
 
-**Repository**: https://github.com/nickweedon/claude-monorepo.git
-**Important**: Skills, commands, hooks, and templates are symlinked. Any changes to files in these directories will be reflected in the repository.
+**Repository Location**: `/home/vscode/claude-monorepo`
+**Repository URL**: https://github.com/nickweedon/claude-monorepo.git
+
+**Important Notes**:
+- Skills, commands, hooks, and templates are symlinked. Any changes to files in these directories will be reflected in the repository.
+- When using `/claude-commit`, the repository path is `/home/vscode/claude-monorepo` (not `/opt/src/claude/claude-monorepo` which is the host path).
+- The repository is mounted from the host at `/opt/src/claude/claude-monorepo` to the container at `/home/vscode/claude-monorepo`.
 
 ## User Permissions
 
@@ -275,6 +282,7 @@ sed -i "s|\$PIP_VERSION|$PIP_VERSION|g" "$CLAUDE_MD"
 sed -i "s|\$DOCKER_VERSION|$DOCKER_VERSION|g" "$CLAUDE_MD"
 sed -i "s|\$GH_VERSION|$GH_VERSION|g" "$CLAUDE_MD"
 sed -i "s|\$JQ_VERSION|$JQ_VERSION|g" "$CLAUDE_MD"
+sed -i "s|\$TREE_VERSION|$TREE_VERSION|g" "$CLAUDE_MD"
 sed -i "s|\$CLAUDE_VERSION|$CLAUDE_VERSION|g" "$CLAUDE_MD"
 sed -i "s|\$PLAYWRIGHT_VERSION|$PLAYWRIGHT_VERSION|g" "$CLAUDE_MD"
 

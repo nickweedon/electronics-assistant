@@ -28,6 +28,8 @@ RUN apt-get update && apt-get install -y \
     nano \
     # JSON processing
     jq \
+    # File system utilities
+    tree \
     # Network tools
     iputils-ping \
     net-tools \

@@ -1,7 +1,10 @@
 __pycache__/
+
+# Temporary/ephemeral scripts (not committed)
+scripts-temp/
+
 data/boms/*
 !data/boms/.gitkeep
-scripts-temp/.claude/skills/partsbox-api/scripts/.venv/
 .claude/skills/partsbox-api/scripts/__pycache__/
 
 # Claude Code credentials file (contains OAuth tokens)
