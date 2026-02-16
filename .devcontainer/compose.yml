@@ -20,11 +20,17 @@ services:
       # Mount claude-monorepo from host
       - /opt/src/claude/claude-monorepo:/home/vscode/claude-monorepo:cached
 
-      # Playwright browser profiles (persistent named volume)
+      # Playwright browser binaries (persistent named volume)
       - playwright-browsers:/home/vscode/.cache/ms-playwright
+
+      # Playwright browser user profiles - cookies, sessions, login state (persistent named volume)
+      - playwright-profiles:/home/vscode/.cache/playwright-profiles
 
       # X11 socket for GUI applications (mount from WSL host)
       - /tmp/.X11-unix:/tmp/.X11-unix:rw
+
+      # Windows screenshots directory (C:\temp\screenshots via WSL mount)
+      - /mnt/c/temp/screenshots:/host/screenshots:ro
 
     # Keep container running
     command: sleep infinity
@@ -49,3 +55,4 @@ services:
 volumes:
   devcontainer-bashhistory:
   playwright-browsers:
+  playwright-profiles:

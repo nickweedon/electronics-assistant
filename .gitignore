@@ -6,3 +6,6 @@ scripts-temp/.claude/skills/partsbox-api/scripts/.venv/
 
 # Claude Code credentials file (contains OAuth tokens)
 .devcontainer/credentials.json
+
+# Terminal Paste Image folder
+.cp-images/

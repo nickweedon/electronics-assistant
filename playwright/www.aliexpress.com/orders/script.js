@@ -35,7 +35,9 @@ const config = {
   headless: args.headless === 'true', // Default to visible mode for debugging
   timeout: parseInt(args.timeout) || 15000, // Longer timeout for AliExpress
   screenshotDir: './screenshots',
-  viewport: { width: parseInt(args.width) || 1920, height: parseInt(args.height) || 1080 }
+  viewport: { width: parseInt(args.width) || 1920, height: parseInt(args.height) || 1080 },
+  manual: args.manual === 'true', // Manual mode - keeps browser open for login
+  pause: parseInt(args.pause) || 0 // Pause time in seconds before closing (for manual interaction)
 };
 
 // Ensure screenshot directory exists
@@ -49,26 +51,19 @@ if (!fs.existsSync(screenshotDir)) {
  */
 async function main() {
   const startTime = Date.now();
-  let browser = null;
   let context = null;
   let page = null;
 
   try {
     console.error(`[INFO] Navigating to: ${targetUrl}`);
 
-    // Launch browser with stealth
-    browser = await playwright.chromium.launch({
-      headless: config.headless,
-      args: [
-        '--no-sandbox',
-        '--disable-setuid-sandbox',
-        '--disable-dev-shm-usage',
-        '--disable-blink-features=AutomationControlled'
-      ]
-    });
+    // Use persistent context to save login sessions
+    // Use the mounted Docker volume for browser profiles
+    const userDataDir = path.join(process.env.HOME || '/home/vscode', '.cache/playwright-profiles/aliexpress');
 
-    // Create context with realistic settings
-    context = await browser.newContext({
+    // Launch browser with persistent context
+    context = await playwright.chromium.launchPersistentContext(userDataDir, {
+      headless: config.headless,
       viewport: config.viewport,
       userAgent: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
       locale: 'en-US',
@@ -76,10 +71,24 @@ async function main() {
       permissions: [],
       extraHTTPHeaders: {
         'Accept-Language': 'en-US,en;q=0.9'
-      }
+      },
+      args: [
+        '--no-sandbox',
+        '--disable-setuid-sandbox',
+        '--disable-dev-shm-usage',
+        '--disable-blink-features=AutomationControlled',
+        '--disable-session-crashed-bubble',
+        '--hide-crash-restore-bubble',
+        '--disable-infobars',
+        '--no-first-run',
+        '--noerrors',
+        '--disable-popup-blocking'
+      ]
     });
 
-    page = await context.newPage();
+    // Get existing page or create new one
+    const pages = context.pages();
+    page = pages.length > 0 ? pages[0] : await context.newPage();
     page.setDefaultTimeout(config.timeout);
 
     // Navigate to URL
@@ -106,7 +115,13 @@ async function main() {
     await page.waitForTimeout(3000); // Give time for SPA to initialize
 
     // Try to detect if we need to login
-    const needsLogin = await page.evaluate(() => {
+    const currentUrl = page.url();
+    const urlNeedsLogin = currentUrl.includes('login') ||
+                          currentUrl.includes('signin') ||
+                          currentUrl.includes('sign-in') ||
+                          currentUrl.includes('accounts.google.com');
+
+    const needsLogin = urlNeedsLogin || await page.evaluate(() => {
       const loginIndicators = [
         'login', 'sign in', 'sign-in', 'signin',
         'Log in', 'Sign In', 'Sign in'
@@ -117,6 +132,57 @@ async function main() {
 
     if (needsLogin) {
       console.error('[WARN] Login may be required - page contains login indicators');
+
+      if (config.manual) {
+        console.error('[INFO] Manual mode enabled - waiting for you to complete login...');
+        console.error('[INFO] Please log in to AliExpress in the browser window');
+        console.error('[INFO] The script will wait for up to 5 minutes...');
+
+        // Wait for successful login by checking multiple indicators
+        const loginTimeout = 300000; // 5 minutes
+        const startWait = Date.now();
+
+        while ((Date.now() - startWait < loginTimeout)) {
+          const currentUrl = page.url();
+
+          // Check if we've successfully logged in (don't assume we're on orders page)
+          const isOnAliExpress = currentUrl.includes('aliexpress.com') || currentUrl.includes('aliexpress.us');
+          const isNotAuthPage = !currentUrl.includes('login') &&
+                                !currentUrl.includes('signin') &&
+                                !currentUrl.includes('accounts.google.com') &&
+                                !currentUrl.includes('thirdparty') &&
+                                !currentUrl.includes('ggcallback');
+
+          const pageTitle = await page.title().catch(() => '');
+
+          const isLoggedIn = isOnAliExpress && isNotAuthPage;
+
+          if (isLoggedIn) {
+            console.error('[INFO] ✓ Login successful - you are now on AliExpress!');
+            console.error(`[INFO] Page title: ${pageTitle}`);
+            console.error(`[INFO] Current URL: ${currentUrl}`);
+
+            // Navigate back to orders page after login
+            console.error('[INFO] Navigating to orders page...');
+            await page.goto(targetUrl, {
+              waitUntil: 'domcontentloaded',
+              timeout: config.timeout
+            });
+            break;
+          }
+
+          console.error(`[DEBUG] Waiting for login... Title: "${pageTitle}", URL: ${currentUrl.substring(0, 60)}...`);
+          await page.waitForTimeout(2000); // Check every 2 seconds
+        }
+
+        const finalUrl = page.url();
+        if (Date.now() - startWait >= loginTimeout) {
+          console.error(`[WARN] Timeout reached. Current URL: ${finalUrl}`);
+        }
+
+        console.error('[INFO] Waiting for page content to fully load...');
+        await page.waitForTimeout(3000); // Give time for SPA to load
+      }
     }
 
     // Extract order data
@@ -218,6 +284,13 @@ async function main() {
 
     console.log(JSON.stringify(result, null, 2));
 
+    // Pause before closing if requested (for manual interaction)
+    if (config.pause > 0) {
+      console.error(`[INFO] Pausing for ${config.pause} seconds before closing...`);
+      console.error('[INFO] You can interact with the browser during this time.');
+      await page.waitForTimeout(config.pause * 1000);
+    }
+
   } catch (error) {
     console.error(`[ERROR] ${error.message}`);
 
@@ -269,9 +342,6 @@ async function main() {
     // Cleanup
     if (context) {
       await context.close();
-    }
-    if (browser) {
-      await browser.close();
     }
     console.error('[INFO] Browser closed');
   }

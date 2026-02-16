@@ -20,21 +20,34 @@ Extract order information from AliExpress orders page. This script navigates to 
 ### Optional
 - `--url=<url>` - Custom orders page URL (default: https://www.aliexpress.com/p/order/index.html)
 - `--headless=true` - Run browser in headless mode (default: false for easier login)
+- `--manual=true` - Enable manual login mode - keeps browser open and waits for you to complete login (recommended)
 - `--timeout=<ms>` - Set timeout in milliseconds (default: 15000)
 - `--screenshot=true` - Take screenshots (always enabled)
 - `--output=<path>` - Custom screenshot path
 
 ## Usage
 
-### Basic usage (visible browser for login)
+### Manual login mode (RECOMMENDED - for first time or when session expired)
 ```bash
-cd /opt/src/mcp/electronics-assistant/playwright/www.aliexpress.com/orders
+cd /workspace/playwright/www.aliexpress.com/orders
+node script.js --manual=true
+```
+This will:
+1. Open a visible browser window
+2. Navigate to the orders page (will redirect to login if needed)
+3. Wait for you to complete login (up to 5 minutes)
+4. Automatically proceed to extract orders after login is detected
+5. Close the browser and output results
+
+### Basic usage (visible browser, but won't wait for login)
+```bash
+cd /workspace/playwright/www.aliexpress.com/orders
 node script.js
 ```
 
 ### With custom URL
 ```bash
-node script.js --url="https://www.aliexpress.com/p/order/index.html?..."
+node script.js --manual=true --url="https://www.aliexpress.com/p/order/index.html?..."
 ```
 
 ### Headless mode (only if already logged in via cookies)
@@ -87,7 +100,7 @@ Scripts output JSON to stdout:
 3. The script will wait while the page loads
 4. After login, the orders should load automatically
 
-Once you're logged in, browser cookies may be preserved for subsequent runs (depending on browser session handling).
+Once you're logged in, browser cookies and sessions are preserved in the Docker volume `playwright-profiles` at `/home/vscode/.cache/playwright-profiles/aliexpress`. This means your login persists across container restarts and you won't need to log in again (unless the session expires on AliExpress's side).
 
 ## Troubleshooting
 

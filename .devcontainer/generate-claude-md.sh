@@ -19,8 +19,8 @@ PIP_VERSION=$(pip --version 2>/dev/null | awk '{print $2}')
 DOCKER_VERSION=$(docker --version 2>/dev/null | awk '{print $3}' | sed 's/,//')
 GH_VERSION=$(gh --version 2>/dev/null | head -1 | awk '{print $3}')
 JQ_VERSION=$(jq --version 2>/dev/null | sed 's/jq-//')
-CLAUDE_VERSION=$(claude --version 2>/dev/null | head -1)
-PLAYWRIGHT_VERSION=$(npm list -g playwright 2>/dev/null | grep playwright@ | awk -F@ '{print $2}')
+CLAUDE_VERSION=$(claude --version 2>/dev/null | head -1 | sed 's/[\/&]/\\&/g')
+PLAYWRIGHT_VERSION=$(npm list -g playwright 2>/dev/null | grep playwright@ | awk -F@ '{print $2}' | head -1 | awk '{print $1}')
 
 # Generate CLAUDE.md
 cat > "$CLAUDE_MD" << 'EOF'
@@ -119,29 +119,43 @@ xeyes
 - Image viewers
 - Any graphical development/debugging tools
 
-## Playwright Browser Profiles
+## Playwright Volumes
 
-A dedicated Docker volume is mounted for Playwright browser profiles and cache.
+Two dedicated Docker volumes are mounted for Playwright:
 
-**Volume Details:**
+### 1. Browser Binaries Volume
 - **Volume Name**: `playwright-browsers` (named Docker volume)
 - **Mount Point**: `/home/vscode/.cache/ms-playwright`
-- **Purpose**: Persist downloaded browser binaries across container rebuilds
+- **Purpose**: Persist downloaded browser binaries (Chromium, Firefox, WebKit) across container rebuilds
 
 **What this means:**
-- Playwright browsers (Chromium, Firefox, WebKit) are downloaded once and persisted
+- Browsers are downloaded once and persisted
 - Faster container startup after initial browser installation
 - No need to re-download browsers after rebuilding the devcontainer
-- Browser profiles and cache survive container recreations
 
-**Managing the volume:**
+### 2. Browser Profiles Volume
+- **Volume Name**: `playwright-profiles` (named Docker volume)
+- **Mount Point**: `/home/vscode/.cache/playwright-profiles`
+- **Purpose**: Persist browser user data - login sessions, cookies, localStorage across container rebuilds
+
+**What this means:**
+- Login sessions are preserved between runs
+- No need to re-authenticate to websites after container restart
+- Browser state (cookies, localStorage, etc.) survives container recreations
+
+**Managing the volumes:**
 ```bash
 # View volume details (from host or container)
 docker volume inspect playwright-browsers
+docker volume inspect playwright-profiles
 
-# If you need to clear the cache and re-download browsers
+# Clear browser binaries (will need to re-download)
 docker volume rm playwright-browsers
-# Then rebuild the devcontainer
+
+# Clear saved login sessions (will need to re-login to websites)
+docker volume rm playwright-profiles
+
+# After removing volumes, rebuild the devcontainer
 ```
 
 **Playwright is Pre-installed:**
@@ -167,8 +181,13 @@ npx playwright install webkit
 
 - **Project**: `/workspace` ← mounted from host (read-write, cached)
 - **Docker Socket**: `/var/run/docker.sock` ← host Docker daemon
-- **Claude Cache**: `/home/vscode/.cache/claude` ← persisted authentication
-- **Playwright Browsers**: `/home/vscode/.cache/ms-playwright` ← persistent volume `playwright-browsers`
+- **Claude Credentials**: `~/.claude/.credentials.json` ← mounted from host (read-only)
+- **Claude Monorepo**: `/home/vscode/claude-monorepo` ← mounted from host (skills, commands, templates)
+- **Bash History**: `/home/vscode/.bash_history_mount` ← persistent volume `devcontainer-bashhistory`
+- **Playwright Browser Binaries**: `/home/vscode/.cache/ms-playwright` ← persistent volume `playwright-browsers`
+- **Playwright Browser Profiles**: `/home/vscode/.cache/playwright-profiles` ← persistent volume `playwright-profiles`
+- **X11 Socket**: `/tmp/.X11-unix` ← mounted from WSL host (for GUI applications)
+- **Windows Screenshots**: `/host/screenshots` ← Windows `C:\temp\screenshots` via WSL mount (read-only)
 
 ## Claude Code Directory Structure
 
@@ -227,6 +246,12 @@ The `vscode` user has:
    - Use the `/playwright` skill to generate automation scripts
    - Browsers are cached in persistent volume (no re-download on rebuild)
    - Additional browsers (Firefox, WebKit) can be installed on demand
+
+8. **Windows Screenshots**: Access screenshots from Windows host.
+   - Windows path: \`C:\temp\screenshots\`
+   - Container path: \`/host/screenshots\`
+   - When you paste a Windows path like \`C:\temp\screenshots\file.png\`, convert to \`/host/screenshots/file.png\`
+   - Use \`xdg-open /host/screenshots/file.png\` to view images
 
 ## Environment Notes
 
