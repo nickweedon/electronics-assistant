@@ -37,6 +37,7 @@ RUN apt-get update && apt-get install -y \
     x11-apps \
     x11-utils \
     xauth \
+    xvfb \
     libx11-6 \
     libx11-xcb1 \
     libxcb1 \
@@ -66,6 +67,8 @@ RUN apt-get update && apt-get install -y \
     libsecret-1-0 \
     libgdk-pixbuf2.0-0 \
     libgtk-3-0 \
+    # xdg-utils for xdg-open and other utilities
+    xdg-utils \
     && rm -rf /var/lib/apt/lists/*
 
 # Install Docker CLI (for Docker-outside-of-Docker)
@@ -99,6 +102,18 @@ RUN apt-get update && apt-get install -y \
     && rm -rf /var/lib/apt/lists/* && \
     ln -sf /usr/bin/python3.12 /usr/bin/python && \
     ln -sf /usr/bin/python3.12 /usr/bin/python3
+
+# Install Playwright and dependencies globally (for /playwright skill)
+# This makes Playwright available system-wide and avoids redundant installations
+RUN npm install -g \
+    playwright \
+    playwright-extra \
+    puppeteer-extra-plugin-stealth \
+    puppeteer-extra-plugin-user-preferences \
+    puppeteer-extra-plugin-user-data-dir
+
+# Install markdownlint CLI globally for linting markdown files
+RUN npm install -g markdownlint-cli2
 
 # Create docker group and vscode user with UID 1000 to match host user
 # Remove ubuntu user if it exists (typically has UID 1000)
@@ -137,8 +152,16 @@ RUN chmod 644 /home/vscode/.claude/settings.json
 RUN echo 'alias claude="claude --dangerously-skip-permissions"' >> /home/vscode/.bash_aliases && \
     chown vscode:vscode /home/vscode/.bash_aliases
 
+# Set up NODE_PATH for globally installed npm packages
+RUN echo 'export NODE_PATH=/usr/lib/node_modules' >> /home/vscode/.bashrc && \
+    chown vscode:vscode /home/vscode/.bashrc
+
 # Create Playwright cache directory (will be mounted as volume)
 RUN mkdir -p /home/vscode/.cache/ms-playwright
+
+# Install Playwright browser binaries (Chromium by default)
+# Browsers are stored in the persistent playwright-browsers volume
+RUN npx playwright install chromium --with-deps
 
 # Generate CLAUDE.md during build to avoid race condition with VSCode extension
 COPY generate-claude-md.sh /tmp/generate-claude-md.sh

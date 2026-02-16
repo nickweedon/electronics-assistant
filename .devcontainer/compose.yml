@@ -23,6 +23,9 @@ services:
       # Playwright browser profiles (persistent named volume)
       - playwright-browsers:/home/vscode/.cache/ms-playwright
 
+      # X11 socket for GUI applications (mount from WSL host)
+      - /tmp/.X11-unix:/tmp/.X11-unix:rw
+
     # Keep container running
     command: sleep infinity
 
@@ -37,8 +40,8 @@ services:
       DOCKER_HOST: unix:///var/run/docker.sock
 
       # X11 forwarding for WSL (connects to host's X server)
-      # WSL typically exposes X11 on the host IP
-      DISPLAY: "${DISPLAY:-host.docker.internal:0}"
+      # Mount X11 socket and use :0 display (WSLg default)
+      DISPLAY: ":0"
 
       # Disable Wayland to force X11 usage
       WAYLAND_DISPLAY: ""

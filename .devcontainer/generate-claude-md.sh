@@ -20,6 +20,7 @@ DOCKER_VERSION=$(docker --version 2>/dev/null | awk '{print $3}' | sed 's/,//')
 GH_VERSION=$(gh --version 2>/dev/null | head -1 | awk '{print $3}')
 JQ_VERSION=$(jq --version 2>/dev/null | sed 's/jq-//')
 CLAUDE_VERSION=$(claude --version 2>/dev/null | head -1)
+PLAYWRIGHT_VERSION=$(npm list -g playwright 2>/dev/null | grep playwright@ | awk -F@ '{print $2}')
 
 # Generate CLAUDE.md
 cat > "$CLAUDE_MD" << 'EOF'
@@ -44,6 +45,7 @@ cat > "$CLAUDE_MD" << 'EOF'
 ### Node.js Ecosystem
 - **Node.js**: v$NODE_VERSION
 - **npm**: $NPM_VERSION
+- **NODE_PATH**: `/usr/lib/node_modules` (set in .bashrc for global package access)
 
 ### Python
 - **Python**: $PYTHON_VERSION
@@ -61,7 +63,16 @@ cat > "$CLAUDE_MD" << 'EOF'
 - **curl**: Installed
 - **wget**: Installed
 - **vim**: Installed
+- **xdg-utils**: Installed (xdg-open, etc.)
 - **build-essential**: Installed (gcc, g++, make)
+
+### Web Automation
+- **Playwright**: $PLAYWRIGHT_VERSION (pre-installed globally with stealth plugins)
+  - playwright-extra
+  - puppeteer-extra-plugin-stealth
+  - puppeteer-extra-plugin-user-preferences
+  - puppeteer-extra-plugin-user-data-dir
+- **Chromium browser**: Pre-installed and cached
 
 ### Claude Code
 - **Claude Code CLI**: $CLAUDE_VERSION
@@ -133,16 +144,23 @@ docker volume rm playwright-browsers
 # Then rebuild the devcontainer
 ```
 
-**Installing Playwright:**
+**Playwright is Pre-installed:**
+Playwright and all dependencies are pre-installed globally. You can use Playwright scripts immediately without installation.
+
 ```bash
-# Install Playwright in your project
+# Playwright is already available globally with NODE_PATH set in .bashrc
+# Just run your scripts directly:
+node my-playwright-script.js
+
+# Or use the /playwright skill to generate scripts
+/playwright
+
+# For project-specific Playwright installation (optional):
 npm install -D playwright
 
-# Install browser binaries (stored in the persistent volume)
-npx playwright install
-
-# Run Playwright with headed browser (using X11)
-npx playwright test --headed
+# Additional browsers can be installed if needed:
+npx playwright install firefox
+npx playwright install webkit
 ```
 
 ## Volume Mounts
@@ -199,10 +217,16 @@ The `vscode` user has:
    ```
 
 5. **Node Packages**: Install packages normally with npm or npx.
+   - Global packages are accessible via NODE_PATH (set automatically in .bashrc)
+   - Playwright and plugins are pre-installed globally
 
 6. **X11 Applications**: Test X11 with `xeyes` before running complex graphical applications.
+   - Use `xdg-open <file>` to open files with default applications
 
-7. **Playwright**: Install once with `npx playwright install` - browsers persist across rebuilds.
+7. **Playwright**: Pre-installed globally with Chromium browser.
+   - Use the `/playwright` skill to generate automation scripts
+   - Browsers are cached in persistent volume (no re-download on rebuild)
+   - Additional browsers (Firefox, WebKit) can be installed on demand
 
 ## Environment Notes
 
@@ -227,5 +251,6 @@ sed -i "s|\$DOCKER_VERSION|$DOCKER_VERSION|g" "$CLAUDE_MD"
 sed -i "s|\$GH_VERSION|$GH_VERSION|g" "$CLAUDE_MD"
 sed -i "s|\$JQ_VERSION|$JQ_VERSION|g" "$CLAUDE_MD"
 sed -i "s|\$CLAUDE_VERSION|$CLAUDE_VERSION|g" "$CLAUDE_MD"
+sed -i "s|\$PLAYWRIGHT_VERSION|$PLAYWRIGHT_VERSION|g" "$CLAUDE_MD"
 
 echo "✓ Generated $CLAUDE_MD"
