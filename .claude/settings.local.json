@@ -1,0 +1,11 @@
+{
+  "enabledMcpjsonServers": [
+    "playwright-mcp-server",
+    "playwright-real-session-mcp-server",
+    "mouser",
+    "partsbox",
+    "digikey",
+    "mcp-resource-server"
+  ],
+  "enableAllProjectMcpServers": true
+}
