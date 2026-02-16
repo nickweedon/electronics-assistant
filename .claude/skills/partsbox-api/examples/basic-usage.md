@@ -68,6 +68,19 @@ python3 .claude/skills/partsbox-api/scripts/storage.py list
 # List including archived
 python3 .claude/skills/partsbox-api/scripts/storage.py list --include-archived
 
+# Create a new storage location
+python3 .claude/skills/partsbox-api/scripts/storage.py create \
+  --name "SMD-Box-A1"
+
+# Create with description and tags
+python3 .claude/skills/partsbox-api/scripts/storage.py create \
+  --name "Drawer-B-Capacitors" \
+  --description "Ceramic capacitors 0805/0603" \
+  --tags "SMD,capacitors"
+
+# Get details for a specific location
+python3 .claude/skills/partsbox-api/scripts/storage.py get --id "01HABC..."
+
 # See what's in a specific location
 python3 .claude/skills/partsbox-api/scripts/storage.py parts --id "01HABC..."
 

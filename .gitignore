@@ -10,5 +10,9 @@ data/boms/*
 # Claude Code credentials file (contains OAuth tokens)
 .devcontainer/credentials.json
 
+# Environment variables and credentials
+.env
+.env.local
+
 # Terminal Paste Image folder
 .cp-images/

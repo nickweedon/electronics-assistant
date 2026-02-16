@@ -71,6 +71,7 @@ All scripts are in `.claude/skills/partsbox-api/scripts/` and output JSON to std
 |---------|-------------|
 | `list [--query Q] [--limit N] [--include-archived]` | List locations |
 | `get --id ID` | Get location details |
+| `create --name NAME [--description D] [--tags T]` | Create new location |
 | `update --id ID [--comments C] [--tags T]` | Update metadata |
 | `rename --id ID --name NAME` | Rename location |
 | `archive --id ID` | Archive location |
@@ -148,6 +149,7 @@ bash .claude/skills/partsbox-api/scripts/run.sh {script}.py {subcommand} {args}
 # Examples:
 bash .claude/skills/partsbox-api/scripts/run.sh parts.py list --limit 10
 bash .claude/skills/partsbox-api/scripts/run.sh parts.py get --id "abc123"
+bash .claude/skills/partsbox-api/scripts/run.sh storage.py create --name "SMD-Box-A1"
 bash .claude/skills/partsbox-api/scripts/run.sh stock.py add --part-id "abc" --storage-id "def" --quantity 50
 ```
 
@@ -219,3 +221,22 @@ All list operations support `--query` for filtering and projection.
 - **Timestamps**: UNIX UTC milliseconds
 - **Part types**: `local`, `linked`, `sub-assembly`, `meta`
 - **Files**: Downloaded via GET from `https://partsbox.com/files/{file_id}`
+
+## API Documentation Reference
+
+**Official PartsBox API Documentation**: <https://partsbox.com/api.html>
+
+**IMPORTANT**: Before reporting that an API method does not exist or is not implemented:
+
+1. Check the official API documentation at the URL above
+2. Verify the endpoint path, parameters, and response format
+3. If the endpoint exists in the API docs but not in this skill's scripts, implement it
+4. Do NOT claim a method doesn't exist without checking the official docs first
+
+**When implementing new API methods**:
+
+1. Use WebFetch to retrieve the API documentation for the specific endpoint
+2. Add the corresponding command to the appropriate Python script
+3. Update the command table in this SKILL.md
+4. Test the implementation with a real API call
+5. Update the examples if needed
