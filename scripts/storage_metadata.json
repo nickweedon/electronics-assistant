@@ -1,0 +1,73 @@
+{
+  "storage_types": {
+    "SMD-Box": {
+      "tags": ["type_smd-box", "material_plastic", "esd_no", "capacity_300pcs-1206"],
+      "description": "AideTek BOX-ALL 144-compartment SMD organizer (18.3x16.7x10.2mm compartments, non-ESD). Amazon: https://amazon.com/dp/B00A15YHJY",
+      "exists": true
+    },
+    "SMD-Box2": {
+      "tags": ["type_smd-box", "material_plastic", "esd_no", "capacity_300pcs-1206"],
+      "description": "AideTek BOX-ALL 144-compartment SMD organizer (18.3x16.7x10.2mm compartments, non-ESD). Amazon: https://amazon.com/dp/B00A15YHJY",
+      "exists": true
+    },
+    "SMD-ESD-Box1": {
+      "tags": ["type_smd-box", "material_plastic", "esd_yes", "capacity_300pcs-1206"],
+      "description": "AideTek BOXALL144 ESD-safe 144-compartment SMD organizer (18.3x16.7x10.2mm compartments). Amazon: https://amazon.com/dp/B0187S6CLM",
+      "exists": false,
+      "grid": {
+        "rows": ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L"],
+        "cols": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
+      }
+    },
+    "CmpntCab1": {
+      "tags": ["type_drawer-cabinet", "material_plastic", "esd_no", "cabinet_1"],
+      "description": "SUGOOE component cabinet #1: 32 standard drawers + 1 large drawer (8x4 grid + 1 large). Cabinet: 11.8x16.1x5.2\". Amazon: https://amazon.com/dp/B0F62TJLND",
+      "exists": true
+    },
+    "CmpntCab2": {
+      "tags": ["type_drawer-cabinet", "material_plastic", "esd_no", "cabinet_2"],
+      "description": "SUGOOE component cabinet #2: 32 standard drawers + 1 large drawer (8x4 grid + 1 large). Cabinet: 11.8x16.1x5.2\". Amazon: https://amazon.com/dp/B0F62TJLND",
+      "exists": true
+    },
+    "CmpntCab3": {
+      "tags": ["type_drawer-cabinet", "material_plastic", "esd_no", "cabinet_3"],
+      "description": "SUGOOE component cabinet #3: 32 standard drawers + 1 large drawer (8x4 grid + 1 large). Cabinet: 11.8x16.1x5.2\". Amazon: https://amazon.com/dp/B0F62TJLND",
+      "exists": true
+    },
+    "CmpntCab4": {
+      "tags": ["type_drawer-cabinet", "material_plastic", "esd_no", "cabinet_4"],
+      "description": "SUGOOE component cabinet #4: 32 standard drawers + 1 large drawer (8x4 grid + 1 large). Cabinet: 11.8x16.1x5.2\". Amazon: https://amazon.com/dp/B0F62TJLND",
+      "exists": true
+    },
+    "CmpntCab5": {
+      "tags": ["type_drawer-cabinet", "material_plastic", "esd_no", "cabinet_5"],
+      "description": "SUGOOE component cabinet #5: 32 standard drawers + 1 large drawer (8x4 grid + 1 large). Cabinet: 11.8x16.1x5.2\". Amazon: https://amazon.com/dp/B0F62TJLND",
+      "exists": true
+    },
+    "Stowaway1": {
+      "tags": ["type_plano-stowaway", "material_plastic", "esd_no", "box_1"],
+      "description": "Plano StowAway #1 utility box (14x9.13\" footprint, depths vary). Configurable compartments.",
+      "exists": true
+    },
+    "Stowaway2": {
+      "tags": ["type_plano-stowaway", "material_plastic", "esd_no", "box_2"],
+      "description": "Plano StowAway #2 utility box (14x9.13\" footprint, depths vary). Configurable compartments.",
+      "exists": true
+    },
+    "Stowaway3": {
+      "tags": ["type_plano-stowaway", "material_plastic", "esd_no", "box_3"],
+      "description": "Plano StowAway #3 utility box (14x9.13\" footprint, depths vary). Configurable compartments.",
+      "exists": true
+    },
+    "Stowaway4": {
+      "tags": ["type_plano-stowaway", "material_plastic", "esd_no", "box_4"],
+      "description": "Plano StowAway #4 utility box (14x9.13\" footprint, depths vary). Configurable compartments.",
+      "exists": true
+    },
+    "Stowaway5": {
+      "tags": ["type_plano-stowaway", "material_plastic", "esd_no", "box_5"],
+      "description": "Plano StowAway #5 utility box (14x9.13\" footprint, depths vary). Configurable compartments.",
+      "exists": true
+    }
+  }
+}
