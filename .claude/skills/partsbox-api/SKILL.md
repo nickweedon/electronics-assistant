@@ -247,10 +247,11 @@ When receiving new components from suppliers, use this workflow to catalog parts
 
 1. Create part entries with `parts.py create` using detailed `--notes` (purchase info, specs, supplier links)
 2. Save returned part IDs
-3. Determine storage locations (see `examples/storage-guidelines.md`)
-4. Generate documentation using template at `templates/stock-in.md.hbs`
-5. Physically store components
-6. Add stock with `stock.py add` AFTER physical placement
+3. **Upload product images** from supplier pages to PartsBox (see [Image Upload Workflow](#image-upload-workflow) below)
+4. Determine storage locations (see `examples/storage-guidelines.md`)
+5. Generate documentation using template at `templates/stock-in.md.hbs`
+6. Physically store components
+7. Add stock with `stock.py add` AFTER physical placement
 
 **Template rendering:**
 
@@ -264,6 +265,51 @@ node /home/vscode/claude-monorepo/claude/lib/template-renderer.js \
 **For detailed instructions:** See `examples/stock-in-workflow.md` for part creation format, template data structure, and complete workflow steps.
 
 **For storage guidelines:** See `examples/storage-guidelines.md` for SMD box usage rules, ESD-safe box criteria, and decision examples.
+
+## Image Upload Workflow
+
+When creating parts from supplier orders (especially AliExpress), upload product images
+to PartsBox so parts have visual reference. Use the `/playwright` skill with these
+specific actions:
+
+**Step 1: Download image from supplier** (global template: `aliexpress.com/download-item-image`)
+
+```bash
+# Copy template to working directory first
+mkdir -p scripts-temp/playwright/aliexpress.com
+cp -r ~/.claude/templates/skills/playwright/actions/aliexpress.com/download-item-image \
+  scripts-temp/playwright/aliexpress.com/
+
+# Download the product image
+cd scripts-temp/playwright/aliexpress.com/download-item-image
+node script.js \
+  --product-url="https://www.aliexpress.com/item/ITEM_ID.html" \
+  --output="/tmp/part-image.jpg"
+```
+
+**Step 2: Upload image to PartsBox** (local script: `playwright/partsbox.com/upload-item-image`)
+
+```bash
+cd /workspace/playwright/partsbox.com/upload-item-image
+node script.js \
+  --part-id="PARTSBOX_PART_ID" \
+  --image-path="/tmp/part-image.jpg"
+```
+
+**Important notes:**
+
+- The PartsBox upload script handles login automatically (switches to headed mode if
+  needed, saves session cookies for reuse)
+- For bulk uploads, loop through parts and run both steps for each
+- The AliExpress download script extracts product images from inline script data
+  (not `<img>` tags) using the `/kf/` CDN path pattern
+- Always use `/tmp/` for intermediate image files to avoid committing them
+
+**When to upload images:**
+
+- After creating new parts with `parts.py create` during stock-in
+- When a part in PartsBox is missing a product image
+- When updating parts with better/higher resolution images
 
 ## API Documentation Reference
 
