@@ -269,41 +269,41 @@ node /home/vscode/claude-monorepo/claude/lib/template-renderer.js \
 ## Image Upload Workflow
 
 When creating parts from supplier orders (especially AliExpress), upload product images
-to PartsBox so parts have visual reference. Use the `/playwright` skill with these
-specific actions:
+to PartsBox so parts have visual reference.
 
-**Step 1: Download image from supplier** (global template: `aliexpress.com/download-item-image`)
+**CRITICAL**: Use the `Skill` tool (NOT the `Task` tool) to invoke the `playwright` skill.
+There is NO `playwright` agent type — `playwright` is a skill only. Always invoke it as:
 
-```bash
-# Copy template to working directory first
-mkdir -p scripts-temp/playwright/aliexpress.com
-cp -r ~/.claude/templates/skills/playwright/actions/aliexpress.com/download-item-image \
-  scripts-temp/playwright/aliexpress.com/
-
-# Download the product image
-cd scripts-temp/playwright/aliexpress.com/download-item-image
-node script.js \
-  --product-url="https://www.aliexpress.com/item/ITEM_ID.html" \
-  --output="/tmp/part-image.jpg"
+```
+Skill tool → skill: "playwright"
 ```
 
-**Step 2: Upload image to PartsBox** (local script: `playwright/partsbox.com/upload-item-image`)
+Never use `Task tool → subagent_type: "playwright"` — this will error.
 
-```bash
-cd /workspace/playwright/partsbox.com/upload-item-image
-node script.js \
-  --part-id="PARTSBOX_PART_ID" \
-  --image-path="/tmp/part-image.jpg"
-```
+### Step 1: Download image from supplier
 
-**Important notes:**
+Use the `Skill` tool with `skill: "playwright"` to download the product image. Ask it
+to run the `aliexpress.com/download-item-image` action with:
 
-- The PartsBox upload script handles login automatically (switches to headed mode if
-  needed, saves session cookies for reuse)
-- For bulk uploads, loop through parts and run both steps for each
-- The AliExpress download script extracts product images from inline script data
-  (not `<img>` tags) using the `/kf/` CDN path pattern
-- Always use `/tmp/` for intermediate image files to avoid committing them
+- `--product-url` — the AliExpress item URL
+- `--output` — `/tmp/part-image.jpg` (always use `/tmp/` for intermediates)
+
+The playwright skill will find the existing global template and run it.
+
+### Step 2: Upload image to PartsBox
+
+Use the `Skill` tool with `skill: "playwright"` to run the committed upload script.
+Ask it to run the `partsbox.com/upload-item-image` action (found in
+`playwright/partsbox.com/upload-item-image/`) with:
+
+- `--part-id` — the PartsBox part ID
+- `--image-path` — `/tmp/part-image.jpg`
+
+The upload script handles login automatically (switches to headed mode if needed,
+saves session cookies for reuse).
+
+For bulk uploads: invoke the `playwright` skill (via `Skill` tool) once per part,
+providing all items and asking it to process them sequentially in a single invocation.
 
 **When to upload images:**
 

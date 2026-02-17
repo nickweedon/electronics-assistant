@@ -112,7 +112,7 @@
 
 **PartsBox ID:** `16ag49837tk23ay7r8h3st7e8j`
 
-**PartsBox Link:** <https://partsbox.com/melkor/parts/16ag49837tk23ay7r8h3st7e8j>
+**PartsBox Link:** <https://partsbox.com/part/16ag49837tk23ay7r8h3st7e8j>
 
 **AliExpress Link:** <https://www.aliexpress.com/item/3256806134695182.html>
 

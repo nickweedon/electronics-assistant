@@ -121,3 +121,11 @@ Don't do anything yet but just letting you know i really like flowers.
   use playwright to list my aliexpress orders at                                                                                      
   https://www.aliexpress.com/p/order/index.html?spm=a2g0o.home.headerAcount.2.468a6278jHGmO5&_gl=1*3yzwja*_gcl_au*ODEwODkyODQ1LjE     
   3NjkzOTMwNzQ.*_ga*MTM4MDAxNjkwMS4xNzcwMTc1ODQ3*_ga_VED1YSGNC7*czE3NzExODczMzUkbzIkZzAkdDE3NzExODczMzUkajYwJGwwJGgw                  
+
+
+
+
+I need you to now update the partsbox skill so that when receiving stock, the same format and style is used when adding items                                                                                              
+
+
+Update the items in this table in the md in partsbox but uploading the image from each items corresponding aliexpress item. Skip the first one since it has already been uploaded
