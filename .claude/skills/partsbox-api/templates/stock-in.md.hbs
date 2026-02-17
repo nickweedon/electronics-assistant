@@ -1,0 +1,48 @@
+# {{orderSource}} Order - {{orderDescription}}
+
+**Received:** {{receivedDate}}
+**Orders:** {{orderNumbers}}
+
+## Inventory Summary
+
+| Part Name | Storage Location | Qty | Order # | Price | Stored |
+|-----------|------------------|-----|---------|-------|--------|
+{{#each parts}}
+| [{{name}}](#{{kebabCase name}}) | {{storageLocation}} | {{quantity}} | {{orderNumber}} | ${{price}} | ☐ |
+{{/each}}
+
+**Total:** {{totalPieces}} pieces across {{totalPartTypes}} part types
+**Total Cost:** ${{totalCost}}
+
+---
+
+## Detailed Component Information
+
+{{#each parts}}
+### {{name}}
+
+**Description:** {{description}}
+
+{{#if specifications}}
+**Specifications:**
+
+{{#each specifications}}
+- {{this}}
+{{/each}}
+
+{{/if}}
+**PartsBox ID:** `{{partsboxId}}`
+
+**PartsBox Link:** <https://partsbox.com/melkor/parts/{{partsboxId}}>
+
+**{{sourceType}} Link:** <{{sourceLink}}>
+
+---
+
+{{/each}}
+## Notes
+
+{{#each storageNotes}}
+- **{{location}}:** {{description}}
+{{/each}}
+- **Stored Column:** Check off (☑) when physically placed in storage location
