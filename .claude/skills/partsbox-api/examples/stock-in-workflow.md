@@ -138,6 +138,7 @@ Use the Handlebars template at `.claude/skills/partsbox-api/templates/stock-in.m
     {
       "name": "Part Name",
       "storageLocation": "StorageName",
+      "storageId": "abc123...",
       "quantity": 5,
       "orderNumber": "8209410078791142",
       "price": "1.91",

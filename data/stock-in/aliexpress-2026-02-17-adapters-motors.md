@@ -7,13 +7,13 @@
 
 | | Part Name | Storage Location | Qty | Order # | Price | Stored |
 |--|-----------|------------------|-----|---------|-------|--------|
-| <img src="images/sc70-sot23-adapter.jpg" alt="SC-70 SOT23 Adapter" height="48"> | [SC-70 SOT23-6 SOT23-5 Adapter Board](#sc-70-sot23-6-sot23-5-adapter-board) | CmpntCab1-Drawer | 5 | 8209410078791142 | $1.91 | ☐ |
-| <img src="images/sot23-sip3-adapter.jpg" alt="SOT23-3 SIP3 Adapter" height="48"> | [SOT23-3 Turn SIP3 Adapter](#sot23-3-turn-sip3-adapter) | CmpntCab1-Drawer | 50 | 8209410078771142 | $3.31 | ☐ |
-| <img src="images/sot89-sot223-adapter.jpg" alt="SOT89 SOT223 Adapter" height="48"> | [SOT89 SOT223 to DIP Adapter](#sot89-sot223-to-dip-adapter) | CmpntCab1-Drawer | 10 | 8209410078751142 | $0.93 | ☐ |
-| <img src="images/sop14-adapter.jpg" alt="SOP14 Adapter" height="48"> | [SOP14 SMD to DIP Adapter](#sop14-smd-to-dip-adapter) | CmpntCab1-Drawer | 10 | 8209410078711142 | $1.59 | ☐ |
-| <img src="images/qfp-adapter.jpg" alt="QFP TQFP LQFP Adapter" height="48"> | [QFP/TQFP/LQFP Multi-Pin Adapter](#qfptqfplqfp-multi-pin-adapter) | CmpntCab1-Drawer | 1 | 8209410078691142 | $2.18 | ☐ |
-| <img src="images/1027-vibration-motor.jpg" alt="1027 Mini Vibration Motor" height="48"> | [1027 Mini Vibration Motor](#1027-mini-vibration-motor) | Stowaway3-B1 | 6 | 8209410078811142 | $3.34 | ☐ |
-| <img src="images/18000rpm-waterproof-motor.jpg" alt="18000 RPM Waterproof Motor" height="48"> | [18000 RPM Waterproof Vibration Motor](#18000-rpm-waterproof-vibration-motor) | Stowaway3-B1 | 2 | 8209410078731142 | $1.83 | ☐ |
+| <img src="images/sc70-sot23-adapter.jpg" alt="SC-70 SOT23 Adapter" height="48"> | [SC-70 SOT23-6 SOT23-5 Adapter Board](#sc-70-sot23-6-sot23-5-adapter-board) | CmpntCab1-Drawer | 5 | 8209410078791142 | $1.91 | ☑ |
+| <img src="images/sot23-sip3-adapter.jpg" alt="SOT23-3 SIP3 Adapter" height="48"> | [SOT23-3 Turn SIP3 Adapter](#sot23-3-turn-sip3-adapter) | CmpntCab1-Drawer | 50 | 8209410078771142 | $3.31 | ☑ |
+| <img src="images/sot89-sot223-adapter.jpg" alt="SOT89 SOT223 Adapter" height="48"> | [SOT89 SOT223 to DIP Adapter](#sot89-sot223-to-dip-adapter) | CmpntCab1-Drawer | 10 | 8209410078751142 | $0.93 | ☑ |
+| <img src="images/sop14-adapter.jpg" alt="SOP14 Adapter" height="48"> | [SOP14 SMD to DIP Adapter](#sop14-smd-to-dip-adapter) | CmpntCab1-Drawer | 10 | 8209410078711142 | $1.59 | ☑ |
+| <img src="images/qfp-adapter.jpg" alt="QFP TQFP LQFP Adapter" height="48"> | [QFP/TQFP/LQFP Multi-Pin Adapter](#qfptqfplqfp-multi-pin-adapter) | CmpntCab1-Drawer | 1 | 8209410078691142 | $2.18 | ☑ |
+| <img src="images/1027-vibration-motor.jpg" alt="1027 Mini Vibration Motor" height="48"> | [1027 Mini Vibration Motor](#1027-mini-vibration-motor) | Stowaway3-A2 | 6 | 8209410078811142 | $3.34 | ☑ |
+| <img src="images/18000rpm-waterproof-motor.jpg" alt="18000 RPM Waterproof Motor" height="48"> | [18000 RPM Waterproof Vibration Motor](#18000-rpm-waterproof-vibration-motor) | Stowaway3-A2 | 2 | 8209410078731142 | $1.83 | ☑ |
 
 <div style="break-after: page;"></div>
 
@@ -123,5 +123,5 @@
 ## Notes
 
 - **CmpntCab1-Drawer:** Component Cabinet #1, large drawer (holds all 5 adapter types)
-- **Stowaway3-B1:** Plano StowAway box #3, compartment B1 (holds both motor types)
+- **Stowaway3-A2:** Plano StowAway box #3, compartment A2 (holds both motor types)
 - **Stored Column:** Check off (☑) when physically placed in storage location
