@@ -68,6 +68,56 @@ Price: \$3.34
 AliExpress Link: https://www.aliexpress.com/item/3256810104837770.html"
 ```
 
+## Thumbnail Image Column
+
+Each part in the Inventory Summary table should have a thumbnail image as the first column. Images are downloaded from PartsBox using the `part/img-id` field returned by `parts.py get`.
+
+**Workflow:**
+
+1. For each part, fetch it to get its image ID:
+
+   ```bash
+   bash .claude/skills/partsbox-api/scripts/run.sh parts.py get --id "<part-id>" \
+     | python3 -c "import sys,json; d=json.load(sys.stdin)['data']; print(d.get('part/img-id','NONE'))"
+   ```
+
+2. Download all images to `data/stock-in/images/` (run in parallel for speed):
+
+   ```bash
+   mkdir -p data/stock-in/images
+   bash .claude/skills/partsbox-api/scripts/run.sh files.py download \
+     --file-id "<img-id>" \
+     -o data/stock-in/images/<kebab-part-name>.jpg
+   ```
+
+3. Reference images in the table using `<img>` tags with:
+   - `height="48"` — roughly double a typical 24px line height, keeps rows compact
+   - `alt="..."` — required by markdownlint (MD045); use a short descriptive name
+   - `src` relative to the markdown file (i.e. `images/<filename>.jpg`)
+
+**Example table row:**
+
+```markdown
+| <img src="images/1027-vibration-motor.jpg" alt="1027 Mini Vibration Motor" height="48"> | [1027 Mini Vibration Motor](#1027-mini-vibration-motor) | Stowaway3-B1 | 6 | ... |
+```
+
+**Image file naming:** Use kebab-case derived from the part name, e.g. `sot23-sip3-adapter.jpg`, `1027-vibration-motor.jpg`.
+
+**Note:** `part/img-id` is only present if an image was previously uploaded to PartsBox. If missing, omit the image cell or use an empty cell for that row.
+
+## Page Break After Summary Table
+
+Add a `<div style="break-after: page;"></div>` immediately after the summary table rows and before the **Total** lines. This ensures the summary table prints on its own page when the markdown is exported to PDF:
+
+```markdown
+| <img ...> | [Part Name](#anchor) | ... | ☐ |
+
+<div style="break-after: page;"></div>
+
+**Total:** 84 pieces across 7 part types
+**Total Cost:** $15.09
+```
+
 ## Stock-In Documentation Template
 
 Use the Handlebars template at `.claude/skills/partsbox-api/templates/stock-in.md.hbs` to generate markdown documentation files.
@@ -94,6 +144,7 @@ Use the Handlebars template at `.claude/skills/partsbox-api/templates/stock-in.m
       "description": "Full description...",
       "specifications": ["Spec 1", "Spec 2"],
       "partsboxId": "abc123...",
+      "imageFilename": "part-name.jpg",
       "sourceType": "AliExpress",
       "sourceLink": "https://..."
     }
@@ -139,9 +190,10 @@ Examples:
 
 1. **Create part entries** - Use `parts.py create` with detailed `--notes` for each component
 2. **Save part IDs** - Collect the returned `part/id` values from each create command
-3. **Determine storage locations** - Use storage guidelines (see `storage-guidelines.md`) to select appropriate locations
-4. **Generate documentation** - Use the template to create `data/stock-in/*.md` file with part IDs and storage assignments
-5. **Physically store components** - Place items in designated storage locations
-6. **Add stock** - Use `stock.py add` to add quantities to PartsBox (AFTER physical storage)
+3. **Download thumbnail images** - Fetch `part/img-id` for each part (via `parts.py get`) and download to `data/stock-in/images/` (see [Thumbnail Image Column](#thumbnail-image-column) above)
+4. **Determine storage locations** - Use storage guidelines (see `storage-guidelines.md`) to select appropriate locations
+5. **Generate documentation** - Use the template to create `data/stock-in/*.md` file, including `imageFilename` in each part's data
+6. **Physically store components** - Place items in designated storage locations
+7. **Add stock** - Use `stock.py add` to add quantities to PartsBox (AFTER physical storage)
 
 **Key principle:** Create parts first, document storage plan, physically store, THEN add stock entries.

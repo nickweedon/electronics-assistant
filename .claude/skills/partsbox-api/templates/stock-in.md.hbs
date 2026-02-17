@@ -5,11 +5,12 @@
 
 ## Inventory Summary
 
-| Part Name | Storage Location | Qty | Order # | Price | Stored |
-|-----------|------------------|-----|---------|-------|--------|
+| | Part Name | Storage Location | Qty | Order # | Price | Stored |
+|--|-----------|------------------|-----|---------|-------|--------|
 {{#each parts}}
-| [{{name}}](#{{kebabCase name}}) | {{storageLocation}} | {{quantity}} | {{orderNumber}} | ${{price}} | ☐ |
+| {{#if imageFilename}}<img src="images/{{imageFilename}}" alt="{{name}}" height="48">{{/if}} | [{{name}}](#{{kebabCase name}}) | {{storageLocation}} | {{quantity}} | {{orderNumber}} | ${{price}} | ☐ |
 {{/each}}
+<div style="break-after: page;"></div>
 
 **Total:** {{totalPieces}} pieces across {{totalPartTypes}} part types
 **Total Cost:** ${{totalCost}}

@@ -129,3 +129,6 @@ I need you to now update the partsbox skill so that when receiving stock, the sa
 
 
 Update the items in this table in the md in partsbox but uploading the image from each items corresponding aliexpress item. Skip the first one since it has already been uploaded
+
+
+can you add a new column to this table that is the thumbnail image of the item? 

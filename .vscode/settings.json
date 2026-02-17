@@ -1,0 +1,5 @@
+{
+    "markdown-pdf.styles": [
+        "./data/stock-in/pdf-style.css"
+    ]
+}

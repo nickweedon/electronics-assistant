@@ -1,0 +1,8 @@
+@page {
+  size: A4 landscape;   /* ← key line */
+  margin: 1.5cm;
+}
+
+body {
+  font-family: Arial, sans-serif;
+}
