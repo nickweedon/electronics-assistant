@@ -16,3 +16,5 @@ data/boms/*
 
 # Terminal Paste Image folder
 .cp-images/
+
+temp/
