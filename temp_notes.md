@@ -132,3 +132,8 @@ Update the items in this table in the md in partsbox but uploading the image fro
 
 
 can you add a new column to this table that is the thumbnail image of the item? 
+
+
+
+❯ /skil Look at the changes to the devcontainer dockerfile and compose.yml and compare   
+  it to the /            

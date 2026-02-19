@@ -15,7 +15,7 @@ services:
       - devcontainer-bashhistory:/home/vscode/.bash_history_mount
 
       # Claude Code credentials (mounted to stay synced with host)
-      - ${HOME}/.claude/.credentials.json:/home/vscode/.claude/.credentials.json:ro
+      - ${HOME}/.claude/.credentials.json:/home/vscode/.claude/.credentials.json:cached
 
       # Mount claude-monorepo from host
       - /opt/src/claude/claude-monorepo:/home/vscode/claude-monorepo:cached
