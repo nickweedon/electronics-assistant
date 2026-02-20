@@ -12,7 +12,7 @@ Does NOT use the Mouser MCP server — scripts call the API directly.
 ## Prerequisites
 
 - Python venv at `.claude/skills/mouser-api/scripts/.venv/`
-- API keys sourced from `/opt/src/mcp/mouser_mcp/.env` (automatic via `run.sh`)
+- API keys sourced from `/workspace/.env` (automatic via `run.sh`)
 
 If venv is missing, create it:
 

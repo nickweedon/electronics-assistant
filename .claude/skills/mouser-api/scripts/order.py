@@ -10,12 +10,12 @@ from api_client import api_get, api_post, output_success, output_error, check_ap
 
 
 def cmd_get(args):
-    """Get order details by order number."""
+    """Get order details by sales order number."""
     order_number = args.order_number.strip()
     if not order_number:
         output_error("Order number cannot be empty")
 
-    result = api_get(f"order/{order_number}")
+    result = api_get("orderhistory/salesOrderNumber", params={"salesOrderNumber": order_number})
     check_api_errors(result)
     output_success(result)
 

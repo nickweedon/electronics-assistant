@@ -1,0 +1,17 @@
+{{description}}
+
+Specifications:
+{{#each specifications}}
+- {{this}}
+{{/each}}
+Purchase source: {{vendor}}
+Order #: {{orderNumber}}
+Received: {{receivedDate}}
+Quantity: {{quantity}} pcs @ ${{unitPrice}}/ea
+{{vendorLabel}} Link: {{vendorLink}}
+{{#if datasheetUrl}}
+Datasheet: <{{datasheetUrl}}>
+{{/if}}
+{{#if additionalNotes}}
+Note: {{additionalNotes}}
+{{/if}}

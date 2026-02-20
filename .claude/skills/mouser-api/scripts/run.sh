@@ -20,9 +20,9 @@ if [ -z "$SCRIPT" ]; then
     exit 1
 fi
 
-# Source Mouser MCP .env if API keys not set
-if [ -z "$MOUSER_PART_API_KEY" ] && [ -f /opt/src/mcp/mouser_mcp/.env ]; then
-    export $(grep -v '^#' /opt/src/mcp/mouser_mcp/.env | xargs)
+# Source project .env if API keys not set
+if [ -z "$MOUSER_PART_API_KEY" ] && [ -f /workspace/.env ]; then
+    export $(grep -v '^#' /workspace/.env | xargs)
 fi
 
 exec "$VENV_PYTHON" "$SCRIPT_DIR/$SCRIPT" "$@"

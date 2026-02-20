@@ -32,8 +32,8 @@ def _load_env():
         return
 
     env_paths = [
+        Path("/workspace") / ".env",
         Path.cwd() / ".env",
-        Path("/opt/src/mcp/mouser_mcp") / ".env",
         Path.home() / ".mouser" / ".env",
     ]
 

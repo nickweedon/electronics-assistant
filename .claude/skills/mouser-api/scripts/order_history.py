@@ -4,9 +4,10 @@
 import sys
 import os
 import argparse
+from datetime import datetime, timedelta
 
 sys.path.insert(0, os.path.dirname(__file__))
-from api_client import api_post, output_success, output_error, check_api_errors
+from api_client import api_get, output_success, output_error, check_api_errors
 
 
 def cmd_list(args):
@@ -14,9 +15,15 @@ def cmd_list(args):
     if args.days < 1:
         output_error("Days must be at least 1")
 
-    payload = {"Days": args.days}
+    end_date = datetime.now()
+    start_date = end_date - timedelta(days=args.days)
 
-    result = api_post("orderhistory/query", payload)
+    params = {
+        "startDate": start_date.strftime("%m/%d/%Y"),
+        "endDate": end_date.strftime("%m/%d/%Y"),
+    }
+
+    result = api_get("orderhistory/ByDateRange", params=params)
     check_api_errors(result)
     output_success(result)
 

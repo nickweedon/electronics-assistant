@@ -134,6 +134,32 @@ Update the items in this table in the md in partsbox but uploading the image fro
 can you add a new column to this table that is the thumbnail image of the item? 
 
 
+/playwright Create two re-usable actions:
+1) List all LCSC orders
+2) List the items within an LCSC order
 
-❯ /skil Look at the changes to the devcontainer dockerfile and compose.yml and compare   
-  it to the /            
+Create these as separate actions to maximize re-usablility 
+
+
+node scripts-temp/playwright/www.lcsc.com/list-order-items/script.js --orderId=WM2601260050
+
+
+You made a number of significant improvements to the script writing process during    
+  this session, especially the use of the X11 message to ask me to do things during      /clear
+  script development and selector exploration. I would like to actually always have the  
+  script development and selector exploration phase always use headed mode as it is      
+  good to watch and see how it progresses.                                               
+  Can you update the playwright script to incorporate these improvements as well as any  
+  other improvements you noted.    
+
+
+  Modify the playwright skill to add these additional instructions when building a     
+  login screen:                                                                          
+  1) Always take the user to the actual login screen, don't make the user have to click  
+  the login button.                                                                      
+  2)                                                                                     
+    A) Always have scripts automatically detect when not logged in                       
+    B) Launch the login process (should be a separate action to maximize re-used) in     
+  headed mode                                                                            
+    C) Detect when the user has logged in                                                
+    D) Go back into headless mode and complete the original action 

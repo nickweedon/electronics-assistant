@@ -36,6 +36,12 @@ Price: $X.XX
 [Supplier] Link: https://..."
 ```
 
+**Tag naming rules:**
+
+- Use only alphanumeric characters, hyphens, and underscores
+- **`%` and other special characters are rejected by the API with a silent 400 error**
+- For tolerance values use `1pct` not `1%`, for ratios use `50v` not `50V`, etc.
+
 **Notes field structure:**
 
 1. **Fuller technical description** - Expand on the short description, add context and applications
@@ -165,17 +171,12 @@ Use the Handlebars template at `.claude/skills/partsbox-api/templates/stock-in.m
 **Render the template:**
 
 ```bash
-# Using the global template renderer
-node /home/vscode/claude-monorepo/claude/lib/template-renderer.js \
-  --template .claude/skills/partsbox-api/templates/stock-in.md.hbs \
-  --data-json '{"orderSource": "...", ...}' \
-  --output data/stock-in/supplier-YYYY-MM-DD-description.md
-
-# Alternative: Write data to JSON file first for complex data
+# Write data to JSON file first (recommended for complex data), then render
 echo '{"orderSource": "...", ...}' > /tmp/stock-in-data.json
-node /home/vscode/claude-monorepo/claude/lib/template-renderer.js \
-  --template .claude/skills/partsbox-api/templates/stock-in.md.hbs \
-  --data /tmp/stock-in-data.json \
+node /home/vscode/claude-monorepo/claude/lib/render-skill.js \
+  --template stock-in.md.hbs \
+  --template-dir /workspace/.claude/skills/partsbox-api/templates \
+  --data-file /tmp/stock-in-data.json \
   --output data/stock-in/supplier-YYYY-MM-DD-description.md
 ```
 

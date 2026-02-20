@@ -239,26 +239,103 @@ bash .claude/skills/partsbox-api/scripts/run.sh storage.py list --limit 700 \
 
 **For detailed guidance:** See `examples/storage-recommendations.md` for tag conventions, querying patterns, workflow steps, and example recommendations.
 
+## Part Creation Notes
+
+**Always check before creating:** Before creating any new part definition, search for
+an existing part with the same name, MPN, or manufacturer. Creating duplicate parts
+pollutes inventory and breaks stock tracking.
+
+**Single item check:**
+
+```bash
+# Search by MPN
+bash .claude/skills/partsbox-api/scripts/run.sh parts.py list \
+  --query '[?contains(nvl("part/mpn", '"'"''"'"'), '"'"'<MPN>'"'"')]'
+
+# Search by name
+bash .claude/skills/partsbox-api/scripts/run.sh parts.py list \
+  --query '[?contains(nvl("part/name", '"'"''"'"'), '"'"'<NAME>'"'"')]'
+```
+
+If a match is found, use the existing part ID — do not create a duplicate. Only create
+a new part if no match exists.
+
+**Bulk pre-check (when adding many items):** When processing multiple items at once,
+**fetch all existing parts first** and match the full list before creating anything:
+
+1. Run `parts.py list --limit 2000` (or paginate with `--offset`) to retrieve all parts
+2. Build a lookup map of existing parts by MPN and by name
+3. For each incoming item, check against the map
+4. Only call `parts.py create` for items with no match — reuse existing IDs for the rest
+
+This avoids N individual search calls and prevents partial-run duplicates.
+
+**Tag character restrictions:** Only alphanumeric characters, hyphens, and underscores
+are accepted. Special characters like `%` cause a silent `400 Bad Request` with no
+useful error message. Use plain equivalents: `1pct` not `1%`, `50v` not `50V`, etc.
+
+**Part notes format:** Always use the `templates/part-notes.hbs` template as the
+structure for `--notes` when creating or updating parts. The `datasheetUrl` field is
+**required** — always look up and include the datasheet URL from the supplier (Mouser
+`DataSheetUrl` field, Digikey product page, or manufacturer website). If no datasheet
+can be found, omit the field rather than leaving it blank.
+
+Template variables:
+
+| Variable | Description |
+|----------|-------------|
+| `description` | Brief one-line part description |
+| `specifications` | Array of spec strings (e.g. `["Resistance: 1.8 Ohm", "Tolerance: 1%"]`) |
+| `vendor` | Supplier name (e.g. `Mouser Electronics`) |
+| `orderNumber` | Order/invoice number |
+| `receivedDate` | Date received (YYYY-MM-DD) |
+| `quantity` | Quantity received |
+| `unitPrice` | Unit price |
+| `vendorLabel` | Label for the vendor link (e.g. `Mouser`) |
+| `vendorLink` | Full URL to the product page |
+| `datasheetUrl` | **Required.** Full URL to the datasheet PDF. The template wraps this in `<url>` angle brackets to prevent markdown from interpreting underscores in filenames as italics. |
+| `additionalNotes` | Optional extra notes (e.g. sample units, lot info) |
+
+Render with:
+
+```bash
+node /home/vscode/claude-monorepo/claude/lib/render-skill.js \
+  --template part-notes.hbs \
+  --template-dir /workspace/.claude/skills/partsbox-api/templates \
+  --data-file /tmp/part-notes-data.json \
+  --output /tmp/part-notes.txt
+```
+
+Then pass the rendered text as the `--notes` argument to `parts.py create` or
+`parts.py update`.
+
 ## Stock-In Workflow
 
 When receiving new components from suppliers, use this workflow to catalog parts and create documentation:
 
 **Quick workflow:**
 
-1. Create part entries with `parts.py create` using detailed `--notes` (purchase info, specs, supplier links)
-2. Save returned part IDs
-3. **Upload product images** from supplier pages to PartsBox (see [Image Upload Workflow](#image-upload-workflow) below)
-4. Determine storage locations (see `examples/storage-guidelines.md`)
-5. Generate documentation using template at `templates/stock-in.md.hbs`
-6. Physically store components
-7. Add stock with `stock.py add` AFTER physical placement
+1. **Check for existing parts first** — run a bulk fetch (`parts.py list --limit 2000`)
+   and match all incoming items by MPN/name before creating any new parts (see
+   [Part Creation Notes](#part-creation-notes)). Reuse existing part IDs where found.
+2. Create part entries with `parts.py create` **only for items with no match**, using
+   detailed `--notes` rendered from `templates/part-notes.hbs` (always include datasheet URL)
+3. Save returned part IDs
+4. **Upload product images** from supplier pages to PartsBox (see [Image Upload Workflow](#image-upload-workflow) below)
+5. Determine storage locations (see `examples/storage-guidelines.md`)
+6. Generate documentation using template at `templates/stock-in.md.hbs`
+   - **Image must be uploaded before rendering** — the template uses `part/img-id` to embed
+     thumbnails. Upload first, then fetch the image and render the sheet.
+7. Physically store components
+8. Add stock with `stock.py add` AFTER physical placement
 
 **Template rendering:**
 
 ```bash
-node /home/vscode/claude-monorepo/claude/lib/template-renderer.js \
-  --template .claude/skills/partsbox-api/templates/stock-in.md.hbs \
-  --data /tmp/stock-in-data.json \
+node /home/vscode/claude-monorepo/claude/lib/render-skill.js \
+  --template stock-in.md.hbs \
+  --template-dir /workspace/.claude/skills/partsbox-api/templates \
+  --data-file /tmp/stock-in-data.json \
   --output data/stock-in/supplier-YYYY-MM-DD-description.md
 ```
 
@@ -268,42 +345,57 @@ node /home/vscode/claude-monorepo/claude/lib/template-renderer.js \
 
 ## Image Upload Workflow
 
-When creating parts from supplier orders (especially AliExpress), upload product images
-to PartsBox so parts have visual reference.
-
-**CRITICAL**: Use the `Skill` tool (NOT the `Task` tool) to invoke the `playwright` skill.
-There is NO `playwright` agent type — `playwright` is a skill only. Always invoke it as:
-
-```
-Skill tool → skill: "playwright"
-```
-
-Never use `Task tool → subagent_type: "playwright"` — this will error.
+When creating parts from supplier orders, upload product images to PartsBox so parts
+have visual reference. The download method varies by supplier.
 
 ### Step 1: Download image from supplier
 
-Use the `Skill` tool with `skill: "playwright"` to download the product image. Ask it
-to run the `aliexpress.com/download-item-image` action with:
+**AliExpress** — Use the `Skill` tool with `skill: "playwright"` to run the
+`aliexpress.com/download-item-image` action:
 
 - `--product-url` — the AliExpress item URL
-- `--output` — `/tmp/part-image.jpg` (always use `/tmp/` for intermediates)
+- `--output` — `/tmp/part-image.jpg`
 
-The playwright skill will find the existing global template and run it.
+**Mouser** — Do NOT use Playwright (Mouser product pages are IP-blocked by DataDome
+bot protection). Use the Mouser API's `ImagePath` field instead:
+
+```bash
+# 1. Get image URL from Mouser API search result
+bash .claude/skills/mouser-api/scripts/run.sh search.py part-number \
+  --part-number "<mouser-part-number>" \
+  | python3 -c "import sys,json; d=json.load(sys.stdin); \
+    parts=d.get('data',{}).get('SearchResults',{}).get('Parts',[]); \
+    print(parts[0].get('ImagePath','') if parts else '')"
+
+# 2. Download directly from the CDN URL returned above
+wget -q "<image-url>" -O /tmp/part-image.jpg \
+  --user-agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"
+```
+
+**Other suppliers** — Use the `Skill` tool with `skill: "playwright"` for browser-based
+image download, or `wget`/`curl` if the image URL is directly accessible.
 
 ### Step 2: Upload image to PartsBox
 
-Use the `Skill` tool with `skill: "playwright"` to run the committed upload script.
-Ask it to run the `partsbox.com/upload-item-image` action (found in
-`playwright/partsbox.com/upload-item-image/`) with:
+Run the committed upload script directly:
 
-- `--part-id` — the PartsBox part ID
-- `--image-path` — `/tmp/part-image.jpg`
+```bash
+node /workspace/playwright/partsbox.com/upload-item-image/script.js \
+  --part-id=<part-id> \
+  --image-path=/tmp/part-image.jpg
+```
 
-The upload script handles login automatically (switches to headed mode if needed,
-saves session cookies for reuse).
+**IMPORTANT:** This script requires `--key=value` format (equals sign, no space).
+Using `--key value` (space-separated) will silently set the value to `true` and fail.
+
+The script handles login automatically (switches to headed mode if needed, saves
+session cookies for reuse).
+
+**CRITICAL**: When invoking via the `playwright` skill, use the `Skill` tool (NOT
+the `Task` tool). There is NO `playwright` agent type — `playwright` is a skill only.
 
 For bulk uploads: invoke the `playwright` skill (via `Skill` tool) once per part,
-providing all items and asking it to process them sequentially in a single invocation.
+providing all items and asking it to process them sequentially.
 
 **When to upload images:**
 
