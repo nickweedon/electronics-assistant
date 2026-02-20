@@ -1,7 +1,7 @@
 ---
 name: partsbox-api
 description: "Direct PartsBox API access via Python scripts for inventory, stock, projects, and orders."
-allowed-tools: Bash, Read, Grep, Glob, Write
+allowed-tools: Bash, Read, Grep, Glob, Write, Edit
 ---
 
 # PartsBox API Skill
@@ -217,6 +217,27 @@ do NOT attempt JMESPath tag filtering.
 **For detailed guidance:** See `examples/storage-recommendations.md` for tag conventions,
 Python filtering patterns, workflow steps, and example recommendations.
 
+**Finding empty slots efficiently (2 API calls):** Use `lots.py list` to build the set of
+occupied storage IDs, then cross-reference the storage list — avoids per-slot `storage.py parts`
+calls:
+
+```bash
+bash .claude/skills/partsbox-api/scripts/run.sh lots.py list 2>/dev/null | python3 -c "
+import sys, json, subprocess
+lots = json.load(sys.stdin)['data']
+occupied = {l.get('lot/storage-id','') for l in lots if l.get('lot/storage-id')}
+res = subprocess.run(['bash','.claude/skills/partsbox-api/scripts/run.sh','storage.py','list'],
+    capture_output=True, text=True)
+locs = json.loads(res.stdout)['data']
+empty = sorted(
+    [l for l in locs if 'type_smd-box' in (l.get('storage/tags') or [])
+     and 'esd_no' in (l.get('storage/tags') or []) and l['storage/id'] not in occupied],
+    key=lambda x: x['storage/name'])
+print(f'{len(empty)} empty regular SMD boxes:')
+for l in empty[:10]: print(f'  {l[\"storage/name\"]} -> {l[\"storage/id\"]}')
+"
+```
+
 ## Part Creation Notes
 
 **Always check before creating:** Before creating any new part definition, search for
@@ -316,6 +337,18 @@ node /home/vscode/claude-monorepo/claude/lib/render-skill.js \
   --data-file /tmp/stock-in-data.json \
   --output data/stock-in/supplier-YYYY-MM-DD-description.md
 ```
+
+**Post-render: fix Unicode anchor links.** The `{{kebabCase name}}` helper strips Unicode
+characters (Ω, μ, etc.) from heading anchors, causing MD051 markdownlint errors when
+part names contain these characters. Always run markdownlint after rendering:
+
+```bash
+markdownlint-cli2 --fix "data/stock-in/supplier-YYYY-MM-DD-description.md"
+markdownlint-cli2 "data/stock-in/supplier-YYYY-MM-DD-description.md"
+```
+
+If MD051 errors remain, manually update the summary table anchor links to include the
+Unicode characters (e.g., `#180-resistor` → `#180ω-resistor`).
 
 **For detailed instructions:** See `examples/stock-in-workflow.md` for part creation format, template data structure, and complete workflow steps.
 
