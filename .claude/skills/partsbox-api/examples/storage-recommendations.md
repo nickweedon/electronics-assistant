@@ -19,48 +19,98 @@ Additional tags may identify specific boxes: `cabinet_{1-5}`, `box_{1-5}`, etc.
 
 **Note:** The underscore delimiter is used because the PartsBox API does not support colons in tags.
 
+**Important:** `storage/tags` is a Python **list**, not a string. Always filter using
+Python list membership, not string operations.
+
 ## Querying Storage by Tags
 
-**Find storage by type:**
+Fetch all storage locations and filter in Python:
 
 ```bash
-# List all SMD-compatible storage
-bash .claude/skills/partsbox-api/scripts/run.sh storage.py list --limit 700 \
-  --query '[?contains("storage/tags", '"'"'type_smd-box'"'"')]'
+# Fetch all storage locations (use high limit to get all)
+bash .claude/skills/partsbox-api/scripts/run.sh storage.py list 2>/dev/null \
+  | python3 -c "
+import sys, json
+locs = json.load(sys.stdin)['data']
 
-# Find ESD-safe storage
-bash .claude/skills/partsbox-api/scripts/run.sh storage.py list --limit 700 \
-  --query '[?contains("storage/tags", '"'"'esd_yes'"'"')]'
-
-# Find drawer-type storage
-bash .claude/skills/partsbox-api/scripts/run.sh storage.py list --limit 700 \
-  --query '[?contains("storage/tags", '"'"'type_drawer-cabinet'"'"')]'
+# Filter by type tag
+smd_boxes = [p for p in locs if 'type_smd-box' in (p.get('storage/tags') or [])]
+print(f'SMD boxes: {len(smd_boxes)}')
+for p in smd_boxes[:10]:
+    print(f\"{p['storage/name']} | id={p['storage/id']}\")
+"
 ```
 
-**Filter by multiple criteria:**
+**Filter by multiple tags (AND logic):**
 
 ```bash
-# Find ESD-safe SMD storage
-bash .claude/skills/partsbox-api/scripts/run.sh storage.py list --limit 700 \
-  --query '[?contains("storage/tags", '"'"'type_smd-box'"'"') && contains("storage/tags", '"'"'esd_yes'"'"')]'
+bash .claude/skills/partsbox-api/scripts/run.sh storage.py list 2>/dev/null \
+  | python3 -c "
+import sys, json
+locs = json.load(sys.stdin)['data']
+
+# ESD-safe SMD boxes only
+esd_smd = [p for p in locs
+           if 'type_smd-box' in (p.get('storage/tags') or [])
+           and 'esd_yes' in (p.get('storage/tags') or [])]
+print(f'ESD-safe SMD boxes: {len(esd_smd)}')
+for p in esd_smd[:10]:
+    print(f\"{p['storage/name']} | id={p['storage/id']}\")
+"
+```
+
+**Get all unique tags (to discover what tags exist):**
+
+```bash
+bash .claude/skills/partsbox-api/scripts/run.sh storage.py list 2>/dev/null \
+  | python3 -c "
+import sys, json
+locs = json.load(sys.stdin)['data']
+all_tags = sorted({t for p in locs for t in (p.get('storage/tags') or [])})
+print('All unique tags:')
+for t in all_tags:
+    print(f'  {t}')
+"
 ```
 
 ## Finding Storage Dimensions
 
 Storage location dimensions and specifications are stored in the **`storage/description`** field.
 
-**Get storage details:**
-
 ```bash
-# Get full details for a specific storage location
 bash .claude/skills/partsbox-api/scripts/run.sh storage.py get --id <storage-id>
-
-# List storage with descriptions
-bash .claude/skills/partsbox-api/scripts/run.sh storage.py list --limit 700 \
-  --query '[].{name: "storage/name", tags: "storage/tags", description: "storage/description"}'
 ```
 
-**Important:** All storage locations of the same type (matching `type_` tag prefix) will have the same physical dimensions. You only need to check one location's description to understand the size constraints for all locations of that type.
+**Important:** All storage locations of the same type (matching `type_` tag prefix) will have
+the same physical dimensions. You only need to check one location's description to understand
+the size constraints for all locations of that type.
+
+## Finding Empty Storage Locations
+
+To find empty SMD boxes for assigning to new parts:
+
+```bash
+bash .claude/skills/partsbox-api/scripts/run.sh storage.py list 2>/dev/null \
+  | python3 -c "
+import sys, json
+locs = json.load(sys.stdin)['data']
+
+# Get non-ESD SMD boxes, sorted alphabetically
+non_esd_smd = [p for p in locs
+               if 'type_smd-box' in (p.get('storage/tags') or [])
+               and 'esd_no' in (p.get('storage/tags') or [])]
+non_esd_smd.sort(key=lambda x: x.get('storage/name',''))
+
+print(f'Non-ESD SMD boxes: {len(non_esd_smd)}')
+for p in non_esd_smd[:10]:
+    print(f\"{p['storage/name']} | id={p['storage/id']}\")
+"
+```
+
+**Note on empty box detection:** If no stock has been added yet (`lots.py list` returns 0
+results), then all storage locations are empty. In this case, simply pick the first N
+boxes alphabetically for your new parts. Once stock is present, use `storage.py parts
+--id <id>` to check individual boxes for occupancy.
 
 ## Workflow for Recommending Storage Locations
 
@@ -72,59 +122,26 @@ When asked to suggest storage for a component, follow this workflow:
    - ESD sensitivity
    - Quantity to store
 
-2. **Query by tags to find candidate storage types:**
-
-   ```bash
-   # Example: For SMD components
-   bash .claude/skills/partsbox-api/scripts/run.sh storage.py list --limit 700 \
-     --query '[?contains("storage/tags", '"'"'type_smd-box'"'"')]'
-   ```
+2. **Fetch all storage and filter by type in Python** (see examples above)
 
 3. **Check one location's description for size constraints:**
    - Read the `storage/description` field from any matching location
    - Extract compartment dimensions from the description
    - Verify component will fit
 
-4. **Find available (empty or low-fill) locations:**
-
-   ```bash
-   # Check stock levels in matching storage locations
-   bash .claude/skills/partsbox-api/scripts/run.sh storage.py parts \
-     --id <storage-id> --limit 10
-   ```
+4. **Find available (empty) locations:**
+   - If no stock exists yet, take first N locations alphabetically
+   - If stock exists, check specific locations with `storage.py parts --id <id>`
 
 5. **Recommend specific location(s):**
    - Prefer empty locations or those with related components
    - Consider grouping similar components together
    - Mention the storage type and why it's appropriate
 
-## Example Recommendation Workflow
-
-**User asks:** "Where should I store 100 pcs of 0805 ceramic capacitors?"
-
-**Your workflow:**
-
-1. Component is SMD → look for `type_smd-box`
-2. Not ESD-sensitive → `esd_no` is fine (but `esd_yes` also works)
-3. Query: Find SMD boxes
-4. Check description: "18.3x16.7x10.2mm compartments" → 0805 fits easily
-5. Check for empty SMD-Box locations (use `storage.py parts` to check fill status)
-6. Recommend: "Store in SMD-Box-C5. This is an AideTek SMD organizer with 18.3x16.7mm compartments, ideal for 0805 SMD components."
-
-**User asks:** "Where should I store a Raspberry Pi 4?"
-
-**Your workflow:**
-
-1. Component is a dev board (large, ~85x56mm)
-2. Not suitable for SMD boxes or small drawers
-3. Query: Find larger storage like `type_plano-stowaway`
-4. Check description: "14x9.13\" footprint, configurable compartments" → RPi4 fits
-5. Recommend specific Stowaway location
-
 ## Best Practices
 
-- **Always query tags first** to narrow down storage types before checking individual locations
-- **Read descriptions to verify size compatibility** - dimensions are in the description field
-- **Leverage tag structure** - use `type_`, `esd_`, etc. prefixes for precise filtering
-- **Consider component grouping** - suggest storing similar parts together (e.g., all 0805 resistors in adjacent compartments)
-- **Check availability** - use `storage.py parts` to see what's already in a location
+- **Fetch all, filter in Python** — load all 700 locations once, filter client-side
+- **Read descriptions to verify size compatibility** — dimensions are in the description field
+- **Leverage tag structure** — use `type_`, `esd_`, etc. prefixes for precise filtering
+- **Consider component grouping** — suggest storing similar parts together
+- **Check availability** — use `storage.py parts --id <id>` to see what's in a location

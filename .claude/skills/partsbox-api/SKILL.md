@@ -22,9 +22,9 @@ Use this skill for ALL PartsBox inventory operations:
 
 ## Prerequisites
 
-- `PARTSBOX_API_KEY` set in environment or `/mnt/c/docker/partsbox-mcp-env`
-- Python venv with `requests` and `jmespath` at `.claude/skills/partsbox-api/scripts/.venv/`
-- If venv missing: `uv venv .claude/skills/partsbox-api/scripts/.venv && uv pip install --python .claude/skills/partsbox-api/scripts/.venv/bin/python requests jmespath`
+- `PARTSBOX_API_KEY` set in environment or `.env` file
+- Python venv with `requests` at `.claude/skills/partsbox-api/scripts/.venv/`
+- If venv missing: `uv venv .claude/skills/partsbox-api/scripts/.venv && uv pip install --python .claude/skills/partsbox-api/scripts/.venv/bin/python requests`
 
 ## Script Reference
 
@@ -34,14 +34,14 @@ All scripts are in `.claude/skills/partsbox-api/scripts/` and output JSON to std
 
 | Command | Description |
 |---------|-------------|
-| `list [--query Q] [--limit N] [--offset N]` | List all parts |
+| `list` | List all parts |
 | `get --id ID` | Get part details |
 | `create --name NAME [--type TYPE] [--manufacturer M] [--mpn MPN] ...` | Create part |
 | `update --id ID [--name N] [--description D] ...` | Update part |
 | `delete --id ID` | Delete part |
 | `stock --id ID` | Get total stock count |
-| `lots --id ID [--query Q] [--limit N]` | List stock sources (per-lot) |
-| `storage --id ID [--query Q] [--limit N]` | List stock sources (by location) |
+| `lots --id ID` | List stock sources (per-lot) |
+| `storage --id ID` | List stock sources (by location) |
 | `add-meta --id ID --member-ids IDS` | Add members to meta-part |
 | `remove-meta --id ID --member-ids IDS` | Remove meta-part members |
 | `add-substitutes --id ID --substitute-ids IDS` | Add substitutes |
@@ -60,7 +60,7 @@ All scripts are in `.claude/skills/partsbox-api/scripts/` and output JSON to std
 
 | Command | Description |
 |---------|-------------|
-| `list [--query Q] [--limit N]` | List all lots |
+| `list` | List all lots |
 | `get --id ID` | Get lot details |
 | `update --id ID [--name N] [--tags T] ...` | Update lot |
 
@@ -68,7 +68,7 @@ All scripts are in `.claude/skills/partsbox-api/scripts/` and output JSON to std
 
 | Command | Description |
 |---------|-------------|
-| `list [--query Q] [--limit N] [--include-archived]` | List locations |
+| `list [--include-archived]` | List locations |
 | `get --id ID` | Get location details |
 | `create --name NAME [--description D] [--tags T]` | Create new location |
 | `update --id ID [--comments C] [--tags T]` | Update metadata |
@@ -76,14 +76,14 @@ All scripts are in `.claude/skills/partsbox-api/scripts/` and output JSON to std
 | `archive --id ID` | Archive location |
 | `restore --id ID` | Restore archived location |
 | `settings --id ID [--full true/false] [--single-part true/false]` | Change settings |
-| `parts --id ID [--query Q] [--limit N]` | List parts in location |
-| `lots --id ID [--query Q] [--limit N]` | List lots in location |
+| `parts --id ID` | List parts in location |
+| `lots --id ID` | List lots in location |
 
 ### Projects (`projects.py`)
 
 | Command | Description |
 |---------|-------------|
-| `list [--query Q] [--limit N] [--include-archived]` | List projects |
+| `list [--include-archived]` | List projects |
 | `get --id ID` | Get project details |
 | `create --name NAME [--description D] [--entries JSON]` | Create project |
 | `update --id ID [--name N] [--description D]` | Update project |
@@ -95,7 +95,7 @@ All scripts are in `.claude/skills/partsbox-api/scripts/` and output JSON to std
 
 | Command | Description |
 |---------|-------------|
-| `get --project-id PID [--build-id BID] [--query Q]` | Get BOM entries |
+| `get --project-id PID [--build-id BID]` | Get BOM entries |
 | `add --project-id PID --entries JSON` | Add BOM entries |
 | `update --project-id PID --entries JSON` | Update BOM entries |
 | `delete --project-id PID --entry-ids IDS` | Delete BOM entries |
@@ -104,7 +104,7 @@ All scripts are in `.claude/skills/partsbox-api/scripts/` and output JSON to std
 
 | Command | Description |
 |---------|-------------|
-| `list --project-id PID [--query Q]` | List builds |
+| `list --project-id PID` | List builds |
 | `get --id ID` | Get build details |
 | `update --id ID [--comments C]` | Update build |
 
@@ -112,7 +112,7 @@ All scripts are in `.claude/skills/partsbox-api/scripts/` and output JSON to std
 
 | Command | Description |
 |---------|-------------|
-| `list [--query Q] [--limit N]` | List all orders |
+| `list` | List all orders |
 | `get --id ID` | Get order details |
 | `create --vendor V [--order-number N] [--entries JSON]` | Create order |
 
@@ -120,7 +120,7 @@ All scripts are in `.claude/skills/partsbox-api/scripts/` and output JSON to std
 
 | Command | Description |
 |---------|-------------|
-| `get --order-id OID [--query Q]` | List items in order |
+| `get --order-id OID` | List items in order |
 | `add --order-id OID --entries JSON` | Add items to order |
 | `delete --order-id OID --stock-id SID` | Delete order entry |
 
@@ -146,7 +146,7 @@ Use the `run.sh` wrapper which handles venv activation and API key loading:
 bash .claude/skills/partsbox-api/scripts/run.sh {script}.py {subcommand} {args}
 
 # Examples:
-bash .claude/skills/partsbox-api/scripts/run.sh parts.py list --limit 10
+bash .claude/skills/partsbox-api/scripts/run.sh parts.py list
 bash .claude/skills/partsbox-api/scripts/run.sh parts.py get --id "abc123"
 bash .claude/skills/partsbox-api/scripts/run.sh storage.py create --name "SMD-Box-A1"
 bash .claude/skills/partsbox-api/scripts/run.sh stock.py add --part-id "abc" --storage-id "def" --quantity 50
@@ -160,47 +160,33 @@ All scripts output JSON to stdout:
 // Success (single item):
 {"success": true, "data": {...}}
 
-// Success (paginated list):
-{"success": true, "total": 150, "offset": 0, "limit": 50,
- "has_more": true, "data": [...], "query_applied": null}
+// Success (list — all items returned, no pagination):
+{"success": true, "total": 150, "data": [...]}
 
 // Error:
 {"success": false, "error": "Error message"}
 ```
 
-## JMESPath Queries
-
-All list operations support `--query` for filtering and projection.
-
-### Critical Syntax Rules
-
-1. **Field names use "/" separator** - Always use double quotes: `"part/name"`, NOT backticks
-2. **Use nvl() for nullable fields** - Prevents null errors in contains/comparisons
-3. **Backticks for literals** - `\`[]\`` for empty array, `\`0\`` for zero
-
-### Custom Functions
-
-| Function | Description | Example |
-|----------|-------------|---------|
-| `nvl(val, default)` | Return default if null | `nvl("part/name", '')` |
-| `int(val)` | Convert to integer | `int('100')` -> 100 |
-| `str(val)` | Convert to string | `str(100)` -> '100' |
-| `regex_replace(pat, repl, val)` | Regex substitution | `regex_replace(' ohm$', '', '100 ohm')` |
-
-### Example Queries
+**Filtering lists:** Scripts return all items. Use Python inline to filter, search, or transform:
 
 ```bash
-# Search parts by name (safe with nvl)
---query '[?contains(nvl("part/name", '"'"''"'"'), '"'"'resistor'"'"')]'
+# Find parts matching an MPN
+bash .claude/skills/partsbox-api/scripts/run.sh parts.py list 2>/dev/null \
+  | python3 -c "
+import sys, json
+parts = json.load(sys.stdin)['data']
+matches = [p for p in parts if 'RC0805' in (p.get('part/mpn') or '')]
+print(json.dumps(matches, indent=2))
+"
 
-# Filter by tag
---query '[?contains(nvl("part/tags", `[]`), '"'"'SMD'"'"')]'
-
-# Sort by name
---query 'sort_by(@, &"part/name")'
-
-# Get specific fields only
---query '[].{id: "part/id", name: "part/name"}'
+# Filter storage by tag (storage/tags is a list, not a string)
+bash .claude/skills/partsbox-api/scripts/run.sh storage.py list 2>/dev/null \
+  | python3 -c "
+import sys, json
+locs = json.load(sys.stdin)['data']
+smd = [p for p in locs if 'type_smd-box' in (p.get('storage/tags') or [])]
+print(json.dumps(smd[:10], indent=2))
+"
 ```
 
 ## Permission Rules
@@ -220,65 +206,58 @@ All list operations support `--query` for filtering and projection.
 - **Timestamps**: UNIX UTC milliseconds
 - **Part types**: `local`, `linked`, `sub-assembly`, `meta`
 - **Files**: Downloaded via GET from `https://partsbox.com/files/{file_id}`
+- **Tags**: Stored as Python lists — always use `'tag' in (p.get('field/tags') or [])` to check membership
 
 ## Storage Location Recommendations
 
-Storage locations use structured tags (e.g., `type_smd-box`, `esd_yes`) to enable intelligent component placement. Query by tags to find appropriate storage, check descriptions for dimensions, and verify availability.
+Storage locations use structured tags (e.g., `type_smd-box`, `esd_yes`) to enable
+intelligent component placement. Always fetch all locations and filter in Python —
+do NOT attempt JMESPath tag filtering.
 
-**Quick tag queries:**
-
-```bash
-# Find SMD boxes
-bash .claude/skills/partsbox-api/scripts/run.sh storage.py list --limit 700 \
-  --query '[?contains("storage/tags", '"'"'type_smd-box'"'"')]'
-
-# Find ESD-safe storage
-bash .claude/skills/partsbox-api/scripts/run.sh storage.py list --limit 700 \
-  --query '[?contains("storage/tags", '"'"'esd_yes'"'"')]'
-```
-
-**For detailed guidance:** See `examples/storage-recommendations.md` for tag conventions, querying patterns, workflow steps, and example recommendations.
+**For detailed guidance:** See `examples/storage-recommendations.md` for tag conventions,
+Python filtering patterns, workflow steps, and example recommendations.
 
 ## Part Creation Notes
 
 **Always check before creating:** Before creating any new part definition, search for
-an existing part with the same name, MPN, or manufacturer. Creating duplicate parts
-pollutes inventory and breaks stock tracking.
+an existing part with the same name or MPN. Creating duplicate parts pollutes inventory
+and breaks stock tracking.
 
-**Single item check:**
+**Bulk pre-check (when adding many items):** Fetch all existing parts first and match
+the full list before creating anything:
 
 ```bash
-# Search by MPN
-bash .claude/skills/partsbox-api/scripts/run.sh parts.py list \
-  --query '[?contains(nvl("part/mpn", '"'"''"'"'), '"'"'<MPN>'"'"')]'
+# 1. Fetch all parts once
+bash .claude/skills/partsbox-api/scripts/run.sh parts.py list 2>/dev/null \
+  | python3 -c "
+import sys, json
+parts = json.load(sys.stdin)['data']
+# Build lookup maps
+by_mpn = {(p.get('part/mpn') or '').upper(): p for p in parts if p.get('part/mpn')}
+by_name = {(p.get('part/name') or '').upper(): p for p in parts if p.get('part/name')}
+import pickle
+with open('/tmp/parts_lookup.pkl', 'wb') as f:
+    pickle.dump({'by_mpn': by_mpn, 'by_name': by_name}, f)
+print(f'Loaded {len(parts)} parts')
+"
 
-# Search by name
-bash .claude/skills/partsbox-api/scripts/run.sh parts.py list \
-  --query '[?contains(nvl("part/name", '"'"''"'"'), '"'"'<NAME>'"'"')]'
+# 2. Check a specific MPN
+python3 -c "
+import pickle, json
+d = pickle.load(open('/tmp/parts_lookup.pkl','rb'))
+match = d['by_mpn'].get('RC0805FR-071R8L'.upper())
+print(json.dumps(match, indent=2) if match else 'NOT FOUND')
+"
 ```
 
-If a match is found, use the existing part ID — do not create a duplicate. Only create
-a new part if no match exists.
-
-**Bulk pre-check (when adding many items):** When processing multiple items at once,
-**fetch all existing parts first** and match the full list before creating anything:
-
-1. Run `parts.py list --limit 2000` (or paginate with `--offset`) to retrieve all parts
-2. Build a lookup map of existing parts by MPN and by name
-3. For each incoming item, check against the map
-4. Only call `parts.py create` for items with no match — reuse existing IDs for the rest
-
-This avoids N individual search calls and prevents partial-run duplicates.
+This avoids N individual API calls and prevents partial-run duplicates.
 
 **Tag character restrictions:** Only alphanumeric characters, hyphens, and underscores
 are accepted. Special characters like `%` cause a silent `400 Bad Request` with no
 useful error message. Use plain equivalents: `1pct` not `1%`, `50v` not `50V`, etc.
 
 **Part notes format:** Always use the `templates/part-notes.hbs` template as the
-structure for `--notes` when creating or updating parts. The `datasheetUrl` field is
-**required** — always look up and include the datasheet URL from the supplier (Mouser
-`DataSheetUrl` field, Digikey product page, or manufacturer website). If no datasheet
-can be found, omit the field rather than leaving it blank.
+structure for `--notes` when creating or updating parts.
 
 Template variables:
 
@@ -291,9 +270,7 @@ Template variables:
 | `receivedDate` | Date received (YYYY-MM-DD) |
 | `quantity` | Quantity received |
 | `unitPrice` | Unit price |
-| `vendorLabel` | Label for the vendor link (e.g. `Mouser`) |
 | `vendorLink` | Full URL to the product page |
-| `datasheetUrl` | **Required.** Full URL to the datasheet PDF. The template wraps this in `<url>` angle brackets to prevent markdown from interpreting underscores in filenames as italics. |
 | `additionalNotes` | Optional extra notes (e.g. sample units, lot info) |
 
 Render with:
@@ -315,17 +292,18 @@ When receiving new components from suppliers, use this workflow to catalog parts
 
 **Quick workflow:**
 
-1. **Check for existing parts first** — run a bulk fetch (`parts.py list --limit 2000`)
-   and match all incoming items by MPN/name before creating any new parts (see
-   [Part Creation Notes](#part-creation-notes)). Reuse existing part IDs where found.
+1. **Check for existing parts first** — fetch all parts and match incoming items by
+   MPN/name before creating any new parts (see [Part Creation Notes](#part-creation-notes)).
+   Reuse existing part IDs where found.
 2. Create part entries with `parts.py create` **only for items with no match**, using
-   detailed `--notes` rendered from `templates/part-notes.hbs` (always include datasheet URL)
+   detailed `--notes` rendered from `templates/part-notes.hbs`
 3. Save returned part IDs
 4. **Upload product images** from supplier pages to PartsBox (see [Image Upload Workflow](#image-upload-workflow) below)
 5. Determine storage locations (see `examples/storage-guidelines.md`)
 6. Generate documentation using template at `templates/stock-in.md.hbs`
-   - **Image must be uploaded before rendering** — the template uses `part/img-id` to embed
-     thumbnails. Upload first, then fetch the image and render the sheet.
+   - **Download images locally before rendering** — the template uses `imageFilename` to embed
+     thumbnails from `data/stock-in/images/`. Images must exist locally before rendering.
+     (PartsBox upload in step 4 is separate — it populates PartsBox's own image gallery.)
 7. Physically store components
 8. Add stock with `stock.py add` AFTER physical placement
 
@@ -350,30 +328,33 @@ have visual reference. The download method varies by supplier.
 
 ### Step 1: Download image from supplier
 
+**Mouser** — Use the Mouser API's `ImagePath` field. Do NOT use Playwright (Mouser
+product pages are blocked by DataDome bot protection):
+
+```bash
+# 1. Search by MPN to get the ImagePath URL
+bash .claude/skills/mouser-api/scripts/run.sh search.py part-number \
+  --part-number "<MPN>" 2>/dev/null \
+  | python3 -c "
+import sys, json
+d = json.load(sys.stdin)
+parts = d.get('data', {}).get('Parts', [])
+print(parts[0].get('ImagePath', '') if parts else '')
+"
+
+# 2. Download directly from the CDN URL
+wget -q "<image-url>" -O /tmp/part-image.jpg \
+  --user-agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"
+```
+
 **AliExpress** — Use the `Skill` tool with `skill: "playwright"` to run the
 `aliexpress.com/download-item-image` action:
 
 - `--product-url` — the AliExpress item URL
 - `--output` — `/tmp/part-image.jpg`
 
-**Mouser** — Do NOT use Playwright (Mouser product pages are IP-blocked by DataDome
-bot protection). Use the Mouser API's `ImagePath` field instead:
-
-```bash
-# 1. Get image URL from Mouser API search result
-bash .claude/skills/mouser-api/scripts/run.sh search.py part-number \
-  --part-number "<mouser-part-number>" \
-  | python3 -c "import sys,json; d=json.load(sys.stdin); \
-    parts=d.get('data',{}).get('SearchResults',{}).get('Parts',[]); \
-    print(parts[0].get('ImagePath','') if parts else '')"
-
-# 2. Download directly from the CDN URL returned above
-wget -q "<image-url>" -O /tmp/part-image.jpg \
-  --user-agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"
-```
-
-**Other suppliers** — Use the `Skill` tool with `skill: "playwright"` for browser-based
-image download, or `wget`/`curl` if the image URL is directly accessible.
+**Other suppliers** — Use `wget`/`curl` if the image URL is directly accessible.
+Use the `Skill` tool with `skill: "playwright"` only when browser automation is required.
 
 ### Step 2: Upload image to PartsBox
 
@@ -394,8 +375,15 @@ session cookies for reuse).
 **CRITICAL**: When invoking via the `playwright` skill, use the `Skill` tool (NOT
 the `Task` tool). There is NO `playwright` agent type — `playwright` is a skill only.
 
-For bulk uploads: invoke the `playwright` skill (via `Skill` tool) once per part,
-providing all items and asking it to process them sequentially.
+**Bulk uploads (CDN sources like Mouser):** Call the upload script directly for each
+part — no need for the Playwright skill when images are available via direct URL:
+
+```bash
+# For each part: wget image, then upload
+wget -q "<image-url>" -O /tmp/part-image.jpg --user-agent="Mozilla/5.0 ..."
+node /workspace/playwright/partsbox.com/upload-item-image/script.js \
+  --part-id=<part-id> --image-path=/tmp/part-image.jpg
+```
 
 **When to upload images:**
 

@@ -24,7 +24,7 @@ def cmd_list(args):
     items = result.get("data", [])
     if not args.include_archived:
         items = [p for p in items if not p.get("project/archived", False)]
-    paginate_and_output(items, args.limit, args.offset, args.query)
+    paginate_and_output(items)
 
 
 def cmd_get(args):

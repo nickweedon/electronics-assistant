@@ -4,8 +4,6 @@ PartsBox API Client - Shared module for all PartsBox API scripts.
 
 Provides:
 - HTTP client with authentication (PARTSBOX_API_KEY)
-- JMESPath query support with custom functions (nvl, int, str, regex_replace)
-- Pagination helpers
 - Standardized JSON output formatting
 - Common argparse argument helpers
 
@@ -17,14 +15,10 @@ Fields: All field names use "/" separator (e.g., "part/name", "stock/quantity")
 import os
 import sys
 import json
-import re
 import argparse
 from pathlib import Path
-from typing import Any, Optional
 
 import requests
-import jmespath
-from jmespath import functions
 
 
 # =============================================================================
@@ -60,60 +54,6 @@ _load_env()
 
 API_KEY = os.getenv("PARTSBOX_API_KEY", "")
 BASE_URL = "https://api.partsbox.com/api/1"
-
-
-# =============================================================================
-# Custom JMESPath Functions
-# =============================================================================
-
-class CustomFunctions(functions.Functions):
-    """Custom JMESPath functions matching PartsBox MCP server conventions."""
-
-    @functions.signature(
-        {"types": ["string"]},
-        {"types": ["string"]},
-        {"types": ["string", "null"]},
-    )
-    def _func_regex_replace(self, pattern, replacement, value):
-        """Regex find-and-replace: regex_replace(' ohm$', '', '100 ohm') -> '100'"""
-        if value is None:
-            return None
-        try:
-            return re.sub(pattern, replacement, value)
-        except (re.error, TypeError):
-            return value
-
-    @functions.signature({"types": ["string", "number", "null"]})
-    def _func_int(self, value):
-        """Convert to integer: int('100') -> 100, int('invalid') -> null"""
-        if value is None:
-            return None
-        try:
-            return int(value)
-        except (ValueError, TypeError):
-            return None
-
-    @functions.signature(
-        {"types": ["string", "number", "boolean", "array", "object", "null"]}
-    )
-    def _func_str(self, value):
-        """Convert to string: str(100) -> '100', str(null) -> 'null'"""
-        if value is None:
-            return "null"
-        if isinstance(value, bool):
-            return "true" if value else "false"
-        return str(value)
-
-    @functions.signature(
-        {"types": ["string", "number", "boolean", "array", "object", "null"]},
-        {"types": ["string", "number", "boolean", "array", "object"]},
-    )
-    def _func_nvl(self, value, default):
-        """Return default if null: nvl(null, 'N/A') -> 'N/A'"""
-        return default if value is None else value
-
-
-_jmespath_options = jmespath.Options(custom_functions=CustomFunctions())
 
 
 # =============================================================================
@@ -182,28 +122,6 @@ def api_download(url: str) -> requests.Response:
 
 
 # =============================================================================
-# JMESPath Query Support
-# =============================================================================
-
-
-def apply_query(data, expression: str):
-    """Apply JMESPath expression with custom functions.
-
-    Args:
-        data: Data to query (typically a list of dicts)
-        expression: JMESPath expression string
-
-    Returns:
-        Tuple of (result, error_message). error_message is None on success.
-    """
-    try:
-        result = jmespath.search(expression, data, options=_jmespath_options)
-        return (result if result is not None else [], None)
-    except jmespath.exceptions.JMESPathError as e:
-        return ([], str(e))
-
-
-# =============================================================================
 # Output Helpers
 # =============================================================================
 
@@ -227,44 +145,13 @@ def output_error(message: str):
 
 
 # =============================================================================
-# Pagination
+# List Output
 # =============================================================================
 
 
-def paginate_and_output(items: list, limit: int, offset: int, query: str = None):
-    """Apply optional JMESPath query, paginate results, and output JSON.
-
-    Args:
-        items: Full list of items from API
-        limit: Max items per page
-        offset: Starting index
-        query: Optional JMESPath expression
-    """
-    query_applied = None
-
-    if query:
-        items, error = apply_query(items, query)
-        if error:
-            output_error(f"JMESPath query error: {error}")
-        query_applied = query
-        if not isinstance(items, list):
-            output_success(items, query_applied=query_applied)
-            return
-
-    total = len(items)
-    page = items[offset : offset + limit]
-
-    output_json(
-        {
-            "success": True,
-            "total": total,
-            "offset": offset,
-            "limit": limit,
-            "has_more": offset + limit < total,
-            "data": page,
-            "query_applied": query_applied,
-        }
-    )
+def paginate_and_output(items: list, *args):
+    """Output all items as a flat list."""
+    output_json({"success": True, "total": len(items), "data": items})
 
 
 # =============================================================================
@@ -273,16 +160,8 @@ def paginate_and_output(items: list, limit: int, offset: int, query: str = None)
 
 
 def add_pagination_args(parser):
-    """Add standard --limit, --offset, --query arguments."""
-    parser.add_argument(
-        "--limit", type=int, default=50, help="Max items to return (default: 50)"
-    )
-    parser.add_argument(
-        "--offset", type=int, default=0, help="Skip first N items (default: 0)"
-    )
-    parser.add_argument(
-        "--query", type=str, help="JMESPath filter/projection expression"
-    )
+    """No-op: kept for backward compatibility with scripts that call it."""
+    pass
 
 
 def parse_json_arg(value: str):

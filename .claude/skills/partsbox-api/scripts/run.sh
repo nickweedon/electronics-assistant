@@ -2,13 +2,13 @@
 # Wrapper to run PartsBox API scripts using the venv Python.
 # Usage: bash .claude/skills/partsbox-api/scripts/run.sh <script.py> [args...]
 #
-# Example: bash .claude/skills/partsbox-api/scripts/run.sh parts.py list --limit 10
+# Example: bash .claude/skills/partsbox-api/scripts/run.sh parts.py list
 
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 VENV_PYTHON="$SCRIPT_DIR/.venv/bin/python"
 
 if [ ! -f "$VENV_PYTHON" ]; then
-    echo '{"success": false, "error": "Virtual environment not found. Run: uv venv '"$SCRIPT_DIR"'/.venv && uv pip install --python '"$SCRIPT_DIR"'/.venv/bin/python requests jmespath"}'
+    echo '{"success": false, "error": "Virtual environment not found. Run: uv venv '"$SCRIPT_DIR"'/.venv && uv pip install --python '"$SCRIPT_DIR"'/.venv/bin/python requests"}'
     exit 1
 fi
 

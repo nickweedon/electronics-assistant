@@ -32,7 +32,15 @@ bash .claude/skills/mouser-api/scripts/run.sh search.py part-number \
 
 ### Search Response Fields
 
-Key fields in each part from `SearchResults.Parts[]`:
+The search response structure is:
+
+```json
+{"success": true, "data": {"NumberOfResult": 1, "Parts": [...]}}
+```
+
+Extract parts with: `d.get('data', {}).get('Parts', [])`
+
+Key fields in each part from `data.Parts[]`:
 
 | Field | Description |
 |---|---|

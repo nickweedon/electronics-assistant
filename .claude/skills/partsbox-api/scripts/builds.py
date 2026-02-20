@@ -21,7 +21,7 @@ from api_client import (
 def cmd_list(args):
     result = api_request("project/get-builds", {"project/id": args.project_id})
     items = result.get("data", [])
-    paginate_and_output(items, args.limit, args.offset, args.query)
+    paginate_and_output(items)
 
 
 def cmd_get(args):

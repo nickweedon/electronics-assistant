@@ -27,7 +27,7 @@ def cmd_get(args):
 
     result = api_request("project/get-entries", payload)
     items = result.get("data", [])
-    paginate_and_output(items, args.limit, args.offset, args.query)
+    paginate_and_output(items)
 
 
 def cmd_add(args):

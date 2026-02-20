@@ -22,7 +22,7 @@ from api_client import (
 def cmd_get(args):
     result = api_request("order/get-entries", {"order/id": args.order_id})
     items = result.get("data", [])
-    paginate_and_output(items, args.limit, args.offset, args.query)
+    paginate_and_output(items)
 
 
 def cmd_add(args):

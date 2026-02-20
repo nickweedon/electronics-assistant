@@ -24,7 +24,7 @@ from api_client import (
 def cmd_list(args):
     result = api_request("part/all")
     items = result.get("data", [])
-    paginate_and_output(items, args.limit, args.offset, args.query)
+    paginate_and_output(items)
 
 
 def cmd_get(args):
@@ -102,13 +102,13 @@ def cmd_stock(args):
 def cmd_lots(args):
     result = api_request("part/lots", {"part/id": args.id})
     items = result.get("data", [])
-    paginate_and_output(items, args.limit, args.offset, args.query)
+    paginate_and_output(items, args.limit, args.offset)
 
 
 def cmd_storage(args):
     result = api_request("part/storage", {"part/id": args.id})
     items = result.get("data", [])
-    paginate_and_output(items, args.limit, args.offset, args.query)
+    paginate_and_output(items, args.limit, args.offset)
 
 
 def cmd_add_meta(args):

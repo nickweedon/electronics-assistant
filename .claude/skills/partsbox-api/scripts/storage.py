@@ -24,7 +24,7 @@ def cmd_list(args):
     items = result.get("data", [])
     if not args.include_archived:
         items = [loc for loc in items if not loc.get("storage/archived", False)]
-    paginate_and_output(items, args.limit, args.offset, args.query)
+    paginate_and_output(items)
 
 
 def cmd_get(args):
@@ -89,13 +89,13 @@ def cmd_settings(args):
 def cmd_parts(args):
     result = api_request("storage/parts", {"storage/id": args.id})
     items = result.get("data", [])
-    paginate_and_output(items, args.limit, args.offset, args.query)
+    paginate_and_output(items)
 
 
 def cmd_lots(args):
     result = api_request("storage/lots", {"storage/id": args.id})
     items = result.get("data", [])
-    paginate_and_output(items, args.limit, args.offset, args.query)
+    paginate_and_output(items)
 
 
 def main():

@@ -4,14 +4,11 @@ Specifications:
 {{#each specifications}}
 - {{this}}
 {{/each}}
-Purchase source: {{vendor}}
-Order #: {{orderNumber}}
-Received: {{receivedDate}}
-Quantity: {{quantity}} pcs @ ${{unitPrice}}/ea
-{{vendorLabel}} Link: {{vendorLink}}
-{{#if datasheetUrl}}
-Datasheet: <{{datasheetUrl}}>
-{{/if}}
+- Purchase source: {{vendor}}
+- Order #: {{orderNumber}}
+- Received: {{receivedDate}}
+- Quantity: {{quantity}} pcs @ ${{unitPrice}}/ea
+- Link: {{vendorLink}}
 {{#if additionalNotes}}
-Note: {{additionalNotes}}
+- Note: {{additionalNotes}}
 {{/if}}

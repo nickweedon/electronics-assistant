@@ -56,6 +56,10 @@ Use when: searching for components, looking up part numbers, checking pricing/av
 - If the user provides an exact part number → use `part-number` subcommand
 - Otherwise → use `keyword` subcommand
 
+**IMPORTANT:** `part-number` search takes the **manufacturer part number (MPN)**, not
+Mouser's catalog number. If you have a Mouser catalog number like `603-RC1206FR-07180RL`,
+strip the prefix to get the MPN: `RC1206FR-07180RL`.
+
 ### Step 2 — Execute search
 
 **Keyword search:**
@@ -149,6 +153,51 @@ bash .claude/skills/mouser-api/scripts/run.sh order_history.py list --days <n>
 ```
 
 Default: 30 days.
+
+**Do NOT continue to other workflows.**
+
+---
+
+## Workflow 4: Bulk Order Item Extraction
+
+Use when: extracting all items from multiple recent orders (e.g. for stock-in sheet creation).
+
+### Step 1 — List order history
+
+```bash
+bash .claude/skills/mouser-api/scripts/run.sh order_history.py list --days 60 2>/dev/null
+```
+
+Returns `OrderHistoryItems[]` with `SalesOrderNumber` for each order.
+
+### Step 2 — Fetch each order and aggregate items
+
+```bash
+for ORDER_NUM in <order1> <order2>; do
+  bash .claude/skills/mouser-api/scripts/run.sh order.py get \
+    --order-number "$ORDER_NUM" 2>/dev/null \
+    | python3 -c "
+import sys, json
+data = json.load(sys.stdin)['data']
+for line in data.get('OrderLines', []):
+    info = line['ProductInfo']
+    print(json.dumps({
+      'order': '$ORDER_NUM',
+      'mpn': info['ManufacturerPartNumber'],
+      'mouser_pn': info['MouserPartNumber'],
+      'manufacturer': info['ManufacturerName'],
+      'description': info['PartDescription'],
+      'quantity': line['Quantity'],
+      'unit_price': line['UnitPrice'],
+    }))
+"
+done
+```
+
+### Step 3 — Deduplicate by MPN (aggregate quantities across orders)
+
+When the same MPN appears in multiple orders, sum the quantities. The `SalesOrderNumber`
+field from `order_history.py list` is what you pass to `order.py get --order-number`.
 
 **Do NOT continue to other workflows.**
 
