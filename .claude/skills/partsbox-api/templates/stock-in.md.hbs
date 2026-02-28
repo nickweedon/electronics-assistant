@@ -1,14 +1,14 @@
 # {{orderSource}} Order - {{orderDescription}}
 
 **Received:** {{receivedDate}}
-**Orders:** {{orderNumbers}}
+**Orders:** {{#if orders}}{{#each orders}}{{#if @first}}{{else}}, {{/if}}{{#if url}}[#{{number}}]({{url}}){{else}}#{{number}}{{/if}}{{/each}}{{else}}{{orderNumbers}}{{/if}}
 
 ## Inventory Summary
 
 | | Part Name | Storage Location | Qty | Order # | Price | Stored |
 |--|-----------|------------------|-----|---------|-------|--------|
 {{#each parts}}
-| {{#if imageFilename}}<img src="images/{{imageFilename}}" alt="{{name}}" height="48">{{/if}} | [{{name}}](#{{kebabCase name}}) | {{storageLocation}} | {{quantity}} | {{orderNumber}} | ${{price}} | ☐ |
+| {{#if imageFilename}}<img src="images/{{imageFilename}}" alt="{{name}}" height="48">{{/if}} | [{{name}}](#{{kebabCase name}}) | {{storageLocation}} | {{quantity}} | {{#if orderUrl}}[{{orderNumber}}]({{orderUrl}}){{else}}{{orderNumber}}{{/if}} | ${{price}} | ☐ |
 {{/each}}
 <div style="break-after: page;"></div>
 

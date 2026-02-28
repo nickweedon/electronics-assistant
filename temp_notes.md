@@ -163,3 +163,11 @@ You made a number of significant improvements to the script writing process duri
   headed mode                                                                            
     C) Detect when the user has logged in                                                
     D) Go back into headless mode and complete the original action 
+
+
+
+  
+  I want to look at replacing our semi-persistant browser and http server with instead using tmux with node.js REPL. The idea     
+  would be that we would run the the existing action script we are working on via node REPL through tmux and then be able to      
+  incrementally execute code to manipulate the browser. Can you use 'thunderstore.io' as an example and create a script that      
+  locates the 5 most popular valheim plugins and list them.         

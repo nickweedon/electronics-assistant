@@ -35,6 +35,8 @@ RUN apt-get update && apt-get install -y \
     net-tools \
     # Process tools
     procps \
+    # Terminal multiplexer
+    tmux \
     # X11 dependencies for graphical applications
     x11-apps \
     x11-utils \
@@ -149,6 +151,9 @@ RUN chmod 600 /home/vscode/.claude.json
 # Copy Claude settings (model preference, etc.)
 COPY --chown=vscode:vscode claude-settings.json /home/vscode/.claude/settings.json
 RUN chmod 644 /home/vscode/.claude/settings.json
+
+# Copy tmux configuration
+COPY --chown=vscode:vscode .tmux.conf /home/vscode/.tmux.conf
 
 # Set up bash aliases for vscode user
 RUN echo 'alias claude="claude --dangerously-skip-permissions"' >> /home/vscode/.bash_aliases && \

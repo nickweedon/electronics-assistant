@@ -313,20 +313,34 @@ When receiving new components from suppliers, use this workflow to catalog parts
 
 **Quick workflow:**
 
+0. **Sort value-based parts in ascending order** before doing anything else. For
+   resistors, capacitors, inductors, and other value-stamped parts: sort by ascending
+   value (e.g. 1.5 Ω → 2.7 Ω → 160 Ω → 180 Ω → 910 kΩ). Assign storage locations
+   in that same order so related parts sit in sequential slots.
 1. **Check for existing parts first** — fetch all parts and match incoming items by
    MPN/name before creating any new parts (see [Part Creation Notes](#part-creation-notes)).
    Reuse existing part IDs where found.
 2. Create part entries with `parts.py create` **only for items with no match**, using
    detailed `--notes` rendered from `templates/part-notes.hbs`
 3. Save returned part IDs
-4. **Upload product images** from supplier pages to PartsBox (see [Image Upload Workflow](#image-upload-workflow) below)
+4. **Upload product images** from supplier pages to PartsBox using the bulk upload
+   script (see [Image Upload Workflow](#image-upload-workflow) below)
 5. Determine storage locations (see `examples/storage-guidelines.md`)
-6. Generate documentation using template at `templates/stock-in.md.hbs`
+6. **Obtain supplier order URLs:**
+   - **Mouser** — run the committed Playwright script to extract the order detail URL:
+     ```bash
+     node /workspace/playwright/mouser.com/get-order-url/script.js \
+       --order-number=<sales-order-number>
+     ```
+     Handles DataDome and login automatically. On first run it may open a headed
+     browser; subsequent runs reuse saved session cookies.
+   - **Other suppliers** — copy the order URL from the supplier website or API response.
+7. Generate documentation using template at `templates/stock-in.md.hbs`
    - **Download images locally before rendering** — the template uses `imageFilename` to embed
      thumbnails from `data/stock-in/images/`. Images must exist locally before rendering.
      (PartsBox upload in step 4 is separate — it populates PartsBox's own image gallery.)
-7. Physically store components
-8. Add stock with `stock.py add` AFTER physical placement
+8. Physically store components
+9. Add stock with `stock.py add` AFTER physical placement
 
 **Template rendering:**
 
@@ -391,32 +405,29 @@ Use the `Skill` tool with `skill: "playwright"` only when browser automation is 
 
 ### Step 2: Upload image to PartsBox
 
-Run the committed upload script directly:
+**ALWAYS use the bulk upload script** — even for a single part. It handles
+login, concurrent workers, and session persistence automatically:
 
 ```bash
-node /workspace/playwright/partsbox.com/upload-item-image/script.js \
-  --part-id=<part-id> \
-  --image-path=/tmp/part-image.jpg
+# 1. Build the items JSON (one entry per part)
+cat > /tmp/bulk-upload.json << 'EOF'
+[
+  {"partId": "<part-id-1>", "imagePath": "/tmp/img-part1.jpg"},
+  {"partId": "<part-id-2>", "imagePath": "/tmp/img-part2.jpg"}
+]
+EOF
+
+# 2. Run bulk upload
+node /workspace/playwright/partsbox.com/bulk-upload-item-image/script.js \
+  --items-file=/tmp/bulk-upload.json
 ```
 
-**IMPORTANT:** This script requires `--key=value` format (equals sign, no space).
-Using `--key value` (space-separated) will silently set the value to `true` and fail.
+Use `--max-concurrency=N` to cap parallel browsers (default: 10).
 
-The script handles login automatically (switches to headed mode if needed, saves
-session cookies for reuse).
+**IMPORTANT:** Script arguments require `--key=value` format (equals sign, no space).
 
-**CRITICAL**: When invoking via the `playwright` skill, use the `Skill` tool (NOT
-the `Task` tool). There is NO `playwright` agent type — `playwright` is a skill only.
-
-**Bulk uploads (CDN sources like Mouser):** Call the upload script directly for each
-part — no need for the Playwright skill when images are available via direct URL:
-
-```bash
-# For each part: wget image, then upload
-wget -q "<image-url>" -O /tmp/part-image.jpg --user-agent="Mozilla/5.0 ..."
-node /workspace/playwright/partsbox.com/upload-item-image/script.js \
-  --part-id=<part-id> --image-path=/tmp/part-image.jpg
-```
+The individual upload script (`upload-item-image/script.js`) exists but should
+NOT be used during stock-in workflows — bulk is always faster and safer.
 
 **When to upload images:**
 

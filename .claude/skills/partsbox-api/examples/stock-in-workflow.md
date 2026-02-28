@@ -139,7 +139,10 @@ Use the Handlebars template at `.claude/skills/partsbox-api/templates/stock-in.m
   "orderSource": "AliExpress",
   "orderDescription": "Adapters and Motors",
   "receivedDate": "2026-02-17",
-  "orderNumbers": "#8209410078811142, #8209410078791142, ...",
+  "orders": [
+    {"number": "8209410078811142", "url": "https://www.aliexpress.com/p/order/index.html#/detail?orderId=8209410078811142"},
+    {"number": "8209410078791142", "url": "https://www.aliexpress.com/p/order/index.html#/detail?orderId=8209410078791142"}
+  ],
   "parts": [
     {
       "name": "Part Name",
@@ -147,6 +150,7 @@ Use the Handlebars template at `.claude/skills/partsbox-api/templates/stock-in.m
       "storageId": "abc123...",
       "quantity": 5,
       "orderNumber": "8209410078791142",
+      "orderUrl": "https://www.aliexpress.com/p/order/index.html#/detail?orderId=8209410078791142",
       "price": "1.91",
       "description": "Full description...",
       "specifications": ["Spec 1", "Spec 2"],
@@ -190,12 +194,21 @@ Examples:
 
 ## Stock-In Workflow Steps
 
+0. **Sort value-based parts ascending** — Before creating anything, sort resistors,
+   capacitors, inductors, and other value-stamped parts by ascending value
+   (e.g. 1.5 Ω → 2.7 Ω → 160 Ω → 180 Ω → 910 kΩ). Assign storage locations in
+   this same order so related parts occupy sequential slots.
 1. **Create part entries** - Use `parts.py create` with detailed `--notes` for each component
 2. **Save part IDs** - Collect the returned `part/id` values from each create command
-3. **Download thumbnail images** - Fetch `part/img-id` for each part (via `parts.py get`) and download to `data/stock-in/images/` (see [Thumbnail Image Column](#thumbnail-image-column) above)
-4. **Determine storage locations** - Use storage guidelines (see `storage-guidelines.md`) to select appropriate locations
-5. **Generate documentation** - Use the template to create `data/stock-in/*.md` file, including `imageFilename` in each part's data
-6. **Physically store components** - Place items in designated storage locations
-7. **Add stock** - Use `stock.py add` to add quantities to PartsBox (AFTER physical storage)
+3. **Download product images** from supplier and upload to PartsBox using the bulk
+   upload script (`bulk-upload-item-image/script.js`). Also download locally to
+   `data/stock-in/images/` for the stock-in sheet thumbnail column.
+4. **Obtain order URLs** for the stock-in template:
+   - **Mouser**: run `node /workspace/playwright/mouser.com/get-order-url/script.js --order-number=<N>`
+   - **Other suppliers**: copy URL from the supplier website or API response
+5. **Determine storage locations** - Use storage guidelines (see `storage-guidelines.md`) to select appropriate locations
+6. **Generate documentation** - Use the template to create `data/stock-in/*.md` file, including `imageFilename` in each part's data
+7. **Physically store components** - Place items in designated storage locations
+8. **Add stock** - Use `stock.py add` to add quantities to PartsBox (AFTER physical storage)
 
-**Key principle:** Create parts first, document storage plan, physically store, THEN add stock entries.
+**Key principle:** Sort → create parts → upload images → get order URLs → document → store → add stock.
